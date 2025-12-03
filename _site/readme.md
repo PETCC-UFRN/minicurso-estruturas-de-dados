@@ -1,6 +1,6 @@
-# Repositório Oficial do Site do Minicurso de Algoritmos e Estruturas de Dados ofertado pelo PET de Ciência da Computação
+# Repositório Oficial do Site do Minicurso de Linux e Git ofertado pelo PET de Ciência da Computação
 
-Este é o repositório onde é hospedado o site via GitHub Pages do Minicurso de férias de Algoritmos e Estruturas de Dados. Neste arquivo você verá um tutorial de como utilizar o gerador de páginas estáticas **Jekyll** para alterar os recursos deste projeto.
+Este é o repositório onde é hospedado o site via GitHub Pages do Minicurso de férias de Linux e Git. Neste arquivo você verá um tutorial de como utilizar o gerador de páginas estáticas **Jekyll** para alterar os recursos deste projeto.
 
 # Instalando o Jekyll
 
@@ -34,13 +34,13 @@ Todavia, existem alguns pontos importantes que vão ser abordados abaixo.
 
 ## Front Matter
 
-O front matter é declarado no início de um arquivo em um projeto Jekyll e pode ser usado para declarar variáveis para aquela página (Exemplo: **titulo_da_pagina: Minicurso de Estruturas de Dados**) e, principalmente, para definir o layout que a página irá usar.
+O front matter é declarado no início de um arquivo em um projeto Jekyll e pode ser usado para declarar variáveis para aquela página (Exemplo: **titulo_da_pagina: Minicurso de Linux e Git**) e, principalmente, para definir o layout que a página irá usar.
 
 O front matter possui o seguinte formato:
 
 ```
 ---
-title: Minicurso de Estruturas de Dados
+title: Minicurso de Linux e Git
 layout: default
 ---
 ```

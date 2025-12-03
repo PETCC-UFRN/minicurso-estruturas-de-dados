@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Minicurso de Matemática aplicada à Computação</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="./assets/css/styles.css">
+        <link rel="stylesheet" href="/matcomp/assets/css/syntax.css">
+        <link rel="icon" href="https://i.ibb.co/RD7XwYH/pet-logo.png" type="image/png">
+    </head>
+    <body class="layoutGit">
+        <header>
+    <nav class="navgit">
+        <ul class="listaNavegacao">
+            <li>
+                <a href="index" style="text-decoration:none;">/home</a>
+            </li>
+            <li>
+                <a href="aulas" style="text-decoration:none;">/aulas</a>
+            </li> 
+            <li>
+                <a href="sobre" style="text-decoration:none;">/sobre</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+        <div>
+            <main>
+                <div id="sumario" class="sumario-git">
+    <h1>Dia 2</h1>
+   <details>
+    <summary><a href="#Indução">Indução</a></summary>
+      <ul>
+        <li><a href="#O que é indução">O que é indução</a>
+          <ul>
+            <li><a href="#estrutura-da-indução">Estrutura da Indução</a></li>
+          </ul>
+        </li>
+        <li><a href="#soma-de-gauss">Soma de Gauss</a>
+          <ul>
+            <li><a href="#indução-em-prática">Indução em Prática</a></li>
+          </ul>
+        </li>
+        <li><a href="#indução-forte">Indução forte</a></li>
+      </ul>
+    </details>
+    <details open="">
+    <summary><a href="#Recursão">Recursão</a></summary>
+      <ul>
+        <li><a href="#Onde usamos a recursão na programação">Onde usamos a recursão na programação</a>
+          <ul>
+            <li><a href="#recursão-vs-iteração">Recursão vs. Iteração</a></li>
+          </ul>
+        </li>
+        <li><a href="#Perigos da recursão">Perigos da recursão</a>
+          <ul>
+            <li><a href="#exemplo-1-chamada-infinita-da-recursão-por-ausência-de-caso-base">Exemplo 1 -&gt; Chamada infinita da recursão por ausência de caso base</a></li>
+            <li><a href="#exemplo-2-chamada-infinita-da-recursão-por-buracos-no-caso-base">Exemplo 2 -&gt; Chamada infinita da recursão por buracos no caso base</a></li>
+            <li><a href="#exemplo-3-chamada-incompleta-por-problemas-no-passo-recursivo">Exemplo 3 -&gt; Chamada incompleta por problemas no passo recursivo</a></li>
+          </ul>
+        </li>
+        <li><a href="#Recursão bem definida">Recursão bem definida</a>
+          <ul>
+            <li><a href="#exemplo-de-recursão-bem-definida">Exemplo de recursão bem definida</a></li>
+          </ul>
+        </li>
+        <li><a href="#Elementos básicos da recursão">Elementos básicos da recursão</a>
+          <ul>
+            <li><a href="#introdução-aos-elementos-básicos-da-recursão">Introdução aos elementos básicos da recursão</a></li>
+          </ul>
+        </li>
+        <li><a href="#construindo-coleções-de-coisas">Construindo coleções de coisas</a>
+          <ul>
+            <li><a href="#utilizando-a-recursão-para-construir-coleções-de-coisas">Utilizando a recursão para construir coleções de coisas</a></li>
+          </ul>
+        </li>
+        <li><a href="#Recursão em listas">Recursão em listas</a>
+          <ul>
+            <li><a href="#montando-construtores-de-listas">Montando construtores de listas</a></li>
+            <li><a href="#descobrindo-a-função-length">Descobrindo a função LENGTH</a></li>
+            <li><a href="#descobrindo-a-função-sum-exercício/desafio">Descobrindo a função SUM (Exercício/desafio)</a></li>
+            <li><a href="#descobrindo-a-função-filter">Descobrindo a função FILTER</a></li>
+            <li><a href="#descobrindo-a-função-map">Descobrindo a função MAP</a></li>
+            <li><a href="#descobrindo-a-função-replicate">Descobrindo a função REPLICATE</a></li>
+          </ul>
+        </li>
+        <li><a href="#Extrapolando para outros tipos">Extrapolando para outros tipos</a>
+          <ul>
+            <li><a href="#descobrindo-melhores-funções-even-e-odd">Descobrindo melhores funções EVEN e ODD</a></li>
+            <li><a href="#verificando-se-uma-função-foi-bem-definida-recursivamente-kahoot">Verificando se uma função foi bem definida recursivamente (kahoot)</a></li>
+          </ul>
+        </li>
+      </ul>
+    </details>   <button class="toggle-button" id="toggle-button">
+  
+      Esconder Sumário
+  
+  </button>
+  </div>
+
+<h1 id="indução">Indução</h1>
+<p>Aposto que em determinado momento, você já se deparou com algum exercício em específico que foi solicitado para resolver, seja na escola, na própria faculdade ou até mesmo em brincadeiras da internet. E de alguma forma o resolveu naturalmente, sem utilizar nenhum artifício matemático de forma séria. Resolvendo por análise de padrões ou tentativa e erro. Para no fim, chegar a um palpite, no qual você tem certeza que está certo.</p>
+
+<p>Dessa forma, chegada a uma conclusão, como podemos provar que uma determinada solução está certa? É aí que entra a Indução.</p>
+
+<h2 id="o-que-é-indução">O que é Indução?</h2>
+<p>Indução Matemática ou Indução Finita, nada mais é que um método de demonstração. É uma forma eficaz de verificar a veracidade de uma determinada propriedade.</p>
+
+<p>Imagine uma fileira de dominós, igualmente espaçados entre si, de tal forma que: derrubando um dominó, o próximo também será derrubado. 
+Você concorda que nesse processo a fileira inteira de dominós será derrubada?</p>
+
+<p>A Indução funciona exatamente dessa forma. Provando que uma determinada propriedade é verdade para um valor e em seguida provando que é verdade para o valor seguinte, então é verdade para todos os valores.</p>
+
+<h3 id="estrutura-da-indução">Estrutura da Indução</h3>
+<p>A indução atua sobre os números inteiros não negativos (1, 2, 3, 4, 5…) e segue a seguinte estrutura:</p>
+<ul>
+  <li>Passo base: Provamos que é verdade para o primeiro valor.</li>
+  <li>Passo indutivo: Verificamos que é verdadeira para o valor seguinte.
+    <ul>
+      <li>Hipótese de indução</li>
+      <li>Verificação da hipótese</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Por enquanto, apenas se familiarize com o que é. Ainda explicaremos como colocar em prática e sua relação com programação.</p>
+
+<h2 id="analisando-um-problema">Analisando um problema</h2>
+<p>Há uma história, em que o matemático alemão, Carl Friedrich Gauss, recebeu como um desafio do seu professor o problema de somar todos os números de 1 até 100. O desafio na verdade era apenas uma pegadinha, que tinha o intuito de mantê-lo ocupado. Contudo, Gauss rapidamente chegou a uma resposta, sem precisar realizar o trabalho árduo de somar número após número. Com isso, vamos analisar o problema e sua solução.</p>
+
+<p>Gauss percebeu algo curioso…</p>
+<ul>
+  <li>A soma do primero número com o último resultava em um determinado valor</li>
+  <li>A soma do segundo número com o penúltimo resultava no mesmo valor</li>
+  <li>A soma do terceiro número com o antipenúltimo novamente tinha o mesmo resultado</li>
+  <li>E assim por diante</li>
+</ul>
+<div style="text-align: center;">  <img src="assets/images/gauss_summation_6.png" alt="" /> </div>
+
+<p>A partir dessas observações, vamos lentamente deduzir a fórmula que resolveria o problema de somar os números de 1 até 100.</p>
+
+<p><strong>1)</strong> Temos 100 números divididos em pares, todos com o mesmo valor:</p>
+
+\[\text{Soma até 100} = 50 \cdot \text{valor de cada par}\]
+
+<p><strong>2)</strong> Cada par soma 101, pois:</p>
+
+\[1 + 100 = 2 + 99 = 3 + 98 = \dots = 101\]
+
+<p>Logo:</p>
+
+\[\text{Soma até 100} = 50 \cdot 101\]
+
+<p>3) E como \(101 = 1 + 100\), podemos reescrever:</p>
+
+\[\text{Soma até 100} = 50 \cdot (1 + 100)\]
+
+<hr />
+
+<p>Agora, vamos generalizar essa ideia para qualquer número \(n\):</p>
+
+<ul>
+  <li>A quantidade de pares é \(n/2\)</li>
+  <li>Cada par soma \((1 + n)\)</li>
+</ul>
+
+<p>Portanto, a fórmula geral é:</p>
+
+\[\text{Soma até } n = \frac{n}{2} \cdot (1 + n)\]
+
+<p>E organizando-a, temos:</p>
+
+\[\text{Soma até } n = \frac{n(n + 1)}{2}\]
+
+<p>Essa expressão nos dá o valor total da soma dos números inteiros de \(1\) até \(n\).</p>
+
+<p>Contudo, isso abre a questão. Como podemos provar que essa fórmula realmente é verdade?</p>
+
+<h3 id="indução-em-prática">Indução em Prática</h3>
+<p>Problema: Prove que \(1 + 2 + 3 + 4 + \dots + n = \frac{n(n + 1)}{2}\) é verdade para qualquer inteiro \(n \geq 1\).</p>
+
+<hr />
+
+<ul>
+  <li><strong>Passo base</strong><br />
+Verificamos se isso é verdade para \(n = 1\).</li>
+</ul>
+
+<p>A fórmula nos dá:</p>
+
+\[\frac{n}{2} \cdot (n + 1) = \frac{1}{2} \cdot (1 + 1) = \frac{1}{2} \cdot 2 = 1\]
+
+<p>Portanto, é verdade para \(n = 1\).</p>
+
+<ul>
+  <li><strong>Passo indutivo</strong>
+(É aqui que as coisas começam a ficar um pouco mais extravagantes).</li>
+</ul>
+
+<p>A primeira etapa do passo indutivo é formular a hipótese de indução.
+A nossa hipótese é a seguinte:
+Suponha que a fórmula vale para algum \(k \in \mathbb{N}\):</p>
+
+\[1 + 2 + 3 + \dots + k = \frac{k(k + 1)}{2}\]
+
+<p>(Perceba que isso é similar à fórmula que já vimos, porém com um k no lugar do n. O uso de variáveis diferentes ocorre porque o k representa algum número qualquer que desconhecemos, enquanto o n representa o valor que será colocado na fórmula).</p>
+
+<p>Queremos provar que:</p>
+
+\[1 + 2 + 3 + \dots + k + (k+1) = \frac{k + 1}{2} \cdot ((k + 1) + 1)\]
+
+<p>Ou seja:</p>
+
+\[1 + 2 + 3 + \dots + k + (k+1) = \frac{(k + 1)(k + 2)}{2}\]
+
+<p>Como é o procedimento a partir daqui?
+Vamos usar a fórmula da hipótese de indução como base e, a partir dela, tentar chegar à expressão que queremos provar para (k + 1), realizando operações e manipulações em uma expressão, para chegar na outra.</p>
+
+<p>Supondo que a hipótese de indução é verdade, sabemos que:</p>
+
+\[1 + 2 + 3 + \dots + k = \frac{k(k + 1)}{2}\]
+
+<p>Nosso objetivo agora é mostrar que essa fórmula também vale para \((k + 1)\). Para isso, somamos \((k + 1)\) dos dois lados da equação:</p>
+
+\[1 + 2 + 3 + \dots + k + (k + 1) = \frac{k(k + 1)}{2} + (k+1)\]
+
+<p>Colocando \((k + 1)\) em evidência:</p>
+
+\[(k + 1) \cdot \left(\frac{k}{2} + 1\right)\]
+
+<p>Somando os termos dentro do parênteses:</p>
+
+\[(k + 1) \cdot \left(\frac{k + 2}{2}\right)\]
+
+<p>Pela comutatividade da multiplicação:</p>
+
+\[\frac{(k + 1)(k + 2)}{2}\]
+
+<p>Portanto, mostramos que:</p>
+
+\[1 + 2 + 3 + \dots + k + (k + 1) = \frac{(k + 1)(k + 2)}{2}\]
+
+<p>Ou seja. Supondo que a fórmula para \(k\) é verdade, a fórmula também é válida para \((k + 1)\). Como mostramos que ela vale para \((n = 1)\) (passo base) e que, se vale para \((k)\), então vale para \((k + 1)\) (passo indutivo), podemos concluir por indução que:</p>
+
+\[1 + 2 + 3 + \dots + n = \frac{n(n + 1)}{2}\]
+
+<p>É verdadeira para todo  \(n \in \mathbb{N}\):</p>
+
+<h2 id="exercício">Exercício</h2>
+<p>Mas quando o assunto é Indução, é a prática que faz a perfeição. 
+Agora chegou o seu momento, tente aplicar indução para o seguinte problema:</p>
+
+<p>Prove que \(n^2 &gt; 2n\) para todo \(n \geq 3\).</p>
+
+<h2 id="indução-forte">Indução Forte</h2>
+<p>Mas o que acontece quando estamos analisando uma propriedade que, para ser analisada ou provada, exige múltiplos passos? Por exemplo, tome o seguinte problema:</p>
+
+<p>Suponha que \(a_1\), \(a_2\), \(a_3\), … seja uma sequência definida da seguinte forma:</p>
+<ul>
+  <li>\(a_1 = 1\);</li>
+  <li>\(a_2 = 3\);</li>
+  <li>\(a_k = a_{k-2} + 2a_{k-1}\), para todo \(k \geq 3\).</li>
+</ul>
+
+<p>Prove que \(a_n\) é ímpar para todo \(n &gt; 1\).</p>
+
+<p>Perceba que a nossa fórmula é composta por uma sequência, em que um determinado termo é definido pelos dois termos anteriores. A Indução que vimos anteriormente será o suficiente para provar o problema?
+Na verdade, não. Precisamos de uma ferramenta um pouco mais poderosa: a Indução Forte.
+Mais tarde voltaremos para esse problema, o mantenha na cabeça por enquanto.</p>
+
+<h3 id="estrutura-da-indução-forte">Estrutura da Indução Forte</h3>
+<p>Não se preocupe, a estrutura da Indução Forte segue a mesma linha da Indução. Ainda teremos o passo base, hipótese de indução e passo indutivo. Contudo, há algumas particularidades, o passo base pode conter prova de vários valores iniciais. Além disso, no passo indutivo, assumiremos que vários valores atráves de k são verdade, para então provar que (k+1) é verdade.</p>
+
+<p>Em resumo, a estrutura da Indução Forte se dá por:</p>
+<ul>
+  <li>Passo base: Provamos que a afirmação é verdadeira para o primeiro valor (ou primeiros valores, se necessário).</li>
+  <li>Passo indutivo: Suponhamos que a afirmação seja verdadeira para todos os valores até um certo número k .
+    <ul>
+      <li>Hipótese de indução: Admitimos que a proposição vale para todos os inteiros entre o valor inicial e k.</li>
+      <li>Verificação da hipótese: Usamos essa suposição para demonstrar que a proposição também é verdadeira para o valor k+1.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="indução-forte-em-prática">Indução Forte em prática</h3>
+
+<p>Para ilustrar a Indução Forte em prática, tome o seguinte problema:
+Seja \(s_0, s_1, s_2, \dots\) uma sequência definida da seguinte forma:</p>
+
+\[\begin{cases}
+s_0 = 0 \\
+s_1 = 4 \\
+s_k = 6 s_{k-1} - 5 s_{k-2}, \quad \text{para todo inteiro } k \geq 2
+\end{cases}\]
+
+<p>A propriedade que queremos provar, \(P(n)\), é que</p>
+
+\[S_n = 5^n - 1\]
+
+<p>é a fórmula fechada para um termo da sequência. Mostrando que ela é verdadeira para todos os inteiros \(n \geq 0\).</p>
+
+<hr />
+
+<ul>
+  <li><strong>Passo base</strong></li>
+</ul>
+
+<p>Vamos mostrar que \(P(0)\) e \(P(1)\) são verdadeiros. Pela definição da sequência sabemos que:</p>
+<ol>
+  <li>\(n = 0\) precisa resultar em 0</li>
+  <li>\(n=1\) precisa resultar em 4</li>
+</ol>
+
+<ul>
+  <li>Para \(n = 0\):</li>
+</ul>
+
+\[S_0 = 5^0 - 1 = 1 - 1 = 0\]
+
+<p>Verdade!</p>
+
+<ul>
+  <li>Para \(n = 1\):</li>
+</ul>
+
+\[S_1 = 5^1 - 1 = 5 - 1 = 4\]
+
+<p>Verdade!</p>
+
+<p>Os valores da fórmula realmente condizem com os valores previamente definidos.</p>
+
+<ul>
+  <li><strong>Passo indutivo</strong></li>
+</ul>
+
+<p>No passo indutivo, queremos mostrar que, para todos os inteiros \(k \geq 1\), se \(P(i)\) é verdade para todos os inteiros \(i\) de \(0\) até \(k\), então \(P(k+1)\) também é verdade.</p>
+
+<p>Nossa hipótese de indução é a seguinte: 
+Seja \(k\) qualquer inteiro \(k \geq 1\) e suponha que</p>
+
+\[s_i = 5^i - 1 \quad \text{para todos os inteiros } i \text{ com } 0 \leq i \leq k\]
+
+<p>(Perceba que agora apareceu uma nova variável, \(i\). Essa variável representa um índice genérico qualquer entre \(0\) e \(k\), e é usada para expressar que estamos assumindo que a propriedade \(P(i)\) é verdadeira para todos os valores anteriores a \(k+1\), ou seja, desde o início da sequência até o valor \(k\).)</p>
+
+<p>(Essa é a principal característica da indução forte: em vez de supor que a propriedade vale apenas para \(k\), como na indução simples, aqui suponhamos que ela vale para todos os casos anteriores até \(k\), e usamos essas informações para provar que também vale para \(k+1\).)</p>
+
+<p>Continuando:
+Queremos mostrar a veracidade de:</p>
+
+\[s_{k+1} = 5^{k+1} - 1\]
+
+<p>Como \(k \geq 1\), temos que \(k + 1 \geq 2\), e então:</p>
+
+\[\begin{aligned}
+s_{k+1} &amp;= 6 s_k - 5 s_{k-1} \quad \text{(pela definição da sequência)} \\
+        &amp;= 6 (5^k - 1) - 5 (5^{k-1} - 1) \quad \text{(pela hipótese indutiva)} \\
+        &amp;= 6 \cdot 5^k - 6 - 5 \cdot 5^{k-1} + 5 \quad \text{(realizando a multiplicação)}\\
+        &amp;= 6 \cdot 5^k - 6 - 5^{k} + 5 \quad \text{(pois } 5 \cdot 5^{k-1} = 5^k) \\
+        &amp;= 6 \cdot 5^k - 1 - 5^{k}  \quad \text{(operando -6 + 5)} \\
+        &amp;= 5^k(6 - 1) - 1 \quad \text{(colocando } 5^k \text{ em evidência)}\\
+        &amp;= 5^k \cdot 5 - 1 \quad \text{(subtraindo termos dentro do parênteses)}\\
+        &amp;= 5^{k+1} - 1 \quad \text{(pois } 5 \cdot 5^k = 5^{k+1})
+\end{aligned}\]
+
+<p>Provando assim que a fórmula é verdadeira!</p>
+
+<h2 id="exercício-1">Exercício</h2>
+<p>Vamos retornar àquele problema que introduzimos anteriormente, e ver se conseguimos resolvê-lo agora!</p>
+
+<p>Suponha que \(a_1, a_2, a_3, \ldots\) é uma sequência definida da seguinte forma:</p>
+
+<ul>
+  <li>\(a_1 = 1\);</li>
+  <li>\(a_2 = 3\);</li>
+  <li>\(a_k = a_{k-2} + 2a_{k-1}\), para todo \(k \geq 3\).</li>
+</ul>
+
+<p>Prove que \(a_n\) é ímpar para todo \(n \geq 1\).
+Dica: Na matemática definimos um número par como 2q, em que q é qualquer número inteiro. A partir disso como definimos um número ímpar?</p>
+
+<h2 id="indução-na-programação">Indução na programação</h2>
+<p>Antes de partirmos para o próximo assunto, acredito que existem diversas discussões interessantes que podemos ter em relação à Indução. Quando utiliza-la? Quando não utiliza-la? Qual sua relação com programação?</p>
+
+<p>A Indução é especialmente útil quando estamos trabalhando problemas recursivos ou com padrões numéricos. Quando o problema em questão parece apresentar uma sequência, talvez cogitar a indução seja uma possibilidade. 
+No entanto, nem todo problema exige indução. Às vezes, uma simples manipulação algébrica ou uma prova direta é suficiente. A indução pode ser desnecessária (ou até mesmo tornar a prova mais complicada) quando o caso a ser provado não depende de forma clara de casos anteriores.</p>
+
+<p>Quanto à indução na programação, a relação se torna mais clara quando falamos de recursão, conceito fortemente presente na indução forte, como vimos anteriormente. Mas afinal, o que é recursão? Apesar de estar presente na indução forte, é um conceito próprio e não um sinônimo.</p>
+
+<h1 id="recursão">Recursão</h1>
+<p>Achou que foi por acaso que nós começamos o nosso dia aprendendo sobre indução?</p>
+
+<p>Nessa seção, iremos aprender que indução e recursão são duas faces da mesma moeda, correspondendo tanto a indução a um método de prova Matemática que pode ser extrapolado para a Computação, chegando na recursão, como a recursão a uma ferramenta computacional que pode ser extrapolada para o campo das demonstrações Matemáticas, chegando-se na indução.</p>
+
+<p>Da mesma forma que a indução tem sua base e passo indutivo, na recursão também teremos uma base e passo recursivo! (até os nomes se parecem, né?)</p>
+
+<p>A etimologia da palavra “Recursão” remete ao latim, da palavra recursio, que significa  “corrida de volta”, “retorno” ou “revolução”. Ela parte do sentido de fazer de novo determinado processo, repetir um padrão ou até mesmo seguir construindo algo indefinidamente.</p>
+
+<h2 id="mas-onde-usamos-a-recursão-na-programação">Mas onde usamos a recursão na programação</h2>
+
+<p>Bem, como já deve ter sido percebido, a Computação está sempre se utilizando das ferramentas mais diversas para alcançar seus objetivos, sejam eles o funcionamento do sistema de uma mercearia de bairro, o cálculo da sua nota do sigaa ou garantir que você não tire a bunda da cadeira depois de abrir o TikTok.</p>
+
+<p>Nesse sentido, a recursão vem na esteira daquelas ferramentas utilizadas, em termos bem simplificados, para facilitar a vida da programadora ou programador, a fim de evitar a realização manual de um trabalho repetitivo. Ontem, vimos na parte de lógica e estruturas de controle, uma ferramenta semelhante à recursão que tinha uma utilidade muito parecida com essa, vocês lembram qual era?</p>
+
+<h3 id="recursão-vs-iteração">Recursão vs. Iteração</h3>
+
+<div style="text-align: center;"><img src="assets/images/boxing.jpg" alt="" style="widht:300px;height:300px;" /> </div>
+
+<p>Isso mesmo! A iteração é uma ferramenta bem parecida com a recursão e normalmente são feitos paralelos entre as duas, sendo muitas vezes possível pensar problemas por uma perspectiva recursiva e por uma perspectiva iterativa.</p>
+
+<p>Enquanto a iteração está compreendida em comandos como for, range e while, normalmente a recursão é identificada no corpo da própria função, sendo o passo base semelhante a um “ponto de parada”, e a chamada recursiva representada por um novo chamamento daquela mesma função, agora com um argumento distinto, sequencialmente.</p>
+
+<p>Pode ter parecido um pouco abstrato demais por agora, mas conforme forem apresentadas as distintas aplicações, cada vez mais fará sentido o tamanho e importância das abordagens recursivas na programação. Mas, vamos lá, se eu (quase) sempre posso utilizar a iteração para resolver os meus problemas, porque eu usaria a recursão?</p>
+
+<ul>
+  <li>Abordagem mais clara e legível para algoritmos complexos</li>
+  <li>Deixa o código mais organizado e bem estruturado</li>
+  <li>Especialmente útil para resolver problemas de natureza recursiva</li>
+  <li>Especialmente útil para utilizar estruturas construídas recursivamente</li>
+</ul>
+
+<p>Em contrapartida, a abordagem recursiva normalmente perde para a iterativa quando falamos em:</p>
+
+<ul>
+  <li>Situações onde o foco é na eficiência/velocidade do programa</li>
+  <li>Situações onde é necessário reduzir o consumo de memória</li>
+</ul>
+
+<p>Ocorre que ambos esses pontos são centrais na maioria das aplicações, fazendo com que um bom programador ou uma boa programadora tenha sempre que não apenas ser capaz de diferenciar os casos onde um é mais viável que o outro, como também ser capaz de aplicar ambos de forma satisfatória.</p>
+
+<h2 id="perigos-da-recursão">Perigos da recursão</h2>
+
+<p>Sendo assim, vejamos então alguns casos onde a recursão foi usada de forma não satisfatória…</p>
+
+<div style="text-align: center;"><img src="assets/images/ouroboros.jpg" alt="" style="widht:300px;height:300px;" /> </div>
+
+<h3 id="exemplo-1---chamada-infinita-da-recursão-por-ausência-de-caso-base">Exemplo 1 -&gt; Chamada infinita da recursão por ausência de caso base</h3>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">Loop</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span> 
+<span class="kt">Loop</span> <span class="n">n</span> <span class="o">=</span> <span class="kt">Loop</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="exemplo-2---chamada-infinita-da-recursão-por-buracos-no-caso-base">Exemplo 2 -&gt; Chamada infinita da recursão por buracos no caso base</h3>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">LoopHole</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+<span class="kt">LoopHole</span> <span class="n">n</span>
+    <span class="o">|</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span>      <span class="o">=</span> <span class="mi">0</span>
+    <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="kt">LoopHole</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+<p>(Atenção: otherwise significa “caso contrário” em inglês)</p>
+
+<h3 id="exemplo-3---chamada-incompleta-por-problemas-no-passo-recursivo">Exemplo 3 -&gt; Chamada incompleta por problemas no passo recursivo</h3>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">Incomplete</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="kt">Incomplete</span> <span class="n">n</span>
+    <span class="o">|</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span>       <span class="o">=</span> <span class="kt">True</span>
+    <span class="o">|</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span>       <span class="o">=</span> <span class="kt">False</span>
+    <span class="o">|</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">3</span>       <span class="o">=</span> <span class="kt">Incomplete</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="o">|</span> <span class="n">otherwise</span>  <span class="o">=</span> <span class="kt">Incomplete</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="recursão-bem-definida">Recursão bem definida</h2>
+
+<p>Já em outros casos, a recursão pode facilitar bastante a nossa vida, garantindo soluções rápidas para problemas diversos:</p>
+
+<h3 id="exemplo-de-recursão-bem-definida">Exemplo de recursão bem definida</h3>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">IsEven</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="kt">IsEven</span> <span class="n">n</span>
+    <span class="o">|</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">=</span> <span class="kt">True</span>
+    <span class="o">|</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">=</span> <span class="kt">False</span>
+    <span class="o">|</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span>   <span class="o">=</span> <span class="kt">IsEven</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+    <span class="o">|</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">2</span>   <span class="o">=</span> <span class="kt">IsEven</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+<p>(Atenção: IsEven significa “ÉPar” em inglês)</p>
+
+<h2 id="introdução-aos-elementos-básicos-da-recursão">Introdução aos elementos básicos da recursão</h2>
+
+<p>Nos exemplos acima, conseguimos ver com clareza os elementos centrais da recursão, quais sejam, o caso base (ou casos base) e o passo recursivo (ou passos recursivos). Também, vimos quão importante é o domínio de ambos os conceitos para garantir uma função recursiva realmente funcional!</p>
+
+<p>Mas então agora já posso começar a pensar sobre como devo montar meu caso base? Devo refletir sobre quais e quantos passos recursivos minha função deve ter?</p>
+
+<p>Bem, por mais que ter uma boa base de indução ajude bastante na montagem de funções recursivas, uma boa programadora ou bom programador deve ser capaz de visualizar a recursão de forma concreta antes de aplicá-la. Para isso, iremos utilizar a construção de estruturas fundamentalmente recursivas como ferramenta pedagógica para facilitar a absorção desses conceitos.</p>
+
+<h2 id="utilizando-a-recursão-para-construir-coleções-de-coisas">Utilizando a recursão para construir coleções de coisas</h2>
+
+<p>Uma das utilizações mais fundamentais da recursão é o seu uso para construir “coleções de coisas”, mas o que seriam essas coisas? Nesse contexto, coisas referem-se a tipos dos mais diversos, temos coleções de inteiros, de valores booleanos, de strings, de chars, de pessoas, de carros, de funções…</p>
+
+<p>Por sua vez, essas coleções podem ter vários formatos, ordenações, regras, formas de interações, etc. Uma coleção aqui representa tudo aquilo que reúne coisas de determinado tipo em determinada estrutura. E, como iremos conhecer, algumas dessas coleções são fundamentalmente recursivas.</p>
+
+<p>Em específico, iremos trabalhar com a coleção nomeada lista, acerca da qual conhecemos algumas características fundamentais, quais sejam: a mutabilidade dos seus elementos, a relevância de suas posições, a possibilidade de elementos repetidos, a mutabilidade do seu tamanho, e por aí vai.</p>
+
+<p>Você consegue pensar de cabeça em alguma outra coleção de coisas* com regras distintas?</p>
+
+<ul>
+  <li>Conjunto</li>
+  <li>Par ordenado/dupla</li>
+  <li>Bag/sacola</li>
+  <li>Sequência</li>
+  <li>Array</li>
+  <li>String</li>
+  <li>Array circular</li>
+  <li>Tabela</li>
+  <li>Árvore</li>
+</ul>
+
+<p>*Estamos generalizando aqui alguns conceitos distintos no intuito de simplificar a explicação, utilizando para tal a nomenclatura de coleção de coisas, entendida como mais adequada para o fim pretendido</p>
+
+<p>Ao que pensamos imediatamente quando nos vem à cabeça o nome lista, chamaremos simplificadamente de “especificação”, já à forma como iremos garantir que nossa estrutura dentro de dada linguagem se comporte como pensamos que deva se comportar uma lista, chamaremos simplificadamente de “implementação”.</p>
+
+<p>Nesse momento, iremos ver uma determinada forma de implementar listas recursivamente, mas as possibilidades são amplas, desde que seja respeitada a especificação esperada desse tipo!</p>
+
+<h2 id="aplicação-da-recursão-em-listas">Aplicação da recursão em listas</h2>
+
+<p>A aplicação da recursão em listas aqui parte de uma construção recursiva (quem diria?) dessa estrutura, a qual nos permite sempre acessar seus membros imediatamente anteriores, ou posteriores (a depender da escolha de implementação), facilmente, como veremos à frente.</p>
+
+<h3 id="montando-construtores-de-listas">Montando construtores de listas</h3>
+
+<p>Iremos agora construir uma lista do zero, em pseudocódigo, simulando uma linguagem de programação que ainda não tenha implementado esse tipo. Para isso, precisaremos apenas de dois construtores: o caso base, que será a lista vazia, e o passo recursivo, que será a possibilidade de formar uma nova lista a partir de uma lista já existente.</p>
+
+<p>Vejamos, como exemplo, a definição de uma lista de coisas x:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">Define</span> <span class="kt">List</span> <span class="n">x</span> <span class="o">::</span> <span class="kr">type</span> <span class="o">-&gt;</span> <span class="kr">type</span><span class="p">,</span> <span class="kr">where</span>
+<span class="c1">-- Aqui definimos o tipo da nossa List x</span>
+    <span class="kt">[ ]</span> <span class="o">::</span> <span class="kt">List</span> <span class="n">x</span>
+<span class="c1">-- Aqui definimos o nosso caso base</span>
+    <span class="p">(</span> <span class="n">x</span> <span class="o">:</span> <span class="n">xs</span> <span class="p">)</span> <span class="o">::</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="kt">List</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="kt">List</span> <span class="n">x</span>
+<span class="c1">-- Aqui definimos o passo recursivo</span>
+</code></pre></div></div>
+<p>Aqui, definimos um tipo recursivo que pode ser acionado de duas formas:</p>
+
+<p>1) Sem qualquer exigência, podemos chamar sempre o caso base, construindo uma lista vazia com o construtor [ ].</p>
+
+<p>2) Caso já tenhamos uma lista, podemos construir uma nova lista, inserindo um elemento na sua “cabeça” (perceba que poderíamos muito bem ter escolhido o “rabo” como outra opção), a partir do comando (x : xs).</p>
+
+<p>Neste caso, o x pode ser qualquer coisa, vejamos sua aplicação com o tipo dos naturais:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">Define</span> <span class="kt">List</span> <span class="kt">Nat</span> <span class="o">::</span> <span class="kr">type</span> <span class="kr">where</span>
+<span class="c1">-- Aqui definimos o tipo da nossa List Nat</span>
+    <span class="kt">[ ]</span> <span class="o">::</span> <span class="kt">List</span> <span class="kt">Nat</span>
+<span class="c1">-- Caso base</span>
+    <span class="p">(</span> <span class="n">x</span> <span class="o">:</span> <span class="n">xs</span> <span class="p">)</span> <span class="o">::</span> <span class="kt">Nat</span> <span class="o">-&gt;</span> <span class="kt">List</span> <span class="kt">Nat</span> <span class="o">-&gt;</span> <span class="kt">List</span> <span class="kt">Nat</span>
+<span class="c1">-- Passo recursivo</span>
+</code></pre></div></div>
+
+<p>Agora que temos em mãos os dois construtores das listas de naturais, podemos brincar um pouco, construindo listas com diferentes núermos, veja bem:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">[ ]</span>
+<span class="c1">-- Aqui temos uma lista vazia</span>
+<span class="p">(</span><span class="mi">1</span> <span class="o">:</span> <span class="kt">[ ]</span><span class="p">)</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1">-- Aqui estamos construindo uma lista com um único elemento,</span>
+<span class="c1">-- o número 1, ao inserirmos uma “cabeça” com o elemento</span>
+<span class="c1">-- 1 na lista vazia.</span>
+<span class="p">(</span><span class="mi">3</span> <span class="o">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="c1">-- Aqui acabamos de construir uma lista com três elementos,</span>
+<span class="c1">-- inserindo uma “cabeça” com o elemento 3 em uma lista que</span>
+<span class="c1">-- tinha anteriormente apenas o 1 e o 2 de elementos. </span>
+<span class="p">(</span><span class="mi">42</span> <span class="o">:</span> <span class="p">[</span><span class="mi">42</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">42</span><span class="p">])</span> <span class="o">=</span> <span class="p">[</span><span class="mi">42</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">42</span><span class="p">]</span>
+<span class="c1">-- Aqui construímos uma lista com 5 elementos 42</span>
+</code></pre></div></div>
+
+<p>Utilizando esses construtores, você consegue criar alguma outra lista?</p>
+
+<h3 id="descobrindo-a-função-length">Descobrindo a função <span style="color: #081849; font-weight: bold;">LENGTH</span></h3>
+
+<p>Agora que temos acesso a um tipo definido, por nós mesmos, recursivamente, nós podemos enfim começar a utilizar funções que se aproveitem dessa implementação!</p>
+
+<p>Como primeiro exemplo, iremos definir uma função que recebe listas e retorna inteiros, representativos da quantidade de elementos dessa lista recebida. Mas nós iremos fazê-lo recursivamente!</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">length</span> <span class="o">::</span> <span class="kt">List</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+<span class="c1">-- O tipo da nossa função recursiva</span>
+<span class="n">length</span> <span class="kt">[ ]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1">-- O caso base</span>
+<span class="n">length</span> <span class="p">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">xs</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">length</span> <span class="n">xs</span>
+<span class="c1">-- O passo recursivo</span>
+</code></pre></div></div>
+
+<p>(Atenção: length significa “comprimento” em inglês)</p>
+
+<p>Olhe como foi fácil definir o caso base e o passo recursivo! Caso a lista esteja vazia, a função retorna o inteiro zero, e caso a função tenha “cabeça”, a função retorna o inteiro 1 somado ao resultado da mesma função length, chamada na lista sem essa cabeça.</p>
+
+<p>Vamos tentar desenhar no quadro para ver se dá certo mesmo?</p>
+
+<h3 id="descobrindo-a-função-sum-exercíciodesafio">Descobrindo a função <span style="color: #081849; font-weight: bold;">SUM</span> (Exercício/desafio)</h3>
+
+<p>A partir da função length definida anteriormente, você consegue pensar como seria a construção de uma função sum (soma), definida usando uma List Nat? Vamos tentar?</p>
+
+<details>
+    <summary>SPOILER!</summary>
+<div>
+    <div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sum</span> <span class="o">::</span> <span class="kt">List</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+<span class="c1">-- O tipo da nossa função recursiva</span>
+<span class="n">sum</span> <span class="kt">[ ]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1">-- O nosso passo base</span>
+<span class="n">sum</span> <span class="p">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">xs</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">xs</span>
+<span class="c1">-- O nosso passo recursivo</span>
+</code></pre></div>    </div>
+
+    <p>(Atenção: sum significa “soma” em inglês)</p>
+
+    <p>Observe que foi apenas possível fazer esta função pois já havia um tipo Int implementado na nossa linguagem de programação simulada com pseudocódigo, assim como uma operação de soma que recebe dois números do tipo Int e retorna outro Int!</p>
+  </div>
+</details>
+
+<p>Além disso, é importante explicitar o quão visível fica o entrelaçamento dos conceitos abordados utilizando-se o exemplo da função acima. Na seara da Matemática e da Indução, calcular a soma de uma quantidade n de termos em dada sequência é um exercício comum.</p>
+
+<p>De forma semelhante, a função sum modificada poderia ser utilizada para calcular os n primeiros termos de uma sequência. E como é construída de forma recursiva, poderíamos utilizar a indução para provar que, assegurados o passo base e o passo indutivo, essa função nos garantiria um resultado correto todas as vezes que a chamassemos.</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sum_mod</span> <span class="o">::</span> <span class="kt">Nat</span> <span class="o">-&gt;</span> <span class="kt">List</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+<span class="n">sum_mod</span> <span class="mi">0</span> <span class="n">xs</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">sum_mod</span> <span class="n">n</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum_mod</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="kt">[]</span> <span class="o">+</span> <span class="n">x</span>
+<span class="n">sum_mod</span> <span class="n">n</span> <span class="p">((</span><span class="n">xs</span> <span class="o">:</span> <span class="n">x'</span><span class="p">)</span> <span class="o">:</span> <span class="kt">[]</span><span class="p">)</span> <span class="o">=</span> <span class="n">sum_mod</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="n">xs</span> <span class="o">:</span> <span class="kt">[]</span><span class="p">)</span> <span class="o">+</span> <span class="n">x'</span>
+<span class="c1">-- Aqui colocamos o construtor da lista acessível</span>
+<span class="c1">-- tanto pela cabeça como pela cauda para facilitar</span>
+<span class="c1">-- o entendimento</span>
+<span class="n">sum_mod</span> <span class="n">n</span> <span class="kr">_</span> <span class="o">=</span> <span class="n">error</span> <span class="s">"too small or not a sequence"</span>
+<span class="c1">-- Caso não seja possível acessar o primeiro elemento</span>
+<span class="c1">-- ou a lista tenha elementos insuficientes, é exibida</span>
+<span class="c1">-- uma mensagem de erro indicando que o argumento</span>
+<span class="c1">-- não é compatível</span>
+</code></pre></div></div>
+
+<p>A utilização de demonstrações matemáticas para provar a corretude de uma função é algo amplamente utilizado na programação, em especial em aplicações críticas que não admitam erros. Outra possibilidade é a utilização exaustiva de casos testes e de  failsafes, mas nenhum deles garante que a aplicação não causará erros, algo que a demonstração matemática faz com 100% de certeza.</p>
+
+<h3 id="descobrindo-a-função-filter">Descobrindo a função <span style="color: #081849; font-weight: bold;">FILTER</span></h3>
+
+<p>É importante perceber que não temos limitações quanto à saída das funções para utilização da recursão! Veja esse exemplo que utiliza um predicado (x -&gt; bool) para filtrar uma lista que queremos que tenha apenas elementos que cumpram um certo critério!</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">filter</span> <span class="o">::</span> <span class="p">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">List</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="kt">List</span> <span class="n">x</span>
+<span class="c1">-- O tipo da nossa função recursiva</span>
+<span class="n">filter</span> <span class="n">p</span> <span class="kt">[ ]</span> <span class="o">-&gt;</span> <span class="kt">[ ]</span>
+<span class="c1">-- O nosso caso base</span>
+<span class="n">filter</span> <span class="n">p</span> <span class="p">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">xs</span><span class="p">)</span> <span class="o">=</span>
+<span class="c1">-- Agora iremos inserir uma estrutura if/then/else</span>
+	<span class="kr">if</span> <span class="n">p</span> <span class="n">x</span>
+<span class="c1">-- Caso a “cabeça” passe pelo filtro</span>
+	<span class="kr">then</span> <span class="p">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">p</span> <span class="n">xs</span><span class="p">)</span>
+<span class="c1">-- Iremos acoplar ela a uma nova chamada da filter</span>
+	<span class="kr">else</span> <span class="n">filter</span> <span class="n">p</span> <span class="n">xs</span>
+<span class="c1">-- Caso contrário, iremos descartar a cabeça e chamar </span>
+<span class="c1">-- a filter no resto ainda assim</span>
+</code></pre></div></div>
+
+<p>Mas o que seria um predicado (x -&gt; bool)? Nós já criamos um hoje mais cedo, lembram qual era?</p>
+
+<details>
+    <summary>SPOILER!</summary>
+<div>
+
+    <div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">filter</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Int</span><span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">List</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">List</span> <span class="kt">Int</span>
+<span class="n">filter</span> <span class="n">p</span> <span class="kt">[ ]</span> <span class="o">-&gt;</span> <span class="kt">[ ]</span>
+<span class="n">filter</span> <span class="n">p</span> <span class="p">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">xs</span><span class="p">)</span> <span class="o">=</span>
+	<span class="kr">if</span> <span class="n">p</span> <span class="n">x</span>
+	<span class="kr">then</span> <span class="p">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">p</span> <span class="n">xs</span><span class="p">)</span>
+	<span class="kr">else</span> <span class="n">filter</span> <span class="n">p</span> <span class="n">xs</span>
+
+<span class="n">filter</span> <span class="kt">IsEven</span> <span class="kt">[ ]</span> <span class="o">=</span> <span class="kt">[ ]</span>
+<span class="n">filter</span> <span class="kt">IsEven</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">65</span><span class="p">]</span>
+<span class="n">filter</span> <span class="kt">IsEven</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="c1">-- ?</span>
+</code></pre></div>    </div>
+
+  </div>
+</details>
+
+<h3 id="descobrindo-a-função-map">Descobrindo a função <span style="color: #081849; font-weight: bold;">MAP</span></h3>
+<p>Outra função fundamental para entender a lógica da recursão é a map, que mapeia uma determinada função em todos os componentes de uma lista. Pelo nome, você conseguiria adivinhar o que ela faz?</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">map</span> <span class="o">::</span> <span class="p">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">List</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="kt">List</span> <span class="n">x</span>
+<span class="c1">-- O tipo da nossa função recursiva</span>
+<span class="n">map</span> <span class="n">f</span> <span class="kt">[ ]</span> <span class="o">=</span> <span class="kt">[ ]</span>
+<span class="c1">-- O nosso caso base</span>
+<span class="n">map</span> <span class="n">f</span> <span class="p">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">xs</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span> <span class="n">x</span> <span class="o">:</span> <span class="n">map</span> <span class="n">f</span> <span class="n">xs</span><span class="p">)</span>
+<span class="c1">-- O nosso passo recursivo</span>
+<span class="n">double</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+<span class="c1">-- Aqui definimos uma função double</span>
+<span class="n">double</span> <span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="n">n</span><span class="p">)</span>
+<span class="c1">-- Ela recebe um inteiro, e dobra ele</span>
+
+<span class="n">map</span> <span class="n">double</span> <span class="kt">[ ]</span> <span class="o">=</span> <span class="kt">[ ]</span>
+<span class="n">map</span> <span class="n">double</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span> <span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+<span class="n">map</span> <span class="n">double</span> <span class="p">[</span> <span class="mi">42</span><span class="o">.</span> <span class="mi">43</span><span class="o">.</span> <span class="mi">42</span><span class="p">]</span> <span class="o">=</span> <span class="c1">-- ?</span>
+</code></pre></div></div>
+
+<p>Você consegue imaginar como seria definir essa função de forma iterativa?</p>
+
+<details>
+    <summary>SPOILER!</summary>
+<div>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">double_list</span><span class="p">(</span><span class="n">input_list</span><span class="p">):</span>
+  <span class="n">doubled_list</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">input_list</span><span class="p">:</span>
+    <span class="n">doubled_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">doubled_list</span>
+
+<span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">input_list</span><span class="p">):</span>
+  <span class="n">result_list</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">input_list</span><span class="p">:</span>
+    <span class="n">result_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">result_list</span>
+
+<span class="k">def</span> <span class="nf">double</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">2</span>
+</code></pre></div>    </div>
+
+  </div>
+</details>
+
+<h3 id="descobrindo-a-função-replicate">Descobrindo a função <span style="color: #081849; font-weight: bold;">REPLICATE</span></h3>
+<p>De forma semelhante, também podemos diversificar o que colocamos na entrada da nossa função! Veja só a replicate, que pega um número natural, um elemento, e o replica por essa quantidade de vezes formando uma lista!</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">replicate</span> <span class="o">::</span> <span class="kt">Nat</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="kt">List</span> <span class="n">x</span>
+<span class="n">replicate</span> <span class="mi">0</span> <span class="kr">_</span> <span class="o">=</span> <span class="kt">[ ]</span>
+<span class="n">replicate</span> <span class="n">n</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">replicate</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">replicate</span> <span class="mi">5</span> <span class="kt">True</span> <span class="o">=</span> <span class="p">[</span><span class="kt">True</span><span class="p">,</span> <span class="kt">True</span><span class="p">,</span> <span class="kt">True</span><span class="p">,</span> <span class="kt">True</span><span class="p">,</span> <span class="kt">True</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h2 id="agora-vamos-praticar-um-pouco-que-aprendemos">Agora, vamos praticar um pouco que aprendemos!</h2>
+
+<p>Vocês conseguem definir mais funções com o tipo dos Bools?</p>
+
+<p>Antes de tudo, precisamos definir o tipo Bool.</p>
+
+<p>Agora, utilize as funções aprendidas ontem, como as and, or e not para definir novas funções que utilizem listas de booleanos. Tente fazer a any e a all.</p>
+
+<h2 id="é-possível-extrapolar-para-outros-tipos">É possível extrapolar para outros tipos?</h2>
+
+<p>Mas somente as listas são tipos recursivos? Ou então apenas as coleções de coisas são tipos recursivos? Quais outros tipos eu posso implementar recursivamente?</p>
+
+<p>De forma ilustrativa, iremos apresentar uma possível implementação dos números naturais de forma recursiva, a fim de que possamos apreciar a potência da recursão. Veja como, com apenas dois construtores, podemos criar um tipo de quantidade infinita!</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">define</span> <span class="kt">Nat</span> <span class="o">::</span> <span class="kr">type</span> <span class="kr">where</span>
+	   <span class="kt">O</span> <span class="o">::</span> <span class="kt">Nat</span>
+	   <span class="kt">S</span> <span class="o">::</span> <span class="kt">Nat</span> <span class="o">-&gt;</span> <span class="kt">Nat</span>
+</code></pre></div></div>
+
+<p>Agora temos um tipo recursivo representante dos números naturais com dois construtores, você consegue identificar qual o caso base e qual o passo recursivo?</p>
+
+<p>1) Do nada, podemos construir o zero (0)
+2) Caso já tenhamos um número natural, podemos chamar o seu sucessor! (S n)</p>
+
+<p>Nesse sentido, teríamos o 1 representado pelo (S 0), o 2 pelo S(S 0), o 3 pelo S(S(S 0)) e assim em diante!</p>
+
+<h3 id="descobrindo-melhores-funções-even-e-odd">Descobrindo melhores funções <span style="color: #081849; font-weight: bold;">EVEN</span> e <span style="color: #081849; font-weight: bold;">ODD</span></h3>
+
+<p>Agora que temos os naturais como tipo recursivo, podemos definir uma função ainda melhor para definir se um número é par (even), ou ímpar (odd)!</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">even</span> <span class="o">::</span> <span class="kt">Nat</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="n">even</span> <span class="kt">O</span> <span class="o">=</span> <span class="kt">False</span>
+<span class="n">even</span> <span class="p">(</span><span class="kt">S</span> <span class="kt">O</span><span class="p">)</span> <span class="o">=</span> <span class="kt">True</span>
+<span class="n">even</span> <span class="p">(</span><span class="kt">S</span> <span class="p">(</span><span class="kt">S</span> <span class="n">n</span><span class="p">))</span> <span class="o">=</span> <span class="n">even</span> <span class="n">n</span>
+
+<span class="n">odd</span> <span class="o">::</span> <span class="kt">Nat</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="n">odd</span> <span class="n">n</span> <span class="o">=</span> <span class="n">even</span> <span class="kt">S</span> <span class="n">n</span>
+</code></pre></div></div>
+
+<h2 id="agora-vamos-praticar-um-pouco-que-aprendemos-1">Agora, vamos praticar um pouco que aprendemos!</h2>
+
+<p>Vocês conseguem definir mais funções com o tipo dos Nats?</p>
+
+<p>Defina as funções mínimo e máximo, que recebem dois naturais e retornam aquele que for o menor, ou o maior.</p>
+
+<p>Defina a função plus, que soma dois naturais.</p>
+
+<p>Defina a função prod, que multiplica dois naturais.</p>
+
+<p>DESAFIO: Defina a função factorial.</p>
+
+<h3 id="verificando-se-uma-função-foi-bem-definida-recursivamente-kahoot">Verificando se uma função foi bem definida recursivamente (kahoot)</h3>
+
+<hr />
+<script>
+const dataDia2 = new Date('2025-03-11');
+const agora = new Date();
+
+if (agora < dataDia2) {
+    document.body.innerHTML = '<h1 style="text-align:center; margin-top:20%;">Página Indisponível</h1>' +
+                              '<p style="text-align:center;">Esta página estará disponível a partir de ' + dataDia2.toLocaleDateString() + '.</p>';
+}
+</script>
+
+<div class="small center">
+<p>&copy; PET-CC/UFRN 2025 Licenciado sob <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br">CC BY-NC-SA</a>.</p>
+</div>
+
+
+            </main>
+            <script src="./assets/js/sumario_script.js"></script>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  options: {
+    ignoreHtmlClass: 'highlight|code'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

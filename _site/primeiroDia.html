@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Minicurso de Matemática aplicada à Computação</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="./assets/css/styles.css">
+        <link rel="stylesheet" href="/matcomp/assets/css/syntax.css">
+        <link rel="icon" href="https://i.ibb.co/RD7XwYH/pet-logo.png" type="image/png">
+    </head>
+    <body class="layoutGit">
+        <header>
+    <nav class="navgit">
+        <ul class="listaNavegacao">
+            <li>
+                <a href="index" style="text-decoration:none;">/home</a>
+            </li>
+            <li>
+                <a href="aulas" style="text-decoration:none;">/aulas</a>
+            </li> 
+            <li>
+                <a href="sobre" style="text-decoration:none;">/sobre</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+        <div>
+            <main>
+                <div id="sumario" class="sumario-git">
+    <h1>Dia 1</h1>
+    <details>
+        <summary><a href="#lógica">Lógica</a></summary>
+        <ul>
+            <li><a href="#clareza-e-precisão-no-código">Clareza e precisão no código</a></li>
+            <li><a href="#depuração-eficaz">Depuração eficaz</a></li>
+            <li><a href="#design-de-algoritmos">Design de algoritmos</a></li>
+            <li><a href="#verificação-e-testes">Verificação e testes</a></li>
+        </ul>
+    </details>
+    <details>
+         <summary><a href="#elementos-da-lógica-formal">Elementos da lógica formal</a></summary>
+        <ul>
+            <li><a href="#proposições">Proprosições</a></li>
+            <li><a href="#conectivos-lógicos">Conectivos lógicos</a>
+                <ul> 
+                    <li><a href="#negação">Negação</a></li>
+                    <li><a href="#conjunção">Conjunção</a></li>
+                    <li><a href="#disjunção">Disjunção</a></li>
+                    <li><a href="#implicação">Implicação</a></li>
+                    <li><a href="#bi-implicação">Bi-implicação</a></li>
+                    <li><a href="#contradição">Contradição</a></li>
+                </ul>
+            </li>
+            <li><a href="#demonstração-de-equivalências">Demonstração de equivalências</a></li>
+            <li><a href="#lógica-de-predicados">Lógica de Predicados</a>
+                <ul> 
+                    <li><a href="#variáveis">Variáveis</a></li>
+                    <li><a href="#predicados">Predicados</a></li>
+                    <li><a href="#exercícios">Exercícios</a></li>
+                </ul>
+            </li>
+        </ul>
+    </details>
+  <button class="toggle-button" id="toggle-button">
+  
+      Esconder Sumário
+  
+  </button>
+</div>
+
+<!--<div style="text-align: center;"> <img alt="Meme muito engraçado sobre arquivos do sistema" src="assets/images/funny-math-meme.png" width="50%">
+</div>
+-->
+
+<p><br /></p>
+
+<h1 id="benefícios-da-lógica-na-programação">Benefícios da Lógica na Programação</h1>
+
+<h2 id="lógica">Lógica</h2>
+<p>Para começarmos a entender mais profundamente a influência da matemática na programação, e como conceitos matemáticos se relacionam com a área da Computação, precisamos ser introduzidos à Lógica, que estrutura toda a matemática que conhecemos, e quais seus benefícios na nossa área.</p>
+
+<h3 id="clareza-e-precisão-no-código">Clareza e Precisão no Código</h3>
+<p>A lógica nos permite estruturar soluções de forma clara e concisa. Ao aplicar princípios lógicos, podemos garantir que cada linha de código tenha um propósito bem definido e que o fluxo do programa seja facilmente compreendido.</p>
+<ul>
+  <li>Estruturas de Controle: As estruturas de controle, como <code class="language-plaintext highlighter-rouge">if/else</code>, <code class="language-plaintext highlighter-rouge">while</code> e <code class="language-plaintext highlighter-rouge">for</code>, são a espinha dorsal de qualquer programa. Elas dependem intrinsecamente de condições lógicas bem definidas para guiar o fluxo de execução. Uma condição lógica mal formulada pode levar a um comportamento inesperado ou a erros difíceis de rastrear.</li>
+  <li>Pensamento Algorítmico: A lógica nos treina a pensar de forma algorítmica, ou seja, a decompor um problema complexo em passos menores e mais gerenciáveis. Cada passo é uma decisão lógica que contribui para a solução geral.</li>
+</ul>
+
+<h4 id="exemplo">Exemplo</h4>
+<p>Imagine que queremos criar um programa que verifica se um aluno foi aprovado ou reprovado em uma disciplina. Para ser aprovado, o aluno precisa ter nota maior ou igual a 60 <strong>E</strong> frequência maior ou igual a 75%. Se apenas uma dessas condições não for atendida, ele será reprovado.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Lógica bem definida
+</span><span class="n">nota</span> <span class="o">=</span> <span class="mi">65</span>
+<span class="n">frequencia</span> <span class="o">=</span> <span class="mi">80</span>
+
+<span class="k">if</span> <span class="n">nota</span> <span class="o">&gt;=</span> <span class="mi">60</span> <span class="ow">and</span> <span class="n">frequencia</span> <span class="o">&gt;=</span> <span class="mi">75</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Aluno Aprovado!"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Aluno Reprovado!"</span><span class="p">)</span>
+
+<span class="c1"># Saída: Aluno Aprovado!
+</span></code></pre></div></div>
+
+<p>Agora, vamos ver um exemplo de como uma lógica mal definida pode levar a erros.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Lógica mal definida
+</span><span class="n">nota</span> <span class="o">=</span> <span class="mi">70</span>
+<span class="n">frequencia</span> <span class="o">=</span> <span class="mi">70</span>
+
+<span class="k">if</span> <span class="n">nota</span> <span class="o">&gt;=</span> <span class="mi">70</span> <span class="ow">or</span> <span class="n">frequencia</span> <span class="o">&gt;=</span> <span class="mi">75</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Aluno Aprovado!"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Aluno Reprovado!"</span><span class="p">)</span>
+
+<span class="c1"># Saída: Aluno Aprovado! (Incorreto, pois a frequência é menor que 75)
+</span></code></pre></div></div>
+<p>Nesse segundo exemplo, a utilização do operador ‘ou’ (OR) em vez do ‘e’ (AND) resultou em uma aprovação indevida. Isso demonstra como a precisão na lógica é crucial para o comportamento correto do programa.</p>
+
+<p>Portanto, uma simples mudança no código pode fazer com que os resultados mudem drasticamente. Por mais que seja um exemplo bobinho, é importante que o programador, ao escrever seu código, saiba exatamente como ele deve se comportar.</p>
+
+<h3 id="depuração-eficaz">Depuração Eficaz</h3>
+<p>Mesmo que você sempre aplique boas técnicas de programação, é comum que algum ponto “passe batido”, ou você pode ficar responsável por revisar algum código que não tenha sido bem escrito. É aí que entra o processo de depuração: Seguir o fluxo do código para identificar em qual ponto o erro ocorreu, e corrigi-lo. Vejamos um exemplo:</p>
+
+<h4 id="exemplo-1">Exemplo</h4>
+<p>Suponha que temos um programa que calcula o dobro do módulo de um número.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">calcular_dobro_modulo</span><span class="p">(</span><span class="n">numero</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">numero</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">numero</span> <span class="o">=</span> <span class="n">numero</span> <span class="o">*</span><span class="mi">2</span>
+        <span class="k">return</span> <span class="n">numero</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">numero</span> <span class="o">=</span> <span class="n">numero</span> <span class="o">*-</span><span class="mi">1</span>
+        <span class="n">numero</span> <span class="o">=</span> <span class="n">numero</span> <span class="o">+</span><span class="mi">2</span>
+        <span class="k">return</span> <span class="n">numero</span>
+    
+<span class="k">print</span><span class="p">(</span><span class="n">calcular_dobro_modulo</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>   <span class="c1"># Output: 10
+</span><span class="k">print</span><span class="p">(</span><span class="n">calcular_dobro_modulo</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">))</span>  <span class="c1"># Output: 7
+</span></code></pre></div></div>
+
+<p>10 é o dobro do módulo de 5, então nosso código funciona para essa entrada. Porém, 7 não é o dobro do módulo de -5. Vamos investigar:</p>
+
+<ul>
+  <li>Primeiro, verificamos a entrada: <code class="language-plaintext highlighter-rouge">numero = -5</code>;</li>
+  <li>Entramos no <code class="language-plaintext highlighter-rouge">if</code>;
+    <ul>
+      <li>A condição <code class="language-plaintext highlighter-rouge">numero &gt; 0</code> é <code class="language-plaintext highlighter-rouge">False</code>;</li>
+    </ul>
+  </li>
+  <li>Saímos do <code class="language-plaintext highlighter-rouge">if</code> e entramos no <code class="language-plaintext highlighter-rouge">else</code>;
+    <ul>
+      <li>Então a operação <code class="language-plaintext highlighter-rouge">numero = numero * -1</code> é executada;</li>
+      <li>Temos <code class="language-plaintext highlighter-rouge">numero = 5 * -1 = 5</code>;</li>
+      <li>A operação <code class="language-plaintext highlighter-rouge">numero = numero+2 = 7</code> é executada</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Achamos nosso erro!</strong> No lugar de multiplicar por 2, foi somado 2. Existem muitos motivos que podem ter levado a esse erro, como também existem muitas maneiras de corrigi-lo. A mais simples é trocando o símbolo de soma pelo da multiplicação.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">calcular_dobro_modulo</span><span class="p">(</span><span class="n">numero</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">numero</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">numero</span> <span class="o">=</span> <span class="n">numero</span> <span class="o">*</span><span class="mi">2</span>
+        <span class="k">return</span> <span class="n">numero</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">numero</span> <span class="o">=</span> <span class="n">numero</span> <span class="o">*-</span><span class="mi">1</span>
+        <span class="n">numero</span> <span class="o">=</span> <span class="n">numero</span> <span class="o">*</span><span class="mi">2</span>
+        <span class="k">return</span> <span class="n">numero</span>
+    
+<span class="k">print</span><span class="p">(</span><span class="n">calcular_dobro_modulo</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>   <span class="c1"># Output: 10
+</span><span class="k">print</span><span class="p">(</span><span class="n">calcular_dobro_modulo</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">))</span>  <span class="c1"># Output: 10
+</span></code></pre></div></div>
+
+<p>Mais uma vez, um exemplo simples, mas que mostra que esse tipo de abordagem pode ser útil. Por mais que pareça bobinho, esse tipo de erro de digitação é relativamente comum.</p>
+
+<h3 id="design-de-algoritmos">Design de Algoritmos</h3>
+<p>Parte da lógica é fazer as coisas na ordem correta. Portanto, antes de escrever qualquer linha de código, precisamos entender o que o programa deve fazer. A lógica nos permite expressar requisitos e especificações de forma precisa e sem ambiguidades. É a ferramenta fundamental para pensar na sequência de passos que o algoritmo deve seguir, nas decisões que ele precisa tomar e nas repetições necessárias para alcançar o objetivo. No lugar de <strong>programar e pensar</strong> ao mesmo tempo, podemos montar uma solução e só depois partir para o código.</p>
+
+<h4 id="exemplo-2">Exemplo</h4>
+<p>Imagine que precisamos criar um algoritmo para encontrar o maior número em uma lista. Como podemos fazer isso?</p>
+
+<ol>
+  <li>Precisamos de um lugar para armazenar o maior número que encontramos até agora. Vamos chamá-lo de <code class="language-plaintext highlighter-rouge">maior_numero_encontrado</code>;</li>
+  <li>Vamos começar assumindo que o primeiro número da lista é o maior;</li>
+  <li>Precisamos olhar cada número na lista, um por um;</li>
+  <li>Para cada número, vamos compará-lo com o <code class="language-plaintext highlighter-rouge">maior_numero_encontrado</code>;</li>
+  <li>Se o número atual for maior que o <code class="language-plaintext highlighter-rouge">maior_numero_encontrado</code>, então o número atual se torna o novo <code class="language-plaintext highlighter-rouge">maior_numero_encontrado</code>;</li>
+  <li>Depois de verificar todos os números, o <code class="language-plaintext highlighter-rouge">maior_numero_encontrado</code> será o maior número da lista.</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">encontrar_maior_numero</span><span class="p">(</span><span class="n">lista</span><span class="p">):</span>
+    <span class="c1"># Assume o primeiro como o maior
+</span>    <span class="n">maior_numero_encontrado</span> <span class="o">=</span> <span class="n">lista</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Itera sobre os elementos da lista
+</span>    <span class="k">for</span> <span class="n">numero</span> <span class="ow">in</span> <span class="n">lista</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">numero</span> <span class="o">&gt;</span> <span class="n">maior_numero_encontrado</span><span class="p">:</span>
+            <span class="n">maior_numero_encontrado</span> <span class="o">=</span> <span class="n">numero</span>
+
+    <span class="k">return</span> <span class="n">maior_numero_encontrado</span>
+
+<span class="n">lista</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">encontrar_maior_numero</span><span class="p">(</span><span class="n">lista</span><span class="p">))</span>
+<span class="c1"># Saída: 20
+</span></code></pre></div></div>
+
+<h3 id="verificação-e-testes">Verificação e Testes</h3>
+<p>Depois de escrever um programa, precisamos ter certeza de que ele funciona como esperado, ou seja, precisamos testá-lo. Esta etapa pode não fazer muito sentido em <em>softwares</em> mais simples (trabalhos da faculdade, por exemplo), mas Aplicações Críticas ou Aplicações Comerciais/Empresariais têm uma tolerância menor a comportamentos inesperados, então a parte de testes acaba tendo uma importância bem maior. A lógica nos ajuda a formular testes que cubram diferentes caminhos de execução do código, validando todas as condições lógicas e ramificações.</p>
+
+<p>O raciocínio lógico nos permite criar casos de teste abrangentes, incluindo:</p>
+<ul>
+  <li>Casos de Borda (Edge Cases): Valores mínimos e máximos, listas vazias, strings nulas, etc.</li>
+  <li>Casos de Sucesso: Entradas que devem produzir o resultado esperado.</li>
+  <li>Casos de Falha: Entradas que devem acionar mensagens de erro ou comportamento específico.</li>
+</ul>
+
+<h4 id="exemplo-3">Exemplo</h4>
+<p>Para a nossa função calcular_dobro, vamos pensar em casos de teste usando a lógica.</p>
+
+<ul>
+  <li>Caso de Sucesso (número positivo): Se a entrada é 5, a saída deve ser 10.</li>
+  <li>Caso de Sucesso (número negativo): Se a entrada é -5, a saída deve ser -10.</li>
+  <li>Caso de Sucesso (zero): Se a entrada é 0, a saída deve ser 0.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">calcular_dobro</span><span class="p">(</span><span class="n">numero</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">numero</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="c1"># Casos de Teste
+</span><span class="k">assert</span> <span class="n">calcular_dobro</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span><span class="p">,</span> <span class="s">"Erro: 5 * 2 deveria ser 10"</span>
+<span class="k">assert</span> <span class="n">calcular_dobro</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="s">"Erro: -5 * 2 deveria ser -10"</span>
+<span class="k">assert</span> <span class="n">calcular_dobro</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s">"Erro: 0 * 2 deveria ser 0"</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"Todos os testes passaram para calcular_dobro!"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Abordagens de testes guiadas por raciocínio lógico nos permite não apenas verificar se o código funciona para casos óbvios, mas também garantir sua robustez em cenários complexos e nos limites das condições. Testes são, em essência, pequenas demonstrações de que nosso código se comporta conforme o esperado sob certas condições. Eles não provam a ausência de bugs, mas aumentam significativamente a confiança na qualidade e na corretude do software, reduzindo riscos e facilitando a manutenção a longo prazo.</p>
+
+<h3 id="colocando-a-mão-na-massa">Colocando a mão na massa</h3>
+
+<p>Agora que nós aprendemos um pouco mais sobre a parte de design, depuração e testes de algoritmos, chegou a hora de colocarmos esses conhecimentos em prática!</p>
+
+<p>Todos os códigos a seguir apresentam algum erro de lógica ou implementação, e é o 🫵 seu dever 🫵 descobrir o que está dando errado! O primeiro exemplo já vem com casos que irão te ajudar a deduzir o erro (pra você ir pegando o jeito), mas você deve criar os seus próprios testes para os últimos exemplos!
+Para fazer seus testes, você pode compilar e executar esses códigos no Vscode da sua máquina atual, em um compilador online ou na IDE de sua preferência.</p>
+
+<h4 id="exercício-1">Exercício 1:</h4>
+
+<p>Função que recebe um inteiro e calcula o seu fatorial. Ou seja, quando ela recebe o inteiro, deve multiplicar todos os seus antecessores positivos e o inteiro em questão.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Definição da Função
+</span><span class="k">def</span> <span class="nf">fatorial</span><span class="p">(</span><span class="n">inteiro</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">numero</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">inteiro</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">*</span> <span class="n">numero</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># Casos de Teste
+</span><span class="k">print</span><span class="p">(</span><span class="s">"Resultado de fatorial(2) é "</span><span class="p">,</span> <span class="n">fatorial</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Resultado de fatorial(3) é "</span><span class="p">,</span> <span class="n">fatorial</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Resultado de fatorial(5) é "</span><span class="p">,</span> <span class="n">fatorial</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Resultado de fatorial(0) é "</span><span class="p">,</span> <span class="n">fatorial</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="k">assert</span> <span class="n">fatorial</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s">"Erro: 2 * 1 deveria ser 2"</span>
+<span class="k">assert</span> <span class="n">fatorial</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span><span class="p">,</span> <span class="s">"Erro: 3 * 2 * 1 deveria ser 6"</span>
+<span class="k">assert</span> <span class="n">fatorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="mi">120</span><span class="p">,</span> <span class="s">"Erro: 5 * 4 * 3 * 2 * 1 deveria ser 120"</span>
+<span class="k">assert</span> <span class="n">fatorial</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"Erro: o resultado deveria ser 1"</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"Todos os testes foram concluídos com sucesso! Parabéns!"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><em>DICA:</em>
+Note que, ao rodar os testes, todos os resultados aparentam dar 0. O que poderia ter causado isso? Talvez alguma subtração errada ou uma multiplicação incorreta?
+Uma maneira de verificarmos o funcionamento da função (e o porquê de estar dando errado) é imprimir todos os resultados parciais, para que possamos ter ideia do que estamos gerando continuamente. Tente imprimir <em>result</em> e <em>numero</em> para cada repetição do <em>loop for</em>!</p>
+
+<h4 id="exercício-2">Exercício 2</h4>
+
+<p>Essa função recebe uma lista de valores e deve retornar a média deles. Você pode se basear no código do exemplo anterior para fazer os testes desse exemplo!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Definição da Função
+</span><span class="k">def</span> <span class="nf">media</span><span class="p">(</span><span class="n">lista</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="n">numero</span> <span class="ow">in</span> <span class="n">lista</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">+</span> <span class="n">lista</span><span class="p">(</span><span class="n">numero</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">/</span><span class="mi">2</span>
+</code></pre></div></div>
+
+<p><em>DICA:</em>
+A função <em>len()</em> do python pode ser útil para esse exemplo!</p>
+
+<h4 id="exercício-3">Exercício 3</h4>
+
+<p>Essa função recebe uma lista de valores e deve retornar o menor dentre os eles</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Definição da Função
+</span><span class="k">def</span> <span class="nf">minimo_lista</span><span class="p">(</span><span class="n">lista</span><span class="p">):</span>
+    <span class="n">minimo</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+    <span class="k">for</span> <span class="n">numero</span> <span class="ow">in</span> <span class="n">lista</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">numero</span> <span class="o">&lt;</span> <span class="n">minimo</span><span class="p">:</span>
+            <span class="n">minimo</span> <span class="o">=</span> <span class="n">numero</span>
+    <span class="k">return</span> <span class="n">minimo</span>
+</code></pre></div></div>
+
+<h4 id="exercício-4">Exercício 4</h4>
+
+<p>Essa função recebe uma lista de valores e um valor específico, com o objetivo de identificar se ele faz parte da lista.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Definição da Função
+</span><span class="k">def</span> <span class="nf">esta_na_lista</span><span class="p">(</span><span class="n">lista</span><span class="p">,</span> <span class="n">valor</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">numero</span> <span class="ow">in</span> <span class="n">lista</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">numero</span> <span class="o">==</span> <span class="n">valor</span><span class="p">:</span>
+            <span class="n">esta</span> <span class="o">=</span> <span class="n">true</span>
+        <span class="k">else</span>
+            <span class="n">esta</span> <span class="o">=</span> <span class="n">false</span>
+    <span class="k">return</span> <span class="n">esta</span>
+
+</code></pre></div></div>
+
+<p>—</p>
+
+<h2 id="elementos-da-lógica-formal">Elementos da Lógica Formal</h2>
+<p>Agora que vimos os benefícios práticos da lógica, vamos aprofundar um pouco mais nos conceitos fundamentais. Pois bem! A lógica é o ‘estudo do raciocínio válido e das inferências’. É uma ferramenta poderosa para a dedução, baseada em hipóteses e premissas. Pensar logicamente é algo que fazemos o tempo todo, mesmo sem perceber. Quando tomamos decisões no dia a dia, resolvemos problemas ou argumentamos sobre algo, estamos aplicando a lógica.</p>
+
+<h3 id="proposições">Proposições</h3>
+<p>No contexto da lógica formal, um dos blocos construtivos mais básicos são as <strong>proposições</strong>.</p>
+
+<p>Uma proposição é uma <strong>afirmação declarativa que pode ser classificada como verdadeira ou falsa</strong>, mas nunca ambas simultaneamente. É crucial que a afirmação não seja ambígua.</p>
+
+<h4 id="exemplo-4">Exemplo</h4>
+<p>Vamos ver alguns exemplos para fixar esse conceito. Para cada frase, digam se é uma proposição e, se for, qual seu valor verdade.</p>
+
+<p>Primeiro, temos dois exemplos para praticarmos juntos. Respondam se é uma proposição, e por quê!</p>
+
+<p>Exemplo 1:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Natal é a capital do Rio Grande do Norte!
+</code></pre></div></div>
+
+<details>
+    <summary>resposta: SPOILER!</summary>
+    Sim, é uma proposição. O valor verdade é Verdadeiro.
+</details>
+
+<p>Exemplo 2:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Que horas são?
+</code></pre></div></div>
+
+<details>
+    <summary>resposta: SPOILER!</summary>
+    Não, não é uma proposição. É uma pergunta.
+</details>
+
+<p>Agora, vamos praticar a identificação de proposições lógicas através da plataforma Kahoot!
+<!--Exercício--></p>
+<p style="text-align: center;"><strong>|--------------------------------PAUSA PARA O KAHOOT!--------------------------------|</strong></p>
+
+<ul>
+  <li>Se alguns exemplos não ficaram muito claros, não se preocupem, esse tipo de conhecimento vai ser aprimorado com o tempo</li>
+  <li><strong>OBS:</strong> É comum usar um símbolo para representar uma proposição. Normalmente, as letras <strong>P</strong> e <strong>Q</strong> são utilizadas, mas isso não significa que outros símbolos não possam ser usados.</li>
+</ul>
+
+<h3 id="conectivos-lógicos">Conectivos Lógicos</h3>
+<p>As proposições podem ser combinadas para formar proposições mais complexas usando conectivos lógicos. Cada conectivo tem uma regra específica para determinar o valor verdade da proposição composta. Vamos explorar os principais e suas tabelas verdade.</p>
+
+<h4 id="negação">Negação</h4>
+<p>A negação de uma proposição simplesmente inverte seu valor verdade. Se <strong>P</strong> é verdadeira, <strong>¬P</strong> é falsa, e vice-versa.</p>
+
+<p><strong>Tabela Verdade</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>P</th>
+      <th>¬P</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>V</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <td>F</td>
+      <td>V</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>
+    <p>P: ‘O sol é uma estrela.’ (Verdadeiro)</p>
+  </li>
+  <li>
+    <p>¬P: ‘O sol não é uma estrela.’ (Falso)</p>
+  </li>
+</ul>
+
+<p>Vamos definir a negação (¬) como uma funçãozinha em pseudocódigo:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">not</span> <span class="o">::</span> <span class="kt">Bool</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="n">not</span> <span class="kt">True</span> <span class="o">=</span> <span class="kt">False</span>
+<span class="n">not</span> <span class="kt">False</span> <span class="o">=</span> <span class="kt">True</span>
+</code></pre></div></div>
+
+<h4 id="conjunção">Conjunção</h4>
+<p>A conjunção de duas proposições <strong>P</strong> e <strong>Q</strong> (lê-se <strong>P e Q</strong>) é verdadeira se ambas <strong>P</strong> e <strong>Q</strong> forem verdadeiras. Em todos os outros casos, é falsa.</p>
+
+<p><strong>Tabela Verdade</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>P</th>
+      <th>Q</th>
+      <th>P ∧ Q</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>V</td>
+      <td>V</td>
+      <td>V</td>
+    </tr>
+    <tr>
+      <td>V</td>
+      <td>F</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <td>F</td>
+      <td>V</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <td>F</td>
+      <td>F</td>
+      <td>F</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Exemplo prático:</p>
+
+<ul>
+  <li>P: ‘Está chovendo.’</li>
+  <li>Q: ‘Estou com guarda-chuva.’</li>
+  <li>P ∧ Q: ‘Está chovendo e estou com guarda-chuva.’</li>
+</ul>
+
+<p>Esta proposição será verdadeira apenas se ambas as condições (chuva e guarda-chuva) forem verdadeiras.</p>
+
+<p>Vamos definir a conjunção (∧) como uma funçãozinha em pseudocódigo:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">and</span><span class="p">)</span> <span class="o">::</span> <span class="kt">Bool</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="kt">True</span>  <span class="n">and</span> <span class="kt">True</span>  <span class="o">=</span> <span class="kt">True</span>
+<span class="kt">True</span>  <span class="n">and</span> <span class="kt">False</span> <span class="o">=</span> <span class="kt">False</span>
+<span class="kt">False</span> <span class="n">and</span> <span class="kr">_</span>     <span class="o">=</span> <span class="kt">False</span>
+</code></pre></div></div>
+
+<h4 id="disjunção">Disjunção</h4>
+<p>A disjunção de duas proposições <strong>P</strong> e <strong>Q</strong> (lê-se <strong>P ou Q</strong>) é verdadeira se pelo menos uma das proposições <strong>P</strong> ou <strong>Q</strong> for verdadeira. É falsa apenas se ambas <strong>P</strong> e <strong>Q</strong> forem falsas.</p>
+
+<hr />
+<h5 id="diferenças-com-o-português">Diferenças com o Português</h5>
+<p>É importante lembrar que existe uma certa diferença entre o <strong>“ou” lógico</strong> e o <strong>“ou” cotidiano</strong>. Em português, se dissermos “<em>este ano viajarei para João Pessoa ou Recife</em>”, normalmente queremos dizer que:</p>
+<ol>
+  <li>Se eu viajar para João Pessoa, então não viajarei para Recife; por outro lado</li>
+  <li>Se eu viajar para Recife, então não viajarei para João Pessoa</li>
+</ol>
+
+<p>Perceba que, neste caso, fazer uma coisa significa que não farei a outra. Porém, usando conectivos lógicos, as afirmações <strong>1.</strong> e <strong>2.</strong> não seriam, necessariamente, verdadeiras.</p>
+
+<hr />
+
+<p><strong>Tabela Verdade</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>P</th>
+      <th>Q</th>
+      <th>P ∨ Q</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>V</td>
+      <td>V</td>
+      <td>V</td>
+    </tr>
+    <tr>
+      <td>V</td>
+      <td>F</td>
+      <td>V</td>
+    </tr>
+    <tr>
+      <td>F</td>
+      <td>V</td>
+      <td>V</td>
+    </tr>
+    <tr>
+      <td>F</td>
+      <td>F</td>
+      <td>F</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Exemplo Prático:</p>
+
+<ul>
+  <li>
+    <p>P: ‘Vou viajar para João Pessoa.’</p>
+  </li>
+  <li>
+    <p>Q: ‘Vou viajar para Recife.’</p>
+  </li>
+  <li>
+    <p>P ∨ Q: ‘Vou viajar para João Pessoa ou vou viajar para Recife.’</p>
+  </li>
+</ul>
+
+<p>Esta proposição é verdadeira se eu viajar para João Pessoa, viajar para Recife, ou se eu fizer as duas coisas. Só será falsa se eu não viajar para João Pessoa e não viajar para Recife.</p>
+
+<p>Vamos definir a disjunção (∨) como uma funçãozinha em pseudocódigo:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">or</span><span class="p">)</span> <span class="o">::</span> <span class="kt">Bool</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="kt">False</span> <span class="n">or</span> <span class="kt">False</span> <span class="o">=</span> <span class="kt">False</span>
+    <span class="kr">_</span> <span class="n">or</span> <span class="kr">_</span>     <span class="o">=</span> <span class="kt">True</span> 
+</code></pre></div></div>
+
+<h5 id="exercício">Exercício</h5>
+
+<p>Seguindo a mesma ideia das tabelas verdades da conjunção e disjunção, tente montar a tabela verdade da seguinte proposição:</p>
+
+<blockquote>
+  <p>(P ∨ Q) ∧ R</p>
+</blockquote>
+
+<h4 id="implicação">Implicação</h4>
+<p>A implicação de <strong>P</strong> para <strong>Q</strong> (lê-se ‘<strong>Se P então Q</strong>’) é falsa apenas quando <strong>P</strong> é verdadeira e <strong>Q</strong> é falsa. Em todos os outros casos, é verdadeira.”</p>
+
+<p><strong>Tabela Verdade</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>P</th>
+      <th>Q</th>
+      <th>P ⟹ Q</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>V</td>
+      <td>V</td>
+      <td>V</td>
+    </tr>
+    <tr>
+      <td>V</td>
+      <td>F</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <td>F</td>
+      <td>V</td>
+      <td>V</td>
+    </tr>
+    <tr>
+      <td>F</td>
+      <td>F</td>
+      <td>V</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Exemplo Prático:</p>
+
+<ul>
+  <li>
+    <p>P: ‘Chove.’</p>
+  </li>
+  <li>
+    <p>Q: ‘A rua fica molhada.’</p>
+  </li>
+  <li>
+    <p>“P ⟹ Q: ‘Se chover, então a rua fica molhada.’</p>
+  </li>
+</ul>
+
+<p>Esta proposição só será falsa se chover (<strong>P</strong> verdadeira) e a rua não ficar molhada (<strong>Q</strong> falsa), o que é um cenário inconsistente com o senso comum. Se não chover (<strong>P</strong> falsa), a proposição é considerada verdadeira, independentemente se a rua está molhada ou não (pode ter sido lavada, por exemplo).</p>
+
+<p>Vamos definir a disjunção (∨) como uma funçãozinha em pseudocódigo:</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="o">==&gt;</span><span class="p">)</span> <span class="o">::</span> <span class="kt">Bool</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="kt">True</span> <span class="o">==&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+<span class="kt">False</span> <span class="o">==&gt;</span> <span class="kr">_</span> <span class="o">=</span> <span class="kt">True</span>
+</code></pre></div></div>
+
+<h5 id="valor-verdade-por-vacuidade">Valor Verdade por Vacuidade:</h5>
+
+<p>Existe um conceito interessante na lógica chamado verdade por vacuidade. Uma proposição condicional <strong>Se P então Q</strong> é considerada verdadeira se a premissa <strong>P</strong> for falsa, independentemente do valor verdade de <strong>Q</strong>. Por exemplo, ‘<em>Se 2 + 2 = 5, então o céu é verde</em>’. Como a premissa ‘<em>2 + 2 = 5</em>’ é falsa, a proposição inteira é verdadeira, mesmo que ‘<em>o céu é verde</em>’ seja falsa. Isso pode parecer contraintuitivo, mas é uma <strong>convenção</strong> importante na lógica formal.</p>
+
+<h4 id="bi-implicação">Bi-implicação</h4>
+<p>A bi-implicação de <strong>P</strong> e <strong>Q</strong> (lê-se ‘<strong>P se e somente se Q</strong>’) é verdadeira se P e Q tiverem o mesmo valor verdade (ambas verdadeiras ou ambas falsas). É falsa se tiverem valores verdade diferentes.”</p>
+
+<p><strong>Tabela Verdade</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>P</th>
+      <th>Q</th>
+      <th>P ⟺ Q</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>V</td>
+      <td>V</td>
+      <td>V</td>
+    </tr>
+    <tr>
+      <td>V</td>
+      <td>F</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <td>F</td>
+      <td>V</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <td>F</td>
+      <td>F</td>
+      <td>V</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Exemplo Prático:</p>
+
+<ul>
+  <li>
+    <p>P: ‘Você passa na disciplina.’</p>
+  </li>
+  <li>
+    <p>Q: ‘Você tira nota maior ou igual a 7.’</p>
+  </li>
+  <li>
+    <p>P ⟺ Q: ‘Você passa na disciplina se e somente se tirar nota maior ou igual a 6.’</p>
+  </li>
+  <li>
+    <p>Isso significa que passar na disciplina está diretamente ligado a tirar nota 6 ou mais. Se você passar, significa que tirou nota 6 ou mais, e vice-versa. Se uma é verdadeira e a outra falsa, a bi-implicação é falsa.”</p>
+  </li>
+</ul>
+
+<h5 id="exercício-1">Exercício</h5>
+
+<p>Seguindo o mesmo padrão das definições anteriores, vamos tentar definir em pseudocódigo a bi-implicação (⟺)!</p>
+
+<blockquote>
+  <p>Dica: Você vai precisar utilizar 2 funções que definimos anteriormente!</p>
+</blockquote>
+
+<h4 id="contradição">Contradição</h4>
+<p>Uma contradição é uma proposição que é sempre falsa, independentemente do valor verdade de suas proposições componentes. Por exemplo, ‘<em>Está chovendo <strong>e</strong> não está chovendo</em>’.</p>
+
+<p><strong>Tabela Verdade</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>P</th>
+      <th>¬P</th>
+      <th>P ∧ ¬P</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>V</td>
+      <td>F</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <td>F</td>
+      <td>V</td>
+      <td>F</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="tautologia">Tautologia:</h4>
+<p>Uma tautologia é uma proposição que é sempre verdadeira, independentemente do valor verdade de suas proposições componentes. Por exemplo, ‘<em>Está chovendo <strong>ou</strong> não está chovendo</em>’.</p>
+
+<p><strong>Tabela Verdade</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>P</th>
+      <th>¬P</th>
+      <th>P ∨ ¬P</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>V</td>
+      <td>F</td>
+      <td>V</td>
+    </tr>
+    <tr>
+      <td>F</td>
+      <td>V</td>
+      <td>V</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="demonstração-de-equivalências">Demonstração de equivalências</h4>
+
+<p>Vamos aprender a como podemos demonstrar a equivalência (bi-implicação) entre proposições lógicas!</p>
+
+<p>Para começar, podemos demonstrar juntos, utilizando do método da igualdade de tabelas verdade, a seguinte proposição:</p>
+
+<ul>
+  <li>P ∨ Q ⟺ Q ∨ P</li>
+</ul>
+
+<blockquote>
+  <p>Nota: É comum ver em livros de lógica proposicional enunciados como esse utilizando o simbolo (≡) ao invés de (⟺), quando se trata da bi-implicação/equivalência de duas sentenças lógicas.</p>
+</blockquote>
+
+<h5 id="exercício-2">Exercício</h5>
+
+<p>Agora é a sua vez de demonstrar algumas equivalências lógicas, utilize do mesmo método que mostramos anterioremente para demonstrar as seguintes bi-implicações:</p>
+
+<div class="language-lean highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P</span> <span class="o">∧</span> <span class="n">Q</span> <span class="o">≡</span> <span class="n">Q</span> <span class="o">∧</span> <span class="n">P</span>               <span class="o">--</span>[<span class="n">Comutatividade</span> <span class="n">da</span> <span class="n">conjun</span><span class="err">çã</span><span class="n">o</span>]
+(<span class="n">P</span> <span class="o">∨</span> <span class="n">Q</span>) <span class="o">∧</span> <span class="n">Q</span> <span class="o">≡</span> <span class="n">Q</span>             <span class="o">--</span>[<span class="n">Absor</span><span class="err">çã</span><span class="n">o</span> <span class="n">da</span> <span class="n">conjun</span><span class="err">çã</span><span class="n">o</span> <span class="n">sobre</span> <span class="n">a</span> <span class="n">disjun</span><span class="err">çã</span><span class="n">o</span>]
+<span class="o">¬</span>(<span class="o">¬</span><span class="n">P</span>) <span class="o">≡</span> <span class="n">P</span>                   <span class="o">--</span>[<span class="n">Nega</span><span class="err">çã</span><span class="n">o</span> <span class="n">da</span> <span class="n">nega</span><span class="err">çã</span><span class="n">o</span>]
+<span class="o">¬</span>(<span class="n">P</span> <span class="o">∧</span> <span class="n">Q</span>) <span class="o">≡</span> (<span class="o">¬</span><span class="n">P</span>) <span class="o">∨</span> (<span class="o">¬</span><span class="n">Q</span>)      <span class="o">--</span>[<span class="n">Demorgan</span>]
+</code></pre></div></div>
+
+<h3 id="lógica-de-predicados">Lógica de Predicados</h3>
+
+<p>Tudo o que vimos até agora, dos conectivos às tabelas verdade, fazem parte da lógica proposicional, uma linguagem robusta que é usada em diversos campos da computação, entretanto ela tem como limitação não conseguir expressar proposições como “<strong>todos</strong> os elementos de um conjunto A possuem propriedade x” ou “<strong>existem</strong> elementos do conjunto A que não pertencem ao conjunto B”.</p>
+
+<p>Essas proposições envolvem <strong>quantificadores</strong> sobre <strong>variáveis</strong> e, para representá-las formalmente, precisamos da Lógica de Predicado (também chamada de Lógica de Primeira Ordem) que estende a lógica proposicional com esses novos termos.</p>
+
+<h4 id="variáveis">Variáveis</h4>
+
+<p>As variáveis são objetos genéricos do escopo que estamos tratando. Vamos ver alguns exemplos:</p>
+
+<ul>
+  <li>
+    <p>No escopo dos números inteiros, podemos dizer que temos um x inteiro que é par. Nesse caso x é um número inteiro genérico que possui a propriedade “ser par”. Note que ele não é o 2, nem o 4, mas sim um elemento genérico do conjunto dos números inteiros pares.</p>
+  </li>
+  <li>
+    <p>No escopo das pessoas presentes nessa sala, podemos dizer que temos um x pessoa que tem cabelo longo. Note que x não é nem Carol, nem André, nem nenhuma das outras pessoas presentes com cabelo grande, mas com certeza faz parte desse subconjunto.</p>
+  </li>
+</ul>
+
+<h4 id="predicados">Predicados</h4>
+
+<p>O conceito de predicados não é nada novo. Dada uma variável ou objeto conhecido x, podemos definir um predicado P, em que P(x) (lê-se “p de x”) significa que x possui a propriedade P. A notação parecida com a de função não é por acaso, pois P funciona como uma função, que recebe um x de um tipo específico e retorna True ou False.</p>
+
+<p>Podemos então definir o predicado que quisermos contanto que respeite o tipo do nosso x, já que não faria sentido definir <code class="language-plaintext highlighter-rouge">P(x) ≝ x é par</code> se x for uma variável do escopo Alunos do BTI. Vamos ver alguns exemplos:</p>
+
+<ul>
+  <li>
+    <p>Seja x um número inteiro, e P um predicado definido por P(x) ≝ x é primo. Logo P(7) = True e P(8) = False.</p>
+  </li>
+  <li>
+    <p>Seja y um aluno do BTI, e T um predicado definido por T(y) ≝ y está no último semestre do curso. Logo T(André) = False.</p>
+  </li>
+</ul>
+
+<h4 id="quantificadores">Quantificadores</h4>
+
+<h5>∀:</h5>
+<p>O quantificador universal (∀) permite expressar generalizações sobre todos os elementos de um escopo. Vamos ver alguns exemplos:</p>
+
+<ul>
+  <li>
+    <p>(∀ x estudante nessa sala)[x aprendeu algo novo hoje]</p>
+  </li>
+  <li>
+    <p>(∀ y inteiro)[y é divisível por 1]</p>
+  </li>
+</ul>
+
+<h5 id="-1">∃:</h5>
+<p>O quantificador existencial nos permite expressar a ideia que dentro de um escopo, existe <strong>ao menos um</strong> elemento que possui uma propriedade qualquer. Vamos ver exemplos disso:</p>
+
+<ul>
+  <li>
+    <p>(∃x pessoa nessa sala)[x é bolsista do PET-CC]</p>
+  </li>
+  <li>
+    <p>(∃y inteiro)[y é divisível por 2]</p>
+  </li>
+  <li>
+    <p>(∃n natural)[n + 1 = 1]</p>
+  </li>
+</ul>
+
+<h4 id="exercícios">Exercícios</h4>
+
+<p>Agora que conhecemos as variáveis e quantificadores da Lógica de Predicados, vamos exercitar a tradução de enunciados.</p>
+
+<p>Escreva em português as seguintes proposições (não é preciso traduzir as equações):</p>
+
+<ul>
+  <li>(∀ x inteiro)[x + 1 = 1 + x]</li>
+  <li>(∃ n natural)[ n + 1 = 1]</li>
+  <li>(∀ x estado do Brasil)(∃ g pessoa)[g é governador de x]</li>
+  <li>(∃ n inteiro)(∀ i inteiro)[ i^n = i ]</li>
+</ul>
+
+<p>Formalize as seguintes frases, usando o conhecimento que adquirimos sobre Lógica Proposicional e Lógica de Predicados:</p>
+
+<ul>
+  <li>Não existe alguém que seja amado por todos.</li>
+  <li>Toda pessoa é odiada por ao menos uma pessoa.</li>
+  <li>Todo professor tem falhas.</li>
+  <li>O 0 é o menor número natural.</li>
+  <li>Todo número natural é maior que o 0.</li>
+</ul>
+
+            </main>
+            <script src="./assets/js/sumario_script.js"></script>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  options: {
+    ignoreHtmlClass: 'highlight|code'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
