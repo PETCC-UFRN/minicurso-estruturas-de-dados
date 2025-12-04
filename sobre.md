@@ -7,32 +7,40 @@ title: Sobre o Minicurso
 
 ## Overview do curso
 
-Neste curso iremos explorar a profunda conexão entre matemática e programação, entendendo como conceitos abstratos matemáticos se transformar em soluções computacionais mais seguras e eficientes.
+Esse curso foi desenvolvido pelo PETCC com o objetivo de introduzir conceitos teóricos e práticos sobre Estruturas de dados e Algoritmos na computação, de modo à tornar a experiência de algumas matérias (EDB1-2, LP, etc) mais agradável. 
 
-O curso é dividido em 5 dias, pensados com base em conteúdos matemáticos essenciais abordados nas disciplinas de Matemática Computacional e Fundamentos Matemáticos da Computação. A divisão dos conteúdos é feita da seguinte maneira:
+O foco do nosso material gira em torno de introduzir conceitos essenciais para o entendimento completo do assunto, onde no fim, o aluno terá uma base sólida para continuar seus estudos futuros.
 
-### DIA 1 - LÓGICA
+Além de conceitos importantes, também veremos o uso prático de cada conteúdo, feito por meio de atividades em sala de aula e o "desafio final" do último dia.
 
-O primeiro dia tem como foco introduzir a Lógica, seus quantificadores lógicos, demonstrações por tabela verdade, e suas aplicações na programação.
+Esses conteúdos serão divididos e disponibilizados a cada dia, de forma em que o aluno possa se focar em cada um individualmente por dia.
 
-### DIA 2 - INDUÇÃO E RECURSÃO
-
-O segundo dia foca no funcionamento da Indução e Recursão, entendendo seu conceito matemática e explorando diversas de suas implementações na programação.
-
-### DIA 3 - TEORIA DOS NÚMEROS
-
-O terceiro dia se concentra na Teoria dos Números, uma área da matemática totalmente entrelaçada com conceitos modernos da area da computação como criptografia.
-
-### DIA 4 - CONJUNTOS
-
-O quarto dia tem como proposta introduzir a Teoria dos Conjuntos e entender como ela embasa diversos conceitos cotidianos da Computação e Programação.
+Logo, seguem aqui uma breve descrição dos conteúdos que serão vistos durante o minicurso:
 
 
-### DIA 5 - ATIVIDADES FINAIS
+### DIA 1 - Introdução à Complexidade Assintótica
 
-O dia final do curso tem como objetivo a resolução de situações-problema a partir de do conteúdo ministrado ao longo dos últimos 4 dias, a fim de colocarmos em prática toda a experiência matemática adquirida ao longo do curso.
+O primeiro dia tem como foco introduzir o conceitos de Complexidade Assintótica e Algoritmos de Busca, junto de uma breve introdução à linguagem que iremos utilizar nesse curso, o C++.
+
+### DIA 2 - Análise e Uso de Algoritmos Famosos
+
+O segundo dia foca em aplicar os conceitos vistos no dia anterior para descobrir quais algoritmos de busca são realmente os "melhores". Além disso, iremos aplicar o conceito de Complexidade Assintótica para "descobrir" alguns fatos interessantes sobre esses algoritmos.
+
+### DIA 3 - Introdução à Estruturas de Dados Basicos
+
+O terceiro dia se concentra em introduzir os conceitos de TADs e Estruturas de Dados, Iteradores e Macros em C++. Veremos como algumas das Estruturas de Dados de lista da STL de C++ se comportam, e como elas operam sobre TADs
+
+### DIA 4 - Análise e uso de Estruturas de Dados Intermediárias e STL
+
+O quarto dia tem como proposta introduzir Árvores Binárias e Tabelas Hash, além de analisar algumas Estruturas de Dados de dicionário e conjunto da STL de C++ se comportam e operam sobre TADs.
 
 
-Lembre-se que, para obter o certificado de conclusão do curso, o aluno deve ter 75% de presença e 50% de aproveitamento nas atividades realizadas.
+### DIA 5 - Projeto Final
 
-Por último, desejamos um bom curso a todos vocês e esperamos que se encantem pela matemática discreta tanto quanto nós!
+O dia final do curso tem como objetivo a resolução de situações-problema no estilo "Contest". Logo, iremos separar trios entre os alunos e resolver problemas famosos selecionados por nós. No fim, iremos aplicar todo o conhecimento obtido durante esses últimos 4 dias em uma atividade preparatória para Competições de Programação!
+
+
+
+Lembre-se que, para obter o certificado de conclusão do curso, o aluno deve ter 75% de presença e participado do projeto final.
+
+Esperamos que vocês curtam essa experiência!!
