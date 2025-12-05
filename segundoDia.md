@@ -81,16 +81,23 @@ Ordenação se trata de um dos problemas mais abordados na área da computação
 
 Dada uma lista `A` de tamanho `n`, sabemos que ela está ordenada quando a seguinte solução é satisfeita:
 
-$$
+$
 {$a_0 \leq a_1 \leq a_2 \leq ... \leq a_(n-2) \leq a_(n-1)$}
-$$
+$
 
 Retomando o conceito de análise assintótica, notamos que a verificação acaba em algum dos seguintes casos:
 
 - Quando encontramos o primeiro elemento que não satisfaz a desigualdade, nesse caso retornamos `false`, pois `A` não está ordenada
 - Quando chegamos ao fim da lista sem encontrar um elemento assim, nesse caso retornamos `true`, pois `A` está ordenada
 
-Dito isso, no pior dos casos será necessário percorrer a lista toda para descobrir se ela é ordenada ou não. Sendo assim, sua complexidade é `O(n)`. Mas para os algoritmos a seguir vamos desconsiderar a verificação da ordenação, considerando no seu custo apenas a ordenação em si.
+## Dito isso, hora de implementar!
+(recursivo e iterativo)
+
+<details>
+<summary>Spoiler!</summary>
+<br>
+No pior dos casos será necessário percorrer a lista toda para descobrir se ela é ordenada ou não. Sendo assim, sua complexidade é `O(n)`. Mas para os algoritmos a seguir vamos desconsiderar a verificação da ordenação, considerando no seu custo apenas a ordenação em si.
+<\details>
 
 ## Uma abordagem comum
 
@@ -154,6 +161,8 @@ void bubbleSort(vector<int>& lista) {
         }
 }
 ```
+
+(adaptar o bubble sort usando cores pra explicitar as trocas)
 
 <div style="text-align: center;"><img src="assets/images/boxing.jpg" alt="" style="widht:300px;height:300px;"> </div>
 
