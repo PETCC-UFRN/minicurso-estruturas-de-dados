@@ -81,29 +81,27 @@ Ordenação se trata de um dos problemas mais abordados na área da computação
 
 Dada uma lista `A` de tamanho `n`, sabemos que ela está ordenada quando a seguinte solução é satisfeita:
 
-$
-{$a_0 \leq a_1 \leq a_2 \leq ... \leq a_(n-2) \leq a_(n-1)$}
-$
+$$
+{a_0 \leq a_1 \leq a_2 \leq ... \leq a_{n-2} \leq a_{n-1}}
+$$
 
 Retomando o conceito de análise assintótica, notamos que a verificação acaba em algum dos seguintes casos:
 
 - Quando encontramos o primeiro elemento que não satisfaz a desigualdade, nesse caso retornamos `false`, pois `A` não está ordenada
 - Quando chegamos ao fim da lista sem encontrar um elemento assim, nesse caso retornamos `true`, pois `A` está ordenada
 
-## Dito isso, hora de implementar!
-(recursivo e iterativo)
+## Dito isso, hora de implementá-la!
 
 <details>
 <summary>Spoiler!</summary>
-<br>
-No pior dos casos será necessário percorrer a lista toda para descobrir se ela é ordenada ou não. Sendo assim, sua complexidade é `O(n)`. Mas para os algoritmos a seguir vamos desconsiderar a verificação da ordenação, considerando no seu custo apenas a ordenação em si.
-<\details>
+No pior dos casos será necessário percorrer a lista toda para descobrir se ela é ordenada ou não. Sendo assim, sua complexidade é *O(n)*. Mas para os algoritmos a seguir vamos desconsiderar a verificação da ordenação, considerando no seu custo apenas a ordenação em si.
+</details>
 
 ## Uma abordagem comum
 
 Caso você precisasse ordenar um grupo de pessoas por altura, como faria? A única restrição é que só se pode mover uma pessoa por vez, mas não fazer "trocas". Uma das abordagens mais comuns seria percorrer o grupo inteiro e verificar quem é a menor pessoa encontrada naquela iteração. Considere o exemplo a seguir:
 
-```
+```cpp
 void ordenar(vector<int> &lista) {
     int tamanho = lista.size();
 
@@ -123,22 +121,20 @@ void ordenar(vector<int> &lista) {
 
 Vamos analisar em tempo real o que acontece quando executamos esse código.
 
-## Atenção no quadro!
+## Atenção na tela!
 
 Agora vamos analisar a complexidade desse algoritmo, partindo de um exemplo do pior cenário. Considere a lista `[7,6,5,4,3,2,1]`.
 
-## Atenção no quadro de novo!
+## Atenção no quadro!
 
 <details>
 <summary>Spoiler!</summary>
-<br>
-Temos 7 + 6 + 5 + 4 + 3 + 2 + 1 iterações. Logo O($$n²$$).
+Temos $7 + 6 + 5 + 4 + 3 + 2 + 1$ iterações. Logo O($$n²$$).
 </details>
 
 <details>
 <summary>Spoiler 2!</summary>
-<br>
-Esse algoritmo tem nome. Selection Sort.
+Esse algoritmo tem nome. *Selection Sort*.
 </details>
 
 # Outras formas de ordenar
@@ -149,7 +145,7 @@ Antes de responder isso, que tal pensarmos no escopo que precisamos ter noção 
 
 Considere o código a seguir:
 
-```
+```cpp
 void bubbleSort(vector<int>& lista) {
     int tamanho = arr.size();
 
