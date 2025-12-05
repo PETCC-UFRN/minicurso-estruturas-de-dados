@@ -55,28 +55,66 @@ title: Minicurso de Matemática aplicada à Computação
 # Introdução à Complexidade Assintótica
 
 ## Introdução à Algoritmos  
-### Definição e História
-### Importância nos Dias Atuais
+### Definição e História 
+
+<!--
+
+Como o nome surgiu
+
+definição
+
+Timeline de acontecimentos históricos sobre algoritmos 
+
+-->
+
+## "Introdução" à Estruturas de Dados
+### Definição
+
+## Importância nos Dias Atuais <!-- JOGOS :o -->
+
 
 ##  Revisão de C++
 ### Motivação             <!-- Explicar por que estamos usando C++-->
-### Diferença de Sintaxe  <!-- Diferenciar C e C++ -->
+### Diferença de Sintaxe
+<!-- 
+     Mostrar e diferenciar códigos análogos em C e C++
+     STL
+  -->
 ### Comandos Simples
+<!-- melhorar a introdução
+     Variaveis
+     Condicionais
+     Loops
+     Funções
+     Structs
+-->
+
 ### Análise de códigos em C++ <!-- Mostrar Busca Binária e Linear -->
 ###  Qual é o melhor?         <!-- Apenas introduz essa dúvida -->
 
 ##   Análise Assintótica
-###  Introdução
+###  Introdução 
+<!--
+
+Definição e uso 
+
+Olhando um gráfico, e vendo a similaridade com funções matemáticas
+Definição formal
+Gatilho puxando para análise de pior/melor/medio caso.
+
+-->
 #### Pior Caso
 #### Melhor Caso
 #### Caso Médio
-###  Notações O, Θ e 𝝮
+###  Exemplo <!-- Pegar um código como exemplo e ver seu pior/melhor/médio caso -->
+###  Notações O, Θ e 𝝮 
 ###  Exercícios
 
 ## Cálculo Assintótico
 ###  Tabela de Complexidade
+<!-- Mostrar que 1 << logn << n <<...  -->
 ###  O que é Eficiência?
 ###  Eficiência de Tempo X Espaço
-#### STL
+#### Aplicação com STL
 ###  Exercícios
 
