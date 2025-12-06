@@ -55,8 +55,6 @@ title: Minicurso de Matemática aplicada à Computação
 # Introdução à Complexidade Assintótica
 
 ## Introdução à Algoritmos  
-### Definição e História 
-
 <!--
 
 Como o nome surgiu
@@ -66,6 +64,44 @@ definição
 Timeline de acontecimentos históricos sobre algoritmos 
 
 -->
+
+
+## Definição de Algoritmos
+
+De forma informal, um **algoritmo** pode ser definido como qualquer procedimento computacional bem definido, que recebe um valor (ou conjunto de valores) como **entrada** e produz um valor (ou conjunto de valores) como **saída** (Cormen, 2002).
+
+Outra forma de enxergar algoritmos é como ferramentas para **resolver problemas computacionais específicos**. Nessa perspectiva, o algoritmo descreve a relação **entrada-saída** de um programa (Cormen, 2002).
+
+Assim, pode-se entender um algoritmo como um **conjunto de instruções** destinadas a realizar uma tarefa.
+
+> **Exemplo:**  
+> Dada a sequência `<4, 6, 2, 7, 8>` como entrada, um algoritmo de ordenação retorna `<2, 4, 6, 7, 8>` como saída.
+
+---
+
+## História e Evolução dos Algoritmos
+
+### Antiguidade
+
+- **Algoritmo de Euclides (300 a.C.)**  
+  Técnica para encontrar rapidamente o **MDC** (máximo divisor comum) de dois inteiros.
+
+### Idade de Ouro Islâmica (Século IX)
+
+- **Muhammad ibn Musa al-Khwarizmi**, matemático que contribuiu para o desenvolvimento da álgebra.  
+- Para resolver equações matemáticas, al-Khwārizmī seguia sistematicamente uma sequência de passos — conceito fundamental de **algoritmo**.  
+- Após ser traduzido para o latim, seu livro sobre numerais hindus recebeu o título *Algorithmi de Numero Indorum*, origem da palavra *algoritmo*.
+
+### Século XIX
+
+- **Ada Lovelace** criou o que é considerado o **primeiro algoritmo de computador**, projetado para calcular números de Bernoulli na máquina analítica de Babbage.
+
+### Década de 1930
+
+- **Alan Turing** — formalizou o conceito de computação com a **Máquina de Turing**, estabelecendo a base teórica da ciência da computação moderna.  
+- Introduziu a noção de “computável”.
+
+---
 
 ## "Introdução" à Estruturas de Dados
 ### Definição
