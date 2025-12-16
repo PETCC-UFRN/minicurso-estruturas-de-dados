@@ -32,7 +32,7 @@ void printChanges(vector<int> &before, vector<int> &after) {
         else cout << x << " ";
     }
 
-    cout << endl << Virou: ";
+    cout << endl << "Virou: ";
     for (int x : after) {
         if (x == a) cout << BOLD << GREEN << x << RESET << " ";
         else if (x == b) cout << BOLD << MAGENTA << x << RESET << " ";
@@ -75,7 +75,7 @@ void selectionSort(vector<int> &arr) {
         vector<int> before = arr;
         swap(arr[i], arr[min_idx]);
 
-        printChanges(arr, before);
+        printChanges(before, arr);
 
         cin.get();
         system("clear");
