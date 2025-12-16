@@ -94,7 +94,7 @@ Retomando o conceito de análise assintótica, notamos que a verificação acaba
 
 <details>
 <summary>Spoiler!</summary>
-No pior dos casos será necessário percorrer a lista toda para descobrir se ela é ordenada ou não. Sendo assim, sua complexidade é *O(n)*. Mas para os algoritmos a seguir vamos desconsiderar a verificação da ordenação, considerando no seu custo apenas a ordenação em si.
+No pior dos casos será necessário percorrer a lista toda para descobrir se ela é ordenada ou não. Sendo assim, sua complexidade é **O(n)**. Mas para os algoritmos a seguir vamos desconsiderar a verificação da ordenação, considerando no seu custo apenas a ordenação em si.
 </details>
 
 ## Uma abordagem comum
@@ -146,7 +146,7 @@ Antes de responder isso, que tal pensarmos no escopo que precisamos ter noção 
 Considere o código a seguir:
 
 ```cpp
-void bubbleSort(vector<int>& lista) {
+void sort(vector<int>& lista) {
     int tamanho = arr.size();
 
     for (int i = 0; i < tamanho - 1; i++) {
@@ -158,23 +158,14 @@ void bubbleSort(vector<int>& lista) {
 }
 ```
 
-(adaptar o bubble sort usando cores pra explicitar as trocas)
+Perceba que o `Selection Sort` ordenava diretamente, ou seja, se preocupando que o menor elemento estivesse no começo da lista. Tive um momento e compare as abordagens.
+
+## Atenção na tela
+
+<details>
+<summary>Spoiler!</summary>
+O método que acabou de ser mostrado consiste no [Bubble Sort](https://pt.wikipedia.org/wiki/Bubble_sort)
+</details>
+
 
 <div style="text-align: center;"><img src="assets/images/boxing.jpg" alt="" style="widht:300px;height:300px;"> </div>
-
-
-### Descobrindo a função <span style="color: #081849; font-weight: bold;">REPLICATE</span>
-
-### Descobrindo melhores funções <span style="color: #081849; font-weight: bold;">EVEN</span> e <span style="color: #081849; font-weight: bold;">ODD</span>
-
----
-<script>
-const dataDia2 = new Date('2025-03-11');
-const agora = new Date();
-
-if (agora < dataDia2) {
-    document.body.innerHTML = '<h1 style="text-align:center; margin-top:20%;">Página Indisponível</h1>' +
-                              '<p style="text-align:center;">Esta página estará disponível a partir de ' + dataDia2.toLocaleDateString() + '.</p>';
-}
-</script>
-{% include petcccopyright.html %}
