@@ -94,7 +94,7 @@ Retomando o conceito de análise assintótica, notamos que a verificação acaba
 
 <details>
 <summary>Spoiler!</summary>
-No pior dos casos será necessário percorrer a lista toda para descobrir se ela é ordenada ou não. Sendo assim, sua complexidade é **O(n)**. Mas para os algoritmos a seguir vamos desconsiderar a verificação da ordenação, considerando no seu custo apenas a ordenação em si.
+No pior dos casos será necessário percorrer a lista toda para descobrir se ela é ordenada ou não. Sendo assim, sua complexidade é <b>O(n)</b>. Mas para os algoritmos a seguir vamos desconsiderar a verificação da ordenação, considerando no seu custo apenas a ordenação em si.
 </details>
 
 ## Uma abordagem comum
@@ -129,12 +129,12 @@ Agora vamos analisar a complexidade desse algoritmo, partindo de um exemplo do p
 
 <details>
 <summary>Spoiler!</summary>
-Temos $7 + 6 + 5 + 4 + 3 + 2 + 1$ iterações. Logo O($$n²$$).
+Temos $7 + 6 + 5 + 4 + 3 + 2 + 1$ iterações. Logo <b>O($$n²$$)</b>.
 </details>
 
 <details>
 <summary>Spoiler 2!</summary>
-Esse algoritmo tem nome. *Selection Sort*.
+Esse algoritmo tem nome. <b>Selection Sort</b>.
 </details>
 
 # Outras formas de ordenar
@@ -164,8 +164,10 @@ Perceba que o `Selection Sort` ordenava diretamente, ou seja, se preocupando que
 
 <details>
 <summary>Spoiler!</summary>
-O método que acabou de ser mostrado consiste no [Bubble Sort](https://pt.wikipedia.org/wiki/Bubble_sort)
+O método que acabou de ser mostrado consiste no <a href="[https://www.google.com](https://pt.wikipedia.org/wiki/Bubble_sort)">Bubble Sort</a>
 </details>
+
+
 
 
 <div style="text-align: center;"><img src="assets/images/boxing.jpg" alt="" style="widht:300px;height:300px;"> </div>
