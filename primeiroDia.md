@@ -89,7 +89,7 @@ Assim, pode-se entender um algoritmo como um **conjunto de instruções** destin
 ### Idade de Ouro Islâmica (Século IX)
 
 - **Muhammad ibn Musa al-Khwarizmi**, matemático que contribuiu para o desenvolvimento da álgebra.  
-- Para resolver equações matemáticas, al-Khwārizmī seguia sistematicamente uma sequência de passos — conceito fundamental de **algoritmo**.  
+- Para resolver equações matemáticas, al-Khwārizmī seguia sistematicamente uma sequência de passos, conceito fundamental de **algoritmo**.  
 - Após ser traduzido para o latim, seu livro sobre numerais hindus recebeu o título *Algorithmi de Numero Indorum*, origem da palavra *algoritmo*.
 
 ### Século XIX
@@ -98,7 +98,7 @@ Assim, pode-se entender um algoritmo como um **conjunto de instruções** destin
 
 ### Década de 1930
 
-- **Alan Turing** — formalizou o conceito de computação com a **Máquina de Turing**, estabelecendo a base teórica da ciência da computação moderna.  
+- **Alan Turing**: Formalizou o conceito de computação com a **Máquina de Turing**, estabelecendo a base teórica da ciência da computação moderna.  
 - Introduziu a noção de “computável”.
 
 ---
