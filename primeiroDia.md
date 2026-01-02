@@ -52,6 +52,7 @@ title: Minicurso de Matemática aplicada à Computação
 </div>
 <br>
 
+
 # Introdução à Complexidade Assintótica
 
 ## Introdução à Algoritmos  
@@ -122,15 +123,15 @@ Um TAD é formado por:
 Vamos exemplificar a seguir.
 
 Podemos definir o TAD Pilha da seguinte forma:
-- Pilha{topo, tamanho}
+- `Pilha{topo, tamanho}`
 
 Para manipular esse conjunto podemos usar as operações:
-- criarPilha() - cria uma pilha com tamanho n
-- push(x) - empilha um elemento x
-- pop() - remove o elemento do topo
-- top() - consulta o topo
-- isEmpty() - verifica se está vazia
-- destruirPilha() - apaga uma pilha
+- `criarPilha()` - cria uma pilha com tamanho n
+- `push(x)` - empilha um elemento x
+- `pop()` - remove o elemento do topo
+- `top()` - consulta o topo
+- `isEmpty()` - verifica se está vazia
+- `destruirPilha()` - apaga uma pilha
 
 Note que foi definido apenas quais dados existem e quais operações podem ser feitas, sem dizar como isso é implementado.
 
@@ -229,6 +230,7 @@ Gatilho puxando para análise de pior/melor/medio caso.
 ###  Eficiência de Tempo X Espaço
 #### Aplicação com STL
 ###  Exercícios
+
 
 
 
