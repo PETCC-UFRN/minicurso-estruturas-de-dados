@@ -74,8 +74,14 @@ Outra forma de enxergar algoritmos é como ferramentas para **resolver problemas
 
 Assim, pode-se entender um algoritmo como um **conjunto de instruções** destinadas a realizar uma tarefa.
 
-> **Exemplo:**  
-> Dada a sequência `<4, 6, 2, 7, 8>` como entrada, um algoritmo de ordenação retorna `<2, 4, 6, 7, 8>` como saída.
+**Exemplo:**  
+Dada a sequência `<4, 6, 2, 7, 8>` como entrada, um algoritmo de ordenação pode seguir os seguintes passos:
+1. Comparar os elementos da sequência;
+2. Identificar pares fora de ordem;
+3. Trocar esses elementos de posição;
+4. Repetir o processo até que não existam mais elementos fora de ordem.
+
+Assim, o algoritmo retornar `<2, 4, 6, 7, 8>` como saída.
 
 ---
 
@@ -98,13 +104,83 @@ Assim, pode-se entender um algoritmo como um **conjunto de instruções** destin
 
 ### Década de 1930
 
-- **Alan Turing**: Formalizou o conceito de computação com a **Máquina de Turing**, estabelecendo a base teórica da ciência da computação moderna.  
+
+- **Alan Turing**: Formalizou o conceito de computação com a **Máquina de Turing**, estabelecendo a base teórica da ciência da computação moderna.
 - Introduziu a noção de “computável”.
 
 ---
 
 ## "Introdução" à Estruturas de Dados
-### Definição
+
+Para compreender o conceito de Estruturas de Dados, é fundamental conhecer primeiro os Tipos Abstratos de Dados (TADs). Esses dois conceitos estão diretamente relacionados, mas não são a mesma coisa.
+
+#### Tipos Abstrados de Dados (TAD)
+Um TAD é formado por:
+- um **conjunto de dados**
+- um **conjunto de operações** para manipular esses dados
+
+Vamos exemplificar a seguir.
+
+Podemos definir o TAD Pilha da seguinte forma:
+- Pilha{topo, tamanho}
+
+Para manipular esse conjunto podemos usar as operações:
+- criarPilha() - cria uma pilha com tamanho n
+- push(x) - empilha um elemento x
+- pop() - remove o elemento do topo
+- top() - consulta o topo
+- isEmpty() - verifica se está vazia
+- destruirPilha() - apaga uma pilha
+
+Note que foi definido apenas quais dados existem e quais operações podem ser feitas, sem dizar como isso é implementado.
+
+#### Definição de Estruturas de Dados
+Uma Estrutura de Dados é a implementação concreta de um TAD em uma linguagem de programação, usando algoritmos.
+
+As estruturas estabelecem:
+- a forma que os dados são dispostos na memória
+- como as operações são realizadas
+
+Vamos implementar a Pilha, usando um array:
+
+```
+truct Pilha {
+    int* dados;        // array que armazena os elementos
+    int topo;          // índice do topo da pilha
+    int capacidade;    // tamanho máximo da pilha
+};
+
+Pilha* criarPilha(int capacidade) {
+    Pilha* p = new Pilha;
+    p->dados = new int[capacidade];
+    p->capacidade = capacidade;
+    p->topo = -1;
+    return p;
+}
+
+void push(Pilha* p, int x) {
+    if (p->topo == p->capacidade - 1)
+        throw std::overflow_error("Pilha cheia");
+
+    p->dados[++p->topo] = x;
+}
+
+int pop(Pilha* p) {
+    if (isEmpty(p))
+        throw std::underflow_error("Pilha vazia");
+
+    return p->dados[p->topo--];
+}
+
+bool isEmpty(Pilha* p) {
+    return p->topo == -1;
+}
+
+void destruirPilha(Pilha* p) {
+    delete[] p->dados;
+    delete p;
+}
+```
 
 ## Importância nos Dias Atuais <!-- JOGOS :o -->
 
@@ -153,4 +229,6 @@ Gatilho puxando para análise de pior/melor/medio caso.
 ###  Eficiência de Tempo X Espaço
 #### Aplicação com STL
 ###  Exercícios
+
+
 
