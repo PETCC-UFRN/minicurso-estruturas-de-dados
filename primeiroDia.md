@@ -67,7 +67,7 @@ Timeline de acontecimentos históricos sobre algoritmos
 -->
 
 
-## Definição de Algoritmos
+### Definição de Algoritmos
 
 De forma informal, um **algoritmo** pode ser definido como qualquer procedimento computacional bem definido, que recebe um valor (ou conjunto de valores) como **entrada** e produz um valor (ou conjunto de valores) como **saída** (Cormen, 2002).
 
@@ -82,28 +82,30 @@ Dada a sequência `<4, 6, 2, 7, 8>` como entrada, um algoritmo de ordenação po
 3. Trocar esses elementos de posição;
 4. Repetir o processo até que não existam mais elementos fora de ordem.
 
-Assim, o algoritmo retornar `<2, 4, 6, 7, 8>` como saída.
+Assim, o algoritmo retorna `<2, 4, 6, 7, 8>` como saída.
+
+### Etapas para resolver problemas
 
 ---
 
-## História e Evolução dos Algoritmos
+### História e Evolução dos Algoritmos
 
-### Antiguidade
+#### Antiguidade
 
 - **Algoritmo de Euclides (300 a.C.)**  
   Técnica para encontrar rapidamente o **MDC** (máximo divisor comum) de dois inteiros.
 
-### Idade de Ouro Islâmica (Século IX)
+#### Idade de Ouro Islâmica (Século IX)
 
 - **Muhammad ibn Musa al-Khwarizmi**, matemático que contribuiu para o desenvolvimento da álgebra.  
 - Para resolver equações matemáticas, al-Khwārizmī seguia sistematicamente uma sequência de passos, conceito fundamental de **algoritmo**.  
 - Após ser traduzido para o latim, seu livro sobre numerais hindus recebeu o título *Algorithmi de Numero Indorum*, origem da palavra *algoritmo*.
 
-### Século XIX
+#### Século XIX
 
 - **Ada Lovelace** criou o que é considerado o **primeiro algoritmo de computador**, projetado para calcular números de Bernoulli na máquina analítica de Babbage.
 
-### Década de 1930
+#### Década de 1930
 
 
 - **Alan Turing**: Formalizou o conceito de computação com a **Máquina de Turing**, estabelecendo a base teórica da ciência da computação moderna.
@@ -111,11 +113,15 @@ Assim, o algoritmo retornar `<2, 4, 6, 7, 8>` como saída.
 
 ---
 
+<!-- 
+Acho que essa parte pode ser no final
+-->
+
 ## "Introdução" à Estruturas de Dados
 
 Para compreender o conceito de Estruturas de Dados, é fundamental conhecer primeiro os Tipos Abstratos de Dados (TADs). Esses dois conceitos estão diretamente relacionados, mas não são a mesma coisa.
 
-#### Tipos Abstrados de Dados (TAD)
+### Tipos Abstrados de Dados (TAD)
 Um TAD é formado por:
 - um **conjunto de dados**
 - um **conjunto de operações** para manipular esses dados
@@ -135,7 +141,7 @@ Para manipular esse conjunto podemos usar as operações:
 
 Note que foi definido apenas quais dados existem e quais operações podem ser feitas, sem dizar como isso é implementado.
 
-#### Definição de Estruturas de Dados
+### Definição de Estruturas de Dados
 Uma Estrutura de Dados é a implementação concreta de um TAD em uma linguagem de programação, usando algoritmos.
 
 As estruturas estabelecem:
@@ -205,9 +211,26 @@ void destruirPilha(Pilha* p) {
 ### Análise de códigos em C++ <!-- Mostrar Busca Binária e Linear -->
 ###  Qual é o melhor?         <!-- Apenas introduz essa dúvida -->
 
+## Análise de Algoritmos
+
+Um mesmo problema pode ser resolvido por diferentes algoritmos. Nesse contexto, a **análise de algoritmos** permite quantificar o custo computacional de cada solução, possibilitando a comparação entre elas e a escolha do algoritmo mais eficiente.
+
+### Modelo RAM
+
+Uma forma simples de medir a eficiência de um algoritmo é por meio da medição do tempo de execução. No entanto, essa abordagem é fortemente influenciada por fatores externos, como o hardware utilizado, a quantidade de memória disponível e o compilador, o que dificulta comparações justas entre algoritmos.
+
+Para contornar esse problema, utiliza-se uma **abstração do modelo de computação**, chamada **RAM (_Random Access Machine_)**. Nesse modelo, assume-se que o algoritmo é executado em uma máquina ideal que possui instruções aritméticas, de movimentação de dados e de controle, e que cada instrução leva um tempo constante para ser executada.
+
+#### Função de Complexidade de Tempo
+
+A função de complexidade de tempo, denotada por `T(n)`, representa o tempo necessário para a execução de um algoritmo em função do tamanho da entrada `n`, considerando o modelo RAM. Essa função permite analisar como o custo do algoritmo cresce à medida que o tamanho da entrada aumenta.
+
+**Exemplo:**
+
 ##   Análise Assintótica
 ###  Introdução 
 <!--
+
 
 Definição e uso 
 
@@ -216,6 +239,7 @@ Definição formal
 Gatilho puxando para análise de pior/melor/medio caso.
 
 -->
+
 #### Pior Caso
 #### Melhor Caso
 #### Caso Médio
@@ -230,7 +254,4 @@ Gatilho puxando para análise de pior/melor/medio caso.
 ###  Eficiência de Tempo X Espaço
 #### Aplicação com STL
 ###  Exercícios
-
-
-
 
