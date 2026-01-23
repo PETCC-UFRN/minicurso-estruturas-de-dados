@@ -221,11 +221,124 @@ Uma forma simples de medir a eficiência de um algoritmo é por meio da mediçã
 
 Para contornar esse problema, utiliza-se uma **abstração do modelo de computação**, chamada **RAM (_Random Access Machine_)**. Nesse modelo, assume-se que o algoritmo é executado em uma máquina ideal que possui instruções aritméticas, de movimentação de dados e de controle, e que cada instrução leva um tempo constante para ser executada.
 
-#### Função de Complexidade de Tempo
+### Função de Complexidade de Tempo
 
 A função de complexidade de tempo, denotada por `T(n)`, representa o tempo necessário para a execução de um algoritmo em função do tamanho da entrada `n`, considerando o modelo RAM. Essa função permite analisar como o custo do algoritmo cresce à medida que o tamanho da entrada aumenta.
 
 **Exemplo:**
+
+```
+  int menorElemento(int v[], int n){
+      int i;
+      int menor = v[0];
+
+      for(i = 1; i < n; i++){
+          if(v[i] < menor){
+              menor = v[i];
+          }
+      }
+
+      return menor;
+  }
+
+```
+A função de complexidade de tempo desse algoritmo é dada pelo número de comparações entre os elementos do vetor `v[]`. Como o laço realiza uma comparação para cada elemento, exceto o primeiro, temos:
+
+`T(n) = n - 1`. 
+
+Nesse caso, o tempo de execução é **uniforme** para qualquer entrada de tamanho `n`, ou seja, independe da ordem ou dos valores dos elementos.
+
+Porém, existem algoritmos que gastam menos tempo dependendo da organização da entrada. Um exemplo clássico é a **busca sequencial**, cujo tempo de execução varia conforme a posição do elemento procurado.
+
+**Exemplo:**
+
+```
+	int buscaSequencial(int v[], int n, int chave){
+    	int i;
+        
+        for (i = 0; i < n; i++){
+        	if(v[i] == chave){
+            	return i;
+            }
+        }
+        
+        return -1;
+    }
+
+```
+Nesse algoritmo, identificam-se **três casos de análise**: o melhor caso, o pior caso e o caso médio.
+
+#### Melhor Caso
+
+O melhor caso ocorre quando o valor que estamos procurando (`chave`) se encontra no primeiro elemento do vetor. Nesse cenário, apenas uma comparação é realizada. Logo:
+
+`T(n) = 1`
+
+#### Pior Caso
+
+O pior caso ocorre quando o valor `chave` se encontra no último elemento do vetor ou não está presente. Nesse caso, é necessário percorrer todo o vetor`v[]`, realizando n comparações. Assim:
+
+`T(n) = n`.
+
+#### Caso Médio
+
+O **caso médio** representa o tempo de execução esperado do algoritmo considerando **todas as possíveis posições** do elemento procurado no vetor, assumindo que cada posição tem **a mesma probabilidade** de conter a chave buscada.
+
+Na busca sequencial, se o elemento `chave` estiver presente no vetor `v[]`, ele pode estar em qualquer uma das `n` posições com probabilidade igual a `1/n`. Nesse caso, o número de comparações realizadas será igual à posição do elemento no vetor (considerando indexação iniciando em 1).
+
+Assim, o tempo médio é dado pela **média aritmética** do número de comparações necessárias em cada posição:
+
+`T(n) = (1 + 2 + 3 + ... + n) / n`
+
+Sabemos que a soma dos primeiros `n` números naturais é:
+
+`1 + 2 + ... + n = n(n + 1) / 2`
+
+Substituindo na expressão do tempo médio, temos:
+
+`T(n) = [n(n + 1) / 2] / n`
+
+`T(n) = (n + 1) / 2`
+
+#### Importância da Análise Assintótica
+
+Para valores pequenos de `n`, qualquer algoritmo, mesmo que ineficiente, tende a apresentar um tempo de execução baixo. No entanto, à medida que o tamanho da entrada aumenta, a complexidade do algoritmo torna-se um fator crítico.
+
+Ao escolher um algoritmo, deve-se analisar aquele que possui **maior escalabilidade**, de acordo com o seu **comportamento assintótico**.
+
+## Notações Assintóticas
+
+As notações assintóticas são utilizadas para representar o **comportamento assintótico** das funções de complexidade de tempo, descrevendo como o custo de execução de um algoritmo cresce à medida que o tamanho da entrada aumenta.
+
+### Notação O
+
+Uma função `f(n)` é dita **O(g(n))** se existem constantes positivas `c` e `n₀` tais que:
+
+f(n) ≤ c · g(n), para todo n ≥ n₀.
+
+Essa notação fornece um **limite superior assintótico** para a função de complexidade, ou seja, descreve o pior crescimento possível do tempo de execução de um algoritmo a partir de um determinado tamanho de entrada, ignorando constantes e termos de menor ordem.
+
+#### Exemplos
+
+1. Seja f(n) = (n + 1)².  
+   Para n ≥ 2, temos:
+
+   (n + 1)² = n² + 2n + 1 ≤ 3n²
+
+   Logo, f(n) é **O(n²)**, considerando c = 3 e n₀ = 2.
+
+2. Seja f(n) = 2n³ + 3n² + n.  
+   Para n ≥ 8, temos:
+
+   2n³ + 3n² + n ≤ 4n³
+
+   Assim, f(n) é **O(n³)**, considerando c = 4 e n₀ = 8.
+   
+Quando dizemos que um algoritmo é **O(n²)**, por exemplo, queremos dizer que o seu tempo de execução cresce, no pior caso, de forma proporcional a `n²` à medida que o tamanho da entrada aumenta. 
+
+### Notação Θ
+
+### Notação 𝝮 
 
 ##   Análise Assintótica
 ###  Introdução 
