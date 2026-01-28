@@ -558,6 +558,623 @@ int main(){
 }
 
 ```
+#### Ponteiros
+
+Calma, não se assuste.
+
+Sabemos que esse tópico é meio chatinho para algumas pessoas, porém é de extrema importância. Não iremos abordar tanta coisa sobre ponteiros, apenas entender por cima como eles funcionam e aplicar na criação de estruturas de dados mais complexas.
+
+Basicamente, ponteiros são variáveis que guardam endereços de objetos na memória. Mas... O que são realmente endereços?
+
+
+##### Endereços de Memória e Referências
+
+Suponha que temos algum valor em nosso código, por exemplo, uma variável inteira `num = 2`.
+
+Quando declaramos essa variável `num`, armazenamos ela em um pequeno espaço na nossa memória para não perdê-la durante a execução do programa. O endereço da variável `num` seria uma representação numérica de onde ela está armazenada.
+
+Em C++ utilizamos o operador `&` para "recolher" o endereço de alguma variável.
+
+```cpp
+int main(){
+
+    int numero = 2;
+
+    printf("%d", &numero); // suponha que "printf()" seja apenas uma função que mostra os seus parâmetros.
+    
+                // A saída do programa será algo como "0x6dfed4", que seria o endereço da variavel numero.
+    return 0;
+}
+
+```
+
+Nesse sentido, também podemos utilizar o operador `&` como um "alias" de outras variáveis, ou seja, caso ele seja alterado, o valor original também será:
+
+```cpp
+
+int main(){
+
+    int numero = 2;
+    int &ref = numero;    //faz referência ao numero
+
+    printf("%d", numero);
+    printf("%d", ref);         //a saída dos dois será 2.
+
+    
+    //caso você altere a ref:
+
+    ref = 3;
+
+    printf("%d", numero);
+    printf("%d", ref);     // a saída dos dois será 3.
+
+
+    return 0;
+}
+
+```
+##### Agora sim, Ponteiros
+
+Como dito anteriormente, ponteiros são simplesmente variáveis que guardam endereços de objetos na memória, ou seja, falamos que eles "apontam" para um objeto na memória. Todos os ponteiros tem um tipo associado que especifica o tipo do objeto que estará apontando. Utilizamos também o prefixo (*) na declaração de ponteiros, como visto no exemplo abaixo:
+
+```cpp
+
+int main() {
+
+    int obj = 2; // apenas uma declaração de um inteiro.
+
+    int* ptr;    // apenas uma declaração de um ponteiro de inteiro.
+    int *ptr2;   // outra declaração de um ponteiro de inteiro.
+
+    return 0;
+}
+
+```
+Além disso, os ponteiros podem ser inicializados recebendo a referência de objetos do mesmo tipo (ou seja, utilizando o prefixo (&)), além de outros ponteiros de mesmo tipo.
+
+```cpp
+int main() {
+
+    int obj = 2;
+
+
+    int *ptr = &obj;    // atribui o endereço de "obj" para "ptr". 
+
+    
+    printf("%d", ptr);      // print do endereço de obj (0x...).
+    printf("%d", *ptr);     // print do valor em obj (2).
+
+
+    int *ptr2 = ptr; // atribui o endereço em "ptr" (ou seja, o endereço de "obj") para "ptr2".
+
+    printf("%d", ptr2);      // print do endereço de obj (0x...).
+    printf("%d", *ptr2);     // print do valor em obj (2).
+
+    return 0;
+}
+
+```
+
+
+#### Tipos Estruturados
+
+Ao contrário das estruturas acima, essa tem uma grande diferença comparado ao C.
+
+Em geral, tipos estruturados (ou structs), são tipos definidos por nós, podendo armazenar outros tipos dentro dela. Elas seguem o seguinte padrão de escrita:
+
+```cpp
+
+struct TipoEstruturado {
+
+    tipo1 valor1;
+    tipo2 valor2;
+
+    //(...)
+}
+
+```
+
+Podemos também acessar cada um desses valores dentro de nosso código, por exemplo:
+
+```cpp
+
+struct Par{
+    int direita;
+    int esquerda;
+}
+
+
+int main(){
+
+    Par parzinho;         //declara uma variável do tipo Par
+
+    parzinho.direita = 1;   
+    parzinho.esquerda = 2;
+
+    return 0;
+}
+
+```
+
+Mas, isso vocês já devem saber.
+
+O grande diferencial entre structs em C e C++ é a possibilidade de colocar funções dentro delas!
+
+Chamaremos essas "funções dentro do struct" de métodos, e eles podem ser acessados da mesma forma que uma variável é acessada.
+
+```cpp
+
+struct Par {
+    int direita;
+    int esquerda;
+
+
+    int soma_dos_dois(){
+        return direita + esquerda;
+    }
+
+    void adicionar_na_direita(int valor){
+        direita += valor;
+    }
+}
+
+
+int main(){
+
+    Par parzinho;
+    int soma;
+
+    parzinho.direita = 1;
+    parzinho.esquerda = 2;
+
+    soma = parzinho.soma_dos_dois(); // soma = 1 + 2 = 3.
+
+    parzinho.adicionar_na_direita(soma) // parzinho.direita = 1 + 3 = 4.
+
+
+    return 0;
+}
+
+```
+
+### Recursão
+
+A recursão é uma técnica de programação em que uma função se chama para resolver um problema.
+Geralmente ela é utilizada em problemas onde para chegar na esposta precisa se dividir em pequenos sub-problemas.
+
+Para criar uma função recursiva, primeiro precisamos definir dois casos principais:
+
+
+Caso de parada : caso onde a função irá parar de se chamar.
+
+Caso recursivo : caso onde a função irá se chamar com um sub-problema menor.
+
+
+```cpp
+
+int fatorial(int n){
+
+    if(n <= 1){     // caso de parada: n <= 1
+        return 1;
+    }
+    else{           // caso recursivo: n > 1
+        return n * fatorial(n - 1); // chamada recursiva
+    }
+}
+
+
+int main(){
+
+    int fat = fatorial(3); // fat = 3 * 2 * 1.
+
+    return 0;
+}
+
+```
+
+Iremos analisar essa função **fatorial** para entender melhor como a recursão está funcionando:
+
+Inicialmente na função main, chamamos fatorial(3).
+
+Logo, realizamos a seguinte iteração:
+
+```cpp
+
+fatorial(3);
+
+if(3 <= 1) return 1; // como 3 > 1, passa para o else.
+
+else{
+    return 3 * fatorial(3 - 1); // Retorno de fatorial(3)
+}
+
+```
+Logo, teremos que ver o retorno de fatorial(3 - 1).
+
+```cpp
+fatorial(3 - 1) = fatorial(2)
+
+if(2 <= 1) return 1; // como 2 > 1, passa para o else:
+
+else{
+    return 2 * fatorial(2 - 1); // Retorno de fatorial(2)
+}
+
+```
+Logo, teremos que ver o retorno de fatorial(2 - 1).
+
+```cpp
+fatorial(2 - 1) = fatorial(1)
+
+if(1 <= 1) return 1; // como 1 = 1, fatorial(1) = 1
+
+```
+
+Logo, como fatorial(3) =  3 * fatorial(2), fatorial(2) = 2 * fatorial(1) e fatorial(1) = 1
+
+Então, fatorial(3) = 3 * fatorial(2) =  3 * 2 * fatorial(1) = 3 * 2 * 1 = 6.
+
+
+
+### STL
+
+A STL (Standard Template Library) é uma coleção de classes e funções pré-montadas (chamadas de Headers) com o foco em facilitar o programador.
+
+Os componentes da STL se dividem em 3 tipos:
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/STL-divisões.png" alt="Tipos em STL" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>STL -> tipo do componente -> explicação<br /></em></p>
+  </div>
+
+
+
+#### Como utilizar a STL?
+
+Inicialmente, colocamos no topo do nosso código o comando **#include** para "chamar" o conteúdo de algum header para o nosso código.
+Esse comando é utilizado para (literalmente) copiar e colar o conteúdo de algum arquivo dado o diretório do próprio.
+
+Utilizamos o **#include** de duas formas:
+
+```cpp
+
+#include <alguma_coisa>// podemos chamar o arquivo com angle brackets <>
+#include "outra_coisa" // ou com aspas ""
+
+```
+
+A diferença entre os dois está no propósito de cada um.
+As aspas ("") são usadas para achar arquivos em diretórios específicos do usuário (o que é desnecessário durante esse minicurso), enquanto os angle brackets (<>) são utilizados para chamar headers da STL.
+
+Além disso, para diferenciar possiveis funções de mesmo nome, também devemos colocar o prefixo **std::** antes de nossas classes/funções recebidas da STL.
+
+A seguir, veremos alguns headers básicos que serão utilizados futuramente.
+
+#### Iostream
+
+Esse header é o verdadeiro substituto do clássico **printf()** do C.
+
+O header Iostream é a junção de outros 4 templates básicos, sendo os principais o **Istream** e o **Ostream**. O nome deles vem da junção da primeira letra de (I)nput e (O)utput, somado à Stream (fluxo), ou seja:
+
+istream : fluxo de entrada (controla a leitura de dados colocados pelo usuário).
+
+ostream : fluxo de saída   (controla a saída de informações gerados pelo programa).
+
+
+Logo, o Iostream será basicamente o header que armazena as funções de entrada e saída do programa.
+Nele, temos os seguintes comandos principais:
+
+std::cin : "função" que será utilizada para a entrada de dados.
+
+std::cout : "função" que será utilizada para a saída de dados.
+
+std::endl : "constante" que será utilizada para iniciar outra linha na saída (similar ao "/n").
+
+
+obs: note as aspas que coloquei em cada "definição" dos comandos, apenas chamarei daquelas formas para facilitar o entendimento.
+
+
+```cpp
+
+#include <iostream> // chamada do header
+
+int main() {
+
+    int var;
+
+    std::cin >> var;                 // comando para entrada de variáveis.
+    std::cout << var << std::endl;   // comando para a saída do programa.
+
+    return 0;
+}               
+
+```
+
+Note que, utilizaremos os brackets para relacionar a entrada e saída de cada comando, usando ">>" para a entrada e "<<" para a saída.
+
+Em geral, sempre que precisarmos trabalhar com entrada/saída de programas, utilizaremos esse header.
+
+Mas vocês não acham que escrever sempre "std::" é cansativo?
+
+#### Namespaces
+
+Como dito anteriormente: "**para diferenciar possiveis funções de mesmo nome, também devemos colocar o prefixo std:: antes de nossas classes/funções recebidas da STL.**". O motivo disso é por que a STL está dentro de um namespace.
+
+Namespaces são uma "artimanha" criada para evitar repetições de nomes em projetos grandes, mas, que em projetos pequenos irritam alguns programadores. Nesse caso, a STL criou um namespace chamado **std** (STandarD) para afunilar suas classes e funções.
+
+##### Como criamos Namespaces?
+
+Na verdade isso é até bem fácil...
+
+Apenas devemos declarar um espaço com o comando **namespace nome_do_namespace** e escrever nosso código nele :) .
+
+
+```cpp
+
+#include <iostream>
+
+namespace heitor {     
+
+    void chamarMeuNome(){  //função dentro do meu namespace
+        std::cout << "Heitor" << std::endl;
+    }
+
+}
+
+
+
+int main(){
+
+    heitor::chamarMeuNome(); // saída: Heitor
+
+    return 0;
+}
+
+
+```
+
+Porém, note que caso eu não use o prefixo "heitor::", o código daria erro.
+
+```cpp
+
+int main(){
+
+    chamarMeuNome(); // erro: chamarMeuNome não está no escopo.
+
+    return 0;
+}
+
+```
+
+Como namespaces não são utilizados em projetos pequenos, também temos a possibilidade de não ter que sempre escrever o prefixo deles!
+
+Para isso, utilizamos o comando **using namespace nome_do_namespace**.
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main(){
+
+    int var;
+    
+    cin >> var;          // nesse caso não precisamos do std::
+    cout << var << endl;
+
+    return 0;
+}
+
+
+```
+
+A partir de agora, por simplicidade, todos os nossos exemplos utilizando a STL terão esse comando.
+
+#### Algorithm
+
+O Algorithm é um dos maiores headers da STL, contendo mais de 100 algoritmos de busca, ordenação, contagem, manipulação e comparação de elementos em contêineres.
+
+Nele, apresentarei apenas 2 funções importantes, Min e Max.
+
+##### Min & Max
+
+Essas duas funções tem objetivos claros, verificar 2 elementos e retornar o maior ou menor valor dentre os dois. Não só isso, mas as duas também podem receber um contêiner como parâmetro e retornar o maior ou menor elemento dentro do mesmo.
+
+```cpp
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+
+int main(){
+
+    int valor1 = 2;
+    int valor2 = 5;
+
+    cout << min(valor1, valor2) << endl; // saída: 2.
+    cout << max(valor1, valor2) << endl; // saída: 5.
+
+    cout << min({2, 5, 10, 3, 1}) << endl; // saída: 1.
+    cout << max({2, 5, 10, 3, 1}) << endl; // saída: 10.
+
+    return 0;
+}
+
+```
+
+#### String
+
+Ao contrário de C, a STL oferece uma biblioteca completa que adiciona o tipo **String** sem ter que criar um array de caracteres. Além disso, a biblioteca também fornece diversas funções que facilitam o uso dos objetos do tipo String.
+
+```cpp 
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+int main(){
+
+    string nome = "Heitor";
+
+    cout << nome << endl; // saída: Heitor
+    
+    return 0;
+}
+```
+
+Porém, podemos também verificar elementos de strings dado seu índice, similar ao C:
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+int main(){
+
+    string hoje = "Segunda-feira";
+
+    cout << hoje[0] << endl; // saída: S
+
+    return 0;
+}
+```
+
+Dentre as diferenças principais de strings nas duas linguagens, a principal está no gerenciamento de memória. Ao contrário de C, em C++ não precisamos nos preocupar em alocar o tamanho exato da string durante sua declaração, pois as strings crescem ou diminuem dinâmicamente conforme o necessário.
+
+Outra diferênça importante ocorre na manipulação das strings, onde em C++ elas possuem métodos internos e operadores mais intuitivos.
+Por exemplo, temos funções como size() e empty() internamente, além de utilizarmos o operador "+" para concatenar e o operador "==" para comparar strings.
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+int main(){
+
+    string nome = "Heitor";
+    string sobrenome = "Campos";
+
+    string nomeCompleto = "";
+
+    if(!nome.empty() and !sobrenome.empty()){ // caso o nome e o sobrenome tenham elementos
+        nomeCompleto = nome + " " + sobrenome; // nomeCompleto = Heitor Campos
+    }
+    
+
+    cout << nomeCompleto << endl;
+
+
+
+    return 0;
+}
+```
+
+Algumas funções disponíveis para as strings são:
+
+
+**size** : retorna um inteiro que corresponde ao tamanho da string.
+
+**empty** : retorna um booleano que corresponde se a string está vazia ou não.
+
+**stoi** : converte a string em um inteiro.
+
+**begin** : retorna um iterador que aponta para o primeiro elemento da string.
+
+**end** : retorna um iterador para o a posição após o último elemento da string.
+
+
+
+#### Array
+
+Ao contrário dos últimos headers, este foi adicionado na versão C++11.
+
+
+**obs: chamarei o array do header de std::array e o array com colchetes ([]) de array clássico.**
+
+
+Sim, o std::array funciona de forma bem parecida com os arrays clássicos, mas possui vantagens nítidas sobre seu irmão mais velho.
+
+Embora tenhamos que escrever um pouco mais, o std::array fornece algumas funções internas, funcionalidades extras e suporte completo para outros algoritmos da STL.
+
+
+A declaração do std::array é um pouco diferente do convencional. Além de declarar colocando std::array no começo, também utilizamos os angle brackets para definir o tipo e o tamanho do array.
+
+```cpp
+#include <array>
+
+using namespace std;
+
+int main(){
+
+    array<int, 5> arr = {1, 2, 3, 4, 5}; // declaração
+
+    return 0;
+}
+
+```
+
+Além disso, como não temos colchetes, acessamos os elementos com a função interna **at(índice)**:
+
+```cpp
+
+#include <array>
+
+using namespace std;
+
+int main(){
+
+    array<int, 5> arr = {1, 2, 3, 4, 5}; 
+
+    cout << arr.at(2) << endl; //saída: 3  
+
+    return 0;
+}
+
+```
+
+Essa mudança torna o acesso de elementos mais seguro, possuindo tratamento adequado caso o índice esteja fora do tamanho do array.
+
+Outro problema "resolvido" pelo std::array é na cópia entre arrays.
+Originalmente, não podemos copiar dois arrays clássicos sem funções externas (criadas pelo usuário ou por outras bibliotecas), mas, que são feitas de forma instantânea na std::array com o operador "=".
+
+```cpp
+#include <array>
+
+using namespace std;
+
+int main(){
+
+    array<int, 5> arr = {1, 2, 3, 4, 5}; 
+
+    array<int, 5> arr2;
+
+    arr2 = arr; // arr2 = {1, 2, 3, 4, 5}
+
+    return 0;
+}
+```
+
+Além disso, o std::array também providencia comandos como **size**, **begin**, **end**, **empty** (vistos também em strings), onde:
+
+**size** : retorna o tamanho do array.
+
+**empty**: retorna um booleano que corresponde se o array está vazio ou não.
+
+**begin**: retorna um iterador que aponta para o primeiro elemento do array.
+
+**end**  : retorna um iterador para o a posição após o último elemento do array.
+
+**front** : retorna o primeiro elemento do array.
+
+**back** : retorna o último elemento do array.
+
+
 ### Análise de códigos em C++ <!-- Mostrar Busca Binária e Linear -->
 ###  Qual é o melhor?         <!-- Apenas introduz essa dúvida -->
 
