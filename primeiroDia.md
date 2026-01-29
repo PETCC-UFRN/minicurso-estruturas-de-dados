@@ -324,7 +324,7 @@ int arrayInt[] = {0, 1, 2, 3}
 
 ##### Condicionais
 
-As condicionais serão, como o nome sugere, estruturas que irão executar alguma ação com base em alguma condição, onde em geral será dada por um booleano, ou uma expressão que retorne um booleano.
+As condicionais serão, como o nome sugere, estruturas que irão executar alguma ação com base em alguma condição, onde será dada por um booleano, ou uma expressão que retorne um booleano.
 
 Iremos utilizar, similar ao C, o comando `if` (se) e `else`(senão) para representar essa estrutura, tendo como padrão:
 ```cpp
@@ -564,7 +564,7 @@ Calma, não se assuste.
 
 Sabemos que esse tópico é meio chatinho para algumas pessoas, porém é de extrema importância. Não iremos abordar tanta coisa sobre ponteiros, apenas entender por cima como eles funcionam e aplicar na criação de estruturas de dados mais complexas.
 
-Basicamente, ponteiros são variáveis que guardam endereços de objetos na memória. Mas... O que são realmente endereços?
+Basicamente, ponteiros são variáveis que guardam endereços de objetos na memória. Mas... O que realmente são endereços?
 
 
 ##### Endereços de Memória e Referências
@@ -573,16 +573,23 @@ Suponha que temos algum valor em nosso código, por exemplo, uma variável intei
 
 Quando declaramos essa variável `num`, armazenamos ela em um pequeno espaço na nossa memória para não perdê-la durante a execução do programa. O endereço da variável `num` seria uma representação numérica de onde ela está armazenada.
 
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Memória-1-exemplo.png" alt="Representação-visual-memória" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
+
 Em C++ utilizamos o operador `&` para "recolher" o endereço de alguma variável.
 
 ```cpp
 int main(){
 
-    int numero = 2;
+    int num = 2;
 
-    printf("%d", &numero); // suponha que "printf()" seja apenas uma função que mostra os seus parâmetros.
+    printf("%d", &num); 
     
-                // A saída do programa será algo como "0x6dfed4", que seria o endereço da variavel numero.
+                // Saída: endereço da variavel, ou nesse caso, "0x6DFED4".
     return 0;
 }
 
@@ -594,18 +601,18 @@ Nesse sentido, também podemos utilizar o operador `&` como um "alias" de outras
 
 int main(){
 
-    int numero = 2;
-    int &ref = numero;    //faz referência ao numero
+    int num = 2;
+    int &ref = num;    //faz referência ao num
 
-    printf("%d", numero);
-    printf("%d", ref);         //a saída dos dois será 2.
+    printf("%d", num);
+    printf("%d", ref);    //a saída dos dois será 2.
 
     
     //caso você altere a ref:
 
     ref = 3;
 
-    printf("%d", numero);
+    printf("%d", num);
     printf("%d", ref);     // a saída dos dois será 3.
 
 
@@ -613,15 +620,22 @@ int main(){
 }
 
 ```
+Visualmente, a declaraçao de `int &ref = num` seria como se criassemos uma variável `ref` "dentro da casinha do `num`", onde eles compartilhariam o mesmo endereço e valor.
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Memória-2-exemplo.png" alt="Representação-visual-memória" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
 ##### Agora sim, Ponteiros
 
-Como dito anteriormente, ponteiros são simplesmente variáveis que guardam endereços de objetos na memória, ou seja, falamos que eles "apontam" para um objeto na memória. Todos os ponteiros tem um tipo associado que especifica o tipo do objeto que estará apontando. Utilizamos também o prefixo (*) na declaração de ponteiros, como visto no exemplo abaixo:
+Como dito anteriormente, ponteiros são simplesmente variáveis que guardam endereços de objetos na memória, ou seja, falamos que eles "apontam" para um objeto na memória. Todos os ponteiros tem um tipo associado que especifica o tipo do objeto que estará "apontando". Utilizamos também o prefixo (*) na declaração de ponteiros, como visto no exemplo abaixo:
 
 ```cpp
 
 int main() {
 
-    int obj = 2; // apenas uma declaração de um inteiro.
+    int num = 2; // apenas uma declaração de um inteiro.
 
     int* ptr;    // apenas uma declaração de um ponteiro de inteiro.
     int *ptr2;   // outra declaração de um ponteiro de inteiro.
@@ -630,37 +644,79 @@ int main() {
 }
 
 ```
-Além disso, os ponteiros podem ser inicializados recebendo a referência de objetos do mesmo tipo (ou seja, utilizando o prefixo (&)), além de outros ponteiros de mesmo tipo.
 
 ```cpp
 int main() {
 
-    int obj = 2;
+    int num = 2;
 
 
-    int *ptr = &obj;    // atribui o endereço de "obj" para "ptr". 
+    int *ptr = &num;    // atribui o endereço de "num" para "ptr". 
 
-    
-    printf("%d", ptr);      // print do endereço de obj (0x...).
-    printf("%d", *ptr);     // print do valor em obj (2).
+    int *ptr2 = ptr; // atribui o endereço em "ptr" (ou seja, o endereço de "num") para "ptr2".
 
-
-    int *ptr2 = ptr; // atribui o endereço em "ptr" (ou seja, o endereço de "obj") para "ptr2".
-
-    printf("%d", ptr2);      // print do endereço de obj (0x...).
-    printf("%d", *ptr2);     // print do valor em obj (2).
+    printf("%d", ptr2);      // print do endereço de num (0x...).
+    printf("%d", *ptr2);     // print do valor em num (2).
 
     return 0;
 }
 
 ```
 
+Voltando para o exemplo do `num = 2`, mudaremos um pouco o nosso objetivo. Dessa vez queremos armazenar o endereço de `num` em outra variável.
+
+Para isso, usaremos o ponteiro de inteiro `ptr`, que como definimos mais cedo, é uma variável que armazena endereços. Após isso, igualaremos ao endereço de `num` utilizando o prefixo "&" para armazená-la.
+
+```cpp
+
+int main() {
+
+    int num = 2; 
+
+    int* ptr = &num;   
+
+    return 0;
+}
+
+```
+
+Nesse caso, ao invés de ter uma variável "na mesma casinha" de `num`, temos uma nova variável `ptr` que armazena o endereço de `num`.
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Ponteiros-1-exemplo.png" alt="Representação-visual-ponteiros" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
+Analogamente, caso seja necessário, podemos também igualar o valor do ponteiro `ptr` à outros ponteiros de mesmo tipo, o que seria o mesmo que igualar ao endereço de `num`.
+
+```cpp
+
+int main() {
+
+    int num = 2; 
+
+    int* ptr = &num;   
+    
+    int* ptr2 = ptr;
+
+    int* ptr3 = &num; // ptr3 == ptr2 == ptr1
+
+    return 0;
+}
+
+```
+
+Lembrando que, mesmo que os ponteiros apontem para o mesmo endereço, não significa que eles estão no mesmo espaço de memória, como visto abaixo:
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Ponteiros-2-exemplo.png" alt="Representação-visual-ponteiros" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
 
 #### Tipos Estruturados
 
-Ao contrário das estruturas acima, essa tem uma grande diferença comparado ao C.
-
-Em geral, tipos estruturados (ou structs), são tipos definidos por nós, podendo armazenar outros tipos dentro dela. Elas seguem o seguinte padrão de escrita:
+Em geral, tipos estruturados (ou structs), são como "tipos definidos por nós", podendo armazenar outros tipos dentro dela. Elas seguem o seguinte padrão de escrita:
 
 ```cpp
 
@@ -686,7 +742,7 @@ struct Par{
 
 int main(){
 
-    Par parzinho;         //declara uma variável do tipo Par
+    Par parzinho;         //declara uma variável do "tipo" Par
 
     parzinho.direita = 1;   
     parzinho.esquerda = 2;
@@ -772,11 +828,15 @@ int main(){
 
 ```
 
-Iremos analisar essa função **fatorial** para entender melhor como a recursão está funcionando:
 
-Inicialmente na função main, chamamos fatorial(3).
+#### Exemplos
 
-Logo, realizamos a seguinte iteração:
+Teoricamente seria apenas isso, mas vamos ver em prática como que a recursão funciona:
+
+
+Iremos analisar a função **fatorial**:
+
+Inicialmente na função main, chamamos fatorial(3):
 
 ```cpp
 
@@ -809,32 +869,145 @@ fatorial(2 - 1) = fatorial(1)
 if(1 <= 1) return 1; // como 1 = 1, fatorial(1) = 1
 
 ```
-
-Logo, como fatorial(3) =  3 * fatorial(2), fatorial(2) = 2 * fatorial(1) e fatorial(1) = 1
-
-Então, fatorial(3) = 3 * fatorial(2) =  3 * 2 * fatorial(1) = 3 * 2 * 1 = 6.
-
-
-
-### STL
-
-A STL (Standard Template Library) é uma coleção de classes e funções pré-montadas (chamadas de Headers) com o foco em facilitar o programador.
-
-Os componentes da STL se dividem em 3 tipos:
-
 <div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/STL-divisões.png" alt="Tipos em STL" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
-    <p style="margin: 0.5rem auto 0; text-align: center;"><em>STL -> tipo do componente -> explicação<br /></em></p>
+    <img src="assets/images/Recursão-1-exemplo.png" alt="representação-visual-recursão" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
   </div>
 
 
+Então, fatorial(3) = 6.
 
-#### Como utilizar a STL?
 
-Inicialmente, colocamos no topo do nosso código o comando **#include** para "chamar" o conteúdo de algum header para o nosso código.
+Outro exemplo comum está na **Sequência de Fibonacci**.
+
+Utilizaremos o seguinte código para exemplificar:
+
+```cpp
+
+int fibo(int n){
+
+    if(n <= 1)return 1;
+    else return fibo(n - 1) + fibo(n - 2);
+}
+
+
+int main(){
+
+    int fib = fibo(5);
+
+    return 0;
+}
+
+```
+
+A função `fibo` é um pouco diferente da função `fatorial`, principalmente por possuir duas chamadas recursivas. Então, vamos analisar como ela chega no resultado de `fibo(5)`.
+
+Inicialmente, temos que definir o caso recursivo e o caso de parada da função `fibo()`:
+
+```cpp
+
+int fibo(int n){
+    // Caso de parada: n <= 1
+    if(n <= 1)return 1;
+
+    // Caso recursivo: n > 1
+    return fibo(n - 1) + fibo(n - 2);
+}
+
+```
+
+Após isso, veremos o que acontece após a declaração `fibo(5)`:
+
+```cpp
+
+fibo(5);
+
+if(5 <= 1) return 1; // como 5 > 1, passa para o else.
+
+else return fibo(5 - 1) + fibo(5 - 2) // retorno de fibo(5)
+
+```
+
+Logo, temos que `fibo(5) = fibo(4) + fibo(3)`. Veremos a seguir o valor de `fibo(4)`.
+
+```cpp
+
+fibo(4);
+
+if(4 <= 1) return 1; // como 4 > 1, passa para o else.
+
+else return fibo(4 - 1) + fibo(4 - 2) // retorno de fibo(4)
+
+```
+
+Logo, temos que `fibo(4) = fibo(3) + fibo(2)`. Veremos a seguir o valor de `fibo(3)`.
+
+```cpp
+
+fibo(3);
+
+if(3 <= 1) return 1; // como 3 > 1, passa para o else.
+
+else return fibo(3 - 1) + fibo(3 - 2) // retorno de fibo(3)
+
+```
+
+Logo, temos que `fibo(3) = fibo(2) + fibo(1)`. Veremos a seguir o valor de `fibo(2)`.
+
+```cpp
+
+fibo(2);
+
+if(2 <= 1) return 1; // como 2 > 1, passa para o else.
+
+else return fibo(2 - 1) + fibo(2 - 2) // retorno de fibo(2)
+
+```
+Logo, temos que `fibo(2) = fibo(1) + fibo(0)`. Veremos a seguir o valor de `fibo(1)`.
+
+```cpp
+
+fibo(1);
+
+if(1 <= 1) return 1; // como 1 <= 1, retorna 1.
+
+```
+
+Logo, temos que `fibo(1) = 1`. Analogamente, `fibo(0)` também será igual à 1 (0 <= 1). Por fim, iremos realizar a soma para chegar em `fibo(5)`.
+
+```cpp
+
+fibo(5) = fibo(4) + fibo(3);
+fibo(5) = fibo(3) + fibo(2) + fibo(3);
+fibo(5) = fibo(2) + fibo|(1) + fibo(2) + fibo(2) + fibo(1);
+fibo(5) = fibo(1) + fibo(0) + fibo(1) + fibo(1) + fibo(0) + fibo(1) + fibo(0) + fibo(1);
+fibo(5) = 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1;
+fibo(5) = 8;
+
+```
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Recursão-2-exemplo.png" alt="Representação-visual-fibonacci" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
+
+Finalmente, descobrimos que `fibo(5) = 8` !
+
+Definitivamente isso demorou mais do que deveria, será que temos como "melhorar" esse código...?
+
+### Biblioteca padrão do C++
+
+A Biblioteca padrão é uma coleção de classes e funções pré-montadas (chamadas de Headers) com o foco em facilitar o programador. A biblioteca padrão do C++ incorpora a biblioteca padrão do C, além de diversas adições que a linguagem trouxe.
+
+Não iremos abordar todas as funcionalidades da biblioteca do C++ (até por que poderia durar o minicurso inteiro kk), mas mostraremos alguns usos interessantes durante o curso.
+
+#### Como utilizar a biblioteca padrão?
+
+Inicialmente, colocamos no topo do nosso código o comando `#include` para "chamar" o conteúdo de algum header para o nosso código.
 Esse comando é utilizado para (literalmente) copiar e colar o conteúdo de algum arquivo dado o diretório do próprio.
 
-Utilizamos o **#include** de duas formas:
+Utilizamos o `#include` de duas formas:
 
 ```cpp
 
@@ -844,31 +1017,28 @@ Utilizamos o **#include** de duas formas:
 ```
 
 A diferença entre os dois está no propósito de cada um.
-As aspas ("") são usadas para achar arquivos em diretórios específicos do usuário (o que é desnecessário durante esse minicurso), enquanto os angle brackets (<>) são utilizados para chamar headers da STL.
+As aspas `""` são usadas para achar arquivos em diretórios específicos do usuário (o que é desnecessário durante este minicurso), enquanto os angle brackets `<>` são utilizados para chamar headers da biblioteca.
 
-Além disso, para diferenciar possiveis funções de mesmo nome, também devemos colocar o prefixo **std::** antes de nossas classes/funções recebidas da STL.
-
-A seguir, veremos alguns headers básicos que serão utilizados futuramente.
+Além disso, para diferenciar possiveis funções de mesmo nome, também devemos colocar o prefixo `std::` antes de nossas classes/funções recebidas.
 
 #### Iostream
 
 Esse header é o verdadeiro substituto do clássico **printf()** do C.
 
-O header Iostream é a junção de outros 4 templates básicos, sendo os principais o **Istream** e o **Ostream**. O nome deles vem da junção da primeira letra de (I)nput e (O)utput, somado à Stream (fluxo), ou seja:
+O Iostream é a junção de outros 4 templates básicos, sendo os principais o **Istream** e o **Ostream**. O nome deles vem da junção da primeira letra de (I)nput e (O)utput, somado à Stream (fluxo), ou seja:
 
-istream : fluxo de entrada (controla a leitura de dados colocados pelo usuário).
+* **istream** : fluxo de entrada (controla a leitura de dados colocados pelo usuário).
 
-ostream : fluxo de saída   (controla a saída de informações gerados pelo programa).
-
+* **ostream** : fluxo de saída   (controla a saída de informações gerados pelo programa).
 
 Logo, o Iostream será basicamente o header que armazena as funções de entrada e saída do programa.
 Nele, temos os seguintes comandos principais:
 
-std::cin : "função" que será utilizada para a entrada de dados.
+* **std::cin** : "função" que será utilizada para a entrada de dados.
 
-std::cout : "função" que será utilizada para a saída de dados.
+* **std::cout** : "função" que será utilizada para a saída de dados.
 
-std::endl : "constante" que será utilizada para iniciar outra linha na saída (similar ao "/n").
+* **std::endl** : "constante" que será utilizada para iniciar outra linha na saída (similar ao "/n").
 
 
 obs: note as aspas que coloquei em cada "definição" dos comandos, apenas chamarei daquelas formas para facilitar o entendimento.
@@ -890,23 +1060,23 @@ int main() {
 
 ```
 
-Note que, utilizaremos os brackets para relacionar a entrada e saída de cada comando, usando ">>" para a entrada e "<<" para a saída.
+Note que, utilizaremos os brackets para relacionar a entrada e saída de cada comando, usando `>>` para a entrada e `<<` para a saída.
 
 Em geral, sempre que precisarmos trabalhar com entrada/saída de programas, utilizaremos esse header.
 
-Mas vocês não acham que escrever sempre "std::" é cansativo?
+Mas vocês não acham que escrever sempre `std::` é cansativo?
 
 #### Namespaces
 
-Como dito anteriormente: "**para diferenciar possiveis funções de mesmo nome, também devemos colocar o prefixo std:: antes de nossas classes/funções recebidas da STL.**". O motivo disso é por que a STL está dentro de um namespace.
+Como dito anteriormente: "**para diferenciar possiveis funções de mesmo nome, também devemos colocar o prefixo std:: antes de nossas classes/funções recebidas**". O motivo disso é por que a biblioteca padrão está dentro de um namespace.
 
-Namespaces são uma "artimanha" criada para evitar repetições de nomes em projetos grandes, mas, que em projetos pequenos irritam alguns programadores. Nesse caso, a STL criou um namespace chamado **std** (STandarD) para afunilar suas classes e funções.
+Namespaces são uma "artimanha" criada para evitar repetições de nomes em projetos grandes, mas, que em projetos pequenos irritam alguns programadores. Nesse caso, acabaram criando um namespace chamado `std` (STandarD) para afunilar suas classes e funções.
 
 ##### Como criamos Namespaces?
 
 Na verdade isso é até bem fácil...
 
-Apenas devemos declarar um espaço com o comando **namespace nome_do_namespace** e escrever nosso código nele :) .
+Apenas devemos declarar um espaço com o comando `namespace nome_do_namespace` e escrever nosso código nele :) .
 
 
 ```cpp
@@ -933,7 +1103,7 @@ int main(){
 
 ```
 
-Porém, note que caso eu não use o prefixo "heitor::", o código daria erro.
+Porém, note que caso eu não use o prefixo `heitor::`, o código daria erro.
 
 ```cpp
 
@@ -946,9 +1116,9 @@ int main(){
 
 ```
 
-Como namespaces não são utilizados em projetos pequenos, também temos a possibilidade de não ter que sempre escrever o prefixo deles!
+Como namespaces não são muito utilizados em projetos pequenos, também temos a possibilidade de não ter que sempre escrever o prefixo deles!
 
-Para isso, utilizamos o comando **using namespace nome_do_namespace**.
+Para isso, utilizamos o comando `using namespace nome_do_namespace`.
 
 ```cpp
 #include <iostream>
@@ -968,7 +1138,23 @@ int main(){
 
 ```
 
-A partir de agora, por simplicidade, todos os nossos exemplos utilizando a STL terão esse comando.
+A partir de agora, por simplicidade, todos os nossos exemplos utilizando a biblioteca de c++ terão esse comando.
+
+#### STL
+
+A STL (Standard Template Library) é uma "pequena biblioteca" dentro da biblioteca padrão do C++. Ela foi uma das principais adições ao C++, transformando completamente a biblioteca padrão da linguagem.
+
+O grande diferencial dela está no próprio nome: **Standard Template**. Basicamente, por conta dos templates da biblioteca, ela se torna uma biblioteca extremamente genérica, podendo utilizar suas classes/funções para a maioria das tipagens do C++. Não só isso, mas torna a linguagem extremamente rápida, mesmo com tantas adições.  
+
+Os componentes da STL se dividem em 3 tipos:
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/STL-divisões.png" alt="Tipos em STL" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>STL -> tipo do componente -> explicação<br /></em></p>
+  </div>
+
+
+Um erro comum é a confusão entre "Biblioteca padrão" e "STL", então tomem muito cuidado com isso!
 
 #### Algorithm
 
@@ -1005,7 +1191,7 @@ int main(){
 
 #### String
 
-Ao contrário de C, a STL oferece uma biblioteca completa que adiciona o tipo **String** sem ter que criar um array de caracteres. Além disso, a biblioteca também fornece diversas funções que facilitam o uso dos objetos do tipo String.
+Ao contrário de C, a STL oferece uma biblioteca completa que adiciona o tipo **String** sem ter que criar um array de caracteres. Além disso, a biblioteca também fornece diversas funções internas que facilitam o uso dos objetos do tipo `string`.
 
 ```cpp 
 #include <iostream>
@@ -1046,7 +1232,7 @@ int main(){
 Dentre as diferenças principais de strings nas duas linguagens, a principal está no gerenciamento de memória. Ao contrário de C, em C++ não precisamos nos preocupar em alocar o tamanho exato da string durante sua declaração, pois as strings crescem ou diminuem dinâmicamente conforme o necessário.
 
 Outra diferênça importante ocorre na manipulação das strings, onde em C++ elas possuem métodos internos e operadores mais intuitivos.
-Por exemplo, temos funções como size() e empty() internamente, além de utilizarmos o operador "+" para concatenar e o operador "==" para comparar strings.
+Por exemplo, temos funções como `size()` e `empty()` internamente, além de utilizarmos o operador "+" para concatenar e o operador `==` para comparar strings.
 
 ```cpp
 #include <iostream>
@@ -1078,15 +1264,15 @@ int main(){
 Algumas funções disponíveis para as strings são:
 
 
-**size** : retorna um inteiro que corresponde ao tamanho da string.
+* **size** : retorna um inteiro que corresponde ao tamanho da string.
 
-**empty** : retorna um booleano que corresponde se a string está vazia ou não.
+* **empty** : retorna um booleano que corresponde se a string está vazia ou não.
 
-**stoi** : converte a string em um inteiro.
+* **stoi** : converte a string em um inteiro.
 
-**begin** : retorna um iterador que aponta para o primeiro elemento da string.
+* **begin** : retorna um iterador que aponta para o primeiro elemento da string.
 
-**end** : retorna um iterador para o a posição após o último elemento da string.
+* **end** : retorna um iterador para o a posição após o último elemento da string.
 
 
 
@@ -1098,12 +1284,12 @@ Ao contrário dos últimos headers, este foi adicionado na versão C++11.
 **obs: chamarei o array do header de std::array e o array com colchetes ([]) de array clássico.**
 
 
-Sim, o std::array funciona de forma bem parecida com os arrays clássicos, mas possui vantagens nítidas sobre seu irmão mais velho.
+Sim, o `std::array` funciona de forma bem parecida com os arrays clássicos, mas possui vantagens nítidas sobre seu irmão mais velho.
 
-Embora tenhamos que escrever um pouco mais, o std::array fornece algumas funções internas, funcionalidades extras e suporte completo para outros algoritmos da STL.
+Embora tenhamos que escrever um pouco mais, o `std::array` fornece algumas funções internas, funcionalidades extras e suporte completo para outros algoritmos da STL.
 
 
-A declaração do std::array é um pouco diferente do convencional. Além de declarar colocando std::array no começo, também utilizamos os angle brackets para definir o tipo e o tamanho do array.
+A declaração do `std::array` é um pouco diferente do convencional. Além de declarar colocando `std::array` no começo, também utilizamos os angle brackets para definir o tipo e o tamanho do array.
 
 ```cpp
 #include <array>
@@ -1119,7 +1305,7 @@ int main(){
 
 ```
 
-Além disso, como não temos colchetes, acessamos os elementos com a função interna **at(índice)**:
+Além disso, como não temos colchetes, acessamos os elementos com a função interna `at(índice)`:
 
 ```cpp
 
@@ -1140,8 +1326,8 @@ int main(){
 
 Essa mudança torna o acesso de elementos mais seguro, possuindo tratamento adequado caso o índice esteja fora do tamanho do array.
 
-Outro problema "resolvido" pelo std::array é na cópia entre arrays.
-Originalmente, não podemos copiar dois arrays clássicos sem funções externas (criadas pelo usuário ou por outras bibliotecas), mas, que são feitas de forma instantânea na std::array com o operador "=".
+Outro problema "resolvido" pelo `std::array` é na cópia entre arrays.
+Originalmente, não podemos copiar dois arrays clássicos sem funções externas (criadas pelo usuário ou por outras bibliotecas), mas, que são feitas de forma instantânea na `std::array` com o operador `=`.
 
 ```cpp
 #include <array>
@@ -1160,19 +1346,19 @@ int main(){
 }
 ```
 
-Além disso, o std::array também providencia comandos como **size**, **begin**, **end**, **empty** (vistos também em strings), onde:
+Além disso, o `std::array` também providencia comandos similares aos vistos em strings, como:
 
-**size** : retorna o tamanho do array.
+* **size** : retorna o tamanho do array.
 
-**empty**: retorna um booleano que corresponde se o array está vazio ou não.
+* **empty**: retorna um booleano que corresponde se o array está vazio ou não.
 
-**begin**: retorna um iterador que aponta para o primeiro elemento do array.
+* **begin**: retorna um iterador que aponta para o primeiro elemento do array.
 
-**end**  : retorna um iterador para o a posição após o último elemento do array.
+* **end**  : retorna um iterador para o a posição após o último elemento do array.
 
-**front** : retorna o primeiro elemento do array.
+* **front** : retorna o primeiro elemento do array.
 
-**back** : retorna o último elemento do array.
+* **back** : retorna o último elemento do array.
 
 
 ### Análise de códigos em C++ <!-- Mostrar Busca Binária e Linear -->

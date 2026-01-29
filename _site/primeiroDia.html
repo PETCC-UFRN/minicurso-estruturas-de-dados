@@ -360,7 +360,7 @@ No fim, utilizamos linguagens de baixo nível para matérias como essas por cont
 
 <h5 id="condicionais">Condicionais</h5>
 
-<p>As condicionais serão, como o nome sugere, estruturas que irão executar alguma ação com base em alguma condição, onde em geral será dada por um booleano, ou uma expressão que retorne um booleano.</p>
+<p>As condicionais serão, como o nome sugere, estruturas que irão executar alguma ação com base em alguma condição, onde será dada por um booleano, ou uma expressão que retorne um booleano.</p>
 
 <p>Iremos utilizar, similar ao C, o comando <code class="language-plaintext highlighter-rouge">if</code> (se) e <code class="language-plaintext highlighter-rouge">else</code>(senão) para representar essa estrutura, tendo como padrão:</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -587,7 +587,7 @@ Elas seguem, respectivamente, os seguintes padrões de escrita:</p>
 
 <p>Sabemos que esse tópico é meio chatinho para algumas pessoas, porém é de extrema importância. Não iremos abordar tanta coisa sobre ponteiros, apenas entender por cima como eles funcionam e aplicar na criação de estruturas de dados mais complexas.</p>
 
-<p>Basicamente, ponteiros são variáveis que guardam endereços de objetos na memória. Mas… O que são realmente endereços?</p>
+<p>Basicamente, ponteiros são variáveis que guardam endereços de objetos na memória. Mas… O que realmente são endereços?</p>
 
 <h5 id="endereços-de-memória-e-referências">Endereços de Memória e Referências</h5>
 
@@ -595,15 +595,20 @@ Elas seguem, respectivamente, os seguintes padrões de escrita:</p>
 
 <p>Quando declaramos essa variável <code class="language-plaintext highlighter-rouge">num</code>, armazenamos ela em um pequeno espaço na nossa memória para não perdê-la durante a execução do programa. O endereço da variável <code class="language-plaintext highlighter-rouge">num</code> seria uma representação numérica de onde ela está armazenada.</p>
 
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Memória-1-exemplo.png" alt="Representação-visual-memória" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
 <p>Em C++ utilizamos o operador <code class="language-plaintext highlighter-rouge">&amp;</code> para “recolher” o endereço de alguma variável.</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
 
-    <span class="kt">int</span> <span class="n">numero</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 
-    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">numero</span><span class="p">);</span> <span class="c1">// suponha que "printf()" seja apenas uma função que mostra os seus parâmetros.</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">num</span><span class="p">);</span> 
     
-                <span class="c1">// A saída do programa será algo como "0x6dfed4", que seria o endereço da variavel numero.</span>
+                <span class="c1">// Saída: endereço da variavel, ou nesse caso, "0x6DFED4".</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -614,18 +619,18 @@ Elas seguem, respectivamente, os seguintes padrões de escrita:</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
 
-    <span class="kt">int</span> <span class="n">numero</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="o">&amp;</span><span class="n">ref</span> <span class="o">=</span> <span class="n">numero</span><span class="p">;</span>    <span class="c1">//faz referência ao numero</span>
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="o">&amp;</span><span class="n">ref</span> <span class="o">=</span> <span class="n">num</span><span class="p">;</span>    <span class="c1">//faz referência ao num</span>
 
-    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">numero</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">ref</span><span class="p">);</span>         <span class="c1">//a saída dos dois será 2.</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">num</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">ref</span><span class="p">);</span>    <span class="c1">//a saída dos dois será 2.</span>
 
     
     <span class="c1">//caso você altere a ref:</span>
 
     <span class="n">ref</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 
-    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">numero</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">num</span><span class="p">);</span>
     <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">ref</span><span class="p">);</span>     <span class="c1">// a saída dos dois será 3.</span>
 
 
@@ -633,14 +638,21 @@ Elas seguem, respectivamente, os seguintes padrões de escrita:</p>
 <span class="p">}</span>
 
 </code></pre></div></div>
+<p>Visualmente, a declaraçao de <code class="language-plaintext highlighter-rouge">int &amp;ref = num</code> seria como se criassemos uma variável <code class="language-plaintext highlighter-rouge">ref</code> “dentro da casinha do <code class="language-plaintext highlighter-rouge">num</code>”, onde eles compartilhariam o mesmo endereço e valor.</p>
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Memória-2-exemplo.png" alt="Representação-visual-memória" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
 <h5 id="agora-sim-ponteiros">Agora sim, Ponteiros</h5>
 
-<p>Como dito anteriormente, ponteiros são simplesmente variáveis que guardam endereços de objetos na memória, ou seja, falamos que eles “apontam” para um objeto na memória. Todos os ponteiros tem um tipo associado que especifica o tipo do objeto que estará apontando. Utilizamos também o prefixo (*) na declaração de ponteiros, como visto no exemplo abaixo:</p>
+<p>Como dito anteriormente, ponteiros são simplesmente variáveis que guardam endereços de objetos na memória, ou seja, falamos que eles “apontam” para um objeto na memória. Todos os ponteiros tem um tipo associado que especifica o tipo do objeto que estará “apontando”. Utilizamos também o prefixo (*) na declaração de ponteiros, como visto no exemplo abaixo:</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
 
-    <span class="kt">int</span> <span class="n">obj</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// apenas uma declaração de um inteiro.</span>
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// apenas uma declaração de um inteiro.</span>
 
     <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span><span class="p">;</span>    <span class="c1">// apenas uma declaração de um ponteiro de inteiro.</span>
     <span class="kt">int</span> <span class="o">*</span><span class="n">ptr2</span><span class="p">;</span>   <span class="c1">// outra declaração de um ponteiro de inteiro.</span>
@@ -649,35 +661,75 @@ Elas seguem, respectivamente, os seguintes padrões de escrita:</p>
 <span class="p">}</span>
 
 </code></pre></div></div>
-<p>Além disso, os ponteiros podem ser inicializados recebendo a referência de objetos do mesmo tipo (ou seja, utilizando o prefixo (&amp;)), além de outros ponteiros de mesmo tipo.</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
 
-    <span class="kt">int</span> <span class="n">obj</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 
 
-    <span class="kt">int</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">obj</span><span class="p">;</span>    <span class="c1">// atribui o endereço de "obj" para "ptr". </span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">num</span><span class="p">;</span>    <span class="c1">// atribui o endereço de "num" para "ptr". </span>
 
-    
-    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">ptr</span><span class="p">);</span>      <span class="c1">// print do endereço de obj (0x...).</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>     <span class="c1">// print do valor em obj (2).</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">ptr2</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">;</span> <span class="c1">// atribui o endereço em "ptr" (ou seja, o endereço de "num") para "ptr2".</span>
 
-
-    <span class="kt">int</span> <span class="o">*</span><span class="n">ptr2</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">;</span> <span class="c1">// atribui o endereço em "ptr" (ou seja, o endereço de "obj") para "ptr2".</span>
-
-    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">ptr2</span><span class="p">);</span>      <span class="c1">// print do endereço de obj (0x...).</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">*</span><span class="n">ptr2</span><span class="p">);</span>     <span class="c1">// print do valor em obj (2).</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">ptr2</span><span class="p">);</span>      <span class="c1">// print do endereço de num (0x...).</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">*</span><span class="n">ptr2</span><span class="p">);</span>     <span class="c1">// print do valor em num (2).</span>
 
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 
 </code></pre></div></div>
 
+<p>Voltando para o exemplo do <code class="language-plaintext highlighter-rouge">num = 2</code>, mudaremos um pouco o nosso objetivo. Dessa vez queremos armazenar o endereço de <code class="language-plaintext highlighter-rouge">num</code> em outra variável.</p>
+
+<p>Para isso, usaremos o ponteiro de inteiro <code class="language-plaintext highlighter-rouge">ptr</code>, que como definimos mais cedo, é uma variável que armazena endereços. Após isso, igualaremos ao endereço de <code class="language-plaintext highlighter-rouge">num</code> utilizando o prefixo “&amp;” para armazená-la.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> 
+
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">num</span><span class="p">;</span>   
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>Nesse caso, ao invés de ter uma variável “na mesma casinha” de <code class="language-plaintext highlighter-rouge">num</code>, temos uma nova variável <code class="language-plaintext highlighter-rouge">ptr</code> que armazena o endereço de <code class="language-plaintext highlighter-rouge">num</code>.</p>
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Ponteiros-1-exemplo.png" alt="Representação-visual-ponteiros" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
+<p>Analogamente, caso seja necessário, podemos também igualar o valor do ponteiro <code class="language-plaintext highlighter-rouge">ptr</code> à outros ponteiros de mesmo tipo, o que seria o mesmo que igualar ao endereço de <code class="language-plaintext highlighter-rouge">num</code>.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> 
+
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">num</span><span class="p">;</span>   
+    
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr2</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">;</span>
+
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr3</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">num</span><span class="p">;</span> <span class="c1">// ptr3 == ptr2 == ptr1</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>Lembrando que, mesmo que os ponteiros apontem para o mesmo endereço, não significa que eles estão no mesmo espaço de memória, como visto abaixo:</p>
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Ponteiros-2-exemplo.png" alt="Representação-visual-ponteiros" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
 <h4 id="tipos-estruturados">Tipos Estruturados</h4>
 
-<p>Ao contrário das estruturas acima, essa tem uma grande diferença comparado ao C.</p>
-
-<p>Em geral, tipos estruturados (ou structs), são tipos definidos por nós, podendo armazenar outros tipos dentro dela. Elas seguem o seguinte padrão de escrita:</p>
+<p>Em geral, tipos estruturados (ou structs), são como “tipos definidos por nós”, podendo armazenar outros tipos dentro dela. Elas seguem o seguinte padrão de escrita:</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="k">struct</span> <span class="nc">TipoEstruturado</span> <span class="p">{</span>
@@ -701,7 +753,7 @@ Elas seguem, respectivamente, os seguintes padrões de escrita:</p>
 
 <span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
 
-    <span class="n">Par</span> <span class="n">parzinho</span><span class="p">;</span>         <span class="c1">//declara uma variável do tipo Par</span>
+    <span class="n">Par</span> <span class="n">parzinho</span><span class="p">;</span>         <span class="c1">//declara uma variável do "tipo" Par</span>
 
     <span class="n">parzinho</span><span class="p">.</span><span class="n">direita</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>   
     <span class="n">parzinho</span><span class="p">.</span><span class="n">esquerda</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
@@ -783,11 +835,13 @@ Geralmente ela é utilizada em problemas onde para chegar na esposta precisa se 
 
 </code></pre></div></div>
 
-<p>Iremos analisar essa função <strong>fatorial</strong> para entender melhor como a recursão está funcionando:</p>
+<h4 id="exemplos">Exemplos</h4>
 
-<p>Inicialmente na função main, chamamos fatorial(3).</p>
+<p>Teoricamente seria apenas isso, mas vamos ver em prática como que a recursão funciona:</p>
 
-<p>Logo, realizamos a seguinte iteração:</p>
+<p>Iremos analisar a função <strong>fatorial</strong>:</p>
+
+<p>Inicialmente na função main, chamamos fatorial(3):</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="n">fatorial</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
@@ -817,28 +871,134 @@ Geralmente ela é utilizada em problemas onde para chegar na esposta precisa se 
 <span class="k">if</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// como 1 = 1, fatorial(1) = 1</span>
 
 </code></pre></div></div>
-
-<p>Logo, como fatorial(3) =  3 * fatorial(2), fatorial(2) = 2 * fatorial(1) e fatorial(1) = 1</p>
-
-<p>Então, fatorial(3) = 3 * fatorial(2) =  3 * 2 * fatorial(1) = 3 * 2 * 1 = 6.</p>
-
-<h3 id="stl">STL</h3>
-
-<p>A STL (Standard Template Library) é uma coleção de classes e funções pré-montadas (chamadas de Headers) com o foco em facilitar o programador.</p>
-
-<p>Os componentes da STL se dividem em 3 tipos:</p>
-
 <div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/STL-divisões.png" alt="Tipos em STL" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
-    <p style="margin: 0.5rem auto 0; text-align: center;"><em>STL -&gt; tipo do componente -&gt; explicação<br /></em></p>
+    <img src="assets/images/Recursão-1-exemplo.png" alt="representação-visual-recursão" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
   </div>
 
-<h4 id="como-utilizar-a-stl">Como utilizar a STL?</h4>
+<p>Então, fatorial(3) = 6.</p>
 
-<p>Inicialmente, colocamos no topo do nosso código o comando <strong>#include</strong> para “chamar” o conteúdo de algum header para o nosso código.
+<p>Outro exemplo comum está na <strong>Sequência de Fibonacci</strong>.</p>
+
+<p>Utilizaremos o seguinte código para exemplificar:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kt">int</span> <span class="nf">fibo</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span><span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">return</span> <span class="n">fibo</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+
+    <span class="kt">int</span> <span class="n">fib</span> <span class="o">=</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>A função <code class="language-plaintext highlighter-rouge">fibo</code> é um pouco diferente da função <code class="language-plaintext highlighter-rouge">fatorial</code>, principalmente por possuir duas chamadas recursivas. Então, vamos analisar como ela chega no resultado de <code class="language-plaintext highlighter-rouge">fibo(5)</code>.</p>
+
+<p>Inicialmente, temos que definir o caso recursivo e o caso de parada da função <code class="language-plaintext highlighter-rouge">fibo()</code>:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kt">int</span> <span class="nf">fibo</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
+    <span class="c1">// Caso de parada: n &lt;= 1</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span><span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="c1">// Caso recursivo: n &gt; 1</span>
+    <span class="k">return</span> <span class="n">fibo</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>Após isso, veremos o que acontece após a declaração <code class="language-plaintext highlighter-rouge">fibo(5)</code>:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">fibo</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+
+<span class="k">if</span><span class="p">(</span><span class="mi">5</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// como 5 &gt; 1, passa para o else.</span>
+
+<span class="k">else</span> <span class="k">return</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">// retorno de fibo(5)</span>
+
+</code></pre></div></div>
+
+<p>Logo, temos que <code class="language-plaintext highlighter-rouge">fibo(5) = fibo(4) + fibo(3)</code>. Veremos a seguir o valor de <code class="language-plaintext highlighter-rouge">fibo(4)</code>.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">fibo</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+
+<span class="k">if</span><span class="p">(</span><span class="mi">4</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// como 4 &gt; 1, passa para o else.</span>
+
+<span class="k">else</span> <span class="k">return</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">// retorno de fibo(4)</span>
+
+</code></pre></div></div>
+
+<p>Logo, temos que <code class="language-plaintext highlighter-rouge">fibo(4) = fibo(3) + fibo(2)</code>. Veremos a seguir o valor de <code class="language-plaintext highlighter-rouge">fibo(3)</code>.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">fibo</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="k">if</span><span class="p">(</span><span class="mi">3</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// como 3 &gt; 1, passa para o else.</span>
+
+<span class="k">else</span> <span class="k">return</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">// retorno de fibo(3)</span>
+
+</code></pre></div></div>
+
+<p>Logo, temos que <code class="language-plaintext highlighter-rouge">fibo(3) = fibo(2) + fibo(1)</code>. Veremos a seguir o valor de <code class="language-plaintext highlighter-rouge">fibo(2)</code>.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">fibo</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="k">if</span><span class="p">(</span><span class="mi">2</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// como 2 &gt; 1, passa para o else.</span>
+
+<span class="k">else</span> <span class="k">return</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">// retorno de fibo(2)</span>
+
+</code></pre></div></div>
+<p>Logo, temos que <code class="language-plaintext highlighter-rouge">fibo(2) = fibo(1) + fibo(0)</code>. Veremos a seguir o valor de <code class="language-plaintext highlighter-rouge">fibo(1)</code>.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">fibo</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="k">if</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// como 1 &lt;= 1, retorna 1.</span>
+
+</code></pre></div></div>
+
+<p>Logo, temos que <code class="language-plaintext highlighter-rouge">fibo(1) = 1</code>. Analogamente, <code class="language-plaintext highlighter-rouge">fibo(0)</code> também será igual à 1 (0 &lt;= 1). Por fim, iremos realizar a soma para chegar em <code class="language-plaintext highlighter-rouge">fibo(5)</code>.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">fibo</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="n">fibo</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="n">fibo</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="o">|</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">fibo</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">fibo</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">fibo</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Recursão-2-exemplo.png" alt="Representação-visual-fibonacci" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
+<p>Finalmente, descobrimos que <code class="language-plaintext highlighter-rouge">fibo(5) = 8</code> !</p>
+
+<p>Definitivamente isso demorou mais do que deveria, será que temos como “melhorar” esse código…?</p>
+
+<h3 id="biblioteca-padrão-do-c">Biblioteca padrão do C++</h3>
+
+<p>A Biblioteca padrão é uma coleção de classes e funções pré-montadas (chamadas de Headers) com o foco em facilitar o programador. A biblioteca padrão do C++ incorpora a biblioteca padrão do C, além de diversas adições que a linguagem trouxe.</p>
+
+<p>Não iremos abordar todas as funcionalidades da biblioteca do C++ (até por que poderia durar o minicurso inteiro kk), mas mostraremos alguns usos interessantes durante o curso.</p>
+
+<h4 id="como-utilizar-a-biblioteca-padrão">Como utilizar a biblioteca padrão?</h4>
+
+<p>Inicialmente, colocamos no topo do nosso código o comando <code class="language-plaintext highlighter-rouge">#include</code> para “chamar” o conteúdo de algum header para o nosso código.
 Esse comando é utilizado para (literalmente) copiar e colar o conteúdo de algum arquivo dado o diretório do próprio.</p>
 
-<p>Utilizamos o <strong>#include</strong> de duas formas:</p>
+<p>Utilizamos o <code class="language-plaintext highlighter-rouge">#include</code> de duas formas:</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="cp">#include</span> <span class="cpf">&lt;alguma_coisa&gt;</span><span class="c1">// podemos chamar o arquivo com angle brackets &lt;&gt;</span><span class="cp">
@@ -847,30 +1007,39 @@ Esse comando é utilizado para (literalmente) copiar e colar o conteúdo de algu
 </code></pre></div></div>
 
 <p>A diferença entre os dois está no propósito de cada um.
-As aspas (“”) são usadas para achar arquivos em diretórios específicos do usuário (o que é desnecessário durante esse minicurso), enquanto os angle brackets (&lt;&gt;) são utilizados para chamar headers da STL.</p>
+As aspas <code class="language-plaintext highlighter-rouge">""</code> são usadas para achar arquivos em diretórios específicos do usuário (o que é desnecessário durante este minicurso), enquanto os angle brackets <code class="language-plaintext highlighter-rouge">&lt;&gt;</code> são utilizados para chamar headers da biblioteca.</p>
 
-<p>Além disso, para diferenciar possiveis funções de mesmo nome, também devemos colocar o prefixo <strong>std::</strong> antes de nossas classes/funções recebidas da STL.</p>
-
-<p>A seguir, veremos alguns headers básicos que serão utilizados futuramente.</p>
+<p>Além disso, para diferenciar possiveis funções de mesmo nome, também devemos colocar o prefixo <code class="language-plaintext highlighter-rouge">std::</code> antes de nossas classes/funções recebidas.</p>
 
 <h4 id="iostream">Iostream</h4>
 
 <p>Esse header é o verdadeiro substituto do clássico <strong>printf()</strong> do C.</p>
 
-<p>O header Iostream é a junção de outros 4 templates básicos, sendo os principais o <strong>Istream</strong> e o <strong>Ostream</strong>. O nome deles vem da junção da primeira letra de (I)nput e (O)utput, somado à Stream (fluxo), ou seja:</p>
+<p>O Iostream é a junção de outros 4 templates básicos, sendo os principais o <strong>Istream</strong> e o <strong>Ostream</strong>. O nome deles vem da junção da primeira letra de (I)nput e (O)utput, somado à Stream (fluxo), ou seja:</p>
 
-<p>istream : fluxo de entrada (controla a leitura de dados colocados pelo usuário).</p>
-
-<p>ostream : fluxo de saída   (controla a saída de informações gerados pelo programa).</p>
+<ul>
+  <li>
+    <p><strong>istream</strong> : fluxo de entrada (controla a leitura de dados colocados pelo usuário).</p>
+  </li>
+  <li>
+    <p><strong>ostream</strong> : fluxo de saída   (controla a saída de informações gerados pelo programa).</p>
+  </li>
+</ul>
 
 <p>Logo, o Iostream será basicamente o header que armazena as funções de entrada e saída do programa.
 Nele, temos os seguintes comandos principais:</p>
 
-<p>std::cin : “função” que será utilizada para a entrada de dados.</p>
-
-<p>std::cout : “função” que será utilizada para a saída de dados.</p>
-
-<p>std::endl : “constante” que será utilizada para iniciar outra linha na saída (similar ao “/n”).</p>
+<ul>
+  <li>
+    <p><strong>std::cin</strong> : “função” que será utilizada para a entrada de dados.</p>
+  </li>
+  <li>
+    <p><strong>std::cout</strong> : “função” que será utilizada para a saída de dados.</p>
+  </li>
+  <li>
+    <p><strong>std::endl</strong> : “constante” que será utilizada para iniciar outra linha na saída (similar ao “/n”).</p>
+  </li>
+</ul>
 
 <p>obs: note as aspas que coloquei em cada “definição” dos comandos, apenas chamarei daquelas formas para facilitar o entendimento.</p>
 
@@ -889,23 +1058,23 @@ Nele, temos os seguintes comandos principais:</p>
 
 </code></pre></div></div>
 
-<p>Note que, utilizaremos os brackets para relacionar a entrada e saída de cada comando, usando “»” para a entrada e “«” para a saída.</p>
+<p>Note que, utilizaremos os brackets para relacionar a entrada e saída de cada comando, usando <code class="language-plaintext highlighter-rouge">&gt;&gt;</code> para a entrada e <code class="language-plaintext highlighter-rouge">&lt;&lt;</code> para a saída.</p>
 
 <p>Em geral, sempre que precisarmos trabalhar com entrada/saída de programas, utilizaremos esse header.</p>
 
-<p>Mas vocês não acham que escrever sempre “std::” é cansativo?</p>
+<p>Mas vocês não acham que escrever sempre <code class="language-plaintext highlighter-rouge">std::</code> é cansativo?</p>
 
 <h4 id="namespaces">Namespaces</h4>
 
-<p>Como dito anteriormente: “<strong>para diferenciar possiveis funções de mesmo nome, também devemos colocar o prefixo std:: antes de nossas classes/funções recebidas da STL.</strong>”. O motivo disso é por que a STL está dentro de um namespace.</p>
+<p>Como dito anteriormente: “<strong>para diferenciar possiveis funções de mesmo nome, também devemos colocar o prefixo std:: antes de nossas classes/funções recebidas</strong>”. O motivo disso é por que a biblioteca padrão está dentro de um namespace.</p>
 
-<p>Namespaces são uma “artimanha” criada para evitar repetições de nomes em projetos grandes, mas, que em projetos pequenos irritam alguns programadores. Nesse caso, a STL criou um namespace chamado <strong>std</strong> (STandarD) para afunilar suas classes e funções.</p>
+<p>Namespaces são uma “artimanha” criada para evitar repetições de nomes em projetos grandes, mas, que em projetos pequenos irritam alguns programadores. Nesse caso, acabaram criando um namespace chamado <code class="language-plaintext highlighter-rouge">std</code> (STandarD) para afunilar suas classes e funções.</p>
 
 <h5 id="como-criamos-namespaces">Como criamos Namespaces?</h5>
 
 <p>Na verdade isso é até bem fácil…</p>
 
-<p>Apenas devemos declarar um espaço com o comando <strong>namespace nome_do_namespace</strong> e escrever nosso código nele :) .</p>
+<p>Apenas devemos declarar um espaço com o comando <code class="language-plaintext highlighter-rouge">namespace nome_do_namespace</code> e escrever nosso código nele :) .</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
@@ -930,7 +1099,7 @@ Nele, temos os seguintes comandos principais:</p>
 
 </code></pre></div></div>
 
-<p>Porém, note que caso eu não use o prefixo “heitor::”, o código daria erro.</p>
+<p>Porém, note que caso eu não use o prefixo <code class="language-plaintext highlighter-rouge">heitor::</code>, o código daria erro.</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
@@ -942,9 +1111,9 @@ Nele, temos os seguintes comandos principais:</p>
 
 </code></pre></div></div>
 
-<p>Como namespaces não são utilizados em projetos pequenos, também temos a possibilidade de não ter que sempre escrever o prefixo deles!</p>
+<p>Como namespaces não são muito utilizados em projetos pequenos, também temos a possibilidade de não ter que sempre escrever o prefixo deles!</p>
 
-<p>Para isso, utilizamos o comando <strong>using namespace nome_do_namespace</strong>.</p>
+<p>Para isso, utilizamos o comando <code class="language-plaintext highlighter-rouge">using namespace nome_do_namespace</code>.</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
 </span>
@@ -963,7 +1132,22 @@ Nele, temos os seguintes comandos principais:</p>
 
 </code></pre></div></div>
 
-<p>A partir de agora, por simplicidade, todos os nossos exemplos utilizando a STL terão esse comando.</p>
+<p>A partir de agora, por simplicidade, todos os nossos exemplos utilizando a biblioteca de c++ terão esse comando.</p>
+
+<h4 id="stl">STL</h4>
+
+<p>A STL (Standard Template Library) é uma “pequena biblioteca” dentro da biblioteca padrão do C++. Ela foi uma das principais adições ao C++, transformando completamente a biblioteca padrão da linguagem.</p>
+
+<p>O grande diferencial dela está no próprio nome: <strong>Standard Template</strong>. Basicamente, por conta dos templates da biblioteca, ela se torna uma biblioteca extremamente genérica, podendo utilizar suas classes/funções para a maioria das tipagens do C++. Não só isso, mas torna a linguagem extremamente rápida, mesmo com tantas adições.</p>
+
+<p>Os componentes da STL se dividem em 3 tipos:</p>
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/STL-divisões.png" alt="Tipos em STL" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>STL -&gt; tipo do componente -&gt; explicação<br /></em></p>
+  </div>
+
+<p>Um erro comum é a confusão entre “Biblioteca padrão” e “STL”, então tomem muito cuidado com isso!</p>
 
 <h4 id="algorithm">Algorithm</h4>
 
@@ -999,7 +1183,7 @@ Nele, temos os seguintes comandos principais:</p>
 
 <h4 id="string">String</h4>
 
-<p>Ao contrário de C, a STL oferece uma biblioteca completa que adiciona o tipo <strong>String</strong> sem ter que criar um array de caracteres. Além disso, a biblioteca também fornece diversas funções que facilitam o uso dos objetos do tipo String.</p>
+<p>Ao contrário de C, a STL oferece uma biblioteca completa que adiciona o tipo <strong>String</strong> sem ter que criar um array de caracteres. Além disso, a biblioteca também fornece diversas funções internas que facilitam o uso dos objetos do tipo <code class="language-plaintext highlighter-rouge">string</code>.</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
 #include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
@@ -1038,7 +1222,7 @@ Nele, temos os seguintes comandos principais:</p>
 <p>Dentre as diferenças principais de strings nas duas linguagens, a principal está no gerenciamento de memória. Ao contrário de C, em C++ não precisamos nos preocupar em alocar o tamanho exato da string durante sua declaração, pois as strings crescem ou diminuem dinâmicamente conforme o necessário.</p>
 
 <p>Outra diferênça importante ocorre na manipulação das strings, onde em C++ elas possuem métodos internos e operadores mais intuitivos.
-Por exemplo, temos funções como size() e empty() internamente, além de utilizarmos o operador “+” para concatenar e o operador “==” para comparar strings.</p>
+Por exemplo, temos funções como <code class="language-plaintext highlighter-rouge">size()</code> e <code class="language-plaintext highlighter-rouge">empty()</code> internamente, além de utilizarmos o operador “+” para concatenar e o operador <code class="language-plaintext highlighter-rouge">==</code> para comparar strings.</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
 #include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
@@ -1068,15 +1252,23 @@ Por exemplo, temos funções como size() e empty() internamente, além de utiliz
 
 <p>Algumas funções disponíveis para as strings são:</p>
 
-<p><strong>size</strong> : retorna um inteiro que corresponde ao tamanho da string.</p>
-
-<p><strong>empty</strong> : retorna um booleano que corresponde se a string está vazia ou não.</p>
-
-<p><strong>stoi</strong> : converte a string em um inteiro.</p>
-
-<p><strong>begin</strong> : retorna um iterador que aponta para o primeiro elemento da string.</p>
-
-<p><strong>end</strong> : retorna um iterador para o a posição após o último elemento da string.</p>
+<ul>
+  <li>
+    <p><strong>size</strong> : retorna um inteiro que corresponde ao tamanho da string.</p>
+  </li>
+  <li>
+    <p><strong>empty</strong> : retorna um booleano que corresponde se a string está vazia ou não.</p>
+  </li>
+  <li>
+    <p><strong>stoi</strong> : converte a string em um inteiro.</p>
+  </li>
+  <li>
+    <p><strong>begin</strong> : retorna um iterador que aponta para o primeiro elemento da string.</p>
+  </li>
+  <li>
+    <p><strong>end</strong> : retorna um iterador para o a posição após o último elemento da string.</p>
+  </li>
+</ul>
 
 <h4 id="array">Array</h4>
 
@@ -1084,11 +1276,11 @@ Por exemplo, temos funções como size() e empty() internamente, além de utiliz
 
 <p><strong>obs: chamarei o array do header de std::array e o array com colchetes ([]) de array clássico.</strong></p>
 
-<p>Sim, o std::array funciona de forma bem parecida com os arrays clássicos, mas possui vantagens nítidas sobre seu irmão mais velho.</p>
+<p>Sim, o <code class="language-plaintext highlighter-rouge">std::array</code> funciona de forma bem parecida com os arrays clássicos, mas possui vantagens nítidas sobre seu irmão mais velho.</p>
 
-<p>Embora tenhamos que escrever um pouco mais, o std::array fornece algumas funções internas, funcionalidades extras e suporte completo para outros algoritmos da STL.</p>
+<p>Embora tenhamos que escrever um pouco mais, o <code class="language-plaintext highlighter-rouge">std::array</code> fornece algumas funções internas, funcionalidades extras e suporte completo para outros algoritmos da STL.</p>
 
-<p>A declaração do std::array é um pouco diferente do convencional. Além de declarar colocando std::array no começo, também utilizamos os angle brackets para definir o tipo e o tamanho do array.</p>
+<p>A declaração do <code class="language-plaintext highlighter-rouge">std::array</code> é um pouco diferente do convencional. Além de declarar colocando <code class="language-plaintext highlighter-rouge">std::array</code> no começo, também utilizamos os angle brackets para definir o tipo e o tamanho do array.</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;array&gt;</span><span class="cp">
 </span>
@@ -1103,7 +1295,7 @@ Por exemplo, temos funções como size() e empty() internamente, além de utiliz
 
 </code></pre></div></div>
 
-<p>Além disso, como não temos colchetes, acessamos os elementos com a função interna <strong>at(índice)</strong>:</p>
+<p>Além disso, como não temos colchetes, acessamos os elementos com a função interna <code class="language-plaintext highlighter-rouge">at(índice)</code>:</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="cp">#include</span> <span class="cpf">&lt;array&gt;</span><span class="cp">
@@ -1123,8 +1315,8 @@ Por exemplo, temos funções como size() e empty() internamente, além de utiliz
 
 <p>Essa mudança torna o acesso de elementos mais seguro, possuindo tratamento adequado caso o índice esteja fora do tamanho do array.</p>
 
-<p>Outro problema “resolvido” pelo std::array é na cópia entre arrays.
-Originalmente, não podemos copiar dois arrays clássicos sem funções externas (criadas pelo usuário ou por outras bibliotecas), mas, que são feitas de forma instantânea na std::array com o operador “=”.</p>
+<p>Outro problema “resolvido” pelo <code class="language-plaintext highlighter-rouge">std::array</code> é na cópia entre arrays.
+Originalmente, não podemos copiar dois arrays clássicos sem funções externas (criadas pelo usuário ou por outras bibliotecas), mas, que são feitas de forma instantânea na <code class="language-plaintext highlighter-rouge">std::array</code> com o operador <code class="language-plaintext highlighter-rouge">=</code>.</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;array&gt;</span><span class="cp">
 </span>
@@ -1142,19 +1334,28 @@ Originalmente, não podemos copiar dois arrays clássicos sem funções externas
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Além disso, o std::array também providencia comandos como <strong>size</strong>, <strong>begin</strong>, <strong>end</strong>, <strong>empty</strong> (vistos também em strings), onde:</p>
+<p>Além disso, o <code class="language-plaintext highlighter-rouge">std::array</code> também providencia comandos similares aos vistos em strings, como:</p>
 
-<p><strong>size</strong> : retorna o tamanho do array.</p>
-
-<p><strong>empty</strong>: retorna um booleano que corresponde se o array está vazio ou não.</p>
-
-<p><strong>begin</strong>: retorna um iterador que aponta para o primeiro elemento do array.</p>
-
-<p><strong>end</strong>  : retorna um iterador para o a posição após o último elemento do array.</p>
-
-<p><strong>front</strong> : retorna o primeiro elemento do array.</p>
-
-<p><strong>back</strong> : retorna o último elemento do array.</p>
+<ul>
+  <li>
+    <p><strong>size</strong> : retorna o tamanho do array.</p>
+  </li>
+  <li>
+    <p><strong>empty</strong>: retorna um booleano que corresponde se o array está vazio ou não.</p>
+  </li>
+  <li>
+    <p><strong>begin</strong>: retorna um iterador que aponta para o primeiro elemento do array.</p>
+  </li>
+  <li>
+    <p><strong>end</strong>  : retorna um iterador para o a posição após o último elemento do array.</p>
+  </li>
+  <li>
+    <p><strong>front</strong> : retorna o primeiro elemento do array.</p>
+  </li>
+  <li>
+    <p><strong>back</strong> : retorna o último elemento do array.</p>
+  </li>
+</ul>
 
 <h3 id="análise-de-códigos-em-c-">Análise de códigos em C++ <!-- Mostrar Busca Binária e Linear --></h3>
 <h3 id="qual-é-o-melhor---------">Qual é o melhor?         <!-- Apenas introduz essa dúvida --></h3>
@@ -1264,7 +1465,7 @@ Originalmente, não podemos copiar dois arrays clássicos sem funções externas
 
 <p>Essa notação fornece um <strong>limite superior assintótico</strong> para a função de complexidade, ou seja, descreve o pior crescimento possível do tempo de execução de um algoritmo a partir de um determinado tamanho de entrada, ignorando constantes e termos de menor ordem.</p>
 
-<h4 id="exemplos">Exemplos</h4>
+<h4 id="exemplos-1">Exemplos</h4>
 
 <ol>
   <li>
