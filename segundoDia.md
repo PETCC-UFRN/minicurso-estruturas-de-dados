@@ -4,9 +4,121 @@ title: Minicurso de Estruturas de Dados e Algoritmos
 ---
 # Como um programa interage com o computador
 
-<!-- heap -->
-<!-- stack -->
-<!-- wip -->
+Quando um programa é compilado sabemos que é necessário espaço na memória para que ele possa ser executado, mas afinal, de qual espaço estamos falando? Quando somos introduzidos aos tipos de dados de C/C++ aprendemos que `int` ocupa 4 bytes, `char` ocupa 1 byte e por aí vai. Mas será que esses dados ficam jogados de qualquer forma dentro da memória RAM? A resposta é *não*. A memória usada para rodar um programa pode ser dividida em duas partes.
+
+## Stack
+
+Essa parte da memória leva este nome por seguir o padrão [LIFO](https://pt.wikipedia.org/wiki/LIFO), que empilha memória conforme lê as linhas do programa. Ela é responsável por armazenar tudo cujo *tamanho* é sabido em *tempo de compilação* e cujo *tempo de vida* é ditado conforme o escopo.
+
+<div style="text-align: center;"><img src="assets/images/dia2/stack.png" alt="" style="widht:300px;height:300px;"> </div>
+
+Dentro da Stack cada função tem seu *StackFrame*, que é o espaço dedicado para as *variáveis locais* de cada função, cujo acesso é permitido apenas dentro daquele escopo.
+
+### Exercício
+
+> Ilustre a Stack do seguinte programa
+```cpp
+float hello() {
+    std::cout << "hello world" << std::endl;
+
+    return 12.5;
+}
+
+bool inverse(bool b) {
+    return !b;
+}
+
+int main() {
+    int a;
+
+    std::cin >> a;
+
+    if (inverse(true)) {
+        int b = 1000;
+    }
+
+    return 0;
+}
+```
+
+### Atenção na tela
+
+Que tal resolvermos esse [exercício](https://judge.beecrowd.com/en/problems/view/1176) juntos?
+<!-- fazer a solução recursiva e... ué, pq dá erro? -->
+<!-- desenhar a stack empilhando várias chamadas da fibonacci -->
+<!-- stack overflow -->
+<!-- cuidado com a profundidade da recursão em linguagens strict -->
+
+## Heap
+
+A região de memória em questão trabalha de forma complementar à *Stack*, armazenando todos os dados que tornariam o acesso menos performático nesta. Isso é, tudo que precisa ter um espaço reservado mas cujo tamanho só é conhecido em *tempo de execução*. Além disso, aqui temos mais liberdade de gerenciar a memória do programa, entretanto, a natureza dinâmica dessa abordagem faz com que ela seja naturalmente *menos performática*.
+
+```cpp
+int main() {
+    int n;
+
+    std::cin >> n;
+
+    std::vector<int> vec(n, -1); // mora na stack, e seu conteúdo na heap
+
+    int* a = &n;                 // mora na stack, e seu conteúdo também
+    char* b = new char[n];       // mora na stack, seu conteúdo na heap
+
+    delete[] b;                  // necessário desalocar manualmente
+
+    return 0;
+}
+```
+
+### Exercício
+
+> Ilustre a Stack e Heap do seguinte programa
+```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+
+void func(int x) {
+    int a = 10;
+    int* p = new int(20);
+
+    std::string s = "abc";
+
+    std::vector<int> v(3, 5);
+
+    static int counter = 0;
+
+    delete p;
+}
+
+int main() {
+    int n = 5;
+
+    int arr[5] = {1,2,3,4,5};
+
+    int* arr2 = new int[n];
+
+    func(n);
+
+    delete[] arr2;
+
+    return 0;
+}
+```
+<!-- stack - n, arr, arr2(conteúdo na heap)
+    daí outro stackframe é criado acima de main
+    stack - a, p(p* na heap), "s" ...
+        como "s" é um literal pequeno fica na stack, mas se tiver 20/30 chars ficaria na heap(small string optimization - sso)
+    ... v(conteúdo na heap)
+   counter fica... -->
+
+
+## Variáveis Estáticas
+
+wip
+<!-- explicar static -->
+<!-- verificar se variáveis const também ficam aqui -->
+
 
 # Ordenação
 
@@ -130,45 +242,6 @@ Implemente a `swap` para poder rodar esses algoritmos.
 	right = tmp;
 } -->
 
-# Recursão
-
-Antes de seguirmos para o último algoritmo de ordenação, precisamos garantir que entendemos conceitos fundamentais que serão importantes na compreensão deste. Um deles é a recursão.
-
-Recursividade se trata de uma propriedade atribuída a funções que chamam a si mesmas, sendo uma alternativa às soluções iterativas tradicionais. Sua estrutura geralmente consiste em pelo menos um *caso base* e um *caso recursivo*. Entretanto, essa forma "mais elegante" de resolver um problema por vezes tem implicações em como o computador distribui os recursos para rodar o programa.
-
-Podemos, por exemplo, usar recursão para definir a função *fatorial*
-
-```cpp
-int fatorial(int n) {
-    if(n == 0) {
-        return 1;                 // caso base
-    } else {
-        return n * fatorial(n-1); // caso recursivo
-    }
-}
-```
-
-### Exercícios
-
->Usar recursão para definir as seguintes funções
-```cpp
-bool isSorted(vector<T> vec);
-```
-<!--
-template<typename T> bool isSorted(vector<T> v) {
-	if(v.size() < 2) {
-		return true;
-	}
-
-	if(v[0] > v[1]) {
-		return false;
-	} else {
-		vector<int> sub(v.begin() + 2, v.end());
-        // falar sobre assinaturas https://en.cppreference.com/w/cpp/container/vector/vector.html
-        // oq são iteradores?
-		return isSorted(sub);
-	}
-} -->
 
 <!-- tangente sobre iteradores/endereços de memória
 int main() {
@@ -186,43 +259,12 @@ int main() {
     //     = i[a]
 	return 0;
 } -->
-```cpp
-bool isPalindrome(vector<T> vec);
-```
-<!--
-template<typename T> bool isPalindrome(const vector<T>& v) {
-	if(v.size() <= 1) {
-		return true;
-	}
-
-	if(v[0] == v[v.size() - 1]) {
-		vector<T> subvec(v.begin()+1, v.end() - 1);
-		return isPalindrome(subvec);
-	} else {
-		return false;
-	}
-} -->
-<!--
-pq usar const vec<T>&?
-sabemos pq usar &, para evitar fazer uma cópia desnecessária
-entretanto não queremos qe haja a possibilidade de modificar o valor
-daí botamos const
--->
-
-## Atenção na tela
-
-Que tal resolvermos esse [exercício](https://judge.beecrowd.com/en/problems/view/1176) juntos?
-<!-- fazer a solução recursiva e... ué, pq dá erro? -->
-<!-- desenhar a stack empilhando várias chamadas da fibonacci -->
-<!-- stack overflow -->
-
-# Voltando para Ordenação
 
 Agora que temos noção do que se trata a *recursão*, podemos usá-la para entender melhor alguns conceitos de *ordenação*. Perceba que os algoritmos que vimos até o momento são todos *O(n²)*, mas será que ordenar sempre se trata de algo custoso assim?
 
 Com essa abordagem, sim. Mas e se a gente pensasse um pouco mais como [Júlio César](https://pt.wikipedia.org/wiki/J%C3%BAlio_C%C3%A9sar) ou [Napoleão Bonaparte](https://pt.wikipedia.org/wiki/Napole%C3%A3o_Bonaparte)?
 
-<div style="text-align: center;"><img src="assets/images/divideandconquer.jpg" alt="" style="widht:300px;height:300px;"> </div>
+<div style="text-align: center;"><img src="assets/images/dia2/divideandconquer.jpg" alt="" style="widht:300px;height:300px;"> </div>
 
 ## Atenção no quadro
 <!-- ordenar [8,6,4,2,5,1,2,7] com merge sort -->
@@ -408,7 +450,7 @@ Dentro do mundo das entrevistas técnicas há um padrão que se faz fortemente p
 
 <!-- exemplificar com [-1,2,7,9,42,89] somar 16 -->
 
-<!-- wip -->
+wip
 
 
 https://www.geeksforgeeks.org/dsa/merge-sort/
