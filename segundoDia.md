@@ -4,11 +4,11 @@ title: Minicurso de Estruturas de Dados e Algoritmos
 ---
 # Como um programa interage com o computador
 
-Quando um programa é compilado sabemos que é necessário espaço na memória para que ele possa ser executado, mas afinal, de qual espaço estamos falando? Quando somos introduzidos aos tipos de dados de C/C++ aprendemos que `int` ocupa 4 bytes, `char` ocupa 1 byte e por aí vai. Mas será que esses dados ficam jogados de qualquer forma dentro da memória RAM? A resposta é *não*. A memória usada para rodar um programa pode ser dividida em duas partes.
+Quando um programa é compilado sabemos que é necessário espaço na memória para que ele possa ser executado, mas afinal, de qual espaço estamos falando? Quando somos introduzidos aos tipos de dados de C/C++ aprendemos que `int` ocupa 4 bytes, `char` ocupa 1 byte e por aí vai. Mas será que esses dados ficam jogados de qualquer forma dentro da memória RAM? A resposta é **não**. A memória usada para rodar um programa pode ser dividida em duas partes.
 
 ## Stack
 
-Essa parte da memória leva este nome por seguir o padrão [LIFO](https://pt.wikipedia.org/wiki/LIFO), que empilha memória conforme lê as linhas do programa. Ela é responsável por armazenar tudo cujo *tamanho* é sabido em *tempo de compilação* e cujo *tempo de vida* é ditado conforme o escopo.
+Essa parte da memória leva este nome por seguir o padrão [LIFO](https://pt.wikipedia.org/wiki/LIFO), que empilha memória conforme lê as linhas do programa. Ela é responsável por armazenar tudo cujo **tamanho** é sabido em **tempo de compilação** e cujo **tempo de vida** é ditado conforme o escopo.
 
 <div style="text-align: center;"><img src="assets/images/dia2/stack.png" alt="" style="widht:300px;height:300px;"> </div>
 
@@ -51,7 +51,7 @@ Que tal resolvermos esse [exercício](https://judge.beecrowd.com/en/problems/vie
 
 ## Heap
 
-A região de memória em questão trabalha de forma complementar à *Stack*, armazenando todos os dados que tornariam o acesso menos performático nesta. Isso é, tudo que precisa ter um espaço reservado mas cujo tamanho só é conhecido em *tempo de execução*. Além disso, aqui temos mais liberdade de gerenciar a memória do programa, entretanto, a natureza dinâmica dessa abordagem faz com que ela seja naturalmente *menos performática*.
+A região de memória em questão trabalha de forma complementar à **Stack**, armazenando todos os dados que tornariam o acesso menos performático nesta. Isso é, tudo que precisa ter um espaço reservado mas cujo tamanho só é conhecido em **tempo de execução**. Além disso, aqui temos mais liberdade de gerenciar a memória do programa, entretanto, a natureza dinâmica dessa abordagem faz com que ela seja naturalmente **menos performática**.
 
 ```cpp
 int main() {
@@ -122,7 +122,7 @@ wip
 
 # Ordenação
 
-Ordenação se trata de um dos problemas mais abordados na área da computação. Comunmente é um exemplo bastante associado para introduzir a análise assintótica, mas além disso, também é um tópico que busca estimular de maneira criativa a forma de pensar uma solução para um problema. 
+Ordenação se trata de um dos problemas mais abordados na área da computação. Comummente é um exemplo bastante associado para introduzir a análise assintótica, mas além disso, também é um tópico que estimula de maneira criativa a busca por soluções para um problema. 
 
 Dada uma lista `A` de tamanho `n`, sabemos que ela está ordenada quando a seguinte solução é satisfeita:
 
@@ -146,7 +146,7 @@ No pior dos casos será necessário percorrer a lista toda para descobrir se ela
 
 ## Uma abordagem comum
 
-Caso você precisasse ordenar um grupo de pessoas por altura, como faria? A única restrição é que só se pode mover uma pessoa por vez, mas não fazer "trocas". Uma das abordagens mais comuns seria percorrer o grupo inteiro e verificar quem é a menor pessoa encontrada naquela iteração. Considere o exemplo a seguir:
+Caso você precisasse ordenar um grupo de pessoas por altura, como faria? A única restrição é que só se pode mover uma pessoa por vez, e não pode exagerar nas trocas. Uma das abordagens mais comuns seria percorrer o grupo inteiro e verificar quem é a menor pessoa encontrada naquela iteração. Considere o exemplo a seguir:
 
 ```cpp
 void ordenar(vector<int> &lista) {
@@ -183,15 +183,13 @@ Agora vamos analisar a complexidade desse algoritmo, partindo de um exemplo do p
 
 <details>
 <summary>Spoiler!</summary>
-Temos $7 + 6 + 5 + 4 + 3 + 2 + 1$ iterações. Logo <b>O($$n²$$)</b>.
+Temos $7 + 6 + 5 + 4 + 3 + 2 + 1$ iterações. Logo <b>O(n²)</b>.
 </details>
 
 <details>
 <summary>Spoiler 2!</summary>
 Esse algoritmo tem nome. <b>Selection Sort</b>.
 </details>
-
-# Outras formas de ordenar
 
 Note que a abordagem usada anteriormente é dependente de conhecermos o estado da lista de forma ampla, a partir de um elemento em diante. E isso é necessário pois toda troca é "semi-definitiva", isso pois um dos elemento não vai sair mais daquela posição. Mas será que precisamos mesmo que toda a alteração feita tenha que ser definitiva?
 
@@ -220,7 +218,7 @@ Perceba que o `Selection Sort` ordenava diretamente, ou seja, se preocupando que
 
 <details>
 <summary>Spoiler!</summary>
-O método que acabou de ser mostrado consiste no <a href="[https://www.google.com](https://pt.wikipedia.org/wiki/Bubble_sort)">Bubble Sort</a>
+O método que acabou de ser mostrado consiste no <b>Bubble Sort<b/>
 </details>
 
 ### Exercício
@@ -242,13 +240,12 @@ Implemente a `swap` para poder rodar esses algoritmos.
 	right = tmp;
 } -->
 
-
 <!-- tangente sobre iteradores/endereços de memória
 int main() {
-	vector<int> vec = {0,1,2,3};
+	int arr[4] = {0,1,2,3};
 
-	std::cout << &vec << std::endl;
-	std::cout << &vec + 1 << std::endl;
+	std::cout << &arr << std::endl;
+	std::cout << &arr + 1 << std::endl;
     // subtrair os hexadecimais numa calculadora
     // pq dá 24?
     // pq 1 byte = 8 bits e um int é composto por 4 bytes
@@ -260,14 +257,12 @@ int main() {
 	return 0;
 } -->
 
-Agora que temos noção do que se trata a *recursão*, podemos usá-la para entender melhor alguns conceitos de *ordenação*. Perceba que os algoritmos que vimos até o momento são todos *O(n²)*, mas será que ordenar sempre se trata de algo custoso assim?
-
-Com essa abordagem, sim. Mas e se a gente pensasse um pouco mais como [Júlio César](https://pt.wikipedia.org/wiki/J%C3%BAlio_C%C3%A9sar) ou [Napoleão Bonaparte](https://pt.wikipedia.org/wiki/Napole%C3%A3o_Bonaparte)?
+Perceba que os algoritmos que vimos até o momento são todos **O(n²)**, mas será que ordenar sempre se trata de algo custoso assim? Com essa abordagem, sim. Mas e se a gente pensasse um pouco mais como [Júlio César](https://pt.wikipedia.org/wiki/J%C3%BAlio_C%C3%A9sar) ou [Napoleão Bonaparte](https://pt.wikipedia.org/wiki/Napole%C3%A3o_Bonaparte)?
 
 <div style="text-align: center;"><img src="assets/images/dia2/divideandconquer.jpg" alt="" style="widht:300px;height:300px;"> </div>
 
 ## Atenção no quadro
-<!-- ordenar [8,6,4,2,5,1,2,7] com merge sort -->
+Vamos ordenar `[8,6,4,2,5,1,2,7]` com uma abordagem diferente.
 
 ### Exercício
 
@@ -434,15 +429,15 @@ void mergeSort(vector<string>& arr, int left, int right) {
 
 # Two Pointers
 
-Dentro do mundo das entrevistas técnicas há um padrão que se faz fortemente presente nas questões propostas, sendo umas das técnicas mais usadas para verificar o conhecimento de algoritmos e estruturas de dados do candidato. Esta se trata do *Two Pointers*, uma forma criativa solucionar problemas de estruturas de dados ordenáveis em *O(n)* ao invés de *O(n²)*.
+Dentro do mundo das entrevistas técnicas há um padrão que se faz fortemente presente nas questões propostas, sendo umas das técnicas mais usadas para verificar o conhecimento de algoritmos e estruturas de dados do candidato. Esta se trata do **Two Pointers**, uma forma criativa solucionar problemas de estruturas de dados ordenáveis em **O(n)** ao invés de **O(n²)**.
 
 ### Exercício
 
-> Dada uma lista *ordenada* de inteiros, como achar os dois inteiros que juntos somam *x*?
+> Dada uma lista **ordenada** de inteiros, como achar os dois inteiros que juntos somam **x**?
 
 <!-- mostrar solução trivial de tentar todas as possibilidades, O(n²) -->
 
-> E se generalizarmos para somar *m* inteiros ao invés de dois?
+> E se generalizarmos para somar **m** inteiros ao invés de dois?
 
 <!-- mostrar que vira O(n^m) -->
 
