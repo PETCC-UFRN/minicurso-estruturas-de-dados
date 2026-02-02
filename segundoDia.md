@@ -1,4 +1,4 @@
----
+
 layout: layoutGit
 title: Minicurso de Estruturas de Dados e Algoritmos
 ---
@@ -10,9 +10,9 @@ Quando um programa é compilado sabemos que é necessário espaço na memória p
 
 Essa parte da memória leva este nome por seguir o padrão [LIFO](https://pt.wikipedia.org/wiki/LIFO), que empilha memória conforme lê as linhas do programa. Ela é responsável por armazenar tudo cujo **tamanho** é sabido em **tempo de compilação** e cujo **tempo de vida** é ditado conforme o escopo.
 
-<div style="text-align: center;"><img src="assets/images/dia2/stack.png" alt="" style="widht:300px;height:300px;"> </div>
+<div style="text-align: center;"><img src="assets/images/dia2/stack.png" alt="" style="width:300px;height:300px;"> </div>
 
-Dentro da Stack cada função tem seu *StackFrame*, que é o espaço dedicado para as *variáveis locais* de cada função, cujo acesso é permitido apenas dentro daquele escopo.
+Dentro da Stack cada função tem seu **StackFrame**, que é o espaço dedicado para as **variáveis locais** de cada função, cujo acesso é permitido apenas dentro daquele escopo.
 
 ### Exercício
 
@@ -40,6 +40,8 @@ int main() {
     return 0;
 }
 ```
+
+<!-- cada thread possue uma stack, mas como estamos trabalhando com programas de single thread... -->
 
 ### Atenção na tela
 
@@ -69,6 +71,10 @@ int main() {
     return 0;
 }
 ```
+
+<!-- diferente da stack, a heap é compartilhada entre as threads -->
+
+<!-- TODO: queria uma imagem boa para botar aqui -->
 
 ### Exercício
 
@@ -112,13 +118,15 @@ int main() {
     ... v(conteúdo na heap)
    counter fica... -->
 
-
 ## Variáveis Estáticas
 
-wip
-<!-- explicar static -->
-<!-- verificar se variáveis const também ficam aqui -->
+Além das duas regiões de memória citadas anteriormente, determinados elementos de um programa possuem uma característica particular, particular o suficiente a ponto de justificar um espaço na memória dedicado exclusivamente para eles. Essa característica é o `static`, e ela é responsável desvincular o tempo de vida de um elemento ao escopo de onde ele é declarado, tornando-o válido durante toda a execução do programa. Usemos um exemplo para elucidar melhor como isso funciona.
 
+Podemos formalizar dizendo que `static` é um [Especificador de Classe de Armazenamento](https://en.cppreference.com/w/cpp/language/storage_duration.html), e existem outros além dele: `auto`, `extern`, `mutable`, etc.
+
+<div style="text-align: center;"><img src="assets/images/dia2/static-stack-heap.png" alt="" style="width:300px;height:300px;"> </div>
+
+No mais, apesar dessa representação não ser completamente fiel a como as coisas acontecem dentro da memória, se trata de uma abstração que favorece o entendimento de um programador sobre como o código dele funciona.
 
 # Ordenação
 
@@ -241,25 +249,32 @@ Implemente a `swap` para poder rodar esses algoritmos.
 } -->
 
 <!-- tangente sobre iteradores/endereços de memória
+#include <iostream>
+
+using namespace std;
+
 int main() {
-	int arr[4] = {0,1,2,3};
+	int arr[4] = {3,8,5,12};
 
-	std::cout << &arr << std::endl;
-	std::cout << &arr + 1 << std::endl;
-    // subtrair os hexadecimais numa calculadora
-    // pq dá 24?
-    // pq 1 byte = 8 bits e um int é composto por 4 bytes
+	cout << arr << endl;
+	cout << *arr << endl;
 
-    //inclusive...
+	cout << arr + 1 << endl;
+	cout << *(arr + 1) << endl;
+
+	cout << arr[0] << endl;
+	cout << *(arr + 0) << endl;
+
+    //generalizando...
     //a[i] = *(a+i)
     //     = *(i+a)
     //     = i[a]
 	return 0;
-} -->
+}-->
 
 Perceba que os algoritmos que vimos até o momento são todos **O(n²)**, mas será que ordenar sempre se trata de algo custoso assim? Com essa abordagem, sim. Mas e se a gente pensasse um pouco mais como [Júlio César](https://pt.wikipedia.org/wiki/J%C3%BAlio_C%C3%A9sar) ou [Napoleão Bonaparte](https://pt.wikipedia.org/wiki/Napole%C3%A3o_Bonaparte)?
 
-<div style="text-align: center;"><img src="assets/images/dia2/divideandconquer.jpg" alt="" style="widht:300px;height:300px;"> </div>
+<div style="text-align: center;"><img src="assets/images/dia2/divideandconquer.jpg" alt="" style="width:300px;height:300px;"> </div>
 
 ## Atenção no quadro
 Vamos ordenar `[8,6,4,2,5,1,2,7]` com uma abordagem diferente.
