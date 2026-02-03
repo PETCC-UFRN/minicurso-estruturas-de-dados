@@ -607,31 +607,38 @@ O que a gente acabou de usar pra resolver isso aqui é uma técnica que vai na d
 
 Atualmente, se você for analisar o nosso algoritmo um pouco mais a fundo, dá pra perceber que estamos fazendo ainda mais comparações do que temos números de pares. isso é porque estamos verificando 2 vezes para cada par!
 
+```cpp
 m = 8
-   *|*  |
-   *v*  v
+   1  2
+   |  |
+   v  v
 [  3  6  1  3  7  ]
 
-   *|*     |
-   *v*     v
+    1     2
+    |     |
+    v     v
 [  3  6  1  3  7  ]
 
-   *|*        |
-   *v*        v
+   1        2
+   |        |
+   v        v
 [  3  6  1  3  7  ]
 
-   *|*           |
-   *v*           v
+   1           2
+   |           |
+   v           v
 [  3  6  1  3  7  ]
 
-
-   |  *|*
-   v  *v*
+   2  1
+   |  |
+   v  v
 [  3  6  1  3  7  ] // aqui estamos comparando o 3 e o 6 de novo!!
 
-      *|*   |
-      *v*   v
+      1  2
+      |  |
+      v  v
 [  3  6  1  3  7  ]
+```
 
 
 Uma maneira simples de consertar isso é mudando de onde o nosso inteiro j começa! Podemos fazer pensando no seguinte: ao passar pelo nosso vetor pela primeira vez, já teremos feito todas as n-1 combinações com o primeiro número. Qualquer outra combinação que fizermos com ele, então, já terá sido feita! Só estamos permutando a ordem de soma. Assim, conseguimos cortar o número de comparações pela metade!
@@ -650,7 +657,9 @@ E se a gente tentasse um approach diferente?
 
 Acabamos de mencionar várias vezes que ordenar vetores é muito útil, então vamos tentar colocar isso em prática e pensar um pouco sobre.
 
+```cpp
 [  1  3  3  6  7  ]
+```
 
 qual é o maior troco que eu posso entregar com essas notas? E qual o menor troco que eu posso entregar?
 
@@ -663,7 +672,7 @@ e caso a soma esteja muito baixa? eu movo algum dos meus números para a direita
 
 
 
-# TWO POINTERS
+# Two Pointers
 
 Essa ideia que a gente tentou alcançar de maneira intuitiva é chamada de "two pointers"! Um ponteiro é um conceito que vamos ver mais pra frente no curso, mas podemos imaginá-lo, nesse caso, como uma seta ou um índice para o número que estamos considerando (além de que, na maioria das vezes, nem usamos ponteiros na implementação desse algoritmo!)
 
@@ -821,21 +830,30 @@ vamos ver mais um exemplo de uso de two pointers!
 
 Aqui, você tem t minutos e quer ir à biblioteca para ler o máximo possível de livros! Existem livros mais grossos e mais finos, então cada livro leva um tempo a_i para ser lido. Mas eles já estão organizados em uma ordem que faz sentido para o leitor, então você não quer embaralhar essa ordem e se confundir mair. Então, a única coisa que você pode fazer é escolher em qual livro você começa. Qual a maior quantidade de livros que você pode ler em t minutos?
 
+ aplicá-lo de diferentes formas? Sigam para o vjudge do minicurso para tentar fazer alguns exercícios de two pointers!
+
+
 Primeiro, vamos tentar entender de fato a questão: Ela quer que você escolha um subarray contíguo da sua lista de livros para ler todos eles - mas a soma não pode passar de t! E já que não podemos mudar a ordem dos livros, aquela ideia de ordenar os livros por tempo gasto e pegar sempre os menores vai pro beleléu :(
 
 De novo, poderíamos testar todas os intervalos possíveis e "brutar" a questão, mas queremos uma saída eficiente! Então como já demos spoiler e você sabe que estamos falando de two pointers, alguma ideia lhe vem à mente?
 
-
-<details>
-<summary><b>Spoiler!</b></summary>
+<p/>
+<p/>
+<p/>
+<p/>
 
 Primeiramente, podemos perceber que estamos tentando montar o intervalo mais extenso possível dentro desse nosso vetor de valores com soma igual a ou menor o nosso t. Então, podemos tentar passar uma única vez iterando pela nossa lista de valores, verificando o maior intervalo possível que pode ser construído começando em cada valor!
 
+
 Mas agora tentando simplificar um pouco o nosso problema: dado um intervalo que estamos avaliando, você concorda que, caso a soma seja menor que t, podemos verificar se conseguimos terminá-lo mais à frente? Se todos os nossos livros juntos somarem 20, que é menor que o nosso t = 30, podemos verificar se ainda é possível ler mais um livro!
+
 
 E se você também pensar mais um pouquinho, fica claro que o contrário também ocorre: se a soma for grande demais, não dá para começar o nosso intervalo no lugar onde ele está atualmente!! Ainda para um t = 30, se levamos 50 minutos para ler nossa lista atual de livros, não podemos ler todos eles - teremos, então, que começar nosso intervalo mais à frente, cortando alguns livros.
 
+
 Então nessa nossa modelagem do problema, podemos inicializar os nossos dois ponteiros no início, ao invés de separados como no problema passado. Assim, quando a soma do nosso intervalo for menor que o t estabelecido, podemos tentar avançar o final do nosso intervalo. No entanto, quando a soma for grande demais, devemos avançar o ponteiro do início, para tentar diminuir a soma dos nossos tempos.
+
+
 
 ```cpp
 t = 7
@@ -1003,8 +1021,6 @@ while (final != n) {
 
 
 ```
-
-</details>
 
 
 Vamos tentar aplicá-lo de diferentes formas? Sigam para o vjudge do minicurso para tentar fazer alguns exercícios de two pointers!

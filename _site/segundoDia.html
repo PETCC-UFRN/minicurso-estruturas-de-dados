@@ -617,36 +617,36 @@ o código fica mais ou menos assim:
 
 <p>Atualmente, se você for analisar o nosso algoritmo um pouco mais a fundo, dá pra perceber que estamos fazendo ainda mais comparações do que temos números de pares. isso é porque estamos verificando 2 vezes para cada par!</p>
 
-<p>m = 8</p>
-<ul>
-  <li>
-    <p>|*  |
-   <em>v</em>  v
-[  3  6  1  3  7  ]</p>
-  </li>
-  <li>
-    <p>|*     |
-   <em>v</em>     v
-[  3  6  1  3  7  ]</p>
-  </li>
-  <li>
-    <p>|*        |
-   <em>v</em>        v
-[  3  6  1  3  7  ]</p>
-  </li>
-  <li>
-    <p>|*           |
-   <em>v</em>           v
-[  3  6  1  3  7  ]</p>
-  </li>
-</ul>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">m</span> <span class="o">=</span> <span class="mi">8</span>
+   <span class="mi">1</span>  <span class="mi">2</span>
+   <span class="o">|</span>  <span class="o">|</span>
+   <span class="n">v</span>  <span class="n">v</span>
+<span class="p">[</span>  <span class="mi">3</span>  <span class="mi">6</span>  <span class="mi">1</span>  <span class="mi">3</span>  <span class="mi">7</span>  <span class="p">]</span>
 
-<p>|  <em>|</em>
-   v  <em>v</em>
-[  3  6  1  3  7  ] // aqui estamos comparando o 3 e o 6 de novo!!</p>
+    <span class="mi">1</span>     <span class="mi">2</span>
+    <span class="o">|</span>     <span class="o">|</span>
+    <span class="n">v</span>     <span class="n">v</span>
+<span class="p">[</span>  <span class="mi">3</span>  <span class="mi">6</span>  <span class="mi">1</span>  <span class="mi">3</span>  <span class="mi">7</span>  <span class="p">]</span>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  *|*   |
-  *v*   v [  3  6  1  3  7  ]
+   <span class="mi">1</span>        <span class="mi">2</span>
+   <span class="o">|</span>        <span class="o">|</span>
+   <span class="n">v</span>        <span class="n">v</span>
+<span class="p">[</span>  <span class="mi">3</span>  <span class="mi">6</span>  <span class="mi">1</span>  <span class="mi">3</span>  <span class="mi">7</span>  <span class="p">]</span>
+
+   <span class="mi">1</span>           <span class="mi">2</span>
+   <span class="o">|</span>           <span class="o">|</span>
+   <span class="n">v</span>           <span class="n">v</span>
+<span class="p">[</span>  <span class="mi">3</span>  <span class="mi">6</span>  <span class="mi">1</span>  <span class="mi">3</span>  <span class="mi">7</span>  <span class="p">]</span>
+
+   <span class="mi">2</span>  <span class="mi">1</span>
+   <span class="o">|</span>  <span class="o">|</span>
+   <span class="n">v</span>  <span class="n">v</span>
+<span class="p">[</span>  <span class="mi">3</span>  <span class="mi">6</span>  <span class="mi">1</span>  <span class="mi">3</span>  <span class="mi">7</span>  <span class="p">]</span> <span class="c1">// aqui estamos comparando o 3 e o 6 de novo!!</span>
+
+      <span class="mi">1</span>  <span class="mi">2</span>
+      <span class="o">|</span>  <span class="o">|</span>
+      <span class="n">v</span>  <span class="n">v</span>
+<span class="p">[</span>  <span class="mi">3</span>  <span class="mi">6</span>  <span class="mi">1</span>  <span class="mi">3</span>  <span class="mi">7</span>  <span class="p">]</span>
 </code></pre></div></div>
 
 <p>Uma maneira simples de consertar isso é mudando de onde o nosso inteiro j começa! Podemos fazer pensando no seguinte: ao passar pelo nosso vetor pela primeira vez, já teremos feito todas as n-1 combinações com o primeiro número. Qualquer outra combinação que fizermos com ele, então, já terá sido feita! Só estamos permutando a ordem de soma. Assim, conseguimos cortar o número de comparações pela metade!</p>
@@ -665,7 +665,8 @@ o código fica mais ou menos assim:
 
 <p>Acabamos de mencionar várias vezes que ordenar vetores é muito útil, então vamos tentar colocar isso em prática e pensar um pouco sobre.</p>
 
-<p>[  1  3  3  6  7  ]</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span>  <span class="mi">1</span>  <span class="mi">3</span>  <span class="mi">3</span>  <span class="mi">6</span>  <span class="mi">7</span>  <span class="p">]</span>
+</code></pre></div></div>
 
 <p>qual é o maior troco que eu posso entregar com essas notas? E qual o menor troco que eu posso entregar?</p>
 
@@ -675,7 +676,7 @@ o código fica mais ou menos assim:
 
 <p>e caso a soma esteja muito baixa? eu movo algum dos meus números para a direita!</p>
 
-<h1 id="two-pointers">TWO POINTERS</h1>
+<h1 id="two-pointers">Two Pointers</h1>
 
 <p>Essa ideia que a gente tentou alcançar de maneira intuitiva é chamada de “two pointers”! Um ponteiro é um conceito que vamos ver mais pra frente no curso, mas podemos imaginá-lo, nesse caso, como uma seta ou um índice para o número que estamos considerando (além de que, na maioria das vezes, nem usamos ponteiros na implementação desse algoritmo!)</p>
 
@@ -813,189 +814,181 @@ Dessa forma, a comparação entre esses dois números não é necessária e as c
 
 <p>Aqui, você tem t minutos e quer ir à biblioteca para ler o máximo possível de livros! Existem livros mais grossos e mais finos, então cada livro leva um tempo a_i para ser lido. Mas eles já estão organizados em uma ordem que faz sentido para o leitor, então você não quer embaralhar essa ordem e se confundir mair. Então, a única coisa que você pode fazer é escolher em qual livro você começa. Qual a maior quantidade de livros que você pode ler em t minutos?</p>
 
+<p>aplicá-lo de diferentes formas? Sigam para o vjudge do minicurso para tentar fazer alguns exercícios de two pointers!</p>
+
 <p>Primeiro, vamos tentar entender de fato a questão: Ela quer que você escolha um subarray contíguo da sua lista de livros para ler todos eles - mas a soma não pode passar de t! E já que não podemos mudar a ordem dos livros, aquela ideia de ordenar os livros por tempo gasto e pegar sempre os menores vai pro beleléu :(</p>
 
 <p>De novo, poderíamos testar todas os intervalos possíveis e “brutar” a questão, mas queremos uma saída eficiente! Então como já demos spoiler e você sabe que estamos falando de two pointers, alguma ideia lhe vem à mente?</p>
 
-<details>
-<summary><b>Spoiler!</b></summary>
+<p />
 
-Primeiramente, podemos perceber que estamos tentando montar o intervalo mais extenso possível dentro desse nosso vetor de valores com soma igual a ou menor o nosso t. Então, podemos tentar passar uma única vez iterando pela nossa lista de valores, verificando o maior intervalo possível que pode ser construído começando em cada valor!
+<p />
 
-Mas agora tentando simplificar um pouco o nosso problema: dado um intervalo que estamos avaliando, você concorda que, caso a soma seja menor que t, podemos verificar se conseguimos terminá-lo mais à frente? Se todos os nossos livros juntos somarem 20, que é menor que o nosso t = 30, podemos verificar se ainda é possível ler mais um livro!
+<p />
 
-E se você também pensar mais um pouquinho, fica claro que o contrário também ocorre: se a soma for grande demais, não dá para começar o nosso intervalo no lugar onde ele está atualmente!! Ainda para um t = 30, se levamos 50 minutos para ler nossa lista atual de livros, não podemos ler todos eles - teremos, então, que começar nosso intervalo mais à frente, cortando alguns livros.
+<p />
 
-Então nessa nossa modelagem do problema, podemos inicializar os nossos dois ponteiros no início, ao invés de separados como no problema passado. Assim, quando a soma do nosso intervalo for menor que o t estabelecido, podemos tentar avançar o final do nosso intervalo. No entanto, quando a soma for grande demais, devemos avançar o ponteiro do início, para tentar diminuir a soma dos nossos tempos.
+<p>Primeiramente, podemos perceber que estamos tentando montar o intervalo mais extenso possível dentro desse nosso vetor de valores com soma igual a ou menor o nosso t. Então, podemos tentar passar uma única vez iterando pela nossa lista de valores, verificando o maior intervalo possível que pode ser construído começando em cada valor!</p>
 
-```cpp
-t = 7
+<p>Mas agora tentando simplificar um pouco o nosso problema: dado um intervalo que estamos avaliando, você concorda que, caso a soma seja menor que t, podemos verificar se conseguimos terminá-lo mais à frente? Se todos os nossos livros juntos somarem 20, que é menor que o nosso t = 30, podemos verificar se ainda é possível ler mais um livro!</p>
 
-  | fim
-  v
-  | inicio
-  v
-[ 5  3  1  2  1  3 ]  soma = 5, qtd = 1
+<p>E se você também pensar mais um pouquinho, fica claro que o contrário também ocorre: se a soma for grande demais, não dá para começar o nosso intervalo no lugar onde ele está atualmente!! Ainda para um t = 30, se levamos 50 minutos para ler nossa lista atual de livros, não podemos ler todos eles - teremos, então, que começar nosso intervalo mais à frente, cortando alguns livros.</p>
 
-     | fim
-     v
-  | inicio
-  v
-[ 5  3  1  2  1  3 ]  soma = 8
+<p>Então nessa nossa modelagem do problema, podemos inicializar os nossos dois ponteiros no início, ao invés de separados como no problema passado. Assim, quando a soma do nosso intervalo for menor que o t estabelecido, podemos tentar avançar o final do nosso intervalo. No entanto, quando a soma for grande demais, devemos avançar o ponteiro do início, para tentar diminuir a soma dos nossos tempos.</p>
 
-     | fim
-     v
-     | inicio
-     v
-[ 5  3  1  2  1  3 ]  soma = 3, qtd = 1
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">=</span> <span class="mi">7</span>
 
-        | fim
-        v
-     | inicio
-     v
-Mas, como já mencionamos, ideias gulosas se apresentam de formas diferentes. Agora vamos 
-[ 5  3  1  2  1  3 ]  soma = 4, qtd = 2
+  <span class="o">|</span> <span class="n">fim</span>
+  <span class="n">v</span>
+  <span class="o">|</span> <span class="n">inicio</span>
+  <span class="n">v</span>
+<span class="p">[</span> <span class="mi">5</span>  <span class="mi">3</span>  <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">1</span>  <span class="mi">3</span> <span class="p">]</span>  <span class="n">soma</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">qtd</span> <span class="o">=</span> <span class="mi">1</span>
 
-           | fim
-           v
-     | inicio
-     v
-[ 5  3  1  2  1  3 ]  soma = 6, qtd = 3
+     <span class="o">|</span> <span class="n">fim</span>
+     <span class="n">v</span>
+  <span class="o">|</span> <span class="n">inicio</span>
+  <span class="n">v</span>
+<span class="p">[</span> <span class="mi">5</span>  <span class="mi">3</span>  <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">1</span>  <span class="mi">3</span> <span class="p">]</span>  <span class="n">soma</span> <span class="o">=</span> <span class="mi">8</span>
 
-              | fim
-              v
-     | inicio
-     v
-[ 5  3  1  2  1  3 ]  soma = 7, qtd = 4
+     <span class="o">|</span> <span class="n">fim</span>
+     <span class="n">v</span>
+     <span class="o">|</span> <span class="n">inicio</span>
+     <span class="n">v</span>
+<span class="p">[</span> <span class="mi">5</span>  <span class="mi">3</span>  <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">1</span>  <span class="mi">3</span> <span class="p">]</span>  <span class="n">soma</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">qtd</span> <span class="o">=</span> <span class="mi">1</span>
 
-                 | fim
-                 v
-     | inicio
-     v
-[ 5  3  1  2  1  3 ]  soma = 10
+        <span class="o">|</span> <span class="n">fim</span>
+        <span class="n">v</span>
+     <span class="o">|</span> <span class="n">inicio</span>
+     <span class="n">v</span>
+<span class="n">Mas</span><span class="p">,</span> <span class="n">como</span> <span class="n">j</span><span class="err">á</span> <span class="n">mencionamos</span><span class="p">,</span> <span class="n">ideias</span> <span class="n">gulosas</span> <span class="n">se</span> <span class="n">apresentam</span> <span class="n">de</span> <span class="n">formas</span> <span class="n">diferentes</span><span class="p">.</span> <span class="n">Agora</span> <span class="n">vamos</span> 
+<span class="p">[</span> <span class="mi">5</span>  <span class="mi">3</span>  <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">1</span>  <span class="mi">3</span> <span class="p">]</span>  <span class="n">soma</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">qtd</span> <span class="o">=</span> <span class="mi">2</span>
 
+           <span class="o">|</span> <span class="n">fim</span>
+           <span class="n">v</span>
+     <span class="o">|</span> <span class="n">inicio</span>
+     <span class="n">v</span>
+<span class="p">[</span> <span class="mi">5</span>  <span class="mi">3</span>  <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">1</span>  <span class="mi">3</span> <span class="p">]</span>  <span class="n">soma</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">qtd</span> <span class="o">=</span> <span class="mi">3</span>
 
-                 | fim
-                 v
-        | inicio
-        v
-[ 5  3  1  2  1  3 ]  soma = 7, qtd = 4
-```
+              <span class="o">|</span> <span class="n">fim</span>
+              <span class="n">v</span>
+     <span class="o">|</span> <span class="n">inicio</span>
+     <span class="n">v</span>
+<span class="p">[</span> <span class="mi">5</span>  <span class="mi">3</span>  <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">1</span>  <span class="mi">3</span> <span class="p">]</span>  <span class="n">soma</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="n">qtd</span> <span class="o">=</span> <span class="mi">4</span>
+
+                 <span class="o">|</span> <span class="n">fim</span>
+                 <span class="n">v</span>
+     <span class="o">|</span> <span class="n">inicio</span>
+     <span class="n">v</span>
+<span class="p">[</span> <span class="mi">5</span>  <span class="mi">3</span>  <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">1</span>  <span class="mi">3</span> <span class="p">]</span>  <span class="n">soma</span> <span class="o">=</span> <span class="mi">10</span>
 
 
+                 <span class="o">|</span> <span class="n">fim</span>
+                 <span class="n">v</span>
+        <span class="o">|</span> <span class="n">inicio</span>
+        <span class="n">v</span>
+<span class="p">[</span> <span class="mi">5</span>  <span class="mi">3</span>  <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">1</span>  <span class="mi">3</span> <span class="p">]</span>  <span class="n">soma</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="n">qtd</span> <span class="o">=</span> <span class="mi">4</span>
+</code></pre></div></div>
 
-Note que devemos manter uma variável de soma, na qual vamos subtrair ou adicionar valores dependendo do avanço dos nossos ponteiros, como uma soma acumulada! Caso não fizéssemos isso e precisássemos passar por todo o intervalo sempre, voltaríamos a O(n²).
+<p>Note que devemos manter uma variável de soma, na qual vamos subtrair ou adicionar valores dependendo do avanço dos nossos ponteiros, como uma soma acumulada! Caso não fizéssemos isso e precisássemos passar por todo o intervalo sempre, voltaríamos a O(n²).</p>
 
+<p>No entanto, note também que podemos fazer perguntas similares às que fizemos no exemplo passado: porque avançamos a seta da frente quando a soma está pequena e o de trás quando está grande demais?</p>
 
-No entanto, note também que podemos fazer perguntas similares às que fizemos no exemplo passado: porque avançamos a seta da frente quando a soma está pequena e o de trás quando está grande demais?
+<p>Porque a nossa estratégia é tentar avaliar o maior subarray que conseguimos somar para cada espaço! Você percebe que, se atingirmos um valor pequeno demais e queiramos voltar para trás, estaremos avaliando o mesmo intervalo de novo? pegue o exemplo de cima!</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="o">|</span> <span class="n">fim</span>
+     <span class="n">v</span>
+  <span class="o">|</span> <span class="n">inicio</span>
+  <span class="n">v</span>
+<span class="p">[</span> <span class="mi">5</span>  <span class="mi">3</span>  <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">1</span>  <span class="mi">3</span> <span class="p">]</span>  <span class="n">soma</span> <span class="o">=</span> <span class="mi">8</span>
+</code></pre></div></div>
 
+<p>quando estamos nessa posição, já avaliamos que a soma é grande demais, logo, avançamos a seta do início</p>
 
-Porque a nossa estratégia é tentar avaliar o maior subarray que conseguimos somar para cada espaço! Você percebe que, se atingirmos um valor pequeno demais e queiramos voltar para trás, estaremos avaliando o mesmo intervalo de novo? pegue o exemplo de cima!
-```cpp
-     | fim
-     v
-  | inicio
-  v
-[ 5  3  1  2  1  3 ]  soma = 8
-```
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="o">|</span> <span class="n">fim</span>
+     <span class="n">v</span>
+     <span class="o">|</span> <span class="n">inicio</span>
+     <span class="n">v</span>
+<span class="p">[</span> <span class="mi">5</span>  <span class="mi">3</span>  <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">1</span>  <span class="mi">3</span> <span class="p">]</span>  <span class="n">soma</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">qtd</span> <span class="o">=</span> <span class="mi">1</span>
+</code></pre></div></div>
 
-quando estamos nessa posição, já avaliamos que a soma é grande demais, logo, avançamos a seta do início
+<p>quando a soma passa a ser pequena demais, caso voltássemos a primeira seta, estaríamos voltando à situação anterior e ficaríamos presos em um loop</p>
 
-```cpp
-     | fim
-     v
-     | inicio
-     v
-[ 5  3  1  2  1  3 ]  soma = 3, qtd = 1
-```
+<p>Agora, em relação à seta final nunca voltar para trás… Eu menti para vocês 😁</p>
 
-quando a soma passa a ser pequena demais, caso voltássemos a primeira seta, estaríamos voltando à situação anterior e ficaríamos presos em um loop
+<p>Não sobre ela nunca voltar pra trás, - isso é verdade mesmo - mas sobre estarmos sempre verificando o maior subintervalo possível para cada “casinha”. Mas vou te mostrar agora porque que não adianta mover a seta final para trás quando a soma ficar grande demais. Imagine o seguinte:</p>
 
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">=</span> <span class="mi">9</span>
+              <span class="o">|</span> <span class="n">fim</span>
+              <span class="n">v</span>
+     <span class="o">|</span> <span class="n">inicio</span>
+     <span class="n">v</span>
+<span class="p">[</span> <span class="mi">5</span>  <span class="mi">3</span>  <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">1</span>  <span class="mi">50</span> <span class="p">]</span>  <span class="n">soma</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="n">qtd</span> <span class="o">=</span> <span class="mi">4</span>
+</code></pre></div></div>
 
-Agora, em relação à seta final nunca voltar para trás... Eu menti para vocês 😁
+<p>Nesse exemplo, podemos tentar avançar o final, porque ainda temos espaço para tentar mais um livro!</p>
 
-Não sobre ela nunca voltar pra trás, - isso é verdade mesmo - mas sobre estarmos sempre verificando o maior subintervalo possível para cada "casinha". Mas vou te mostrar agora porque que não adianta mover a seta final para trás quando a soma ficar grande demais. Imagine o seguinte:
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">=</span> <span class="mi">9</span>
+                 <span class="o">|</span> <span class="n">fim</span>
+                 <span class="n">v</span>
+     <span class="o">|</span> <span class="n">inicio</span>
+     <span class="n">v</span>
+<span class="p">[</span> <span class="mi">5</span>  <span class="mi">3</span>  <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">1</span>  <span class="mi">50</span> <span class="p">]</span>  <span class="n">soma</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="n">qtd</span> <span class="o">=</span> <span class="mi">4</span>
+ <span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">][</span><span class="mi">4</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span>
+</code></pre></div></div>
 
-```cpp
-t = 9
-              | fim
-              v
-     | inicio
-     v
-[ 5  3  1  2  1  50 ]  soma = 7, qtd = 4
-```
+<p>Mas assim que avançamos, ficamos com uma soma imensa: 57. E, caso avancemos o início, não vamos conseguir formar nenhum intervalo começando nos índices 2, 3 ou 4 devido ao nosso 50 na última casa!
+Então, nesse caso, poderíamos tentar voltar a segunda seta para trás, para ir verificando a maior soma que ainda é possível em todos os índices.</p>
 
-Nesse exemplo, podemos tentar avançar o final, porque ainda temos espaço para tentar mais um livro!
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">=</span> <span class="mi">9</span>
+              <span class="o">|</span> <span class="n">fim</span>
+              <span class="n">v</span>
+     <span class="o">|</span> <span class="n">inicio</span>
+     <span class="n">v</span>
+<span class="p">[</span> <span class="mi">5</span>  <span class="mi">3</span>  <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">1</span>  <span class="mi">50</span> <span class="p">]</span>  <span class="n">soma</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="n">qtd</span> <span class="o">=</span> <span class="mi">4</span>
+ <span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">][</span><span class="mi">4</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">Mas</span><span class="p">,</span> <span class="n">como</span> <span class="n">j</span><span class="err">á</span> <span class="n">mencionamos</span><span class="p">,</span> <span class="n">ideias</span> <span class="n">gulosas</span> <span class="n">se</span> <span class="n">apresentam</span> <span class="n">de</span> <span class="n">formas</span> <span class="n">diferentes</span><span class="p">.</span> <span class="n">Agora</span> <span class="n">vamos</span> 
 
-```cpp
-t = 9
-                 | fim
-                 v
-     | inicio
-     v
-[ 5  3  1  2  1  50 ]  soma = 7, qtd = 4
- [0][1][2][3][4][5]
-```
+              <span class="o">|</span> <span class="n">fim</span>
+              <span class="n">v</span>
+        <span class="o">|</span> <span class="n">inicio</span>
+        <span class="n">v</span>
+<span class="p">[</span> <span class="mi">5</span>  <span class="mi">3</span>  <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">1</span>  <span class="mi">50</span> <span class="p">]</span>  <span class="n">soma</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">qtd</span> <span class="o">=</span> <span class="mi">3</span>
+ <span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">][</span><span class="mi">4</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span>
+</code></pre></div></div>
+<p>E assim por diante.</p>
 
-Mas assim que avançamos, ficamos com uma soma imensa: 57. E, caso avancemos o início, não vamos conseguir formar nenhum intervalo começando nos índices 2, 3 ou 4 devido ao nosso 50 na última casa!
-Então, nesse caso, poderíamos tentar voltar a segunda seta para trás, para ir verificando a maior soma que ainda é possível em todos os índices.
+<p>Mas você percebe que, independente de quantos intervalos antes do número 50 eu tentar avaliar, a quantidade de livros que você vai ler será sempre menor do que 4?</p>
 
+<p>Antes de eu avançar a seta para o 50, esperançosa pela ideia de ler mais um livro nos meus 2 minutos restantes, eu tinha um intervalo de que ía do índice 1 até o índice 4. Então qualquer subintervalo que eu tentar montar que ainda não inclua o 50 vai ser obrigatoriamente menor do que ele, porque termina no mesmo lugar e começa mais à frente! Por isso, nós não precisamos avaliar o maior subintervalo para cada índice sempre: Só os que podem ser maiores do que o nosso maior atual 😁</p>
 
-```cpp
-t = 9
-              | fim
-              v
-     | inicio
-     v
-[ 5  3  1  2  1  50 ]  soma = 7, qtd = 4
- [0][1][2][3][4][5]
-Mas, como já mencionamos, ideias gulosas se apresentam de formas diferentes. Agora vamos 
+<p>Então o nosso código poderia ficar mais ou menos assim:</p>
 
-              | fim
-              v
-        | inicio
-        v
-[ 5  3  1  2  1  50 ]  soma = 4, qtd = 3
- [0][1][2][3][4][5]
-```
-E assim por diante.
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">soma</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">qtd</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">fim</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">inicio</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-Mas você percebe que, independente de quantos intervalos antes do número 50 eu tentar avaliar, a quantidade de livros que você vai ler será sempre menor do que 4?
-
-Antes de eu avançar a seta para o 50, esperançosa pela ideia de ler mais um livro nos meus 2 minutos restantes, eu tinha um intervalo de que ía do índice 1 até o índice 4. Então qualquer subintervalo que eu tentar montar que ainda não inclua o 50 vai ser obrigatoriamente menor do que ele, porque termina no mesmo lugar e começa mais à frente! Por isso, nós não precisamos avaliar o maior subintervalo para cada índice sempre: Só os que podem ser maiores do que o nosso maior atual 😁
-
-Então o nosso código poderia ficar mais ou menos assim:
-
-```cpp
-int soma = 0, qtd = 0, fim = 0, inicio = 0;
-
-while (final != n) {
+<span class="k">while</span> <span class="p">(</span><span class="k">final</span> <span class="o">!=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
 
 
-	if (soma &lt;= t) {
-		qtd = max(qtd, fim - inicio+1); // conto o intervalo válido
-		fim++;
-		soma+= livros[fim]; // incremento a soma e o índice final
-	}
+	<span class="k">if</span> <span class="p">(</span><span class="n">soma</span> <span class="o">&lt;=</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">qtd</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">qtd</span><span class="p">,</span> <span class="n">fim</span> <span class="o">-</span> <span class="n">inicio</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// conto o intervalo válido</span>
+		<span class="n">fim</span><span class="o">++</span><span class="p">;</span>
+		<span class="n">soma</span><span class="o">+=</span> <span class="n">livros</span><span class="p">[</span><span class="n">fim</span><span class="p">];</span> <span class="c1">// incremento a soma e o índice final</span>
+	<span class="p">}</span>
 	
-	else if (inicio == fim) { // precisamos colocar esse caso para a nossa seta do início
-				  // nunca passar a nossa seta do fim!!
-		fim++;
-		soma+= livros[fim];
-	}
+	<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">inicio</span> <span class="o">==</span> <span class="n">fim</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// precisamos colocar esse caso para a nossa seta do início</span>
+				  <span class="c1">// nunca passar a nossa seta do fim!!</span>
+		<span class="n">fim</span><span class="o">++</span><span class="p">;</span>
+		<span class="n">soma</span><span class="o">+=</span> <span class="n">livros</span><span class="p">[</span><span class="n">fim</span><span class="p">];</span>
+	<span class="p">}</span>
 	
-	else if (soma &gt; t) {
-		soma -=livros[inicio]; // subtraio 
-		inicio++; // incremento o índice inicial
-	}
+	<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">soma</span> <span class="o">&gt;</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">soma</span> <span class="o">-=</span><span class="n">livros</span><span class="p">[</span><span class="n">inicio</span><span class="p">];</span> <span class="c1">// subtraio </span>
+		<span class="n">inicio</span><span class="o">++</span><span class="p">;</span> <span class="c1">// incremento o índice inicial</span>
+	<span class="p">}</span>
 
 
-}
+<span class="p">}</span>
 
 
-```
-
-</details>
+</code></pre></div></div>
 
 <p>Vamos tentar aplicá-lo de diferentes formas? Sigam para o vjudge do minicurso para tentar fazer alguns exercícios de two pointers!</p>
 
