@@ -5,67 +5,68 @@ title: Minicurso de Matemática aplicada à Computação
 
 <div id="sumario" class="sumario-git">
     <h1>Dia 4</h1>
-    <details>
-        <summary><a href="#teoria-dos-conjuntos">Teoria dos Conjuntos</a></summary>
+    <details open>
+        <summary><a href="#introdução-a-árvores-binárias">Introdução a Árvores Binárias</a></summary>
         <ul>
-            <li><a href="#conjuntos">Conjuntos</a>
-              <ul> 
-                  <li><a href='#"interface"-dos-conjuntos'>"Interface" dos conjuntos</a></li>
-                  <li><a href='#definindo-um-conjunto'>Definindo um conjunto</a></li>
-                  <li><a href='#conjunto-vazio'>Conjunto Vazio</a></li>
-                  <li><a href='#conjunto-universo'>Conjunto Universo</a></li>
-                  <li><a href='#paradoxo-de-russell'>Paradoxo de Russell</a></li>
-              </ul>
-            </li>
-            <li><a href="#operações-de-conjuntos">Operações de Conjuntos</a>
-              <ul> 
-                  <li><a href='#união'>União</a></li>
-                  <li><a href='#interseção'>Interseção</a></li>
-                  <li><a href='#diferença'>Diferença</a></li>
-                  <li><a href='#complemento'>Complementoo</a></li>
-              </ul>
-            </li>
-            <li><a href="#relações-entre-conjuntos">Relações entre Conjuntos</a>
-              <ul> 
-                  <li><a href='#contém-e-contido'>Contém e Contido</a></li>
-                  <li><a href='#igualdade'>Igualdade</a></li>
-              </ul>
-            </li>
-            <li><a href="#demonstrações-sobre-conjuntos">Demonstrações sobre Conjuntos</a></li>
-        </ul>
-    </details>
-    <details>
-        <summary><a href="#conjuntos-e-programação">Conjuntos e Programação</a></summary>
-        <ul>
-            <li><a href="#tipos-x-objetos-x-conjuntos/sets">Tipos ⨯ Objetos ⨯ Conjuntos/Sets</a></li>
-            <li><a href="#conjuntos-como-inspiração-para-a-montagem-da-lógica-de-tipos">Conjuntos como inspiração para a montagem da lógica de tipos</a></li>
-            <li><a href="#sets-como-coleções-de-coisas">Sets como coleções de coisas</a>
+            <li><a href="#definição">Definição</a></li>
+            <li>
+                <a href="#propriedades-das-árvores-binárias">Propriedades das Árvores Binárias</a>
                 <ul>
-                    <li><a href="#especificacao/tipo-abstrato-de-dados">Especificação/Tipo Abstrato de Dados</a></li>
-                    <li><a href="#implementacao">Implementação</a></li>
+                    <li><a href="#estrutura-recursiva">Estrutura Recursiva</a></li>
+                    <li><a href="#altura">Altura</a></li>
+                    <li><a href="#profundidade">Profundidade</a></li>
+                    <li><a href="#grau">Grau</a></li>
+                    <li><a href="#caminho">Caminho</a></li>
+                    <li><a href="#número-máximo-de-nós-em-un-nível">Número Máximo de Nós em um Nível</a></li>
+                    <li><a href="#exemplos">Exemplos</a></li>
                 </ul>
             </li>
-            <li><a href="#tipos-de-coleções-semelhantes">Tipos de coleções semelhantes</a></li>
-            <li><a href="#especificação-elementar-dos-sets">Especificação elementar dos Sets</a></li>
-            <li><a href="#ocasiões-em-que-sets-podem-aparecer">Ocasiões em que Sets podem aparecer</a></li>
+            <li>
+                <a href="#classificações-de-árvores">Classificações de Árvores</a>
+                <ul>
+                    <li><a href="#árvore-estritamente-binária">Árvore Estritamente Binária</a></li>
+                    <li><a href="#árvore-completa">Árvore Completa</a></li>
+                    <li><a href="#árvore-cheiaperfeita">Árvore Cheia / Perfeita</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#percursos">Percursos</a>
+                <ul>
+                    <li><a href="#pré-ordem">Pré-Ordem</a></li>
+                    <li><a href="#em-ordem-simétrica">Em Ordem (Simétrica)</a></li>
+                    <li><a href="#pós-ordem">Pós-Ordem</a></li>
+                </ul>
+            </li>
+            <li><a href="#operações">Operações</a></li>
         </ul>
     </details>
     <details>
-        <summary><a href="#funções-na-matemática-vs-funções-na-programação">Funções na Matemática vs funções na programação</a></summary>
+        <summary><a href="#árvore-binária-de-busca-bst">Árvore Binária de Busca (BST)</a></summary>
         <ul>
-            <li><a href="#o-que-são-funções">O que são funções?</a></li>
-                <ul>
-                    <li><a href="#pontos-em-comum">Pontos em comum</a></li>
-                </ul>
-            <li><a href="#aplicação-de-funções-matemáticas-na-programação">Aplicação de funções matemáticas na programação</a></li>
+            <li><a href="#probiedades-da-bst">Propriedades da BST</a></li>
+            <li><a href="#estrutura">Estrutura</a></li>
+            <li><a href="#busca-na-bst">Busca na BST</a></li>
+            <li><a href="#inserção-na-bst">Inserção na BST</a></li>
+            <li><a href="#remoção-na-bst">Remoção na BST</a></li>
         </ul>
     </details>
-  <button class="toggle-button" id="toggle-button">
-  
-      Esconder Sumário
-  
-  </button>
+    <details>
+        <summary><a href="#árvore-avl">Árvore AVL</a></summary>
+    </details>
+    <details>
+        <summary><a href="#árvore-rubro-negra">Árvore Rubro-Negra</a></summary>
+    </details>
+    <details>
+        <summary><a href="#map">&lt;map&gt;</a></summary>
+    </details>
+    <details>
+        <summary><a href="#set">&lt;set&gt;</a></summary>
+    </details>
+    <button class="toggle-button" id="toggle-button">
+        Esconder Sumário
+    </button>
 </div>
+
 
 # Introdução a Árvores Binárias
 
