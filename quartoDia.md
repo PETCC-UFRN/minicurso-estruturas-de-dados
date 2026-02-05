@@ -75,7 +75,7 @@ title: Minicurso de Matemática aplicada à Computação
 
 **Exemplos:**
 
-Uma árvore binária é formada por um número finito de elementos, chamados de **nós**.
+Uma **árvore binária** é formada por um número finito de elementos, chamados de **nós**.
 
 - O primeiro nó da árvore é denominado **raiz**.
 
@@ -90,24 +90,68 @@ Cada nó de uma árvore binária pode possuir nenhum ou **no máximo dois filhos
 - um filho à **direita**.
 
 Sendo assim, quando não está vazia, ela pode ser dividida em três **subconjuntos disjuntos**:
-	1. **Nó raiz**.
-    2. **Sub-árvore esquerda**.
-    3. **Sub-árvore direita**.
+	
+1. **Nó raiz**.
+    
+2. **Sub-árvore esquerda**.
+
+3. **Sub-árvore direita**.
     
 **Exemplo:**
 
-## Propiedades 
+## Propriedades das Árvores Binárias
 
-A árvore binária possui as seguintes **propriedades principais**:
+As árvores binárias possuem as seguintes **propriedades principais**:
 
-1. Todos os nós de uma sub-ávore **direita** são **maiores** que o valor do nó raiz.
+1. Todos os nós de uma sub-ávore **direita** são **maiores** que o valor da raiz.
 
-2. Todos os nós de uma sub-ávore **esquerda** são **menores** que o valor do nó raiz 
+2. Todos os nós de uma sub-ávore **esquerda** são **menores** que o valor da raiz. 
 
 3. Cada sub-árvore é, por si mesma, uma árvore binária. Isso torna a **estrutura recursiva**, em que cada nó pode ser considerado a raiz de uma nova árvore binária.
 
-Essa organização permite operações eficientes de **busca** e **inserção**, com garantia de que a árvore estará estruturada de forma **hieráquica** e **balanceada**.
+Essa organização permite operações eficientes de **busca**, **inserção** e **remoção**, especialmente quando a árvore está **balanceada**, mantendo uma estrutura **hieráquica**.
 
-## Balanceamento 
+### Altura 
+
+A **altura de uma árvore** é o comprimento do caminho entre a raiz e a folha mais profunda da árvore. Ela impacta diretamente na eficiência das operações.
+
+### Profundidade
+
+A **profundidade de um nó** é a distância entre esse nó e a raiz da árvore.
+
+A **profundidade de uma árvore** é a profundidade da sua folha mais profunda.
+
+### Grau 
+
+O **grau de um nó** é o número de subárvores (filhos) que ele possui. Em uma árvore binária, o **grau máximo de um nó é 2**.
+
+O **grau de uma árvore** é definido como o maior grau entre todos os seus nós.
+
+### Caminho
+
+Um caminho é uma **sequência de nós** conectados entre si.
+
+O **comprimento de um caminho** é o número de nós (ou arestas, dependendo da definição adotada) que o compõem.
+
+### Número Máximo de Nós em un Nível
+O número máximo de nós em um nível `n` de uma árvore binária é dado por: `2^n`
+
+### Exemplos 
+<!-- mostre exemplos e suas propriedades --->
+
+1. Árvore Degenerada
+
+2. Árvore Balanceada
+
+## Classificações
+
+### Classificações de nós
+### Classificações de arvores
 ## Estrutura
 ## Operações
+
+# Árvore Binária de Busca
+# Árvore AVL
+# Árvore Rubro-Negra
+
+
