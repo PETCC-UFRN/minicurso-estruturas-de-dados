@@ -72,7 +72,7 @@ title: Minicurso de Matemática aplicada à Computação
 
 ## Definição 
 
-Árvores são estruturas de dados **não lineares**, ou seja, seus elementos não estão armazenados de forma sequencial e não seguem uma única cadeia de encadeamento, como ocorre em listas ou vetores.
+Árvores são estruturas de dados **não lineares**, caracterizadas por uma organização hierárquica, na qual cada elemento pode estar ligado a vários outros, diferentemente de listas ou vetores, que possuem uma organização sequencial.
 
 **Exemplos:**
 
