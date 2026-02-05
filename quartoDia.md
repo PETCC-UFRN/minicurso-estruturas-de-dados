@@ -103,13 +103,9 @@ Sendo assim, quando não está vazia, ela pode ser dividida em três **subconjun
 
 As árvores binárias possuem as seguintes **propriedades principais**:
 
-1. Todos os nós de uma sub-ávore **direita** são **maiores** que o valor da raiz.
+### Estrutura Recursiva
 
-2. Todos os nós de uma sub-ávore **esquerda** são **menores** que o valor da raiz. 
-
-3. Cada sub-árvore é, por si mesma, uma árvore binária. Isso torna a **estrutura recursiva**, em que cada nó pode ser considerado a raiz de uma nova árvore binária.
-
-Essa organização permite operações eficientes de **busca**, **inserção** e **remoção**, especialmente quando a árvore está **balanceada**, mantendo uma estrutura **hieráquica**.
+Cada sub-árvore é, por si mesma, uma árvore binária. Isso torna a **estrutura recursiva**, em que cada nó pode ser considerado a raiz de uma nova árvore binária.
 
 ### Altura 
 
@@ -143,15 +139,86 @@ O número máximo de nós em um nível `n` de uma árvore binária é dado por: 
 
 2. Árvore Balanceada
 
-## Classificações
+## Classificações de Árvores
 
-### Classificações de nós
-### Classificações de arvores
-## Estrutura
+### Árvore Estritamente Binária
+
+É uma árvore em que todos os nós possuem exatamente **nenhum ou dois filhos**.
+
+A expressão que representa o **número de nós** de uma árvore estritamente binária é dada po: `2n - 1`.
+
+**Exemplo**:
+
+### Árvore Completa
+
+É uma árvore em que todos os nós com menos de dois filhos ficam no **último e penúltimo nível**.
+
+**Exemplo**:
+
+### Árvore Cheia/Perfeita
+
+É uma árvore **estritamente binária e completa**.
+
+**Exemplo**:
+
+## Percursos
+
+### Pré Ordem
+
+### Em Ordem (Simétrica)
+
+### Pós Ordem
+
 ## Operações
 
-# Árvore Binária de Busca
+Neste tipo de estrutura serão abordadas as seguintes operações:
+
+- Consultar um nó na árvore.
+
+- Inserir um nó na árvore.
+
+- Remover um nó da árvore.
+
+# Árvore Binária de Busca (BST)
+
+## Probiedades da BST
+
+1. Todos os nós de uma sub-ávore **direita** são **maiores** que o valor da raiz.
+
+2. Todos os nós de uma sub-ávore **esquerda** são **menores** que o valor da raiz. 
+
+Essa organização permite operações eficientes de **busca**, **inserção** e **remoção**, especialmente quando a árvore está **balanceada**, mantendo uma estrutura **hieráquica**.
+
+## Estrutura
+
+## Busca na BST
+
+**Função**:
+
+**Complexidade**:
+
+## Inserção na BST
+
+**Função**:
+
+**Complexidade**:
+
+## Remoção na BST
+
+**Função**:
+
+**Complexidade**:
+
 # Árvore AVL
+
 # Árvore Rubro-Negra
+
+# `<map>`
+
+# `<set>`
+
+
+
+
 
 
