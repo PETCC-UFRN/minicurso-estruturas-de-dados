@@ -305,11 +305,57 @@ Essa organização permite operações eficientes de **busca**, **inserção** e
 
 ## Estrutura
 
+Na implementação da BST, podemos utilizar uma struct para
+representar os nós da árvore. Cada nó contém três componentes principais: 
+
+- Um valor, representado pela chave.
+- Dois ponteiros, um para a subárvore à esquerda e outro para a subárvore à direita. 
+
+A seguir, temos a definição da estrutura:
+
+```c++
+    struct arvore_t {
+        int chave;
+        arvore_t *esq;
+        arvore_t *dir;
+    };
+```
+
 ## Busca na BST
 
 **Função**:
 
+```c++
+    arvore_t *buscar(arvore_t *arvore, int chave) {
+        if (arvore == NULL) {
+            return NULL;
+        }
+
+        if (chave < arvore->chave) {
+            return buscar(arvore->esq, chave);
+        } else if (chave > arvore->chave) {
+            return buscar(arvore->dir, chave);
+        } else {
+            return arvore; // achou
+        }
+    }
+```
+
+Nesse exemplo de operação de busca, o valor procurado é comparado **recursivamente** com a chave do nó atual, começando pela raiz. 
+
+- Se o valor for **menor** que a chave, a busca continua na sub-árvore **esquerda**.
+- Se for **maior**, prossegue na sub-árvore **direita**.
+
+Esse processo se repete até que o valor seja encontrado ou até alcançar uma folha(nó nulo), indicando que o valor não está presente na árvore.
+
 **Complexidade**:
+
+Para analisar a complixade dessa operação é importante saber a relação de altura da árvore (`h`) e o número de nós (`n`). 
+
+- Uma árvore possui **altura máxima** quando cada nível possuir um único nó. Nesse caso, `h = n`.
+- Já uma árvore completa possui **altura miníma**, dada por: `h = 1 + |log n|`.
+
+A operação de busca depende do número de nós existentes no caminho da raiz até o nó procurado.
 
 ## Inserção na BST
 
