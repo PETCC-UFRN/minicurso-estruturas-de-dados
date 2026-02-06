@@ -76,6 +76,17 @@ title: Minicurso de Matemática aplicada à Computação
 
 **Exemplos:**
 
+<div class="figure" style="flex: 1; text-align: center;">
+    <img 
+        src="assets/images/arvores/arvore_binaria_basica.png"
+        alt="Exemplo básico de árvore binária"
+        style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;"
+    />
+    <p style="margin-top: 0.5rem; text-align: center;">
+        <em>Exemplo Básico de Árvore Binária</em>
+    </p>
+</div>
+
 Uma **árvore binária** é formada por um número finito de elementos, chamados de **nós**.
 
 - O primeiro nó da árvore é denominado **raiz**.
@@ -116,8 +127,6 @@ A **altura de uma árvore** é o comprimento do caminho entre a raiz e a folha m
 
 A **profundidade de um nó** é a distância entre esse nó e a raiz da árvore.
 
-A **profundidade de uma árvore** é a profundidade da sua folha mais profunda.
-
 ### Grau 
 
 O **grau de um nó** é o número de subárvores (filhos) que ele possui. Em uma árvore binária, o **grau máximo de um nó é 2**.
@@ -136,9 +145,89 @@ O número máximo de nós em um nível `n` de uma árvore binária é dado por: 
 ### Exemplos 
 <!-- mostre exemplos e suas propriedades --->
 
-1. Árvore Degenerada
+- Exemplo 1
 
-2. Árvore Balanceada
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/arvores/arvore_binaria_exemplo_1.png" alt="Árvore Degenerada" style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin-top: 0.5rem; text-align: center;"><em>Árvore Degenerada</em></p>
+</div>
+
+Vamos analisar as propriedades dessa árvore.
+
+<details>
+<summary>Altura</summary>
+    h = 3
+</details>
+
+<details>
+<summary>Profundidade</summary>
+  <p><strong>Profundidade 0:</strong> Nó A (raiz).</p>
+  <p><strong>Profundidade 1:</strong> Nós B e C.</p>
+  <p><strong>Profundidade 2:</strong> Nós D, E e F.</p>
+  <p><strong>Profundidade 3:</strong> Nó G (nó mais profundo).</p>
+</details>
+
+<details>
+<summary>Grau</summary>
+  <p><strong>Grau 2:</strong> Nós A e C.</p>
+  <p><strong>Grau 1:</strong> Nós B e F.</p>
+  <p><strong>Grau 0 (Folhas):</strong> Nós D, E e G.</p>
+</details>
+
+<details>
+<summary>Caminho mais longo</summary>
+  Tem comprimento 3 e passa por 4 nós: A → C → F → G.
+</details>
+
+<details>
+<summary>Número de Nós por Nível</summary>
+  <p><strong>Nível 0:</strong> 1 nó (A). Máximo teórico: 2⁰ = 1. (Completo).</p>
+  <p><strong>Nível 1:</strong> 2 nós (B, C). Máximo teórico: 2¹ = 2. (Completo).</p>
+  <p><strong>Nível 2:</strong> 3 nós (D, E, F). Máximo teórico: 2² = 4. (Incompleto).</p>
+  <p><strong>Nível 3:</strong> 1 nó (G). Máximo teórico: 2³ = 8. (Incompleto).</p>
+</details>
+
+---
+
+- Exemplo 2
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/arvores/arvore_binaria_exemplo_2.png" alt="Árvore Balanceada" style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin-top: 0.5rem; text-align: center;"><em>Árvore Balanceada</em></p>
+</div>
+
+Vamos analisar as propriedades dessa árvore.
+
+<details> 
+<summary>Altura</summary> 
+    h = 2 
+</details>
+
+<details> 
+<summary>Profundidade</summary> 
+    <p><strong>Profundidade 0:</strong> Nó A (raiz).</p> 
+    <p><strong>Profundidade 1:</strong> Nós B e C.</p> 
+    <p><strong>Profundidade 2:</strong> Nós D, E, F e G (folhas).</p> 
+</details>
+
+<details> 
+<summary>Grau</summary> 
+    <p><strong>Grau 2:</strong> Nós A, B e C.</p> 
+    <p><strong>Grau 0 (Folhas):</strong> Nós D, E, F e G.</p> 
+</details>
+
+<details> 
+<summary>Caminho mais longo</summary> 
+    Tem comprimento 2 e passa por 3 nós. Como a árvore é perfeitamente balanceada, todos os caminhos da raiz até as folhas possuem o mesmo tamanho (ex.: A → B → D ou A → C → G). 
+</details>
+
+<details> 
+<summary>Número de Nós por Nível</summary> 
+    <p><strong>Nível 0:</strong> 1 nó (A). Máximo teórico: 2⁰ = 1. (Completo).</p> 
+    <p><strong>Nível 1:</strong> 2 nós (B, C). Máximo teórico: 2¹ = 2. (Completo).</p> 
+    <p><strong>Nível 2:</strong> 4 nós (D, E, F, G). Máximo teórico: 2² = 4. (Completo).</p> 
+</details>
+
 
 ## Classificações de Árvores
 
@@ -150,17 +239,41 @@ A expressão que representa o **número de nós** de uma árvore estritamente bi
 
 **Exemplo**:
 
+O exemplo dado no inicio desse máterial trata-se de uma árvore estritamente binária.
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img 
+        src="assets/images/arvores/arvore_estritamente_binaria.png"
+        alt="Exemplo de árvore estritamente binária"
+        style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"
+    />
+    <p style="margin-top: 0.5rem; text-align: center;">
+        <em>Exemplo de Árvore Estritamente Binária</em>
+    </p>
+</div>
+
 ### Árvore Completa
 
 É uma árvore em que todos os nós com menos de dois filhos ficam no **último e penúltimo nível**.
 
 **Exemplo**:
 
+<div class="figure" style="flex: 1; text-align: center;">
+    <img 
+        src="assets/images/arvores/arvore_completa.png"
+        alt="Exemplo de árvore completa"
+        style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"
+    />
+    <p style="margin-top: 0.5rem; text-align: center;">
+        <em>Exemplo de Árvore Completa</em>
+    </p>
+</div>
+
 ### Árvore Cheia/Perfeita
 
 É uma árvore **estritamente binária e completa**.
 
-**Exemplo**:
+**Exemplo**: O exemplo 2 dado anteriomente trata-se de uma árvore cheia.
 
 ## Percursos
 
