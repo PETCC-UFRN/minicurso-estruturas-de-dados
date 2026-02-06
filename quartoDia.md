@@ -148,7 +148,7 @@ O número máximo de nós em um nível `n` de uma árvore binária é dado por: 
 - Exemplo 1
 
 <div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/arvores/arvore_binaria_exemplo_1.png" alt="Árvore Degenerada" style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;" />
+    <img src="assets/images/arvores/arvore_binaria_exemplo_1.png" alt="Árvore Degenerada" style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;" />
     <p style="margin-top: 0.5rem; text-align: center;"><em>Árvore Degenerada</em></p>
 </div>
 
@@ -245,7 +245,7 @@ O exemplo dado no inicio desse máterial trata-se de uma árvore estritamente bi
     <img 
         src="assets/images/arvores/arvore_estritamente_binaria.png"
         alt="Exemplo de árvore estritamente binária"
-        style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"
+        style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;"
     />
     <p style="margin-top: 0.5rem; text-align: center;">
         <em>Exemplo de Árvore Estritamente Binária</em>
@@ -262,7 +262,7 @@ O exemplo dado no inicio desse máterial trata-se de uma árvore estritamente bi
     <img 
         src="assets/images/arvores/arvore_completa.png"
         alt="Exemplo de árvore completa"
-        style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"
+        style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;"
     />
     <p style="margin-top: 0.5rem; text-align: center;">
         <em>Exemplo de Árvore Completa</em>
