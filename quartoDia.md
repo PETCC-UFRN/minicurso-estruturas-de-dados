@@ -368,6 +368,11 @@ Para analisar a complixade dessa operação é importante saber a relação de a
 
 A operação de busca depende do número de nós existentes no caminho da raiz até o nó procurado.
 
+Se a árvore possui **altura máxima**, o nó procurado pode estar a uma distância de até `n` **da raiz**, e a complexidade da busca é `O(n)`.
+
+Se a árvore possui **altura mínima**, o tempo de busca é `O(log n)`.
+
+
 ## Inserção na BST
 
 **Função**:
