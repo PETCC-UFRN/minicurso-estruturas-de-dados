@@ -111,6 +111,17 @@ Sendo assim, quando não está vazia, ela pode ser dividida em três **subconjun
     
 **Exemplo:**
 
+<div class="figure" style="flex: 1; text-align: center;">
+    <img 
+        src="assets/images/arvores/arvore_conjuntos.png"
+        alt="conjuntos da árvore binária"
+        style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"
+    />
+    <p style="margin-top: 0.5rem; text-align: center;">
+        <em>Conjuntos da Árvore Binária</em>
+    </p>
+</div>
+
 ## Propriedades das Árvores Binárias
 
 As árvores binárias possuem as seguintes **propriedades principais**:
