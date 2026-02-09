@@ -393,34 +393,271 @@ Mas bom, essas são as estruturas de dados que vamos ver por enquanto! Vamos par
 
 ## Tipos abstratos de dados e suas implementações
 
-### Lista
+## Fila (Queue)
 
-#### implementação
+### Descrição
 
-<!-- atrvés de arrays -->
+O Tipo Abstrato de Dados (TAD) Fila, conhecido na literatura como Queue, é uma das estruturas conceituais mais importantes da Ciência da Computação. Seu princípio fundamental é a política de acesso FIFO (First-In, First-Out), segundo a qual o primeiro elemento inserido é também o primeiro a ser removido. Esse comportamento reflete diversos processos naturais e computacionais, tornando a fila um modelo essencial para a organização temporal de dados.
 
-<!-- Questão conjunta -->
+Enquanto TAD, a fila descreve o comportamento lógico da estrutura, independentemente de como ela é implementada em memória. Como já vimos antes no estudo da diferença entre TAD e ED.
+
+Em uma fila, os elementos são inseridos em uma extremidade, usualmente chamada de final, e removidos da outra extremidade, chamada de início. Não há acesso direto ou aleatório aos elementos intermediários, o que reforça a ideia de processamento sequencial e ordenado (temporal).
+
+### Operações Básicas
+
+O TAD Fila é definido por um conjunto restrito, porém suficiente, de operações fundamentais. A operação de inserção, tradicionalmente denominada enqueue, adiciona um novo elemento ao final da fila. A operação de remoção, chamada dequeue, remove e retorna o elemento que se encontra no início da fila, respeitando a ordem FIFO.
+
+Além dessas operações centrais, é comum que a fila ofereça uma operação de consulta ao primeiro elemento, geralmente chamada de front ou peek, que permite observar o elemento do início sem removê-lo. Operações auxiliares, como a verificação de fila vazia (isEmpty) e a obtenção do número de elementos armazenados (size), também são amplamente utilizadas, especialmente em contextos algorítmicos e de implementação.
+
+Em implementações com capacidade limitada, como aquelas baseadas em vetores estáticos, pode ainda existir a operação isFull, responsável por indicar se a fila atingiu sua capacidade máxima.
+
+### Como implementar
+
+A implementação de uma fila pode variar significativamente, desde estruturas simples até abordagens mais sofisticadas. A escolha da implementação impacta diretamente aspectos como uso de memória, desempenho e flexibilidade, embora o comportamento externo do TAD permaneça o mesmo.
+
+#### Implementação 1
+
+Uma das implementações mais diretas da fila utiliza vetores (arrays). Nessa abordagem, dois índices são mantidos: um para indicar a posição do início da fila e outro para indicar a posição do final. A inserção ocorre no índice do final, enquanto a remoção ocorre no índice do início.
+
+Em sua forma mais simples, essa implementação apresenta um problema clássico: o desperdício de espaço. À medida que elementos são removidos do início, posições iniciais do vetor tornam-se inutilizadas, mesmo que ainda exista espaço disponível no final.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class FilaEstatica {
+private:
+    int* dados;
+    int inicio;
+    int fim;
+    int capacidade;
+
+public:
+    FilaEstatica(int cap) {
+        capacidade = cap;
+        dados = new int[capacidade];
+        inicio = 0;
+        fim = 0;
+    }
+
+    ~FilaEstatica() {
+        delete[] dados;
+    }
+
+    bool isEmpty() const {
+        return inicio == fim;
+    }
+
+    bool isFull() const {
+        return fim == capacidade;
+    }
+
+    void enqueue(int valor) {
+        if (isFull()) {
+            cout << "Fila cheia" << endl;
+            return;
+        }
+        dados[fim++] = valor;
+    }
+
+    int dequeue() {
+        if (isEmpty()) {
+            cout << "Fila vazia" << endl;
+            return -1;
+        }
+        return dados[inicio++];
+    }
+};
+```
+
+#### Implementação 2
+
+Para resolver o problema de desperdício de memória da implementação anterior, introduz-se a fila circular. Nessa abordagem, o vetor é tratado de forma lógica como circular, permitindo que os índices retornem ao início do vetor quando atingem o limite máximo.
+
+A fila circular garante melhor aproveitamento do espaço disponível e mantém todas as operações básicas com complexidade de tempo constante, O(1). Essa implementação é amplamente utilizada em sistemas que exigem eficiência e previsibilidade, como buffers e sistemas embarcados.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class FilaCircular {
+private:
+    int* dados;
+    int inicio;
+    int fim;
+    int tamanho;
+    int capacidade;
+
+public:
+    FilaCircular(int cap) {
+        capacidade = cap;
+        dados = new int[capacidade];
+        inicio = 0;
+        fim = 0;
+        tamanho = 0;
+    }
+
+    ~FilaCircular() {
+        delete[] dados;
+    }
+
+    bool isEmpty() const {
+        return tamanho == 0;
+    }
+
+    bool isFull() const {
+        return tamanho == capacidade;
+    }
+
+    void enqueue(int valor) {
+        if (isFull()) {
+            cout << "Fila cheia" << endl;
+            return;
+        }
+        dados[fim] = valor;
+        fim = (fim + 1) % capacidade;
+        tamanho++;
+    }
+
+    int dequeue() {
+        if (isEmpty()) {
+            cout << "Fila vazia" << endl;
+            return -1;
+        }
+        int valor = dados[inicio];
+        inicio = (inicio + 1) % capacidade;
+        tamanho--;
+        return valor;
+    }
+};
+```
+
+### Fila na STL do C++
+
+A biblioteca padrão do C++ fornece uma implementação pronta do TAD Fila por meio do contêiner std::queue, definido no cabeçalho <queue>. Essa implementação segue rigorosamente a semântica FIFO e abstrai completamente os detalhes internos da estrutura.
+
+Internamente, o std::queue é um adaptador de contêiner, geralmente implementado sobre estruturas como std::deque ou std::list. O programador interage apenas com as operações essenciais, como inserção no final, remoção do início e acesso ao elemento frontal, reforçando o conceito de TAD e incentivando boas práticas de encapsulamento.
+
+### Onde usar Filas
+
+#### Overview
+
+Filas são amplamente empregadas em sistemas computacionais sempre que há necessidade de processamento ordenado por tempo de chegada. Elas surgem naturalmente em contextos nos quais múltiplas entidades competem por um recurso compartilhado ou aguardam processamento sequencial.
+
+Exemplos clássicos incluem escalonamento de processos em sistemas operacionais, gerenciamento de buffers de entrada e saída, controle de requisições em servidores e algoritmos de busca em grafos.
+
+#### Exemplo prático 1
+
+Em sistemas operacionais, filas são utilizadas para organizar processos prontos para execução. O escalonador do sistema mantém uma fila de processos aguardando tempo de CPU, garantindo que cada processo seja atendido de forma justa, de acordo com a política de escalonamento adotada.
+
+Nesse contexto, a fila assegura previsibilidade e organização, sendo fundamental para o funcionamento correto do sistema.
 
 
-### Fila
 
-#### implementação:
+## Pilha (Stack)
 
-<!-- através de arrays com ponteiros e afins -->
+Assim como a fila, a pilha é de extrema importância na Ciência da Computação como um TAD crucial à modelagem de situações específicas. Seu maior princípio é a ideia do "LIFO" (Last In, First Out) - os primeiros elementos a sair da nossa estrutura de dados são sempre aqueles que chegaram por último. Podemos imaginar esse TAD como vários objetos e ideias do dia a dia: um dispenser de gurdanapos de uma lanchonete - A única maneira de adicionar guardanapos é empurrando pela única entrada, que também serve de saída - ou até uma rua sem saída bem estreita - onde um carro, caso não tenha sido o último a entrar, não consegue sair imediatamente! Em geral, é como uma pilha de objetos de fato, na qual você só pode retirar o objeto no topo (se não a pilha cai!)
 
-<!-- Questão conjunta -->
+// imagem de um dispenser de guardanapos
+// imagem de um carro uma rua sem saída bem estreita
 
-### Pilha
+De maneira geral, existem muitas aplicações para essa modelagem (bem mais do que imaginamos), e vamos ver isso logo após a implementação.
 
-#### Implementação:
+### Modelagem e operações básicas
 
-<!-- da mesma forma -->
+Como sabemos que um TAD independe da estrutura de dados, vamos imaginar a explicação em um array devido à simplicidade. Mas lembre-se, ela também pode ser implementada sobre outras EDs! As suas funções devem apenas corretamente guardar e atualizar as variáveis extras que vamos criar que nos ajudam a definir quais operações são possíveis. Na STL, por exemplo, ela é implementada com uma estrutura de dados mais sofisticada chamada _deque_
 
-<!-- Questão conjunta -->
+No caso de um array estático simples, deveremos guardar apenas duas informações a mais: O final e o tamanho da nossa pilha. Diferentemente da fila, que sofre alterações dos dois lados, a pilha só pode sofrer remoções ou inserções a partir de uma mesma posição: a última. Dessa forma, podemos "empacotar" nosso array junto a essas duas variáveis para a modelagem da nossa _stack_ .
 
-## Iterando através de estruturas de dados diferentes
+Note que estamos usando a mesma ideia vista no vector de um "final lógico", já que a nossa pilha tem uma capacidade constante mas está vazia.
 
-## Resolução de questões
+```cpp
+class queue {
+	
+	private:
+	int size;
+	int end;
+	int * storage;
+
+}
+
+```
+
+Podemos imaginar o seu construtor como algo assim:
+
+```cpp
+
+queue(int n) {
+	size = n;
+	storage = int[n];
+	end = 0;
+}
+```
+
+Obs.: Assim como implementado em diversos outros lugares, estamos usando aqui um intervalo fechado aberto - ou seja, o lugar no qual o nosso _end_ aponta para é o primeiro lugar livre, em que podemos adicionar objetos!
+
+
+#### Acesso
+
+Uma coisa interessante desse tipo abstrato é justamente a nossa falta de acesso ao resto da nossa pilha. Como só podemos inserir e remover do topo, só temos acesso à função `top()` ao invés de conseguir fazer mais através do uso dos colchetes [ e ]. Assim, ela é a nossa única maneira de acessar qualquer informação da pilha - e enquanto não fizermos outra operação, não conseguimos saber de nenhum outro número!
+
+Como você já deve imaginar, o acesso dessa forma é O(1).
+
+int top() {
+	return storage[end-1];
+}
+
+#### Inserção
+
+Como já vimos, a inserção só pode ser realizada no topo da nossa pilha, pela função `push()`. E o que ela fará é bem previsível: Caso a nossa estrutura não esteja cheia, ela irá adicionar o elemento no topo da pilha e aumentar o contador de tamanho; Caso contrário, o seu comportamento vai depender, de novo, da estrutura que é realizada sobre - E em nosso caso, não poderá fazer nada, já que é um tamanho estático. Caso fosse um vector ou um deque, poderíamos alocar um espaço maior para incluir mais espaços!
+
+O código de uma operação pode parecer com isso:
+
+```cpp
+
+push(int novo) {
+
+if (end == size-1) {
+	throw std::out_of_range("Erase - Index out of range!");
+}
+
+storage[end] = novo; // insere como o mais novo número na lista
+end++;
+}
+
+```
+
+E sua complexidade também é O(1)
+
+// inserir imagem
+
+
+#### Remoção
+
+De maneira similar, só podemos remover o objeto do topo, através do `pop()`. Então o código dessa operação acaba extremamente simples (e também O(1))
+
+```cpp
+
+void pop() {
+	end--;
+}
+
+```
+Imagino que você veja isso e fique um pouco confuso, já que não fizemos nada com o nosso array _storage_! Mas no fim das contas, o que vale para nós é o que. Não temos nenhuma maneira de "apagar" uma das "casas" do nosso array sem mudar a alocação de memória - então podemos só esquecer o valor ali, já que qualquer inserção que for usar esse endereço substituirá o valor! É como se ele fosse um lixo de memória.
+
+// inserir imagem
+
+### Aplicações
+
+De maneira geral, os códigos para a implementação da pilha são bem simples e fáceis de entender, né? Então já que entendemos tudo que precisamos saber sobre pilhas, vamos fazer algumas questões em conjunto e depois seguir para o vjudge para testarmos nossos conhecimentos individualmente!
+
+#### Para fazermos juntos
+
+// colocar questao aqui
+
+#### Para fazer sozinho
+
+Agora que você já entendeu como essas TADs funcionam, siga para o vjudge para fazer as questões!
 
 <!-- vjudge!! -->
 
