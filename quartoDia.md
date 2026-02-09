@@ -336,7 +336,7 @@ A seguir, temos a definição da estrutura:
 
 **Função**:
 
-```c++
+```cpp
     arvore_t *buscar(arvore_t *arvore, int chave) {
         if (arvore == NULL) {
             return NULL;
@@ -372,18 +372,127 @@ Se a árvore possui **altura máxima**, o nó procurado pode estar a uma distân
 
 Se a árvore possui **altura mínima**, o tempo de busca é `O(log n)`.
 
-
 ## Inserção na BST
 
 **Função**:
+```cpp
+    arvore_t* inserir(arvore_t* arvore, int chave) {
+        if (arvore == nullptr) {
+            arvore = new arvore_t;
+            arvore->chave = chave;
+            arvore->esq = nullptr;
+            arvore->dir = nullptr;
+        }
+        else if (chave < arvore->chave) {
+            arvore->esq = inserir(arvore->esq, chave);
+        }
+        else if (chave > arvore->chave) {
+            arvore->dir = inserir(arvore->dir, chave);
+        }
+        return arvore;
+    }
+```
+
+Na operação de inserção em uma Árvore Binária de Busca, é essencial que suas propriedades sejam preservadas.
+
+O algoritmo funciona de forma recursiva, comparando a chave a ser inserida com o valor do nó atual:
+
+- Se a árvore (ou subárvore) estiver **vazia** (nullptr), um **novo nó é criado** e inserido nessa posição.
+
+- Se a chave for **menor** que o valor do nó atual, a inserção continua na subárvore **esquerda**.
+
+- Se a chave for **maior**, a inserção continua na subárvore **direita**.
+
+Além disso, **todo novo nó inserido é sempre uma folha**, ou seja, não possui filhos no momento da inserção. Com o crescimento da árvore, esse nó poderá futuramente receber filhos, mantendo sempre as propriedades da BST.
 
 **Complexidade**:
+
+A operação de inserção em uma Árvore Binária de Busca percorre a árvore desde a raiz até uma folha, realizando comparações ao longo do caminho. Assim, o custo da operação é proporcional à altura da árvore. Na **árvore balanceada**, a e a inserção ocorre em tempo `O(log n)`.
 
 ## Remoção na BST
 
 **Função**:
 
+Na operação de remoção, devemos considerar três casos, nos quais o nó a ser removido possui:
+
+1. **nenhum** filho.
+
+2. **uma sub-árvore** não vazia
+
+3. **duas sub-árvores** não vazias
+
+```cpp
+    arvore_t* remover(arvore_t* arvore, int chave) {
+        if (arvore == nullptr)
+            return nullptr;
+
+        if (chave < arvore->chave) {
+            arvore->esq = remover(arvore->esq, chave);
+        }
+        else if (chave > arvore->chave) {
+            arvore->dir = remover(arvore->dir, chave);
+        }
+        else {
+            // nó com zero ou um filho
+            if (arvore->esq == nullptr) {
+                arvore_t* temp = arvore->dir;
+                delete arvore;
+                return temp;
+            }
+            else if (arvore->dir == nullptr) {
+                arvore_t* temp = arvore->esq;
+                delete arvore;
+                return temp;
+            }
+
+            // nó com dois filhos
+            arvore_t* rightMin = find_min(arvore->dir);
+            arvore->chave = rightMin->chave;
+            arvore->dir = remover(arvore->dir, rightMin->chave);
+        }
+
+        return arvore;
+    }
+
+```
+
+**Caso 1:**
+
+Se chegamos a um ponteiro nulo, significa que:
+
+- a chave não existe nessa subárvore
+
+- nada precisa ser feito
+
+**Caso 2:**
+
+O filho do nó a ser removido substitui o nó.
+Ligamos o pai do nó diretamente ao seu único filho.
+
+**Caso 3:**
+
+O nó a ser removido é substituído por um valor que preserva as propriedades da árvore. Para isso, pode-se escolher:
+
+- o maior elemento da subárvore esquerda, ou
+
+- o menor elemento da subárvore direita.
+
+Nesta implementação, utiliza-se o menor valor da subárvore direita, pois:
+
+- ele é maior que todos os elementos da subárvore esquerda;
+
+- e menor que todos os elementos da subárvore direita.
+
+O procedimento ocorre da seguinte forma:
+
+- copia-se o valor do menor elemento da subárvore direita para o nó atual;
+
+- remove-se o nó duplicado da subárvore direita, reduzindo o problema a um caso de remoção com zero ou um filho.
+
+
 **Complexidade**:
+
+A remoção percorre a árvore da raiz até o nó a ser removido, com custo proporcional à altura da árvore. Ou seja, `O(log n)` para árvore de altura miníma.
 
 # Árvore AVL
 
