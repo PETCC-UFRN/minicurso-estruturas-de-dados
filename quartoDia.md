@@ -581,6 +581,15 @@ Existem 4 cenários de desbalanceamento possíveis, que são corrigidos por rota
 
 Graças a esse rigoroso controle de altura, a Árvore AVL garante que todas as suas operações (Busca, Inserção e Remoção) tenham complexidade de tempo `O(log n)` no pior caso, tornando-a extremamente previsível e eficiente para pesquisas.
 
+
+### Aplicações
+
+Por conta do seu balanceamento rígido, a altura da árvore sempre será a menor possível, fazendo com que ela seja extremamente eficiente para realizar buscas, mas como possui muitas trocas entre seus nós, faz com que ela perca um pouco de eficiência para operações de modificação.
+
+* **Bancos de dados em Memória** : Utilizar árvores AVL em bancos de dados em memória é extremamente eficiente, já que são sistemas onde os dados são carregados imediatamente (evita diversas trocas) e acessados milhares de vezes.
+
+* **Jogos e Simulações** : Utilizar árvores AVL como estrutras de dados de colisão estática torna seu uso incrivelmente eficiente, já que não mudam de posição frequentemente.
+
 ## Árvore Rubro-Negra
 
 O nome Rubro-Negra se dá pelo algoritmo de balanceamento desta árvore, onde separam cada nó com uma cor, Vermelho ou Preto.
@@ -702,14 +711,23 @@ Para verificar se esta árvore é realmente uma árvore Rubro-Negra, basta ver s
 
 ### Operações
 
-As operações de Rotação e Busca irão funcionar da mesma forma que a árvore AVL (embora as rotações tenham finalidades diferentes). Porém, adicionamos diversos casos de erro nas operações de Inserção e Remoção, de forma que a árvore mantenha as 5 propriedades fundamentais.
+As operações de **Rotação** e **Busca** irão funcionar da mesma forma que a árvore AVL (embora as rotações tenham finalidades diferentes). Porém, adicionamos diversos casos de erro nas operações de **Inserção** e **Remoção**, de forma que a árvore mantenha as 5 propriedades fundamentais.
 
 Embora pareça complexa, as árvores Rubro-Negro são as mais flexiveis em questão de uso. Isso acontece principalmente por exigir menos rotações durantes as inserções e remoções, tornando estatísticamente mais rápida para aplicações dinâmicas.
 
+### Aplicações
+
+Ao contrário das árvores AVL, as Rubro-Negro se destacam na eficiência de suas operações de modificação (inserção e remoção), já que necessitam de menos trocas, porém, sendo menos eficientes no quesito busca, já que podem permitir árvores mais altas que uma AVL.
+
+* **Bibliotecas de linguagens** : Algumas bibliotecas como `java.util` de java, `STL` de C++ e `System.Collections.Generic` de C# tem diversos contêineres que são implementados utilizando árvores Rubro-Negras.
+
+* **Gerenciadores de memória** : Alocadores de memória (malloc) frequentemente utilizam árvores Rubro-Negras para rastrear blocos de memória de forma eficiente.
 
 # `<map>`
 
 # `<set>`
+
+
 
 
 
