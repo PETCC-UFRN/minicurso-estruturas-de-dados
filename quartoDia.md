@@ -306,7 +306,7 @@ Neste tipo de estrutura serão abordadas as seguintes operações:
 
 # Árvore Binária de Busca (BST)
 
-## Probiedades da BST
+## Propriedades da BST
 
 1. Todos os nós de uma sub-ávore **direita** são **maiores** que o valor da raiz.
 
@@ -494,9 +494,218 @@ O procedimento ocorre da seguinte forma:
 
 A remoção percorre a árvore da raiz até o nó a ser removido, com custo proporcional à altura da árvore. Ou seja, `O(log n)` para árvore de altura miníma.
 
-# Árvore AVL
+# Árvores Auto-balanceadas
 
-# Árvore Rubro-Negra
+Como dito anteriormente, muitas vezes as BST podem ter casos onde a inserção/remoção chega em complexidades `O(n)`. Para resolver isso, pelo custo de algumas linhas de código e lógica, foram criados métodos para manter a complexidade como `O(log n)`, sendo o **balanceamento** um deles.
+
+Consideramos uma árvore como **balanceada** quando sua altura `h` é limitada de forma que: `h = O(log n)`.
+
+Logo, chamamos uma árvore de **Árvore de Auto-balanceamento**, quando ela possui um algoritmo de balanceamento automático. Essas árvores são essenciais para "consertar" os possíveis problemas vistos anteriormente, portanto, veremos duas das mais utilizadas atualmente.
+
+## Árvore AVL
+
+O nome AVL surge das iniciais de seus criadores, Georgy Maximovich <strong>A</strong>delson-<strong>V</strong>elsky e Evgenii Mikhailovich <strong>L</strong>andis.
+
+**Definição**
+
+A Árvore AVL é a primeira estrutura de dados a implementar o conceito de árvore binária de busca auto-balanceável.
+Além disso, para cada nó, tem-se a relação:
+
+<code>| h<sub>e</sub>(nó) - h<sub>d</sub>(nó) | <= 1</code>
+
+Onde h<sub>e</sub> é a altura do filho esquerdo do nó e h<sub>d</sub> é a altura do filho direito do nó. Chamaremos essa relação de **fator de balanceamento**.
+
+**Exemplos:**
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img 
+        src="assets/images/arvores/AVL-exemplo-1.png"
+        alt="Exemplo de árvore"
+        style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;"
+    />
+    <p style="margin-top: 0.5rem; text-align: center;">
+        <em>Exemplo de Árvore </em>
+    </p>
+</div>
+
+Para verificar se esta BST é uma árvore AVL, temos que ver se ela obedece sua principal regra. Logo, veremos a altura dessa árvore (1) e verificamos o fator de balanceamento de todos os nós (2).
+
+<details>
+    <summary>1</summary>
+    <div class="figure" style="flex: 1; text-align: center;">
+        <img 
+            src="assets/images/arvores/AVL-exemplo-3.png"
+            alt="Cálculo da altura de cada nó."
+            style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;"
+        />
+        <p style="margin-top: 0.5rem; text-align: center;">
+            <em>Cálculo da altura de cada nó</em>
+        </p>
+    </div>
+
+    Agora basta aplicar a relação prevista na definição das árvores AVL para verificar se ela é uma AVL.
+</details>
+
+
+<details>
+    <summary>2</summary>
+    <div class="figure" style="flex: 1; text-align: center;">
+        <img 
+            src="assets/images/arvores/AVL-exemplo-2.png"
+            alt="Aplicação da relação da AVL."
+            style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;"
+        />
+        <p style="margin-top: 0.5rem; text-align: center;">
+            <em>Aplicação da relação da AVL</em>
+        </p>
+    </div>
+
+    Logo, como cada nó dessa BST tem seu fator de balanceamento adequado, essa árvore também é uma AVL.
+
+</details>
+
+### Operações
+
+Assim como na árvore Rubro-Negra, não iremos detalhar a implementação exata, mas sim a lógica que garante a eficiência da estrutura.
+
+**Rotação, Busca, Inserção e Remoção**
+
+A operação de **Busca** é idêntica à de uma BST convencional, beneficiando-se da altura controlada para garantir rapidez.
+
+O diferencial da AVL está nas operações de modificação (**Inserção** e **Remoção**). Ao adicionar ou remover um nó, podemos acidentalmente violar a regra do fator de balanceamento. Quando isso ocorre, o algoritmo percebe o "nó desbalanceado" e aplica uma operação de correção chamada **Rotação**.
+
+Existem 4 cenários de desbalanceamento possíveis, que são corrigidos por rotações Simples ou Duplas.
+
+* Na **Inserção**, basta uma única correção (rotação) para que a árvore inteira volte a ficar equilibrada.
+* Na **Remoção**, a correção pode gerar um efeito cascata, exigindo ajustes sucessivos até a raiz.
+
+Graças a esse rigoroso controle de altura, a Árvore AVL garante que todas as suas operações (Busca, Inserção e Remoção) tenham complexidade de tempo `O(log n)` no pior caso, tornando-a extremamente previsível e eficiente para pesquisas.
+
+## Árvore Rubro-Negra
+
+O nome Rubro-Negra se dá pelo algoritmo de balanceamento desta árvore, onde separam cada nó com uma cor, Vermelho ou Preto.
+
+**Definição**
+
+Uma árvore Rubro-Negra possui a estrutura de uma BST, onde cada nó possui chave, filhos, pai e cor. Diferente da AVL que foca na altura estrita, a Rubro-Negra foca em regras de coloração para seu balanceamento.
+
+Ela é definida por 5 **propriedades fundamentais**:
+
+1) Todo nó ou é vermelho, ou preto.
+
+2) O nó Raiz é sempre preto.
+
+3) Toda folha (NIL) é considerada preta.
+
+4) Se um nó é vermelho, então ambos os filhos são pretos.
+
+5) Para cada nó, todos os caminhos até uma folha possui o mesmo número de nós pretos.
+
+
+**Exemplo:**
+
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img 
+        src="assets/images/arvores/RB-exemplo-1.png"
+        alt="Exemplo de árvore RB"
+        style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;"
+    />
+    <p style="margin-top: 0.5rem; text-align: center;">
+        <em>Exemplo de Árvore Rubro-Negra</em>
+    </p>
+</div>
+
+Para verificar se esta árvore é realmente uma árvore Rubro-Negra, basta ver se ela possui todas as propriedades fundamentais.
+
+<details>
+    <summary>Propriedade 1</summary>    
+    <div class="figure" style="flex: 1; text-align: center;">
+        <img 
+            src="assets/images/arvores/RB-exemplo-2.png"
+            alt="Exemplo RB propriedade 1."
+            style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;"
+        />
+        <p style="margin-top: 0.5rem; text-align: center;">
+            <em>Exemplo de Árvore Rubro-Negra</em>
+        </p>
+    </div>
+
+        Neste caso, todos os nós são pretos e vermelhos, o que faz ela possuir a propriedade 1.
+</details>
+
+<details>
+    <summary>Propriedade 2</summary>    
+    <div class="figure" style="flex: 1; text-align: center;">
+        <img 
+            src="assets/images/arvores/RB-exemplo-3.png"
+            alt="Exemplo RB propriedade 2."
+            style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;"
+        />
+        <p style="margin-top: 0.5rem; text-align: center;">
+            <em>Exemplo de Árvore Rubro-Negra</em>
+        </p>
+    </div>
+
+        Neste caso, como o nó raiz é preto, ele satisfaz a propriedade 2.
+</details>
+
+<details>
+    <summary>Propriedade 3</summary>    
+    <div class="figure" style="flex: 1; text-align: center;">
+        <img 
+            src="assets/images/arvores/RB-exemplo-1.png"
+            alt="Exemplo RB propriedade 3."
+            style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;"
+        />
+        <p style="margin-top: 0.5rem; text-align: center;">
+            <em>Exemplo de Árvore Rubro-Negra</em>
+        </p>
+    </div>
+
+    Como esta propriedade é uma consequência, ao invés de um critério, não precisamos verificar nada.
+</details>
+
+<details>
+    <summary>Propriedade 4</summary>    
+    <div class="figure" style="flex: 1; text-align: center;">
+        <img 
+            src="assets/images/arvores/RB-exemplo-4.png"
+            alt="Exemplo RB propriedade 4."
+            style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;"
+        />
+        <p style="margin-top: 0.5rem; text-align: center;">
+            <em>Exemplo de Árvore Rubro-Negra</em>
+        </p>
+    </div>
+    
+    Assumindo que todas as folhas (NIL) são pretas (propriedade 3), temos que todos os nós vermelhos possuem 2 filhos pretos. Logo, satisfazendo a propriedade 4.
+</details>
+
+<details>
+    <summary>Propriedade 5</summary>    
+    <div class="figure" style="flex: 1; text-align: center;">
+        <img 
+            src="assets/images/arvores/RB-exemplo-5.png"
+            alt="Exemplo RB propriedade 5."
+            style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;"
+        />
+        <p style="margin-top: 0.5rem; text-align: center;">
+            <em>Exemplo de Árvore Rubro-Negra</em>
+        </p>
+    </div>
+    
+    Assumindo que todas as folhas (NIL) são pretas (propriedade 3), todos os caminhos até elas tem a mesma quantidade de nós pretos, satisfazendo a propriedade 5
+
+    Logo, essa árvore do exemplo é de fato uma árvore Rubro-Negra.
+</details>
+
+### Operações
+
+As operações de Rotação e Busca irão funcionar da mesma forma que a árvore AVL (embora as rotações tenham finalidades diferentes). Porém, adicionamos diversos casos de erro nas operações de Inserção e Remoção, de forma que a árvore mantenha as 5 propriedades fundamentais.
+
+Embora pareça complexa, as árvores Rubro-Negro são as mais flexiveis em questão de uso. Isso acontece principalmente por exigir menos rotações durantes as inserções e remoções, tornando estatísticamente mais rápida para aplicações dinâmicas.
+
 
 # `<map>`
 
