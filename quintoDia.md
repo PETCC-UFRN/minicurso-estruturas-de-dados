@@ -57,57 +57,33 @@ title: Minicurso de Matemática aplicada à Computação
 
 6) Boas práticas e documentação;
 
-## Problema 1 Números bloqueados
+## Sintaxe
 
-Determinado usuário da empresa para a qual você presta serviços tem recebido uma quantidade excessiva de ligações spam. Ao perceber que muitas dessas ligações eram de números repetidos, o usuário solicitou uma aplicação que fosse capaz de bloquear essas chamadas.
+[Atcoder ABC269 A](https://atcoder.jp/contests/abc269/tasks/abc269_a?lang=en) - Muito fácil
 
-Sendo parte da equipe que ficou com essa demanda, você precisa criar um sistema que armazene os números de telefones bloqueados e, baseando-se nessa coleção de dados, seja capaz de bloquear as chamadas provenientes dos números listados.
+## Pilha
 
-A sua equipe deve entregar as seguintes funções implementadas:
+[LeetCode Valid Parentheses](https://leetcode.com/problems/valid-parentheses/description/) - Fácil/Médio
 
-- O construtor da estrutura de dados que armazena os números
-- Uma função que verifica a presença ou ausência do número na lista
-- Uma função que adiciona novos números
-- Uma função que remove um número
-- Uma função auxiliar que bloqueia chamadas de números presentes na estrutura de dados
+## Vector e Sort
 
-## Problema 2 Conversão de minutos para horas
+[Atcoder ABC313 A](https://atcoder.jp/contests/abc313/tasks/abc313_a?lang=en) - Fácil
+[Atcoder ABC301 B](https://atcoder.jp/contests/abc301/tasks/abc301_b?lang=en) - Fácil/Médio
+[CSES 1640](https://cses.fi/problemset/task/1640) - Médio
 
-Você está trabalhando numa pesquisa sobre o tempo de uso de smartphones pela população do Brasil. No entanto, os dados de tempo de uso são coletados em minutos, e sua equipe precisa dos dados em horas. Os dados são muitos para ficar convertendo tudo à mão, então você decide utilizar seus conhecimentos de matemática e programação para fazer um algoritmo que recebe o tempo em minutos e retorna o tempo em horas.
+## Set
 
-- Qual estrutura matemática estudada durante o curso melhor resolve esse problema e porquê?
-- Implemente um algorítmo em pseudocódigo ou na linguagem de sua preferência que faça a conversão desejada.
-- **DESAFIO:** Como podemos modificar esse código para converter minutos para qualquer outro formato temporal (dias, semanas, etc)?
+[CSES 1621](https://cses.fi/problemset/task/1621) - Muito fácil
+[Atcoder ABC310 C](https://atcoder.jp/contests/abc310/tasks/abc310_c?lang=en) - Fácil/Médio
+[Atcoder ABC347](https://atcoder.jp/contests/abc347/tasks/abc347_b?lang=en) - Médio
+[Atcoder ABC248](https://atcoder.jp/contests/abc248/tasks/abc248_a?lang=en) - Fácil/Médio
+[Atcoder ABC291](https://atcoder.jp/contests/abc291/tasks/abc291_c?lang=en) - Fácil/Médio
 
-## Problema 3 Histórico de comandos de um terminal
+## Map
 
-Você participa de uma equipe de programadores que faz parte do desenvolvimento do sistema operacional PET OS, o novo sistema operacional do PET-CC. Ao longo do desenvolvimento seu grupo nota que seria uma boa ideia implementar um sistema que armazene os comandos recentes utilizados no terminal. Ao ouvir isso, Umberto, o líder do projeto, decidiu que essa _feature_ deve ser implementada como uma lista.
-
-A sua equipe deve entregar as seguintes utilidades implementadas:
-
-- O histórico de comandos
-- A busca de um comando no histórico (ex: verificar se git push foi usado)
-- Limpeza de comandos repetidos
-- A visualização do histórico na ordem inversa
-- A limpeza de todo o histórico
-
-## Problema 4 Criptografia fraca
-
-Você trabalha em uma empresa que guarda as senhas dos colaboradores de forma criptografada em seu banco de dados, entretanto, eles não fazem isso de uma forma muito segura. O diretor de tecnologia acredita tanto na confiabilidade da criptografia utilizada na empresa que deixa o banco de dados localmente público, ou seja, qualquer usuário da empresa pode acessar a versão criptografada da senha dos seus colegas. Suponha que você quer convencer o diretor de que a criptografia usada não é segura e, para isso, você pretende fazer o seguinte:
-
-**Primeiro momento:**
-- Sua senha é “banana123” e sua versão criptografada é armazenada como “edqdqd456”. Sabendo que todas as senhas são criptografadas sob o mesmo padrão e usando o mesmo número de encriptação, faça um script que aplique o processo reverso a todas as senhas (faça isso usando os “ASCII printable characters” como referência de alfabeto)
-
-**Segundo momento:**
-- Depois que você fez isso, o diretor da equipe reconheceu que a forma de criptografia atual não era segura e optou por implementar a atualização da criptografia de outra maneira: agora, cada senha é criptografada usando um número diferente, entretanto, ele também concatenou “colaborador@” com todas as senhas. Adapte o código anterior para apresentar na reunião e, possivelmente, ser promovido por evitar um possível vazamento de dados.
-
-## Problema 5 Testando segurança da criptografia
-
-Você é parte de um grupo de programadores contratado por uma grande empresa para realizar testes e verificar se o sistema de segurança implementado está seguro o suficiente. Você sabe que o método utilizado na criptografia local é a criptografia RSA, com números relativamente pequenos (podem ser computados em python, c++ e outras linguagens!) para as mensagens passadas entre os seus chefes. Dado uma chave pública (N), responda:
-
-- Porque esse sistema de segurança é falho e simples de violar?
-- Escreva um pseudocódigo que descubra quais primos P e Q foram utilizados para a geração da chave pública N.
-- **Desafio:** Implemente esse código em python, c++ ou na linguagem de sua preferência
+[Atcoder ABC349](https://atcoder.jp/contests/abc349/tasks/abc349_b?lang=en) - Médio
+[Atcoder ABC308](https://atcoder.jp/contests/abc308/tasks/abc308_b?lang=en) - Médio/Difícil
+[Codeforces 4C](https://codeforces.com/problemset/problem/4/C) - Médio
 
 <script>
 const dataDia5 = new Date('2025-03-13');
