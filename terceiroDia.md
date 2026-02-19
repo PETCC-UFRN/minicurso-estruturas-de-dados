@@ -78,18 +78,174 @@ title: Minicurso de Matemática aplicada à Computação
   
   </div>
 
-###
 
 ## O que são Tipos Abstratos de Dados (TADs)?
 
-### Vector
+// guilherme
 
-<!-- + implementação -->
 ## O que são Estruturas de Dados?
+
+//guilherme
+
+
+## Ponteiros
+
+Calma, não se assuste.
+
+Sabemos que esse tópico é meio chatinho para algumas pessoas, porém é de extrema importância. Não iremos abordar tanta coisa sobre ponteiros, apenas entender por cima como eles funcionam e aplicar na criação de estruturas de dados mais complexas.
+
+Basicamente, ponteiros são variáveis que guardam endereços de objetos na memória. Mas... O que realmente são endereços?
+
+
+##### Endereços de Memória e Referências
+
+Suponha que temos algum valor em nosso código, por exemplo, uma variável inteira `num = 2`.
+
+Quando declaramos essa variável `num`, armazenamos ela em um pequeno espaço na nossa memória para não perdê-la durante a execução do programa. O endereço da variável `num` seria uma representação numérica de onde ela está armazenada.
+
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Memória-1-exemplo.png" alt="Representação-visual-memória" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
+
+Em C++ utilizamos o operador `&` para "recolher" o endereço de alguma variável.
+
+```cpp
+int main(){
+
+    int num = 2;
+
+    printf("%d", &num); 
+    
+                // Saída: endereço da variavel, ou nesse caso, "0x6DFED4".
+    return 0;
+}
+
+```
+
+Nesse sentido, também podemos utilizar o operador `&` como um "alias" de outras variáveis, ou seja, caso ele seja alterado, o valor original também será:
+
+```cpp
+
+int main(){
+
+    int num = 2;
+    int &ref = num;    //faz referência ao num
+
+    printf("%d", num);
+    printf("%d", ref);    //a saída dos dois será 2.
+
+    
+    //caso você altere a ref:
+
+    ref = 3;
+
+    printf("%d", num);
+    printf("%d", ref);     // a saída dos dois será 3.
+
+
+    return 0;
+}
+
+```
+Visualmente, a declaraçao de `int &ref = num` seria como se criassemos uma variável `ref` "dentro da casinha do `num`", onde eles compartilhariam o mesmo endereço e valor.
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Memória-2-exemplo.png" alt="Representação-visual-memória" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
+##### Agora sim, Ponteiros
+
+Como dito anteriormente, ponteiros são simplesmente variáveis que guardam endereços de objetos na memória, ou seja, falamos que eles "apontam" para um objeto na memória. Todos os ponteiros tem um tipo associado que especifica o tipo do objeto que estará "apontando". Utilizamos também o prefixo (*) na declaração de ponteiros, como visto no exemplo abaixo:
+
+```cpp
+
+int main() {
+
+    int num = 2; // apenas uma declaração de um inteiro.
+
+    int* ptr;    // apenas uma declaração de um ponteiro de inteiro.
+    int *ptr2;   // outra declaração de um ponteiro de inteiro.
+
+    return 0;
+}
+
+```
+
+```cpp
+int main() {
+
+    int num = 2;
+
+
+    int *ptr = &num;    // atribui o endereço de "num" para "ptr". 
+
+    int *ptr2 = ptr; // atribui o endereço em "ptr" (ou seja, o endereço de "num") para "ptr2".
+
+    printf("%d", ptr2);      // print do endereço de num (0x...).
+    printf("%d", *ptr2);     // print do valor em num (2).
+
+    return 0;
+}
+
+```
+
+Voltando para o exemplo do `num = 2`, mudaremos um pouco o nosso objetivo. Dessa vez queremos armazenar o endereço de `num` em outra variável.
+
+Para isso, usaremos o ponteiro de inteiro `ptr`, que como definimos mais cedo, é uma variável que armazena endereços. Após isso, igualaremos ao endereço de `num` utilizando o prefixo "&" para armazená-la.
+
+```cpp
+
+int main() {
+
+    int num = 2; 
+
+    int* ptr = &num;   
+
+    return 0;
+}
+
+```
+
+Nesse caso, ao invés de ter uma variável "na mesma casinha" de `num`, temos uma nova variável `ptr` que armazena o endereço de `num`.
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Ponteiros-1-exemplo.png" alt="Representação-visual-ponteiros" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
+Analogamente, caso seja necessário, podemos também igualar o valor do ponteiro `ptr` à outros ponteiros de mesmo tipo, o que seria o mesmo que igualar ao endereço de `num`.
+
+```cpp
+
+int main() {
+
+    int num = 2; 
+
+    int* ptr = &num;   
+    
+    int* ptr2 = ptr;
+
+    int* ptr3 = &num; // ptr3 == ptr2 == ptr1
+
+    return 0;
+}
+
+```
+
+Lembrando que, mesmo que os ponteiros apontem para o mesmo endereço, não significa que eles estão no mesmo espaço de memória, como visto abaixo:
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Ponteiros-2-exemplo.png" alt="Representação-visual-ponteiros" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
 
 ## Tipos lineares de dados!
 
-<!-- list, queue, stack-->
 
 ### Array
 
@@ -158,7 +314,6 @@ vector<int> vetor;
 vector<int> vetor2(10);
 
 ```
-Quando você declara um vector, você cita os tipos de 
 
 Ele funciona da mesma forma que um array funcionaria, mas com alguns grandes diferenciais: O espaço que é alocado quando declaramos a estrutura é separado na Heap (então temos mais espaço!), e o seu tamanho é variável.
 
@@ -201,6 +356,7 @@ OK! Agora que modelamos tudo que será necessário para o nosso vetor, vamos ver
 *Acesso*
 Como a nossa estrutura é implementada a partir de arrays (no qual um bloco contíguo de memória nos é reservado), o acesso ao número em cada índice também é imediato! Assim, podemos recuperar o valor de algum objeto em tempo constante, ou O(1). A função implementada pode ficar algo tão simples quanto isso:
 tipo
+
 ```cpp
 
 int & at(int idx){
@@ -218,7 +374,7 @@ int & operator[](int idx) {
 
 
 
-#### redimensionamento
+#### Redimensionamento
 
 Assim que declaramos um vector da STL, um "construtor" é chamado. Ele vai "preparar" o chão pra o que vem por aí - setar o tamanho lógico pra zero e pode alocar ou não algum espaço inicial (isso depende da implementação! Na STL, não é alocado nenhum espaço de cara). Ele pode parecer algo assim:
 
@@ -603,9 +759,11 @@ Uma coisa interessante desse tipo abstrato é justamente a nossa falta de acesso
 
 Como você já deve imaginar, o acesso dessa forma é O(1).
 
+```cpp
 int top() {
 	return storage[end-1];
 }
+```
 
 #### Inserção
 
