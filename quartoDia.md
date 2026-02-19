@@ -68,6 +68,223 @@ title: Minicurso de Matemática aplicada à Computação
 </div>
 
 
+# Dicionário (Map)
+
+## Descrição
+
+O Tipo Abstrato de Dados (TAD) **Dicionário**, também conhecido como *Map*, é uma das abstrações fundamentais da Ciência da Computação. Seu princípio é armazenar pares (chave, valor), permitindo recuperar um valor a partir de sua chave associada.
+
+Diferentemente de estruturas sequenciais, como listas ou filas, o dicionário não é orientado por posição, mas por chave. O foco da abstração está na associação entre elementos, e não na ordem em que são inseridos.
+
+Enquanto TAD, o dicionário descreve apenas o comportamento lógico da estrutura, independentemente de como os dados são organizados em memória. Assim, diferentes estruturas de dados podem implementar o mesmo TAD, oferecendo garantias distintas de desempenho.
+
+---
+
+## Operações Básicas
+
+O TAD Dicionário é definido por um conjunto essencial de operações:
+
+* `insert(k, v)` – associa o valor `v` à chave `k`.
+* `search(k)` – retorna o valor associado à chave `k`.
+* `remove(k)` – remove o par correspondente à chave `k`.
+* `contains(k)` – verifica se a chave está presente.
+* `size()` – retorna a quantidade de elementos armazenados.
+
+A eficiência dessas operações depende diretamente da estrutura de dados escolhida para implementar o TAD.
+
+---
+
+# Hash Table
+
+## Descrição
+
+A **Hash Table (Tabela Hash)** é uma estrutura de dados projetada para implementar o TAD Dicionário com alta eficiência média. Seu princípio fundamental é o uso de uma **função hash**, responsável por transformar uma chave em um índice de um vetor.
+
+Formalmente, seja uma função:
+
+h(k) → {0, 1, ..., m-1}
+
+onde `m` é o tamanho da tabela.
+
+O ideal seria que cada chave fosse mapeada para um índice distinto. No entanto, como o domínio de chaves geralmente é maior que o tamanho da tabela, colisões são inevitáveis. A forma como essas colisões são tratadas define o comportamento e o desempenho da estrutura.
+
+Em termos assintóticos:
+
+* Caso médio: O(1)
+* Pior caso: O(n)
+
+---
+
+## Como implementar
+
+A implementação de uma hash table pode variar de acordo com a estratégia de tratamento de colisões. Podemos dividir as abordagens em dois grandes grupos: implementações sem colisão (modelo ideal) e implementações com colisão.
+
+---
+
+### Implementação 1 — Modelo Ideal (Sem Colisão)
+
+Nesta abordagem teórica, assume-se que não existem colisões. Cada índice do vetor armazena diretamente um elemento.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class HashTableIdeal {
+private:
+    int* tabela;
+    int capacidade;
+
+    int hashFunction(int chave) const {
+        return chave % capacidade;
+    }
+
+public:
+    HashTableIdeal(int cap) : capacidade(cap) {
+        tabela = new int[capacidade];
+        for (int i = 0; i < capacidade; i++)
+            tabela[i] = -1;
+    }
+
+    ~HashTableIdeal() {
+        delete[] tabela;
+    }
+
+    void insert(int chave) {
+        int indice = hashFunction(chave);
+        tabela[indice] = chave;
+    }
+
+    bool search(int chave) const {
+        int indice = hashFunction(chave);
+        return tabela[indice] == chave;
+    }
+};
+```
+
+Essa abordagem é apenas didática, pois colisões inevitavelmente ocorrerão em cenários reais.
+
+---
+
+### Implementação 2 — Encadeamento Separado (Separate Chaining)
+
+Cada posição da tabela contém uma lista de elementos que compartilham o mesmo índice hash.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <list>
+using namespace std;
+
+class HashTableChaining {
+private:
+    int capacidade;
+    vector<list<pair<int,int>>> tabela;
+
+    int hashFunction(int chave) const {
+        return chave % capacidade;
+    }
+
+public:
+    HashTableChaining(int cap) : capacidade(cap) {
+        tabela.resize(capacidade);
+    }
+
+    void insert(int chave, int valor) {
+        int indice = hashFunction(chave);
+        tabela[indice].push_back({chave, valor});
+    }
+
+    bool search(int chave, int &valor) const {
+        int indice = hashFunction(chave);
+        for (const auto &par : tabela[indice]) {
+            if (par.first == chave) {
+                valor = par.second;
+                return true;
+            }
+        }
+        return false;
+    }
+};
+```
+
+Essa abordagem mantém complexidade média O(1), mas pode degradar para O(n) no pior caso.
+
+---
+
+## Complexidade Temporal
+
+| Operação | Caso Médio | Pior Caso |
+| -------- | ---------- | --------- |
+| Insert   | O(1)       | O(n)      |
+| Search   | O(1)       | O(n)      |
+| Remove   | O(1)       | O(n)      |
+
+A análise depende do fator de carga (α = n/m) e da qualidade da função hash.
+
+---
+
+## Hash Table na STL do C++
+
+A biblioteca padrão do C++ fornece duas estruturas principais que implementam o TAD Dicionário:
+
+### unordered_map
+
+Implementado como tabela hash.
+
+```cpp
+#include <unordered_map>
+#include <iostream>
+using namespace std;
+
+int main() {
+    unordered_map<int, string> tabela;
+    tabela[1] = "Um";
+    tabela[2] = "Dois";
+    cout << tabela[1] << endl;
+}
+```
+
+* Complexidade média: O(1)
+* Não mantém ordenação das chaves
+* Realiza rehash automaticamente
+
+---
+
+### map
+
+Implementado como árvore balanceada (tipicamente rubro-negra).
+
+```cpp
+#include <map>
+#include <iostream>
+using namespace std;
+
+int main() {
+    map<int, string> tabela;
+    tabela[1] = "Um";
+    tabela[2] = "Dois";
+    cout << tabela[1] << endl;
+}
+```
+
+* Complexidade garantida: O(log n)
+* Mantém ordenação das chaves
+* Não depende de função hash
+
+---
+
+## Onde usar Hash Tables
+
+Hash tables são indicadas quando é necessário acesso rápido por chave e a ordenação não é relevante. São amplamente utilizadas em:
+
+* Tabelas de símbolos em compiladores
+* Implementação de caches
+* Indexação em bancos de dados
+* Estruturas internas de linguagens de programação
+
+Quando a ordenação é necessária ou quando se deseja garantia assintótica mais forte no pior caso, árvores balanceadas podem ser preferíveis.
+
+
 # Introdução a Árvores Binárias
 
 ## Definição 
