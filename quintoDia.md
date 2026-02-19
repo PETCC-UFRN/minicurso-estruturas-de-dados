@@ -25,45 +25,22 @@ title: Minicurso de Matemática aplicada à Computação
   </button>
   </div>
 
-## Orientações gerais:
 
-1) A partir do apresentado, elabore um plano de como a sua equipe solucionaria a atual demanda, indicando cada passo a ser seguido e quais os sub-problemas identificados;
-
-2) Programe superficialmente um protótipo do sistema requisitado, em pseudocódigo ou em alguma linguagem de programação de sua escolha, que seja capaz de atender de forma eficiente a situação em análise;
-
-3) Faça uma apresentação a todo o corpo de colaboradores presentes, esmiuçando os pontos-chaves essenciais à continuidade de ações que garantam um produto final.
-
-## Pontos que devem estar presentes na apresentação da solução alcançada
-
-1) Aspectos observados ao decorrer da solução que se aproximam de conceitos matemáticos vistos nesse curso;
-
-2) Explicação detalhada da lógica por trás do pseudocódigo ou código utilizado;
-
-3) Checagem de possíveis problemas que podem ocorrer na implementação;
-
-4) Aplicação em um caso teste hipotético;
-
-## Critérios de Avaliação
-
-1) Entendimento satisfatório da situação problema;
-
-2) Domínio do código usado como solução;
-
-3) Boa escolha de caso teste;
-
-4) Didaticidade e clareza na hora de apresentar a solução encontrada;
-
-5) Corretude matemática dos algoritmos implementados;
-
-6) Boas práticas e documentação;
 
 ## Sintaxe
 
 [Atcoder ABC269 A](https://atcoder.jp/contests/abc269/tasks/abc269_a?lang=en) - Muito fácil
 
+## Greedy
+
+[CSES 1084](https://cses.fi/problemset/task/1084) - Médio
+[Codeforces 1117B] (https://codeforces.com/contest/1117/problem/B)- Médio
+
 ## Pilha
 
 [LeetCode Valid Parentheses](https://leetcode.com/problems/valid-parentheses/description/) - Fácil/Médio
+[Spoj STPAR] (https://www.spoj.com/problems/STPAR/)  - Médio/Difícil?
+
 
 ## Vector e Sort
 
