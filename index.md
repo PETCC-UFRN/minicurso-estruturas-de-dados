@@ -11,9 +11,9 @@ title: Minicurso de Matemática aplicada à Computação
 </div>
 <br>
 
-Bem vindo ao site oficial do Minicurso de Matemática aplicada à Computação ofertado pelo PET de Ciência da Computação.
+Bem vindo ao site oficial do Minicurso de Estruturas de Dados e Agoritmos ofertado pelo PET de Ciência da Computação.
 
-O Minicurso será ofertado do perído de 04-08/08/2025, e as aulas serão das 14h até as 18h, no LCC2 do Departamento de Informática e Matemática Aplicada (DIMAP), UFRN.
+O Minicurso será ofertado do perído de xx-xx???/02/2026, e as aulas serão das 14h até as 18h, no LCC2 do Departamento de Informática e Matemática Aplicada (DIMAP), UFRN.
 
 Você pode consultar o material das aulas que foram ministradas até agora em [`/aulas`](/aulas.md) e saber mais sobre o Minicurso em geral em [`/sobre`](/sobre.md).
 
@@ -27,7 +27,11 @@ Assim, guiados por pesquisas de demanda e interesse realizadas anteriormente pel
 -->
 ## Introdução ao curso
 
-Olá a todos! Sejam bem-vindos ao curso de Matemática aplicada à Computação do PET-CC. Neste curso iremos explorar a profunda conexão entre matemática e programação, entendendo como conceitos abstratos matemáticos se transformar em soluções computacionais mais seguras e eficientes. Veremos que por trás de todo algoritmo, estrutura de dados ou sistema inteligente existe um fundamento matemático essencial!
+Olá a todos! Sejam bem-vindos ao curso de Estruturas de Dados e Algoritmos do PET-CC.
+
+Você sabe como as Estruturas de Dados que usamos enquanto programamos são implementadas? Neste curso, vamos dar uma olhada por baixo dos panos e entender como os nossos computadores organizam as nossas informações para rodarem um programa! Com isso, buscamos mostrar a vocês como entender tal funcionamento pode melhorar e expandir as nossas maneiras de pensar algoritmos e interagir com computadores.
+
+<!--
 
 ### Matemática e Computação
 
@@ -49,7 +53,7 @@ A Computação tem suas raízes profundamente entrelaçadas com a Matemática, v
     <p style="margin: 0.5rem auto 0; text-align: center;"><em>John von Neumann<br>(1903-1957)</em></p>
   </div>
 </div>
-
+-->
 
 ## Programação do curso
 
