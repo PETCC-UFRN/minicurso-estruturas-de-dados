@@ -8,7 +8,6 @@ title: Minicurso de Matemática aplicada à Computação
         <summary><a href="#introdução-à-algoritmos">Introdução à Algoritmos</a></summary>
         <ul>
             <li><a href="#definição-de-algoritmos">Definição de Algoritmos</a></li>
-            <li><a href="#etapas-para-resolver-problemas">Etapas para Resolver Problemas</a></li>
             <li><a href="#história-e-evolução-dos-algoritmos"> História e Evolução dos Algoritmos </a></li>
                 <ul>
                     <li><a href="#antiguidade"> Antiguidade</a></li>
@@ -85,8 +84,6 @@ title: Minicurso de Matemática aplicada à Computação
             <li><a href="#notações-assintóticas"> Notações Assintóticas </a></li>
             <ul>
                 <li><a href="#notação-o"> Notação O</a></li>
-                <li><a href="#notação-θ"> Notação Θ </a></li>
-                <li><a href="#notação-𝝮"> Notação 𝝮</a></li>
             </ul>
         </ul>
     </details>
@@ -100,15 +97,6 @@ title: Minicurso de Matemática aplicada à Computação
 # Introdução à Complexidade Assintótica
 
 ## Introdução à Algoritmos  
-<!--
-
-Como o nome surgiu
-
-definição
-
-Timeline de acontecimentos históricos sobre algoritmos 
-
--->
 
 
 ### Definição de Algoritmos
@@ -127,8 +115,6 @@ Dada a sequência `<4, 6, 2, 7, 8>` como entrada, um algoritmo de ordenação po
 4. Repetir o processo até que não existam mais elementos fora de ordem.
 
 Assim, o algoritmo retorna `<2, 4, 6, 7, 8>` como saída.
-
-### Etapas para resolver problemas
 
 ---
 
@@ -1416,35 +1402,6 @@ Essa notação fornece um **limite superior assintótico** para a função de co
    
 Quando dizemos que um algoritmo é **O(n²)**, por exemplo, queremos dizer que o seu tempo de execução cresce, no pior caso, de forma proporcional a `n²` à medida que o tamanho da entrada aumenta. 
 
-### Notação Θ
-
-### Notação 𝝮 
-
-##   Análise Assintótica
-###  Introdução 
-<!--
 
 
-Definição e uso 
-
-Olhando um gráfico, e vendo a similaridade com funções matemáticas
-Definição formal
-Gatilho puxando para análise de pior/melor/medio caso.
-
--->
-
-#### Pior Caso
-#### Melhor Caso
-#### Caso Médio
-###  Exemplo <!-- Pegar um código como exemplo e ver seu pior/melhor/médio caso -->
-###  Notações O, Θ e 𝝮 
-###  Exercícios
-
-## Cálculo Assintótico
-###  Tabela de Complexidade
-<!-- Mostrar que 1 << logn << n <<...  -->
-###  O que é Eficiência?
-###  Eficiência de Tempo X Espaço
-#### Aplicação com STL
-###  Exercícios
 
