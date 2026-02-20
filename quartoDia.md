@@ -865,7 +865,7 @@ public:
     ~Set(){
         clear(raiz);
     }
-    void inserir(int v) {
+    void insert(int v) {
         raiz = insert(raiz, v);
     }
 
@@ -964,7 +964,7 @@ Por fim, o multiset mantêm cada elemento em ordem crescente, mas não elimina r
 
 Cada tipo de **Set** tem sua aplicação, visto suas limitações.
 
-### <Set>
+### Set
 
 Os **Sets** tradicionais são utilizados principalmente como um "filtro inteligente", permitindo armazenas valores únicos.
 
@@ -974,7 +974,7 @@ Os **Sets** tradicionais são utilizados principalmente como um "filtro intelige
 
 Em cenários onde a ordem dos valores não importa, ou se a quantidade de vezes que um elemento aparece seja necessária, os **Sets** tradicionais não são uma escolha adequada.
 
-### <Unordered_sets>
+### Unordered_sets
 
 Os **Unordered_sets** são utilizados principalmente por sua complexidade baixíssima, embora não permita ordenar seus elementos, a velocidade compensa muito em determinados casos.
 
