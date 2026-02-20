@@ -78,730 +78,756 @@ title: Minicurso de Matemática aplicada à Computação
   
   </div>
 
-# Introdução aos Inteiros 
 
-## Contextualização
+## O que são Tipos Abstratos de Dados (TADs)?
 
-Nosso objetivo no dia de hoje é aprender de onde que surgiram algumas noções algébricas que são utilizadas desde o seu fundamental, mas de uma forma mais aprofundada, além de entender como elas se relacionam a conceitos importantíssimos na programação.
+// guilherme
 
-Note que teremos alguns simbolos diferentes do que vocês devem ter visto, então, sempre perguntem caso sintam dúvidas!
+## O que são Estruturas de Dados?
 
-## Ue, questões..?
+//guilherme
 
-Antes de começar, iremos conversar um pouco e discutir certas questões sobre o que são os números. Peço para que não olhem as definições do site ainda.
 
-1) O que você acha que são os números naturais?
+## Ponteiros
 
-2) O que você acha que são os números inteiros?
+Calma, não se assuste.
 
-3) Esses números (naturais e inteiros) servem para o quê?
+Sabemos que esse tópico é meio chatinho para algumas pessoas, porém é de extrema importância. Não iremos abordar tanta coisa sobre ponteiros, apenas entender por cima como eles funcionam e aplicar na criação de estruturas de dados mais complexas.
 
-Algumas delas podem ser dificeis ou faceis dependendo de quem veja essas perguntas, porém, elas escondem tópicos complexos. No fim, alguns podem definir o 1 como "números sem resto decimal" e o 2 como "números sem resto decimal que podem ser negativos", mas percebem que sempre voltamos na mesma questão?
+Basicamente, ponteiros são variáveis que guardam endereços de objetos na memória. Mas... O que realmente são endereços?
 
-4) Que questão é essa? (eu vou parar com isso, eu juro)
+
+##### Endereços de Memória e Referências
+
+Suponha que temos algum valor em nosso código, por exemplo, uma variável inteira `num = 2`.
+
+Quando declaramos essa variável `num`, armazenamos ela em um pequeno espaço na nossa memória para não perdê-la durante a execução do programa. O endereço da variável `num` seria uma representação numérica de onde ela está armazenada.
+
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Memória-1-exemplo.png" alt="Representação-visual-memória" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
+
+Em C++ utilizamos o operador `&` para "recolher" o endereço de alguma variável.
+
+```cpp
+int main(){
+
+    int num = 2;
+
+    printf("%d", &num); 
+    
+                // Saída: endereço da variavel, ou nesse caso, "0x6DFED4".
+    return 0;
+}
+
+```
+
+Nesse sentido, também podemos utilizar o operador `&` como um "alias" de outras variáveis, ou seja, caso ele seja alterado, o valor original também será:
+
+```cpp
+
+int main(){
+
+    int num = 2;
+    int &ref = num;    //faz referência ao num
+
+    printf("%d", num);
+    printf("%d", ref);    //a saída dos dois será 2.
+
+    
+    //caso você altere a ref:
+
+    ref = 3;
+
+    printf("%d", num);
+    printf("%d", ref);     // a saída dos dois será 3.
+
+
+    return 0;
+}
+
+```
+Visualmente, a declaraçao de `int &ref = num` seria como se criassemos uma variável `ref` "dentro da casinha do `num`", onde eles compartilhariam o mesmo endereço e valor.
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Memória-2-exemplo.png" alt="Representação-visual-memória" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
+##### Agora sim, Ponteiros
+
+Como dito anteriormente, ponteiros são simplesmente variáveis que guardam endereços de objetos na memória, ou seja, falamos que eles "apontam" para um objeto na memória. Todos os ponteiros tem um tipo associado que especifica o tipo do objeto que estará "apontando". Utilizamos também o prefixo (*) na declaração de ponteiros, como visto no exemplo abaixo:
+
+```cpp
+
+int main() {
+
+    int num = 2; // apenas uma declaração de um inteiro.
+
+    int* ptr;    // apenas uma declaração de um ponteiro de inteiro.
+    int *ptr2;   // outra declaração de um ponteiro de inteiro.
+
+    return 0;
+}
+
+```
+
+```cpp
+int main() {
+
+    int num = 2;
+
+
+    int *ptr = &num;    // atribui o endereço de "num" para "ptr". 
+
+    int *ptr2 = ptr; // atribui o endereço em "ptr" (ou seja, o endereço de "num") para "ptr2".
+
+    printf("%d", ptr2);      // print do endereço de num (0x...).
+    printf("%d", *ptr2);     // print do valor em num (2).
+
+    return 0;
+}
+
+```
+
+Voltando para o exemplo do `num = 2`, mudaremos um pouco o nosso objetivo. Dessa vez queremos armazenar o endereço de `num` em outra variável.
+
+Para isso, usaremos o ponteiro de inteiro `ptr`, que como definimos mais cedo, é uma variável que armazena endereços. Após isso, igualaremos ao endereço de `num` utilizando o prefixo "&" para armazená-la.
+
+```cpp
+
+int main() {
+
+    int num = 2; 
+
+    int* ptr = &num;   
+
+    return 0;
+}
+
+```
+
+Nesse caso, ao invés de ter uma variável "na mesma casinha" de `num`, temos uma nova variável `ptr` que armazena o endereço de `num`.
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Ponteiros-1-exemplo.png" alt="Representação-visual-ponteiros" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
+Analogamente, caso seja necessário, podemos também igualar o valor do ponteiro `ptr` à outros ponteiros de mesmo tipo, o que seria o mesmo que igualar ao endereço de `num`.
+
+```cpp
+
+int main() {
+
+    int num = 2; 
+
+    int* ptr = &num;   
+    
+    int* ptr2 = ptr;
+
+    int* ptr3 = &num; // ptr3 == ptr2 == ptr1
+
+    return 0;
+}
+
+```
+
+Lembrando que, mesmo que os ponteiros apontem para o mesmo endereço, não significa que eles estão no mesmo espaço de memória, como visto abaixo:
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/Ponteiros-2-exemplo.png" alt="Representação-visual-ponteiros" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
+  </div>
+
+
+## Tipos lineares de dados!
+
+
+### Array
+
+Ontem, para entendermos sobre ordenação, vimos um pouco sobre heap, stack, alocação estática e alocação dinâmica.
+Hoje nos aprofundaremos um pouco mais nessa parte e veremos estruturas de dados e suas implementações!
+
+// insira aqui diferenca ED x TADs
+
+// agora comecaremos as TADs
+
+
+Array
+
+Vocês provavelmente já estão acostumados a usar essa estrutura de dados, né?
+É uma das primeiras estruturas que aprendemos a usar, já que ela é muito simples: ela consegue guardar _N_ instâncias de um tipo primitivo (inteiro, booleano, double, etc.)
+
+Mas como isso acontece?
+
+```cpp
+
+int n = 10;
+
+int arr[n];
+
+```
+
+Quando você declara um array dessa forma, o computador "entende" que você quer alocar 10 espaços de inteiros na sua memória - nesse caso, na stack (lembre-se que esse N que declara o tamanho pode variar!).
+Como vimos ontem, o acesso à stack é extremamente rápido, mas tem tamanho limitado. Então o array é uma estrutura muito otimizada e rápida para usarmos, mas não podemos abusar da nossa querida stack criando um array de tamanho 10⁹, como talvez possamos nos sentir inclinados a fazer.
+
+
+Vamos analizar as particularidades e complexidades assintóticas de cada operação sobre um array
+
+Como a estrutura é guardada toda junta na memória (e considerando que você tem acesso ao endereço inicial de memória), todo o acesso é O(1).
+
+```cpp
+
+cout << arr[5]
+
+```
+
+Isso acontece porque, tendo o ponto inicial da nossa estrutura, podemos só adicionar a quantidade de "casinhas" (equivalente à quantidade de bits que o tipo guardado no array ocupa) que vamos pular e chegar ao endereço que queremos acessar. Por isso, qualquer operação de acesso ou atualização é constante, o que se torna muito bom para nós!
+
+Note também que não é possível fazer uma remoção ou uma anexação ao pé da letra do nosso array, porque o tamanho é fixo! Então mesmo se eu quiser muito adicionar mais um número ao meu array de tamanho 10, eu não vou conseugir :( . Isso é uma das maiores diferenças dessa estrutura para várias outras que usamos e vemos por aí. Por isso, ao criar um array, você precisa ter *certeza* do número máximo de coisas que você vai guardar.
+
+Diferentemente do que vamos ver um pouco mais adiante, o array é nativo ao c++ (e ao c também!), então ele está fora da nossa biblioteca *STL*. Mas o que isso significa, na prática? Nós não temos funções específicas para a nossa estrutura como veremos para as outras. Mas isso veremos daqui a pouco!
+
+De forma geral, é uma estrutura rápida e que te faz ter muito controle e noção do que você está fazendo o tempo todo. Eu pessoalmente acredito na soberania do array em todas as situações que o vector não é estritamente necessário (como em assuntos como grafos e, às vezes, na chamada de funções - mas não vamos ver nada disso aqui!), mas isso é para *você* decidir ao longo dessas aulas!
+
+Então, vamos seguir adiante para o vector!
+
+
+
+
+
+
+### Vector
+
+Agora já entramos no mundo da STL! o vector, ou vetor, é outra das estruturas mais populares e comumente utilzadas por toda a base usuária do C++ - mas ele não é nada mais que um array "embalado" (ou "encapsulado", para os mais chiques).
+
+// colocar o ah ehhhhh
+
+```cpp
+
+vector<int> vetor;
+
+vector<int> vetor2(10);
+
+```
+
+Ele funciona da mesma forma que um array funcionaria, mas com alguns grandes diferenciais: O espaço que é alocado quando declaramos a estrutura é separado na Heap (então temos mais espaço!), e o seu tamanho é variável.
+
+Vamos pensar no vector como um struct do C: É uma caixa que guarda alguns atributos e indica onde estão guardados os nossos valores. Então poderíamos imaginar essa implementação como algo assim:
+
+// desenho com atributos vem aqui
+
+
+Esses atributos podem parecer meio desnecessários, mas são *extremamente* úteis para quase todas as funcionalidades do vector - eles que dão as informações necessárias para a realocação de espaço de memória.
+
+Primeiramente, temos o valor capacity. Ele indica o tamanho do array alocado dinamicamente - a quantidade de objetos que podemos guardar ao total nessa estrutura. A seguir, temos o atrtipoibuto "end"; ele, por outro lado, vai indicar o "final lógico" da nossa lista. Ou seja, podemos ter quantidades diferentes nesses valores, desde que a capacidade seja maior ou igual ao número de objetos comportados atualmente (capacity >= end). O último valor é um ponteiro, que, como vimos anteriormente, aponta para o primeiro endereço de memória que guarda as nossas _data_ . Esse controle que temos a partir dessas informações é que vai nos permitir alocar tamanhos menores ou maiores de memória dependendo da situação em que nos encotramos.
+
+Uma possível implementação desses atributos de um vetor é essa aqui (feita por mim em 2024 e adaptada para vocês entenderem melhor).
+
+```cpp
+class vector {
+
+	private:
+
+  		int end;      		// indica o tamanho "real" do vetor, o final lógico
+  		int capacity; 		// indica a capacidade do vetor
+  		int * storage;        	// ponteiro para onde os valores estão
+  		
+ 	 // [...]
+  
+};
+
+
+```
 <details>
-<summary>resposta: SPOILER!</summary>
-    O QUE SÃO NÚMEROS???
+<summary> <b>Curiosidade</b> </summary>
+Note que, em classes no C++, nós podemos deixar coisas "privadas" - o que significa que estamos escondendo ela do usuário! Temos funções que retornam o tamanho e a capacidade do vector (.size(), .capacity()), mas uma pessoa qualquer não consegue mudar o valor de m_end e confundir a nossa lógica, ou deletar o m_storage e apagar todos os nossos dados (vocês aprenderão um pouco mais sobre POO e o princípio do encapsulamento quando pagarem P1!).
 </details>
 
-Nesse minicurso, para poupar vocês, iremos dar tudo mastigadinho para contextualizar e iremos construir do zero cada um desses números utilizando os Axiomas de Peano e os modelos de von Neumann (mas de uma forma um pouco simplificada).
-
-## Definição dos... Números?
-
-Sim, isso é bem feio de ler, mas para criar os números naturais, precisamos saber o que são números (mesmo que seja bem trivial).
-
-Note que iremos ver o que são conjuntos no dia 4, mas irei dar um spoiler para construir de forma similar a forma que os matemáticos Peano e von Neumann construíram. 
+OK! Agora que modelamos tudo que será necessário para o nosso vetor, vamos ver um pouquinho sobre as principais funções e suas especificidades e complexidades!
 
 
-## Definição dos Naturais
 
 
-Iremos começar o dia definindo o conjunto dos números naturais. Porém, iremos poupar um pouco
-vocês disso e apenas mostrar por cima o sistema de von Neumann e alguns axiomas de Peano, já que não temos tanto tempo
-para nos aprofundar nessa parte.
-Além disso, (coloquem na conta de Heitor) serei hipócrita e irei falar um pouco sobre a história da criação dos naturais, depois disso nós iremos construir nossas coisas se baseando na perspectiva deles.
+*Acesso*
+Como a nossa estrutura é implementada a partir de arrays (no qual um bloco contíguo de memória nos é reservado), o acesso ao número em cada índice também é imediato! Assim, podemos recuperar o valor de algum objeto em tempo constante, ou O(1). A função implementada pode ficar algo tão simples quanto isso:
+tipo
 
-### Os Axiomas de Peano
+```cpp
 
-Estamos em 1889, no fim do século XIX, a matemática está em crescimento (mas prestes a estar em uma era de medo :o), mas estamos com alguns problemas nas teorias dos números naturais. Basicamente, o matemático Giuseppe Peano notou que a teoria dos números tinha um grande problema: A falta de rigor matemático. Durante essa época, a teoria dos naturais era baseada apenas em intuição, e Peano notou que isso poderia levar a ambiguidades e contradições. 
-
-Após isso, inspirado pelos trabalhos de Euclides (axiomatização da geometria), Peano resolveu fazer o mesmo para a aritmética, mostrando que as operações básicas (adição, subtração, multiplicação etc) poderiam ser deduzidas em um conjunto pequeno de premissas, ou axiomas que não precisassem de prova. Então, Peano publicou "Arithmetices principia, nova methodo exposita", onde continham seus 5 axiomas e 3 objetos primitivos, sendo eles:
-
-```haskell
--- Objetos
-  -- apenas o número 0
-  -- apenas o conjunto dos naturais N (sim, é o N e não o ℕ)
-  -- apenas uma função sucessor (Succ()) (pega um numero e retorna o sucessor dele)
-
--- Axiomas
-  -- 1) O 0 existe.
-  0 ∈ N
-
-  -- 2) O sucessor existe.
-  (∀n ∈ N)[Succ(n) ∈ N]
-
-  -- 3) O 0 não é sucessor.
-  (∀n ∈ N)[0 != Succ(n)]
-
-  -- 4) Injetividade dos sucessores.
-  (∀n, m ∈ N)[Succ(n) = Succ(m) → n = m]
-
-  -- 5) Axioma da Indução
-  --Não irei escrever, mas é a indução que vocês viram ontem.
-```
-
-Porém, mesmo com esses axiomas, ainda temos aquela mesma dúvida de antes, "O que são números?", von Neumann irá resolver isso e ainda ajudar a deixar esses axiomas mais "fortes" e "robustos".
-
-### Ordinais de John von Neumann
-
-Agora estamos no começo do século XX, o momento onde começa a Crise dos Fundamentos da Matemática, a matemática até aquele momento era vista como a ciência "perfeita" e "rigorosa", mas, foi o momento onde surgiram diversos paradoxos, como o paradoxo de Russel, que foi o mais famoso (uma analogia dele seria "se um barbeiro que barbeia todos os homens de uma vila que não barbeiam si mesmos, quem barbeia o barbeiro?). Basicamente, a solução para a crise seria criar um sistema de axiomas "perfeito", onde não teriam erros e paradoxos, logo, a solução foi útilizar a querida Teoria dos conjuntos ZFC (Zermelo-Fraenkel com o axioma da escolha), onde não iremos nos aprofundar.
-
-Com isso, por volta de 1923, John von Neumann pensou: "como eu posso consertar os paradoxicos lógicos dos números?" e também "Como eu posso fazer isso respeitando os Axiomas de Peano", como a teoria dos conjuntos ZFC estava em alta por ser "simples" e "completa", von Neumann buscou formalizar ela para resolver esses paradoxos, dando uma base firme para a criação da Teoria dos Números.
-
-Nessa teoria, definimos cada natural como o "conjunto dos naturais que os precedem". Confuso? Um pouco. Então iremos mostrar de forma visual:
-
-```haskell
-0 ≝ Ø --antes do 0 não tem ninguém
-1 ≝ {0} ≝ { Ø } -- antes do 1 tem o 0
-2 ≝ {1, 0} ≝ { { Ø } , Ø } -- antes do 2 tem o 1 e o 0
-```
-
-Em termos formais, temos:
-
-```haskell
-
-Succ(n) ≝ n ∪ {n}
+int & at(int idx){
+    if(idx < 0 or idx >= size()){			 // retorna erro caso o índice for negativo (impossível) ou passar do tamanho lógico
+      throw std::out_ofter_range("Index out of range!");
+    }
+    return m_storage[idx];				// retorna o valor
+  }
+  
+int & operator[](int idx) {
+   return m_storage[idx];				// retorna o valor
+  }
 
 ```
 
-Com isso, temos não só como construir os naturais de forma "simples", mas estamos prontos para criar o conjunto dos inteiros!
 
-## Definição dos Inteiros
 
-Antes de iniciar isso, tenho duas perguntas:
+#### Redimensionamento
 
-1) Alguém já sabe como definir os inteiros?
+Assim que declaramos um vector da STL, um "construtor" é chamado. Ele vai "preparar" o chão pra o que vem por aí - setar o tamanho lógico pra zero e pode alocar ou não algum espaço inicial (isso depende da implementação! Na STL, não é alocado nenhum espaço de cara). Ele pode parecer algo assim:
 
-2) Alguém consegue explicar como ela funciona?
+```cpp
 
-Sim, eu sei como funciona, tanto que fiz esse material, mas o ponto é que a partir daqui, temos MUITAS definições possíveis, algumas mais fortes que outras, e hoje, irei mostrar uma das favoritas e iremos criar ela do zero:
-
-A nossa definição de inteiros vai utilizar alguns conceitos interessantes sobre classes de equivalência:
-
-Sejam n, m, i, k ∈ Nat e a relação de equivalência (∼).
-Sejam, então, as tuplas (n, m), (i, k) :: Nat X Nat.
-Definimos a relação (∼):
-```haskell
-(∼) :: (Nat × Nat) × (Nat × Nat) → Prop
-
-(n, m) ∼ (i, k) ↔ n + i = k + m.
-
-[(n, m)] = {(k, i) : (k, i) ∈ Nat × Nat e (n, m) ∼ (k, i)}
+  vector(){
+    end = 0;
+    capacity = 2;
+    storage = new int[2];
+  }
 
 ```
 
-Um pouco dificil de entender, mas, vamos analisar essa definição.
+Mas se inicializamos o nosso array dinâmico como algo tão pequeno, como vamos usar ele para guardar uma quantidade grande de objetos? É aqui que entra a mágica do _redimensionamento_ !
 
-Vamos pegar como exemplo a tupla (2, 3). a classe [(2, 3)] será o conjunto de todas as tuplas que
-tem a relação 2 + k = 3 + i para quaisquer k e i naturais, ou seja, (2, 3), (3, 4), (4, 5), ..., e
-também, caso não tenha notado, essa classe [(2, 3)] representa o inteiro -1.
+A função `reserve()`, como o nome sugere, "reserva" uma quantidade de espaço para o nosso vetor - aumenta a sua capacidade, o que nos vai ser bem útil daqui a pouco. De maneira geral, ela vai ser usada quando queremos inserir itens e a nossa estrutura já está cheia - isso é, o nosso end e o nosso capacity já estão iguais - ou quando sabemos quantos objetos vamos inserir ao total.
 
-Sendo assim, temos que o conjunto dos inteiros é o conjunto de todas as classes de congruência (∼).
-Exemplos:
+O argumento passado pela chamada da função é exatamente o tamanho do novo bloco de memória que vamos reservar pra o nosso novo array. Então a primeira coisa que devemos fazer é verificar se essa capacidade nova é maior que a capacidade atual - caso não, não faz sentido usar essa função, já que ela é feita para aumentar a capacidade do nosso vetor! Depois disso, vamos alocar o novo e maior array, copiar todos os valores antigos para o novo e desalocar o array antigo.
 
-```haskell
-[(3, 2)] := 1
+Então o código dessa função poderia ser algo assim:
 
-[(5, 2)] := 3
 
-[(0, 42)] := −42
+```cpp
+
+void reserve(int new_cap){
+
+    if (new_cap <= capacity) { // se a capacidade nova é menor, não fazemos nada
+      return;
+    }
+
+    else {
+      pointer temp = new value_type[new_cap];	// aloca espaço novo
+      
+      std::copy(begin(), end(), temp);		// copia os valores antigos para o novo espaço
+      
+      delete[] storage;				// liberar a memoria antiga
+      
+      storage = temp;				// fazer m_apontar pra a nova memoria ampliada
+      
+      capacity = new_cap;			// aumentar a capacidade
+    }
+  }
+
 ```
 
-
-# Divisibilidade e Primos
-
-## Relação de divisibilidade e o Teorema da divisão
-
-Agora que definimos o nosso escopo, estamos interessados em construir relações para ele, sendo
-o nosso objetivo principal encontrar jeitos de relacionar cada número inteiro. Iniciaremos com as
-seguintes relações:
-
-``` haskell
-(+) :: Int x Int → Int
-(*) :: Int x Int → Int
-(−) :: Int → Int
-( | ) :: Int x Int → Prop
-```
-
-Já estamos acostumados com os três primeiros, porém, essa última pode ser um pouco confusa caso vista pela primeira vez.
-
-Sejam a, b ∈ Int com a ̸= 0, temos que a|b significa ”a divide b”, quase como se fosse uma divisão,
-mas retornaria ”true” ou ”false” caso o resultado seja inteiro, ou não. Sendo essa operação o nosso
-tópico principal.
-Definimos a|b da seguinte forma:
-
-```haskell
-a|b ↔ (∃k :: int)[k * a = b]
-```
-
-Alguns podem ter notado que essa relação na verdade não é ”quase como se fosse uma divisão”, como dito antes,
-mas sim, o nosso primeiro passo para construir a própria divisão.
-
-Como o objetivo era ”relacionar cada inteiro”, vamos ”reformular” essa relacão de modo em que
-caso tenhamos 2 inteiros, nós conseguimos extrair uma relação entre os dois:
-
-```haskell
-(∀a, b :: int)(∃!q, r :: int)[0 ≤ r < |b| ⇒ a = q * b + r]
-```
-
-Chamamos essa proposição de o Teorema da Divisão. Caso os simbolos feios tenham deixado
-dificil entender, esse teorema diz que conseguimos relacionar quaisquer dois inteiros de uma única forma.
-
-Note que, quando temos que r = 0, o teorema da divisão é muito similar a nossa relação de divisibilidade,
-o motivo disso é que olhamos esse ”r” como o ”resto” da divisão entre a e b, e caso você se
-lembre do seu 5 ano do fundamental, quando temos resto 0, é quando um inteiro é divisor de outro.
-
-Exemplos:
-```haskell
-a := 42, b := 9:
-42 = 4 * 9 + 6 (q = 4, r = 6)
-
-a := 5, b := 2:
-5 = 2 * 2 + 1 (q = 2, r = 1)
-
-a := 4, b := 5
-4 = 0 * 5 + 4 (q = 0, r = 4)
-```
-Logo, chamaremos de div e mod as relações onde:
-```haskell
-a div b = div(a, b) = q.
-a mod b = r.
-```
-Com isso, estamos preparados para trabalhar em alto nível.
-
-## Teorema Fundamental da Aritmética
-
-Iremos começar montando nossos planos para construir o Teorema Fundamental da Aritmética:
-1) Definir o que são primos.
-2) Mostrar que qualquer número é um primo ou composto por uma fatoração de primos
-3) Mostrar que essa fatoração é única.
-
-
-### O que são Primos?
-
-Primeiramente, iremos definir o que são números primos (viu o que eu fiz? >:))
-
-Seja p um número primo. Temos que o p tem as seguintes características:
-```haskell
-(I) p ∈ Int
-(II) p > 1.
-(III) p não tem divisores além de 1 e ele mesmo.
-```
-
-Podemos também reescrever o (II) como:
-
-```haskell
-p primo ↔ (∀a ∈ Int)[a != 1 & a != p ⇒ a ∤ p]
-```
-
-Ou reduzindo a complexidade para:
-
-```haskell
-p primo ↔ (∀a < p)[a > 1 ⇒ a ∤ p]
-```
-
-OU REDUZINDO MAIS AINDA PARA:
-
-```haskell
-p primo ↔ (∀a primo)[a ≤ √p ⇒ a ∤ p]
-```
-
-Brincadeiras a parte, iremos utilizar qualquer uma das duas primeiras reescritas como uma ”definição”, 
-a terceira é conhecida como o Crivo de Eratóstenes, antes de utilizar ele, vocês precisarão demonstrar :). Obs: vocês também precisam definir o que é uma raiz quadrada >:).
-
-Analogamente, chamaremos os números que ”não são primos” como números compostos.
-
-### Qualquer número é primo, ou composto por uma fatoração de primos
-Irei demonstrar em uma linguagem um pouco mais "low level":
-
-```haskell
--- Iremos mostrar que (∀n > 1)(∃p primo)[p | n]
-Seja n :: Int>1, Inducao forte em n.
-Passo base: -- n = 2
-Imediato [2 primo e 2|2]
-Passo Indutivo:      --Hipotese: (∀k)[1 < k < n ⇒ (∃p primo)[p | k]]
-
-Caso n primo:
-Imediato [n | n]
-Caso n composto:
-Sejam a, b tq n = a*b
-Logo, a > 1, n > b [Teorema ?]
-Logo, pela Hipotese, a e b sao primos, ou compostos por primos.
-Logo, n  ́e composto por primos [Transitividade]
-```
-
-Note que escrevi [Teorema ?] na linha 10, tente descobrir qual teorema eu usei e demonstre-o.
-
-### A fatoração acima é única
-
-```haskell
---Iremos mostrar a unicidade dessa fatoração.
-Seja n composto. Suponha que n tenha duas fatoracoes distintas.
-Sejam s e t tq, sem perda de generalidade, s ≤ t.
-Logo, temos que n = p₁ * p₂ * ... * pₛ, onde cada p sao primos que estao em ordem crescente
-Analogamente, temos que n = q₁ * q₂ * ...qₜ, onde cada q sao primos que estao em ordem crescente.
-Como p₁ | n, temos que p₁|q₁ * q₂ * ... * qₜ.
-Logo, seja h tq p₁ = qₕ  [Lema ?]
-Logo, p₁ ≥ q₁ [h ≥ 1]. -- chamarei esse passo de h1.
-Logo, q₁ ≥ p₁ [h1]
-Logo, p₁ = q₁
-Analogamente, temos que p₂ * p₃ * ... * pₛ = q₂ * q₃ * ... * qₜ. [p₁ = q₁]
-Analogamente, para cada pₖ e qₖ com 1 < k < s, pₖ = qₖ.
-Caso s < t:
-Logo, 1 = qₛ₊₁ * qₛ₊₂ * ... * qₜ.
-Contradicao [qₖ primo para cada 1 < k < t].
-Logo, s = t e pₖ = qₖ para cada 1 < k < t
-```
-Similar a última demonstração, encontre o [Lema ?] e o demonstre.
-
-### Juntando as peças
-Juntando tudo isso, para qualquer inteiro positivo a, ou ele é um primo, ou pode ser escrito como uma fatoração
-de primos, onde essa fatoração é única, a menos da ordem de seus fatores.
-
-Podemos ver da seguinte forma:
-
-Para qualquer n > 1, podemos escrever n como:
-
-```haskell
-n = p₁ᵏ¹ * p₂ᵏ² * ... * pᵣᵏʳ
-```
-
-Onde, para i = 1, 2, ... , r, cada kᵢ é um inteiro positivo e cada pᵢ é um número primo, tal
-que p₁ < p₂ < ... < pᵣ.
-
-SIM MATEMATICOS, EU SEI QUE ISSO FICARIA MUITO MAIS BONITO COM UMA PRODUTÓRIA.
-
-Chamamos essa forma de forma canônica.
-Note que, o nosso objetivo de ”relacionar dois inteiros quaisquer” já foi cumprido. Esse teorema
-é extremamente poderoso e é a ”base para a matemática básica que vemos nas escolas". A partir
-disso, podemos iniciar tópicos um pouco mais complexos.
-
-## Múltiplos e Divisores comuns
-Sim, de fato iremos ver isso.
-
-O Teorema Fundamental da Aritmética nos permite especificar cada divisor/múltiplo comum de
-quaisquer números inteiros, então, iremos analisar como as operações de MMC e MDC nos
-permitem trabalhar melhor com números primos.
-
-### MMC
-O MMC (Mínimo Múltiplo Comum), como o nome já diz, á a operação que vê o menor número
-que é divisível por outros dois (ou mais). Definimos da seguinte forma:
-
-```haskell
-MMC(a, b) = min(c : a|c & b|c)
-```
-
-Uma definição um pouco diferente do que estamos acostumados, mas que não é tão dificil de
-se compreender, já que ela (literalmente) pega o menor fator "c", onde a | c e b | c.
-
-### MDC
-
-Agora, iremos ver o ”mais interessante” que é o MDC. Como o nome já diz, o MDC (Máximo
-Divisor Comum) não foge muito do padrão. Similar ao seu irmão mais novo (MMC), podemos
-utilizar a seguinte definição:
-
-```haskell
-MDC(a, b) = max(c : c|a & c|b)
-```
-
-Onde ela pega o maior fator "c" onde a divide c e b divide c.
-
-Note que, unindo as duas operações, temos que:
-```haskell
-MDC(a, b) * MMC(a, b) = a * b
-```
-
-### Algoritmo de Euclides e o Teorema de Bezout
-
-Podemos utilizar o seguinte algoritmo para calcular o MDC de 2 números:
-```haskell
-MDC(c, 0) = c
-MDC(a, b) = MDC(b, r)
-```
-Onde o r é o resto da divisão de a por b.
-Chamamos esse algoritmo de ”Algoritmo de Euclides”. A ”extratégia” do uso desse algoritmo é continuar
-dividindo o número ”na esquerda” pelo ”da direita” até encontrar o MDC na forma MDC(c.0) para simplificar como apenas ”c”.
-
-O interessante surge quando Bezout constrói seu mais famoso teorema:
-
-(∀a, b ∈ Int=0)(∃s, t ∈ Int)[MDC(a, b) = a * s + b * t]
-
-Em outras palavras, podemos colocar MDC(a, b) como uma combinação linear de a e b.
-Agora, juntando isso com o Algoritmo de Euclides, temos o Algoritmo Estendido de Euclides (nome criativo).
-Nele, buscamos encontrar o ”r” (como no Algoritmo de Euclides), mas, voltamos para encontrar
-a combinaçãoo linear. Confuso? Sim. Útil? MUITO!!
-Exemplo:
-
-```haskell
-MDC(252, 198)
-252 = 1*198 + 54 -> 54 = 252 - 1*198 (I)
-198 = 3*54 + 36  -> 36 = 198 - 3*54 (II)
-54 = 1*36 + 18   -> 18 = 54 - 1*36 (III)
-36 = 2 * 18 + 0
-calc:
-18 = 54 - 1*36 [III]
-18 = 54 -1*(198 - 3*54) [II]
-18 = -198 + 4*54
-18 = -198 + 4*(252 - 1*198) [I]
-18 = 4*252 -5*198
-Logo, MDC(252, 198) = s*252 + t*198 onde s = 4 e t = -5.
-```
-
-Se fosse apenas isso, não teria sentido em ver isso agora, porém, esse algoritmo tem diversos usos na área de Aritmética Modular.
-Já pararam para pensar em qual é o menor valor possivel para o MDC?
-De fato é beeem contraditório, já que na operação buscamos o valor máximo, mas,
-temos que o menor valor é o 1, já que o 1 divide qualquer número. Essa parte fica interessante quando a gente faz a seguinte pergunta:
-
-Quando que o MDC de dois números resulta em 1?
-
-Spoiler, ocorre quando nenhum número (além do 1) divide os outros dois (wooow). Nesse caso,
-falaremos que os dois números são ”primos entre si” ou ”coprimos”. Essa informação sobre primos e coprimos será extremamtente útil na área de Aritmética Modular, mais especificamente em teoremas um pouco mais avançados como os teoremas de Fermat.
-
-# Relações de congruência 
-
-## Conceitualização
-No Brasil, usamos o sistema de 24 horas, mas, coloquialmente, chamamos o horário das 18h por “6 da tarde”, ou o horário das 17h por “5 da tarde”. De onde exatamente saíram esse 6 e esse 5? Você pode argumentar que são 6 horas após o meio-dia (12h), ou seja, 12 + 6 = 18h, e você estaria correto, isso se trata de uma relação de congruência! 
-O relógio de ponteiro só vai até as 12, mas mesmo assim conseguimos ler através dele as 24 horas do dia. Relações de congruência funcionam como relógios, da mesma forma que podemos dizer que 18h equivale a 6h (da tarde) no formato de 12h, dizemos que 18 ≡ 6 (mod 12). As relações de congruência estão diretamente ligadas aos comportamentos “cíclicos” de como enxergamos o mundo, outros exemplos são os dias da semana, dias no mês ou até mesmo as bases numéricas (como a base 10 que usamos)! Tente identificar relações de congruência nos exemplos dados.
-
-## Relações de congruência na programação
-Na computação, utilizamos vastamente relações de congruência para as mais diversas finalidades.
-O operador ‘%’ (módulo) retorna o resto de uma divisão, o que é a base para as relações de congruência. Utilizando nosso exemplo do relógio, podemos utilizar o operador ‘%’ para descobrir que horário no relógio é equivalente a nossa entrada no formato 24h.
-```python
-# Exemplo 1: Ciclos de 12 horas (relógio)
-
-# Qual horário corresponde as 18h?
-print(18 % 12)  # Saída: 6 → 18 ≡ 6 (mod 12)
-
-# Qual horário corresponde as 23h?
-print(23 % 12)  # Saída: 11 → 23 ≡ 11 (mod 12)
-``` 
-Para checar se dois números são congruentes (em relação a um módulo m), basta checar se o resto que eles deixam na divisão por m é o mesmo.
-```python
-# Exemplo 2: Checando se dois números são congruentes em relação a um módulo
-
-a = 38
-b = 14
-m = 12
-print(a % m == b % m)  # True, pois 38 ≡ 14 ≡ 2 (mod 12)
-
-```
-Uma aplicação mais concreta e amplamente utilizada é descobrir se um número é par ou ímpar. Se dividirmos qualquer número por 2, existem apenas duas possibilidades: ou o resto é 0, ou o resto é 1. 
-```python
-# Exemplo 3: Restos deixados na divisão por 2
-print(8 % 2) # Saída: 0
-print(9 % 2) # Saída: 1
-print(255 % 2) # Saída: 1
-print(1798 % 2) # Saída: 0
-```
-Os números pares são as classes de equivalência de 0 módulo 2 (mais sobre isso futuramente), podemos abusar desse fato para classificar pares e ímpares facilmente, se deixa resto 0 significa que é par, se deixa resto 1, significa que é ímpar.
-```python
-# Exemplo 4: função para verificar se um número é par
-
-def eh_par(numero):
-   if numero % 2 == 0:
-      return true # O número é par
-   if numero % 2 == 1:
-      return false # O numéro não é par (ou seja, é impar) 
-```
- Da mesma forma que fizemos no exemplo acima, podemos usar o exemplo 2 para definir uma função recebe 2 números e um módulo, e retorna se aqueles números são congruentes em relação aquele módulo.
-```python
-# Exemplo 5: função para verificar se dois números são congruentes 
-# em relação a um módulo
-
-def congruente(a, b, m):
-   if (a % m) == (b % m):
-      return true
-   else:
-      return false:
-```
-
-## Aplicações e Definição formal
-A ideia principal por trás das relações de congruência é mostrar que dois números são equivalentes numa divisão por um número m se, ao serem divididos por m, eles deixam o mesmo resto. Por exemplo quando dividimos 6 por 4, obtemos resto 2 (6 mod 4 = 2), e da mesma forma, quando dividimos 10 por 4 também obtemos resto 2 (10 mod 4 = 2), assim, dizemos que 6 equivale a 10 (ou que 6 é congruente a 10) numa divisão por 4. Esse conceito tem diversas aplicações práticas, como:
-
-1. **Criptografia**
- - Algoritmos como RSA usam congruências modulares para codificar/decodificar mensagens (ex: cálculo de c ≡ m^e mod n para cifragem). [Idéia: implementar em python um algorítmo de cifra de césar simples]
-2. **Validação de documentos**
- - Dígitos verificadores do CPF, cartões de crédito ou até contas bancárias utilizam congruências modulares
-3. **Hash tables**
- - Funções hash utilizam o operador '%' para mapear chaves em índices de arrays
-4. **RNG (Random Number Generator)**
- - ...
-
-### Definição Formal
-Dados a,b e m inteiros, e m > 0, dizemos que:
-a ≡ b (mod m) se e somente se m \| (a - b)
-Exemplos:
-```haskell
-- 15 ≡ 3 (mod 12), pois 12 \| (15 - 3)
-- 6 ≡ 2 (mod 4), pois 4 \| (6 - 2)
-- 19 ≡ 5 (mod 7), pois 7 \| (19 - 5)
-```
-## Aritmética Modular
-
-### Propriedades
-Agora, vamos ver algumas propriedades fundamentais das relações de equivalência, e demonstrar que elas valem.
-#### **Propriedades relacionais**
-Vamos começar com algumas propriedades da relação em si.
-
-**Reflexividade:** a ≡ a (mod m)
-
+conseguem imaginar a complexidade dessa operação?
 
 <details>
-<summary> Resposta:SPOILER! </summary>
-<div markdown="1">
-```haskell
--- Podemos demonstrar essa propriedade por contradição. 
-Assuma que a propriedade é falsa, ou seja:
-a /≡ a (mod m) -- [onde '/≡' é a negação de '≡']
--- Podemos transformar essa proposição através de definições que já vimos de tal forma:
-a /≡ a (mod m) -> m ∤ (a - a) -- [pela definição de congruência que vimos a pouco]
-m ∤ (a - a) -> ∄k, k * m = (a - a) -- [pela definição do operador '\|' que vimos no começo dessa aula]
--- A partir daqui, basta desenvolver um pouco a equação para chegar numa contradição:
-∄k, k * m = (a - a) -> ∄k, k * m = 0    
--- Sabemos que qualquer número multiplicado por 0 resulta em 0, 
--- isso contradiz a proposição que concluímos 
--- a partir da assunção original que fizemos. 
-Logo, por prova indireta, a ≡ a (mod m).
-```
-</div>
+<summary> <b>Spoiler</b> </summary>
+A complexidade é O(n)! (nesse caso, O(new_cap)). Ela está escondida na função de copy, que copia todos os n valores, um a um, para o novo array.
 </details>
 
-**Simetria:** a ≡ b (mod m) → b ≡ a (mod m)
-
-<details>
-<summary> Resposta:SPOILER! </summary>
-<div markdown="1">
-```haskell
-Seja a ≡ b (mod m) 
--- Como na propriedade anterior, vamos transformar essa proposição
-a ≡ b (mod m) -> m \| (a - b)
-m \| (a - b) -> ∃k, k * m = (a - b)
--- Agora, vamos desenvolver essa equação a nosso favor
-k * m = (a - b) -> -1 * k * m = -1 * (a - b) 
--1 * k * m = -1 * (a - b) -> (-k) * m = -a + b
-(-k) * m = -a + b -> j * m = b - a -- [Com j = -k]
-Logo,
-∃j, j * m = (b - a) 
-Pela definição de \|, temos
-∃j, j * m = (b - a) -> m \| (b - a)
-Pela definição de congruência, temos
-m \| (b - a) -> b ≡ a (mod m)
-Que é o que queriamos demonstrar.
-```
-</div>
-</details>
-
-**Transitividade:** a ≡ b (mod m) e b ≡ c (mod m) → a ≡ c (mod m)
-
-<details>
-<summary> Resposta:SPOILER! </summary>
-<div markdown="1">
-```haskell
-Seja a ≡ b (mod m), e  b ≡ c (mod m)
--- Já sabe o que fazer né? Transformar a proposição utilizando as definições
-Podemos escrever:
-a ≡ b (mod m) -> m \| (a - b)
-m \| (a - b) -> ∃k, k * m = (a - b)
-Analogamente:
-b ≡ c (mod m) -> m \| (b - c)
-m \| (b - c) -> ∃k, k * m = (b - c)
--- Temos que pensar um pouco fora da caixa agora,
--- precisamos chegar que a ≡ c (mod m). Para isso
--- precisamos obter b em função de a
-Temos que:
-k * m = (a - b) -> -b = k * m - a -> b = -k * m + a
--- Agora, basta substituir b na outra equação
-Logo:
-k * m = (b - c) -> k * m = (-k * m + a) - c -> k * m + k * m = a - c
-k * m + k * m = a - c -> 2 * (k * m) = (a - c) -> (2 * k) * m = (a - c)
-(2 * k) * m = (a - c) = j * m = a - c -- Com j = 2 * k
--- Agora é so transformar de volta pra forma de congruência 
-Pela definição de \|, temos
-∃j, j * m = (a - c) -> m \| (a - c)
-Pela definição de congruência, temos
-m \| (a - c) -> a ≡ c (mod m)
-Que é o que queriamos demonstrar.
-```
-</div>
-</details>
+Mas essa função não é tããão utilizada no dia a dia por nós - só por trás dos panos.
 
 
-#### **Propriedades operacionais**
-Agora é sua vez, como exercício, tente demonstrar as seguintes propriedades. Lembre-se, você pode utilizar as propriedades
-que já foram demonstradas acima.
+#### Inserção
 
-> *Se a ≡ b (mod m) e c ≡ d (mod m), então:*
-1. Adição: a + c  ≡ b + d (mod m)
-2. Subtração: a - c ≡ b - d (mod m)
-3. Multiplicação: a * c ≡ b * d (mod m)
+A inserção em um vetor pode ser feita com funções como `push_back()` ou `emplace_back()`, e vai receber o objeto que você quer adicionar na sua lista.
 
-> *Desafio!*
-1. Se c * a ≡ c * b (mod m), então a ≡ b (mod n/MDC(c, n))
-2. Se c * a ≡ c * b (mod m) e MDC(c, m) = 1, então a ≡ b (mod m)
-3. Se c * a ≡ c * b (mod p) e p ∤ c, onde p é primo, então a ≡ b (mod p)
-
-### Congruência Linear e Inversos Modulares
-
-Similar as funções lineares que vocês devem ter visto recentemente em ME, MBM, Cálculo, uma congruência linear é uma equação na seguinte forma:
-
-a * x ≡ b (mod m)
-
-E como ocorre em qualquer equação, nós podemos resolver ela (encontrar o x onde a congruência acontece). Porém, note que caso b = 1, nós temos uma situação bem conhecida na matemática:
-
-a * x ≡ 1 (mod m)
-
-Chamamos o "x" de "inverso modular de a no módulo m", ou apenas de "inverso de a mod m". Essa informação nos permite manipular equações e montar sistemas. Note que existem alguns casos onde alguns números não possuem inversos, por exemplo:
-
-2x ≡ 1 (mod 4)
-
-Não nos aprofundaremos nisso, mas temos o seguinte Teorema sem nome: "O elemento a tem inverso módulo
-m se, e somente se, a e m não têm fatores primos em comum ". Note que, como consequência do último teorema, temos o seguinte: "se m for primo, todos os elementos não nulos possuem inversos" 
-
-#### Como encontrar um inverso modular
-
-"ah, é só sair multiplicando até achar"
-
-encontre o x em 5x ≡ 1 (mod 10007).
-
-Ok, é possivel fazer isso com números pequenos, mas para valores grandes isso se torna inviável. 
-
-Voltando um pouco no tempo, nós temos uma ferramente muito útil para esse momento, e ele é o Teorema de Bezout! Ele diz que MDC(a, b) = at + bs para algum t e s inteiros. Como o nosso outro teorema diz que "a tem inverso modulo m apenas se eles não tem fatores primos em comum", podemos ver ele como "a tem inverso módulo m apenas de MDC(a, m) = 1" (caso não se lembre, foi visto anteriormente no módulo de MDC). Logo, calculemos:
-
-
-```haskell
-MDC(a, m) = at + ms         [teorema de bezout]
-1 = at + ms                 [a e m não tem fatores primos em comum]
-1 ≡ at + ms    (mod m)      [1 ≡ 1 (mod m), como 1 = at + ms, então 1 ≡ at + ms (mod m)]
-1 ≡ at         (mod m)      [ms ≡ 0 (mod m)]
+```cpp
+vector<int> vetor;
+vetor.push_back(10)
 ```
 
-Logo, utilizando conceitos vistos no passado, podemos utilizar o Algoritmo Estendido de Euclides para encontrar os inversos modulares, apenas encontrando o "t" que aparece no MDC(a, m) = at + ms.
+Esse valor, como indica o nome da função, vai ser sempre inserido no fim da nossa lista - ou seja, estamos aumentando o final lógico em 1. Em uma análise trivial, poderíamos apenas valorar storage[end] com o valor que nos é passado, aumentar o valor lógico e seguir em frente.
 
-#### Exercícios
+```cpp
 
-1. Faça um "esquema" que mostre o passo à passo de como se calcula o inverso modular.
-2. Faça um pseudocódigo que aplique esse "esquema".
-3. Calcule os inversos de 3 mod 7 e 42 mod 11.
-
-> *Desafio!*
-4. Implemente um código na linguagem que você preferir que calcule o inverso modular de algum número a no módulo m. (dica: fazer isso e rodar o código para resolver a questão 3 é beeem divertido!)
-5. Resolva os desafios do último tópico utilizando inversos modulares.
-
-# Criptografia
-
-## Contextualização histórica
-Historicamente, "esconder" mensagens sempre foi uma necessidade: passar informações para aliados de maneira segura, - sem a possibilidade delas serem roubadas - era imprescindível durante episódios como guerras ou conflitos. Nesse contexto, foram desenvolvidas técnicas para que essas mensagens pudessem passar despercebidas ou ininteligíveis diante do olho inimigo, mas claras para os destinatários.
-
-A esteganografia, por exemplo, já é utilizada há milhares de anos. O seu nome vem das palavra gregas "steganos", que significa "coberta", e "graphein", que significa "escrever" - e, como as definições sugerem, a prática se reduz a encobrir a existência dessas mensagens por completo, de forma que elas passem despercebidas a um olho destreinado.
-
-Durante as Guerras Persas, (cerca de 500-450 AC!) o governante Histieu de Mileto já se utilizava da esteganografia: prisioneiro do rei da Pérsia e na necessidade de passar mensagens para o seu exército na Grécia, ele raspou a cabeça de um mensageiro, tatuou a mensagem em seu couro cabeludo, e esperou o cabelo crescer de novo. Com a mensagem encoberta, o mensageiro poderia viajar sem nenhum problema pelas terras e, quando chegasse em seu destino, rasparia a sua cabeça de novo para informar as ações que deveriam ser tomadas pelos gregos.
-
-Ainda que completamente inaplicável em grande escala (convenhamos, nem todos temos tempo o suficiente de esperar cabelo crescer para mandarmos mensagens. Ou espaço o suficiente em nossos couros cabeludos.), essa ação já mostrava a aplicação da esteganografia para passar mensagens de maneira segura (e ineficiente). Mas não para por aí! Ainda na Grécia, tabuletas de cera eram raspadas, escritas sobre e depois cobertas com cera de novo para passarem despercebidas. Já na China antiga, mensagens eram escritas em tiras finas de seda e amassadas e cobertas por cera - os mensageiros, então, engoliam as bolinhas para transportá-las.
-
-Mas o problema com essas práticas era claro: assim que alguém prestasse mais atenção, pensasse em raspar a cera de uma tábua ou checasse a cabeça de alguém, ía tudo pro beleléu.
-
-Então, à medida que a "comunicação secreta" continuou a evoluir, outra forma de passar essas mensagens foi desenvolvida - a criptografia ("cryptos", também do grego, significa "escondido"). Assim, ao invés de tentar acobertar uma mensagem, os esforços seriam direcionados para esconder o seu significado - processo conhecido como cifragem ou encriptação. Ou seja, uma mensagem seria embaralhada ou modificada com base em uma regra ou em um protocolo pré-definido, de forma que a pessoa que vai receber a mensagem consiga fazer um outro processo para desembaralhar essa mensagem e torná-la inteligível (o que ficaria difícil para alguém que não é o destinatário da mensagem fazer). Durante esse processo, é utilizada uma chave - ela que será a responsável por manter a mensagem secreta, mesmo que o algoritmo seja conhecido!
-
-Uma das criptografias mais conhecidas é a chamada "Cifra de César", usada durante as Guerras da Gália pelo Império Romano. Nela, Júlio César (ou o seu representante) simplesmente substituía cada letra da mensagem pela letra 3 casas depois no alfabeto (nesse caso, a chave seria 3!).
-
-*imagem cifra de césar*
-
-<div style="text-align: center;">  <img src="assets/images/ceaserCipher.png" alt=""> </div>
-
-Uma outra ferramenta que pode facilitar a nossa visualização é o disco de cifra! Infelizmente não temos um exemplo presencial pra mostrar pra vocês, mas as duas rodas possibilitariam o deslocamento relativo das letras de maneira circular, facilitando a etapa da encriptação!
-
-<div style="text-align: center;">  <img src="assets/images/cipher-wheel.jpg" alt=""> </div>
-
-Diversas variações dessa cifra existem - e enquanto sim, só existem 25 diferentes possibilidades triviais de chaves, não se engane! Há cerca de 400,000,000,000,000,000,000,000,000 chaves diferentes caso o alfabeto seja rearranjado; Se levássemos um segundo para checar cada uma das possibilidades, esse processo duraria cerca de um bilhão de vezes o tempo de vida do universo!
-
-Com a modernização da área, foram criados diversos outros sistemas de criptografia, cada vez mais modernos e seguros - um deles sendo a Criptografia RSA (Rivest-Shamir-Adleman), que estudaremos um pouquinho mais a fundo a seguir!
-
-## Criptografia Assimétrica
-
-Até então, todas as formas de criptografia eram simétricas, - ou seja, o processo de “decriptação” era objetivamente o inverso da “encriptação”. Assim, ambos usavam a mesma chave - o que facilitaria o roubo de informações, já que a chave deveria ser transportada para que o conteúdo pudesse ser revelado! Justamente para tentar mitigar esse problema, Whitfield Diffie e Martin Hellman (dois Cientistas da Computação e pesquisadores de Stanford) idealizaram uma maneira diferente de transportar mensagens secretas: a Criptografia Assimétrica.
-
-Na criptografia assimétrica, ao invés de apenas uma chave, duas chaves são necessárias: uma pública, para a encriptação, e uma privada, para a decriptação. Dessa forma, cada usuário disponibiliza a sua chave pública, de maneira que qualquer um pode criptografar mensagens para ele, e mantém em segredo a sua chave privada, para que ele seja o único capaz de descriptografar o que lhe foi enviado. O maior objetivo, então, seria facilitar ao máximo a primeira etapa e dificultar ao máximo a segunda (a não ser que a chave secreta esteja em sua posse!). Ou seja, o problema da necessidade de transportar a chave de maneira segura (para que a mensagem não seja roubada) some!
-
-<div style="text-align: center;">  <img src="assets/images/alice-e-bob-2.png" alt=""> </div>
-
-Para explicar mais claramente essa ideia, vamos imaginar que Alice precisa mandar uma mensagem para Bob. Então, ambos terão disponibilizado suas chaves públicas e escondido suas chaves privadas. Mas vamos também imaginar que Eve quer bisbilhotar as mensagens que eles estão mandando entre si, esse processo precisa ser feito da maneira mais segura possível.
-
-Para Alice criptografar uma mensagem e enviá-la para Bob, ela vai usar a chave pública oferecida por ele para deixar a mensagem ininteligível. Eve, por mais que ela queira descobrir o que foi mandado, não vai conseguir fazer com que a mensagem passe a ser compreensível, porque ela não tem a chave secreta! Bob, assim que receber a mensagem, vai usar a chave secreta que ele tem para decriptar a mensagem.
-
-Até simples de entender, né? Mas um processo que possibilitasse essa propriedade demorou anos a ser desenvolvido! Foi apenas em 1977 que Ron Rivest, Adi Shamir e Leonard Adleman foram capazes de publicar suas descobertas e uma nova forma de criptografar: a chamada Criptografia RSA.
-
-## Criptografia RSA
-
-A segurança desse sistema se baseia tanto na infinidade dos números primos quanto na dificuldade para a fatoração de números extensos em primos - então os primos escolhidos por Alice seriam tão, tão extensos que teriam centenas de casas decimais!!
-
-Antes de entrarmos em exemplos com números de verdade, vamos ver o processo idealizado pelos três cientistas: Inicialmente, Alice escolhe os dois primos ***p*** e ***q***, e um número e que seja coprimo a (***p***-1)x(***q***-1) (que representa o valor da função totiente de euler! mas isso não vem ao caso agora); A chave pública consistirá, então, no produto ***n*** entre ***p*** e ***q*** e no número e. Bob, então, pegaria a sua mensagem e transformaria-na em um número ***m*** (por meio de recursos como a tabela ASCII!). O algoritmo geral levaria o garoto a transformar sua mensagem em um texto cifrado ***C*** = ***m***^***e***(mod ***n***).
-
-Em geral, é muito difícil reverter c para a sua mensagem original sem nenhuma informação adicional devido à natureza de funções módulo: elas são imprevisíveis! Você não consegue ir “testando” números diferentes para m e basear seus chutes seguintes nos anteriores (como seria feito em uma busca binária!), já que um resultado maior não necessariamente implica em um m maior. Assim, qualquer espião ou fofoqueiro teria dificuldade em retornar à mensagem original.
-
-Na volta, precisaremos do valor de outro número: ***d***, o inverso modular multiplicativo daquele e que publicamos anteriormente! Ou seja, temos que: ***d*** x ***e*** ≡ 1(mod(***p***-1)(***q***-1)). Conseguimos resolver essa equação usando o algoritmo estendido de euclides, que vimos anteriormente nesta aula!
-
-Logo, pelas propriedades de inverso multiplicativo, nós conseguimos reverter a cifra para a nossa mensagem original! então, ***m*** = ***c***^***d***(mod ***n***).
-
-Para deixar as coisas um pouco mais tangíveis, vamos exemplificar com números pequenos. Alice escolheu ***p*** = 17, ***q*** = 11 e ***e*** = 7. Portanto, serão publicados ***e*** e ***n*** = ***p*** x ***q*** = 187. Caso Bob queira mandar apenas uma letra ‘X’ para Alice, ele precisa transformar essa letra em um número para que ele possa ser encriptado - e, ao checar a tabela ASCII, Bob chega à conclusão que sua mensagem ***m*** = 88. Usando a fórmula vista anteriormente, ***c*** = 887(mod 187). Através de propriedades modulares (aquelas que vimos mais cedo!), podemos chegar aos seguintes resultados:
-
-```haskell
-88⁷ (mod 187) = [88⁴ (mod 187) ✕ 88² (mod 187) ✕ 88¹(mod 187)] (mod 187)
-88¹ = 88 = 88 (mod 187)
-88²  = 7,744 = 77 (mod 187)
-88⁴ = 59,969,536 = 132 (mod 187)
-88⁷ = 88¹ ✕ 88² ✕ 88⁴ = 88 ✕ 77 ✕ 132 = 894,432 = 11 (mod 187)
-```
-Então Bob chega à conclusão que a mensagem encriptada tem o valor 11!
-
-
-Alice, para decriptar a mensagem, precisa encontrar o valor de ***e*** - e, para isso, irá utilizar os valores de suas chaves privadas ***d***, ***p*** e ***q***!. Assim, como temos que ***d*** e ***e*** são inversos modulares, podemos aplicar o algoritmo estendido de euclides para descobrirmos o valor de ***d***:
-
-```haskell
-d * 7 ≡ 1(mod(17-1)*(11-1))
-d * 7 ≡ 1(mod 16*10)
-d * 7 ≡ 1(mod 160)
+void push_back(valor) {
+	storage[end] = valor;
+	end++;
+}
 
 ```
-ou seja, temos que, para algum ***d*** e algum outro inteiro k, 7*d + 160k = 1
 
-pelo algoritmo de euclides:
-```haskell
-160 = 22 * 7 + 6
-7 = 1 * 6 + 1
-6 = 6 * 1 + 0
+...Mas isso pode resultar em um erro se a capacidade do nosso vetor já for igual à quantidade de valores guardados: Estaremos acessando um espaço fora do permitido - o que vai gerar uma falha de segmentação. Para evitar isso, podemos usar a função `resize()` que vimos antes.
+
+```cpp
+
+  void push_back(const_reference value) {
+
+    if (size() >= capacity()) {
+      reserve( 2 * capacity());
+    }
+
+    m_storage[m_end++] = value;
+  }
+
 ```
 
-Agora, para realizar os passos extras do algoritmo estendido, isolamos cada resto do passo anterior e substituímos os valores!:
-```haskell
-1 = 7 - 1*6
-1 = 7 - 1 * (160 - 22*7)
-1 = 7 - 160 + 22*7
-1 = 23 * 7 + 160 * (-1)
+Assim, já que a função de `resize()` é O(n), `push_back` no pior caso também é O(n).
+
+Como você pode observar na implementação acima, sempre que "estouramos" o tamanho, reservamos duas vezes a capacidade atual. Assim, se fizermos push_back muitas vezes, sempre que chegarmos a uma potência de 2, teremos que copiar todos os valores um a um. Logo, a complexidade de algo como o código abaixo, ainda que pareça linear, é O(n * log2n)!
+
+```cpp
+cin >> n;
+int a;
+
+for (int i = 0; i < n; i++){
+
+	cin >> a;
+	vetor.push_back(a);
+}
+
+```
+Ainda que nlogn, em geral, não seja significativamente maior do que tempo linear, ainda temos uma maneira inteligente de contornar isso! Nesse caso, como já sabemos a quantidade de números que vamos inserir, podemos reservar todo esse espaço ao invés de deixar o push back ir aumentando logaritmicamente:
+
+```cpp
+
+cin >> n
+
+vector<int> vetor;
+vetor.reserve(n);
+
+for (int i = 0; i < n; i++){
+	cin >> a;
+	vetor.push_back(a);
+}
+
 ```
 
-No fim, para descobrir o que Bob teria enviado para ela, alice aplica ***m*** = ***c***^***d*** (mod 187).
-```haskell
-M= 11²³(mod 187)
-M = [11¹ (mod 187) ✕ 11² (mod 187) ✕ 11⁴ (mod 187) ✕ 11¹⁶(mod 187)] (mod 187)
-M = 11 ✕ 121 ✕ 55 ✕ 154 (mod 187)
-M = 88 = X em ASCII
+Nesse código, a complexidade será linear!
+
+É interessante também mencionar que existem várias outras maneiras de declarar vectors (que "chamam" outros construtores) que podem reservar a quantidade certa de memória durante a sua criação!
+
+```cpp
+vector<int> vetor(n); // cria um vetor de n espaços
+vector<int> vetor2(n, 0) // cria um vetor de n espaços e preenche todos eles com 0
 ```
 
-A mensagem foi enviada, transportada e entregue de maneira segura! Alice pode, finalmente, ler a letra ‘X’ que Bob lhe enviou.
 
-No entanto, vale ressaltar que os números escolhidos para esse exemplo são pequenos demais para serem seguros. Na realidade, são utilizados números que usam até 2048 bits para serem representados! E, mesmo assim, esse sistema é considerado relativamente desatualizado, já que sua segurança depende da fatoração de um número grande em dois primos, e os avanços em hardware têm sido muito extensos nos últimos anos! Assim, os usos mais seguros desse sistema de criptografia incluem, em geral, a utilização da criptografia RSA junto a outros sistemas de criptografia.
+#### Deleção
 
----
+Muitas vezes, é de nosso interesse deletar algum número em um vetor. Caso o número seja o último, temos até uma função feita pra esse caso especificamente (o `pop_back()`)!
+
+No caso em que isso não ocorre, - o número que queremos deletar é no meio do vetor - nós não podemos simplesmente deixar um buraco no vetor, ou marcar o espaço como "não utilizado". Toda a nossa lógica de acesso a objetos depende da continuidade do nosso bloco de memória. Então a única solução que temos é, infelizmente, mover todos os números após o objeto removido para a esquerda e diminuir o nosso tamanho em um.
+
+Então a nossa função de deleção poderia parecer algo assim:
+
+```cpp
+
+void erase(int idx){
+    if(idx < 0 or idx >= size()){
+      throw std::out_of_range("Erase - Index out of range!"); // não é possível remover um número que tenha o índice negativo ou maior que o final lógico!
+    }
+
+    for(size_type i = idx; i < size() - 2; ++i){ // movendo todos os objetos para a "esquerda", um a um
+      storage[i] = storage[i+1];
+    }
+    
+    end--; // diminuindo o final lógico
+  }
+
+
+
+```
+
+Como vocês provavelmente imaginam, a complexidade dessa operação também é O(n), devido à necessidade de mover todos os objetos de índices seguintes ao indicado.
+
+Note também que sempre que vemos essas implementações, parece que estamos _"babyproofing"_ uma casa: fazendo condicionais para pegar cada caso de borda, cada exceção. Mas é exatamente assim que as estruturas na STL são pensadas: elas precisam ser robustas de forma que o usuário desinformado (nós!) não consiga quebrá-las. E é por isso que é algo tão bom quando estamos programando! É algo previsível, meticulosamente testado, que garatidamente vai retornar erros ao invés de nos deixar acabar com a estrutura que estamos tentando acessar.
+
+
+
+Mas bom, essas são as estruturas de dados que vamos ver por enquanto! Vamos partir para os diferentes TADs?
+
+
+
+### Lista Encadeada
+
+<!-- implementationrrr-->
+
+
+## Tipos abstratos de dados e suas implementações
+
+## Fila (Queue)
+
+### Descrição
+
+O Tipo Abstrato de Dados (TAD) Fila, conhecido na literatura como Queue, é uma das estruturas conceituais mais importantes da Ciência da Computação. Seu princípio fundamental é a política de acesso FIFO (First-In, First-Out), segundo a qual o primeiro elemento inserido é também o primeiro a ser removido. Esse comportamento reflete diversos processos naturais e computacionais, tornando a fila um modelo essencial para a organização temporal de dados.
+
+Enquanto TAD, a fila descreve o comportamento lógico da estrutura, independentemente de como ela é implementada em memória. Como já vimos antes no estudo da diferença entre TAD e ED.
+
+Em uma fila, os elementos são inseridos em uma extremidade, usualmente chamada de final, e removidos da outra extremidade, chamada de início. Não há acesso direto ou aleatório aos elementos intermediários, o que reforça a ideia de processamento sequencial e ordenado (temporal).
+
+### Operações Básicas
+
+O TAD Fila é definido por um conjunto restrito, porém suficiente, de operações fundamentais. A operação de inserção, tradicionalmente denominada enqueue, adiciona um novo elemento ao final da fila. A operação de remoção, chamada dequeue, remove e retorna o elemento que se encontra no início da fila, respeitando a ordem FIFO.
+
+Além dessas operações centrais, é comum que a fila ofereça uma operação de consulta ao primeiro elemento, geralmente chamada de front ou peek, que permite observar o elemento do início sem removê-lo. Operações auxiliares, como a verificação de fila vazia (isEmpty) e a obtenção do número de elementos armazenados (size), também são amplamente utilizadas, especialmente em contextos algorítmicos e de implementação.
+
+Em implementações com capacidade limitada, como aquelas baseadas em vetores estáticos, pode ainda existir a operação isFull, responsável por indicar se a fila atingiu sua capacidade máxima.
+
+### Como implementar
+
+A implementação de uma fila pode variar significativamente, desde estruturas simples até abordagens mais sofisticadas. A escolha da implementação impacta diretamente aspectos como uso de memória, desempenho e flexibilidade, embora o comportamento externo do TAD permaneça o mesmo.
+
+#### Implementação 1
+
+Uma das implementações mais diretas da fila utiliza vetores (arrays). Nessa abordagem, dois índices são mantidos: um para indicar a posição do início da fila e outro para indicar a posição do final. A inserção ocorre no índice do final, enquanto a remoção ocorre no índice do início.
+
+Em sua forma mais simples, essa implementação apresenta um problema clássico: o desperdício de espaço. À medida que elementos são removidos do início, posições iniciais do vetor tornam-se inutilizadas, mesmo que ainda exista espaço disponível no final.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class FilaEstatica {
+private:
+    int* dados;
+    int inicio;
+    int fim;
+    int capacidade;
+
+public:
+    FilaEstatica(int cap) {
+        capacidade = cap;
+        dados = new int[capacidade];
+        inicio = 0;
+        fim = 0;
+    }
+
+    ~FilaEstatica() {
+        delete[] dados;
+    }
+
+    bool isEmpty() const {
+        return inicio == fim;
+    }
+
+    bool isFull() const {
+        return fim == capacidade;
+    }
+
+    void enqueue(int valor) {
+        if (isFull()) {
+            cout << "Fila cheia" << endl;
+            return;
+        }
+        dados[fim++] = valor;
+    }
+
+    int dequeue() {
+        if (isEmpty()) {
+            cout << "Fila vazia" << endl;
+            return -1;
+        }
+        return dados[inicio++];
+    }
+};
+```
+
+#### Implementação 2
+
+Para resolver o problema de desperdício de memória da implementação anterior, introduz-se a fila circular. Nessa abordagem, o vetor é tratado de forma lógica como circular, permitindo que os índices retornem ao início do vetor quando atingem o limite máximo.
+
+A fila circular garante melhor aproveitamento do espaço disponível e mantém todas as operações básicas com complexidade de tempo constante, O(1). Essa implementação é amplamente utilizada em sistemas que exigem eficiência e previsibilidade, como buffers e sistemas embarcados.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class FilaCircular {
+private:
+    int* dados;
+    int inicio;
+    int fim;
+    int tamanho;
+    int capacidade;
+
+public:
+    FilaCircular(int cap) {
+        capacidade = cap;
+        dados = new int[capacidade];
+        inicio = 0;
+        fim = 0;
+        tamanho = 0;
+    }
+
+    ~FilaCircular() {
+        delete[] dados;
+    }
+
+    bool isEmpty() const {
+        return tamanho == 0;
+    }
+
+    bool isFull() const {
+        return tamanho == capacidade;
+    }
+
+    void enqueue(int valor) {
+        if (isFull()) {
+            cout << "Fila cheia" << endl;
+            return;
+        }
+        dados[fim] = valor;
+        fim = (fim + 1) % capacidade;
+        tamanho++;
+    }
+
+    int dequeue() {
+        if (isEmpty()) {
+            cout << "Fila vazia" << endl;
+            return -1;
+        }
+        int valor = dados[inicio];
+        inicio = (inicio + 1) % capacidade;
+        tamanho--;
+        return valor;
+    }
+};
+```
+
+### Fila na STL do C++
+
+A biblioteca padrão do C++ fornece uma implementação pronta do TAD Fila por meio do contêiner std::queue, definido no cabeçalho <queue>. Essa implementação segue rigorosamente a semântica FIFO e abstrai completamente os detalhes internos da estrutura.
+
+Internamente, o std::queue é um adaptador de contêiner, geralmente implementado sobre estruturas como std::deque ou std::list. O programador interage apenas com as operações essenciais, como inserção no final, remoção do início e acesso ao elemento frontal, reforçando o conceito de TAD e incentivando boas práticas de encapsulamento.
+
+### Onde usar Filas
+
+#### Overview
+
+Filas são amplamente empregadas em sistemas computacionais sempre que há necessidade de processamento ordenado por tempo de chegada. Elas surgem naturalmente em contextos nos quais múltiplas entidades competem por um recurso compartilhado ou aguardam processamento sequencial.
+
+Exemplos clássicos incluem escalonamento de processos em sistemas operacionais, gerenciamento de buffers de entrada e saída, controle de requisições em servidores e algoritmos de busca em grafos.
+
+#### Exemplo prático 1
+
+Em sistemas operacionais, filas são utilizadas para organizar processos prontos para execução. O escalonador do sistema mantém uma fila de processos aguardando tempo de CPU, garantindo que cada processo seja atendido de forma justa, de acordo com a política de escalonamento adotada.
+
+Nesse contexto, a fila assegura previsibilidade e organização, sendo fundamental para o funcionamento correto do sistema.
+
+
+
+## Pilha (Stack)
+
+Assim como a fila, a pilha é de extrema importância na Ciência da Computação como um TAD crucial à modelagem de situações específicas. Seu maior princípio é a ideia do "LIFO" (Last In, First Out) - os primeiros elementos a sair da nossa estrutura de dados são sempre aqueles que chegaram por último. Podemos imaginar esse TAD como vários objetos e ideias do dia a dia: um dispenser de gurdanapos de uma lanchonete - A única maneira de adicionar guardanapos é empurrando pela única entrada, que também serve de saída - ou até uma rua sem saída bem estreita - onde um carro, caso não tenha sido o último a entrar, não consegue sair imediatamente! Em geral, é como uma pilha de objetos de fato, na qual você só pode retirar o objeto no topo (se não a pilha cai!)
+
+// imagem de um dispenser de guardanapos
+// imagem de um carro uma rua sem saída bem estreita
+
+De maneira geral, existem muitas aplicações para essa modelagem (bem mais do que imaginamos), e vamos ver isso logo após a implementação.
+
+### Modelagem e operações básicas
+
+Como sabemos que um TAD independe da estrutura de dados, vamos imaginar a explicação em um array devido à simplicidade. Mas lembre-se, ela também pode ser implementada sobre outras EDs! As suas funções devem apenas corretamente guardar e atualizar as variáveis extras que vamos criar que nos ajudam a definir quais operações são possíveis. Na STL, por exemplo, ela é implementada com uma estrutura de dados mais sofisticada chamada _deque_
+
+No caso de um array estático simples, deveremos guardar apenas duas informações a mais: O final e o tamanho da nossa pilha. Diferentemente da fila, que sofre alterações dos dois lados, a pilha só pode sofrer remoções ou inserções a partir de uma mesma posição: a última. Dessa forma, podemos "empacotar" nosso array junto a essas duas variáveis para a modelagem da nossa _stack_ .
+
+Note que estamos usando a mesma ideia vista no vector de um "final lógico", já que a nossa pilha tem uma capacidade constante mas está vazia.
+
+```cpp
+class queue {
+	
+	private:
+	int size;
+	int end;
+	int * storage;
+
+}
+
+```
+
+Podemos imaginar o seu construtor como algo assim:
+
+```cpp
+
+queue(int n) {
+	size = n;
+	storage = int[n];
+	end = 0;
+}
+```
+
+Obs.: Assim como implementado em diversos outros lugares, estamos usando aqui um intervalo fechado aberto - ou seja, o lugar no qual o nosso _end_ aponta para é o primeiro lugar livre, em que podemos adicionar objetos!
+
+
+#### Acesso
+
+Uma coisa interessante desse tipo abstrato é justamente a nossa falta de acesso ao resto da nossa pilha. Como só podemos inserir e remover do topo, só temos acesso à função `top()` ao invés de conseguir fazer mais através do uso dos colchetes [ e ]. Assim, ela é a nossa única maneira de acessar qualquer informação da pilha - e enquanto não fizermos outra operação, não conseguimos saber de nenhum outro número!
+
+Como você já deve imaginar, o acesso dessa forma é O(1).
+
+```cpp
+int top() {
+	return storage[end-1];
+}
+```
+
+#### Inserção
+
+Como já vimos, a inserção só pode ser realizada no topo da nossa pilha, pela função `push()`. E o que ela fará é bem previsível: Caso a nossa estrutura não esteja cheia, ela irá adicionar o elemento no topo da pilha e aumentar o contador de tamanho; Caso contrário, o seu comportamento vai depender, de novo, da estrutura que é realizada sobre - E em nosso caso, não poderá fazer nada, já que é um tamanho estático. Caso fosse um vector ou um deque, poderíamos alocar um espaço maior para incluir mais espaços!
+
+O código de uma operação pode parecer com isso:
+
+```cpp
+
+push(int novo) {
+
+if (end == size-1) {
+	throw std::out_of_range("Erase - Index out of range!");
+}
+
+storage[end] = novo; // insere como o mais novo número na lista
+end++;
+}
+
+```
+
+E sua complexidade também é O(1)
+
+// inserir imagem
+
+
+#### Remoção
+
+De maneira similar, só podemos remover o objeto do topo, através do `pop()`. Então o código dessa operação acaba extremamente simples (e também O(1))
+
+```cpp
+
+void pop() {
+	end--;
+}
+
+```
+Imagino que você veja isso e fique um pouco confuso, já que não fizemos nada com o nosso array _storage_! Mas no fim das contas, o que vale para nós é o que. Não temos nenhuma maneira de "apagar" uma das "casas" do nosso array sem mudar a alocação de memória - então podemos só esquecer o valor ali, já que qualquer inserção que for usar esse endereço substituirá o valor! É como se ele fosse um lixo de memória.
+
+// inserir imagem
+
+### Aplicações
+
+De maneira geral, os códigos para a implementação da pilha são bem simples e fáceis de entender, né? Então já que entendemos tudo que precisamos saber sobre pilhas, vamos fazer algumas questões em conjunto e depois seguir para o vjudge para testarmos nossos conhecimentos individualmente!
+
+#### Para fazermos juntos
+
+// colocar questao aqui
+
+#### Para fazer sozinho
+
+Agora que você já entendeu como essas TADs funcionam, siga para o vjudge para fazer as questões!
+
+<!-- vjudge!! -->
+
+
+
+
+
+
+
+
+
+
 
 <script>
 const dataDia3 = new Date('2025-03-12');
