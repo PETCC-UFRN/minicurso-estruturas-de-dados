@@ -453,13 +453,14 @@ int main() {
 
     int num1, num2, num3, num4;
 
+    num1 = 5
     num2 = 5;
     num3 = 10;
-
-    if(num1 == num2){
-        num4 = num1;
+ 
+    if(num1 == num2){             // 5 == 5
+        num4 = num1;              // num4 = 5
     }
-    else if(num1 == num2 * num3){
+    else if(num1 == num2 * num3){ // 5 != 50
         num4 = num3;
     }
     else{

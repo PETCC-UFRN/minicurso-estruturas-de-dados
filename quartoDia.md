@@ -820,13 +820,13 @@ private:
 
     No* insert(No* atual, int v) {
         if (atual == nullptr) {
-            return new No(v);
+            return new No(v);   // caso de parada : cria o novo nó
         }
 
-        if (v < atual->valor) {
+        if (v < atual->valor) { //caso recursivo : verifica pela esquerda
             atual->esquerda = insert(atual->esquerda, v);
-        } 
-        else if (v > atual->valor) {
+        }       
+        else if (v > atual->valor) { // caso recursivo : verifica pela direita
             atual->direita = insert(atual->direita, v);
         }
         
@@ -835,14 +835,14 @@ private:
 
     bool count(No* atual, int v) {
         if (atual == nullptr) {
-            return false;
+            return false;   //caso de parada : retorna falso se não achou o valor
         }
         
-        if (atual->valor == v) {
+        if (atual->valor == v) {// caso de parada : retorna verdadeiro se achou o valor
             return true;
         }
 
-        if (v < atual->valor) {
+        if (v < atual->valor) { //caso recursivo : verifica um dos lados a depender do valor
             return count(atual->esquerda, v);
         } else {
             return count(atual->direita, v);
@@ -850,7 +850,7 @@ private:
     }
 
     void clear(No* atual) {
-        if (atual != nullptr) {
+        if (atual != nullptr) { // deleta todos os nós
             clear(atual->esquerda);
             clear(atual->direita);
             delete atual;
@@ -858,11 +858,11 @@ private:
     }
 
 public:
-    Set() {
+    Set() { //construtor
         raiz = nullptr;
     }
 
-    ~Set(){
+    ~Set(){//destrutor
         clear(raiz);
     }
     void insert(int v) {
@@ -929,7 +929,7 @@ int main(){
     unordered_set<int> s = {1, 4, 2, 2, 3}; // declaração como uma lista
 
     for(int x : s ){
-        cout << x << endl;  // saída : 3 2 4 1.
+        cout << x << endl;  // saída : 1 4 2 3.
     }
 
 
@@ -950,7 +950,7 @@ int main(){
     multiset<int> s = {1, 4, 2, 2, 3}; // declaração como uma lista
 
     for(int x : s ){
-        cout << x << endl;  // saída : 3 2 4 1.
+        cout << x << endl;  // saída : 1 2 2 3 4.
     }
 
 
