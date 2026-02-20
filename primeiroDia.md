@@ -7,43 +7,87 @@ title: Minicurso de Matemática aplicada à Computação
     <details>
         <summary><a href="#introdução-à-algoritmos">Introdução à Algoritmos</a></summary>
         <ul>
-            <li><a href="#definição-e-história">Definição e História</a></li>
-            <li><a href="#importância-nos-dias-atuais">Importância nos Dias Atuais</a></li>
-        </ul>
+            <li><a href="#definição-de-algoritmos">Definição de Algoritmos</a></li>
+            <li><a href="#etapas-para-resolver-problemas">Etapas para Resolver Problemas</a></li>
+            <li><a href="#história-e-evolução-dos-algoritmos"> História e Evolução dos Algoritmos </a></li>
+                <ul>
+                    <li><a href="#antiguidade"> Antiguidade</a></li>
+                    <li><a href="#idade-de-ouro-islâmica-século-ix"> Idade de Ouro Islâmica (Século IX)</a></li>
+                    <li><a href="#século-xix"> Século XIX</a></li>
+                    <li><a href="#década-de-1930"> Década de 1930</a></li>
+                </ul>
+        </ul>        
     </details>  
+    <details>
+        <summary><a href="#introdução-à-estruturas-de-dados"> "Introdução" à Estruturas de Dados </a></summary>
+        <ul>
+            <li><a href="#tipos-abstrados-de-dados-tad"> Tipos Abstratos de Dados (TAD) </a></li>
+            <li><a href="#definição-de-estruturas-de-dados"> Definição de Estruturas de Dados</a></li>
+        </ul>
+    </details>
+    <details>
+        <summary><a href="#por-que-estudar-algoritmos-e-estruturas-de-dados"> Por que Estudar Algoritmos e Estruturas de Dados </a></summary>
+            <ul>
+                <li><a href="#eficiência-e-escalabilidade"> Eficiência e Escalabilidade </a></li>
+                <li><a href="#processos-seletivos-mercado-de-trabalho"> Processos Seletivos (Mercado de Trabalho)</a></li>
+                <li><a href="#exemplo-prático-two-sum"> Exemplo Prático: Two Sum </a></li>
+            </ul>
+    </details>
     <details>
          <summary><a href="#revisão-de-c">Revisão de C++</a></summary>
         <ul>
             <li><a href="#motivação">Motivação</a></li>
-            <li><a href="#diferença-de-sintaxe">Diferença de Sintaxe</a></li>
-            <li><a href="#comandos-simples">Comandos Simples</a></li>
-            <li><a href="#análise-de-códigos-em-c">Análise de Códigos em C++</a></li>
-            <li><a href="#qual-é-o-melhor">Qual é o melhor?</a></li>
-        </ul>
-    </details>
-    <details>
-        <summary><a href="#análise-assintótica"> Análise Assintótica</a></summary>
-        <ul>
-            <li><a href="#introdução"> Introdução</a></li>
-            <ul>
-                <li><a href="#pior-caso"> Pior Caso </a></li>
-                <li><a href="#melhor-caso"> Melhor Caso</a></li>
-                <li><a href="#caso-médio"> Caso Médio </a></li>
-            </ul>
-            <li><a href="#notações-o-θ-e-𝝮"> Notações O, Θ e 𝝮 </a></li>
-            <li><a href="#exercícios"> Exercícios</a></li>
-        </ul>
-    </details>
-    <details>
-        <summary><a href="#cálculo-assintótico"> Cálculo Assintótico </a></summary>
-        <ul>
-            <li><a href="#tabela-de-complexidade"> Tabela de Complexidade</a></li>
-            <li><a href="#o-que-é-eficiência"> O que é Eficiência? </a></li>
-                <li> <a href="#eficiência-de-tempo-x-espaço"> Eficiência de Tempo X Espaço</a></li>
                 <ul>
-                    <li><a href="#stl"> STL </a></li>
+                    <li><a href="#porém-por-que-nós-iremos-utilizar-c-ao-invés-de-c-e-rust"> Porém, por que nós iremos utilizar C++ ao invés de C e rust?</a></li>
                 </ul>
-            <li><a href="#exercícios-1"> Exercícios </a></li>
+            <li><a href="#c-x-c">C++ x C</a></li>
+            <li><a href="#comandos-simples">Comandos Simples</a></li>
+                <ul>
+                    <li><a href="#variáveis-condicionais-loops-e-funções"> Variáveis, Condicionais, Loops e Funções </a></li>
+                        <ul>
+                            <li><a href="#variáveis"> Variáveis</a></li>
+                            <li><a href="#condicionais"> Condicionais</a></li>
+                            <li><a href="#loops"> Loops </a></li>
+                            <li><a href="#funções"> Funções </a></li>
+                        </ul>
+                    <li><a href="#recursão"> Recursão </a></li>
+                        <ul>
+                            <li><a href="#exemplos"> Exemplos </a></li>
+                        </ul>    
+                    <li><a href="#biblioteca-padrão-do-c"> Biblioteca Padrão do C++ </a></li>
+                        <ul>
+                            <li><a href="#como-utilizar-a-biblioteca-padrão"> Como Utilizar a Biblioteca Padrão </a></li>
+                            <li><a href="#iostream"> Iostream</a></li>
+                            <li><a href="#namespaces"> Namespaces </a></li>
+                                <ul>
+                                    <li><a href="#como-criamos-namespaces"> Como criamos Namespaces?</a></li>
+                                </ul>
+                                <li><a href="#stl"> STL </a></li>
+                                <li><a href="#algorithm"> Algorithm </a></li>
+                                <ul><li><a href="#min--max"> Min & Max </a></li></ul>
+                                <li><a href="#string"> String</a></li>
+                                <li><a href="#array"> Array</a></li>
+                        </ul>
+                </ul>
+        </ul>
+    </details>
+    <details>
+        <summary><a href="#análise-de-algoritmos"> Análise de Algoritmos</a></summary>
+        <ul>
+            <li><a href="#modelo-ram"> Modelo Ram</a></li>
+            <li><a href="#função-de-complexidade-de-tempo"> Função de Complexidade de Tempo</a></li>
+            <ul>
+                <li><a href="#melhor-caso"> Melhor Caso </a></li>
+                <li><a href="#pior-caso"> Pior Caso</a></li>
+                <li><a href="#caso-médio"> Caso Médio </a></li>
+                <li><a href="#importância-da-análise-assintótica"> Importância da Análise Assintótica</a></li>
+            </ul>
+            <li><a href="#notações-assintóticas"> Notações Assintóticas </a></li>
+            <ul>
+                <li><a href="#notação-o"> Notação O</a></li>
+                <li><a href="#notação-θ"> Notação Θ </a></li>
+                <li><a href="#notação-𝝮"> Notação 𝝮</a></li>
+            </ul>
         </ul>
     </details>
   <button class="toggle-button" id="toggle-button">
@@ -1306,15 +1350,13 @@ int main(){
 Algumas funções disponíveis para as strings são:
 
 
-* **size** : retorna um inteiro que corresponde ao tamanho da string.
+* **size()** : retorna um inteiro que corresponde ao tamanho da string.
 
-* **empty** : retorna um booleano que corresponde se a string está vazia ou não.
+* **empty()** : retorna um booleano que corresponde se a string está vazia ou não.
 
-* **stoi** : converte a string em um inteiro.
+* **begin()** : retorna um iterador que aponta para o primeiro elemento da string.
 
-* **begin** : retorna um iterador que aponta para o primeiro elemento da string.
-
-* **end** : retorna um iterador para o a posição após o último elemento da string.
+* **end()** : retorna um iterador para o a posição após o último elemento da string.
 
 
 
@@ -1390,21 +1432,18 @@ int main(){
 
 Além disso, o `std::array` também providencia comandos similares aos vistos em strings, como:
 
-* **size** : retorna o tamanho do array.
+* **size()** : retorna o tamanho do array.
 
-* **empty**: retorna um booleano que corresponde se o array está vazio ou não.
+* **empty()**: retorna um booleano que corresponde se o array está vazio ou não.
 
-* **begin**: retorna um iterador que aponta para o primeiro elemento do array.
+* **begin()**: retorna um iterador que aponta para o primeiro elemento do array.
 
-* **end**  : retorna um iterador para o a posição após o último elemento do array.
+* **end()**  : retorna um iterador para o a posição após o último elemento do array.
 
-* **front** : retorna o primeiro elemento do array.
+* **front()** : retorna o primeiro elemento do array.
 
-* **back** : retorna o último elemento do array.
+* **back()** : retorna o último elemento do array.
 
-
-### Análise de códigos em C++ <!-- Mostrar Busca Binária e Linear -->
-###  Qual é o melhor?         <!-- Apenas introduz essa dúvida -->
 
 ## Análise de Algoritmos
 
