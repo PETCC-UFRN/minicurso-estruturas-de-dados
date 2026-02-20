@@ -51,16 +51,62 @@ title: Minicurso de Matemática aplicada à Computação
         </ul>
     </details>
     <details>
-        <summary><a href="#árvore-avl">Árvore AVL</a></summary>
+        <summary><a href="#árvores-auto-balanceadas">Árvores Auto-balanceadas</a></summary>
+        <ul>
+            <li><a href="#árvore-avl"> Árvore AVL </a> </li>
+            <ul>
+                <li><a href="#operações-1"> Operações </a> </li>
+                <li><a href="#aplicações"> Aplicações </a> </li>
+            </ul>
+            <li><a href="#árvore-rubro-negra"> Árvore Rubro-Negra </a></li>
+            <ul>
+                <li><a href="#operações-2"> Operações </a></li>
+                <li><a href="#aplicações-1"> Aplicações </a></li>
+            </ul>
+        </ul>
     </details>
     <details>
-        <summary><a href="#árvore-rubro-negra">Árvore Rubro-Negra</a></summary>
+        <summary><a href="#sets">Sets</a></summary>
+        <ul>
+            <li><a href="#descrição"> Descrição </a></li>
+            <li><a href="#operações-básicas"> Operações Básicas </a></li>
+            <li><a href="#implementação-simples"> Implementação Simples</a></li>
+            <li><a href="#sets-na-stl"> Sets na STL </a></li>
+            <ul>
+                <li><a href="#exemplos-1"> Exemplos</a></li>
+            </ul>
+            <li><a href="#onde-utilizar-cada-um-dos-sets"> Onde usar cada um dos Sets</a></li>
+            <ul>
+                <li><a href="#set">Set</a></li>
+                <li><a href="#unordered_sets">Unordered_set</a></li>
+                <li><a href="#multisets"> Multisets</a></li>
+            </ul>
+        </ul>
     </details>
     <details>
-        <summary><a href="#map">&lt;map&gt;</a></summary>
+        <summary><a href="#dicionário-map">Dicionário (Map)</a></summary>
+        <ul>
+            <li><a href="#descrição-1"> Descrição</a></li>
+            <li><a href="#operações-básicas-1"> Operações Básicas</a></li>
+        </ul>
     </details>
     <details>
-        <summary><a href="#set">&lt;set&gt;</a></summary>
+        <summary><a href="#hash-table"> Hash Table </a></summary>
+        <ul>
+            <li><a href="#descrição-2"> Descrição </a></li>
+            <li><a href="#como-implementar">Como Implementar</a></li>
+            <ul>
+                <li><a href="#implementação-1--modelo-ideal-sem-colisão"> Implementação 1</a></li>
+                <li><a href="#implementação-2--encadeamento-separado-separate-chaining"> Implementação 2</a></li>
+            </ul>
+            <li><a href="#complexidade-temporal"> Complexidade Temporal</a></li>
+            <li><a href="#hash-table-na-stl-do-c"> Hash Table na STL do C++</a></li>
+            <ul>
+                <li><a href="#unordered_map"> &lt;unordered_map&gt; </a></li>
+                <li><a href="#map"> &lt;map&gt; </a></li>
+            </ul>
+            <li><a href="#onde-usar-hash-tables"> Onde usar Hash Tables</a></li>
+        </ul>
     </details>
     <button class="toggle-button" id="toggle-button">
         Esconder Sumário
@@ -567,7 +613,7 @@ Para verificar se esta BST é uma árvore AVL, temos que ver se ela obedece sua 
 
 ### Operações
 
-Assim como na árvore Rubro-Negra, não iremos detalhar a implementação exata, mas sim a lógica que garante a eficiência da estrutura.
+Por questão de tempo e complexidade, não iremos detalhar a implementação exata, mas sim a lógica que garante a eficiência da estrutura.
 
 **Rotação, Busca, Inserção e Remoção**
 
@@ -750,7 +796,7 @@ Embora os **Sets** tenham como objetivo ordenar seus elementos, eles não são o
 
 As operações de **insert**, **count** e **erase** possuem complexidade O(log n), **clear** possui O(n), e o resto possui complexidade constante (O(1)).
 
-## Implementação
+## Implementação Simples
 
 Como dito anteriormente, os **Sets** são implementados a partir de uma árvore **Rubro-Negra**, porém, para fins didáticos, implementarei um simples **Set** utilizando o básico de BST.
 
@@ -846,11 +892,79 @@ Dentro do header `<set>`, temos o próprio `std::set` que já vimos sua funciona
 
 Enquanto isso, no `<unordered_set>` temos uma estrutura levemente diferente, onde armazena os elementos em uma **Hash Table**, que vocês verão logo em seguida. Isso permite que o `unordered_set` tenha suas funções com uma complexidade próxima de O(1)! No entanto, como o nome sugere, seus elementos não são ordenados.
 
+
+### Exemplos
+
+```cpp
+#include <iostream>
+#include <set>
+
+using namespace std;
+
+int main(){
+
+    set<int> s = {1, 4, 2, 2, 3}; // declaração como uma lista
+
+    for(int x : s ){
+        cout << x << endl;  // saída : 1 2 3 4.
+    }
+
+
+    return 0;
+}
+
+```
+
+Nesse caso, note que mesmo com uma declaração que contenha 2 números repetidos, por ser um **set**, eles não se repetirão. Além de que, estará sempre ordenado.
+
+
+```cpp
+#include <iostream>
+#include <unordered_set>
+
+using namespace std;
+
+int main(){
+
+    unordered_set<int> s = {1, 4, 2, 2, 3}; // declaração como uma lista
+
+    for(int x : s ){
+        cout << x << endl;  // saída : 3 2 4 1.
+    }
+
+
+    return 0;
+}
+```
+Similar ao outro caso, o número `2` aparece apenas 1 vez. Entretanto, por ser um **unordered_set**, a saída mostra a ordem em que os elementos entraram.
+
+
+```cpp
+#include <iostream>
+#include <set>
+
+using namespace std;
+
+int main(){
+
+    multiset<int> s = {1, 4, 2, 2, 3}; // declaração como uma lista
+
+    for(int x : s ){
+        cout << x << endl;  // saída : 3 2 4 1.
+    }
+
+
+    return 0;
+}
+```
+
+Por fim, o multiset mantêm cada elemento em ordem crescente, mas não elimina repetições.
+
 ## Onde utilizar cada um dos Sets
 
 Cada tipo de **Set** tem sua aplicação, visto suas limitações.
 
-### Set
+### <Set>
 
 Os **Sets** tradicionais são utilizados principalmente como um "filtro inteligente", permitindo armazenas valores únicos.
 
@@ -860,7 +974,7 @@ Os **Sets** tradicionais são utilizados principalmente como um "filtro intelige
 
 Em cenários onde a ordem dos valores não importa, ou se a quantidade de vezes que um elemento aparece seja necessária, os **Sets** tradicionais não são uma escolha adequada.
 
-### Unordered_sets
+### <Unordered_sets>
 
 Os **Unordered_sets** são utilizados principalmente por sua complexidade baixíssima, embora não permita ordenar seus elementos, a velocidade compensa muito em determinados casos.
 
@@ -1040,7 +1154,7 @@ A análise depende do fator de carga (α = n/m) e da qualidade da função hash.
 
 A biblioteca padrão do C++ fornece duas estruturas principais que implementam o TAD Dicionário:
 
-### unordered_map
+### &lt;unordered_map&gt;
 
 Implementado como tabela hash.
 
@@ -1063,7 +1177,7 @@ int main() {
 
 ---
 
-### map
+### &lt;map&gt;
 
 Implementado como árvore balanceada (tipicamente rubro-negra).
 
