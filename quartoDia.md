@@ -333,14 +333,6 @@ O exemplo dado no inicio desse máterial trata-se de uma árvore estritamente bi
 
 **Exemplo**: O exemplo 2 dado anteriomente trata-se de uma árvore cheia.
 
-## Percursos
-
-### Pré Ordem
-
-### Em Ordem (Simétrica)
-
-### Pós Ordem
-
 ## Operações
 
 Neste tipo de estrutura serão abordadas as seguintes operações:
