@@ -333,14 +333,6 @@ O exemplo dado no inicio desse máterial trata-se de uma árvore estritamente bi
 
 **Exemplo**: O exemplo 2 dado anteriomente trata-se de uma árvore cheia.
 
-## Percursos
-
-### Pré Ordem
-
-### Em Ordem (Simétrica)
-
-### Pós Ordem
-
 ## Operações
 
 Neste tipo de estrutura serão abordadas as seguintes operações:
@@ -373,9 +365,13 @@ A seguir, temos a definição da estrutura:
 
 ```c++
     struct arvore_t {
-        int chave;
-        arvore_t *esq;
-        arvore_t *dir;
+        
+        int chave;        // Valor armazenado no nó
+
+        arvore_t *esq;    // Ponteiro para o filho à esquerda
+
+        arvore_t *dir;    // Ponteiro para o filho à direita
+
     };
 ```
 
@@ -385,16 +381,33 @@ A seguir, temos a definição da estrutura:
 
 ```cpp
     arvore_t *buscar(arvore_t *arvore, int chave) {
+    // Retorna um ponteiro para o nó encontrado, ou NULL caso a chave não exista na árvore.
+        
+        // Caso base 1:
+        // Se a árvore (ou subárvore) está vazia,
+        // significa que a chave não foi encontrada.
         if (arvore == NULL) {
             return NULL;
         }
 
+        // Caso recursivo 1:
+        // Se a chave procurada é menor que a chave do nó atual,
+        // então, pela propriedade da BST, ela só pode estar
+        // na subárvore esquerda.
         if (chave < arvore->chave) {
             return buscar(arvore->esq, chave);
+        
+        // Caso recursivo 2:
+        // Se a chave procurada é maior que a chave do nó atual,
+        // ela só pode estar na subárvore direita.
         } else if (chave > arvore->chave) {
             return buscar(arvore->dir, chave);
+        
+        // Caso base 2 (sucesso):
+        // Se não é menor nem maior, então é igual.
+        // Encontramos o nó desejado.
         } else {
-            return arvore; // achou
+            return arvore;
         }
     }
 ```
@@ -424,18 +437,44 @@ Se a árvore possui **altura mínima**, o tempo de busca é `O(log n)`.
 **Função**:
 ```cpp
     arvore_t* inserir(arvore_t* arvore, int chave) {
+    // Retorna a raiz da árvore após a inserção.
+
+        // Caso base:
+        // Se chegamos em uma posição vazia (subárvore nula),
+        // encontramos o local correto para inserir o novo nó.
         if (arvore == nullptr) {
+
+            // Alocação dinâmica de memória para o novo nó
             arvore = new arvore_t;
+
+            // Inicialização da chave
             arvore->chave = chave;
+
+            // Como todo novo nó é inserido como folha,
+            // seus filhos começam apontando para nullptr.
             arvore->esq = nullptr;
             arvore->dir = nullptr;
         }
+
+        // Caso recursivo 1:
+        // Se a chave é menor que a chave do nó atual,
+        // devemos inserir na subárvore esquerda.
         else if (chave < arvore->chave) {
+
+            // Atribuímos o resultado da inserção ao ponteiro esquerdo,
+            // pois a subárvore pode ser modificada.
             arvore->esq = inserir(arvore->esq, chave);
         }
+
+        // Caso recursivo 2:
+        // Se a chave é maior que a chave do nó atual,
+        // devemos inserir na subárvore direita.
         else if (chave > arvore->chave) {
+
+            // Atualizamos o ponteiro direito da mesma forma.
             arvore->dir = inserir(arvore->dir, chave);
         }
+
         return arvore;
     }
 ```
@@ -470,34 +509,69 @@ Na operação de remoção, devemos considerar três casos, nos quais o nó a se
 
 ```cpp
     arvore_t* remover(arvore_t* arvore, int chave) {
+    // Retorna a raiz da árvore após a remoção.
+
+        // Caso base:
+        // Se a subárvore é nula, a chave não existe.
         if (arvore == nullptr)
             return nullptr;
 
+        // Caso recursivo 1:
+        // Se a chave é menor, ela só pode estar na subárvore esquerda.
         if (chave < arvore->chave) {
             arvore->esq = remover(arvore->esq, chave);
         }
+
+        // Caso recursivo 2:
+        // Se a chave é maior, ela só pode estar na subárvore direita.
         else if (chave > arvore->chave) {
             arvore->dir = remover(arvore->dir, chave);
         }
+
+        // Caso em que encontramos o nó a ser removido
         else {
-            // nó com zero ou um filho
+
+            // CASO 1 e 2: Nó com zero ou um filho
+
+            // Se não possui filho à esquerda,
+            // então pode ter no máximo o filho direito.
             if (arvore->esq == nullptr) {
+
+                // Guardamos o filho direito
                 arvore_t* temp = arvore->dir;
+
+                // Liberamos a memória do nó atual
                 delete arvore;
+
+                // Retornamos o filho (que pode ser nullptr)
                 return temp;
             }
+
+            // Se não possui filho à direita,
+            // então possui apenas o filho esquerdo.
             else if (arvore->dir == nullptr) {
+
                 arvore_t* temp = arvore->esq;
                 delete arvore;
                 return temp;
             }
 
-            // nó com dois filhos
+            // CASO 3: Nó com dois filhos
+
+            // Encontramos o menor elemento da subárvore direita.
+            // Esse valor é o sucessor em ordem do nó atual.
             arvore_t* rightMin = find_min(arvore->dir);
+
+            // Substituímos a chave do nó atual pela chave do sucessor.
+            // Isso mantém a propriedade da BST.
             arvore->chave = rightMin->chave;
+
+            // Agora removemos o nó duplicado na subárvore direita.
+            // Esse novo problema será um caso 1 ou 2.
             arvore->dir = remover(arvore->dir, rightMin->chave);
         }
 
+        // Retornamos a raiz da subárvore atualizada.
         return arvore;
     }
 
