@@ -1,8 +1,46 @@
-
-layout: layoutGit
-title: Minicurso de Estruturas de Dados e Algoritmos
 ---
-# Como um programa interage com o computador
+layout: layoutGit
+title: Minicurso de Algoritmos e Estruturas de Dados
+---
+<div id="sumario" class="sumario-git">
+    <h1>Dia 2</h1>
+    <details>
+        <summary><a href="#introdução-à-algoritmos">Introdução à Algoritmos</a></summary>
+        <ul>
+            <li><a href="#definição-de-algoritmos">Definição de Algoritmos</a></li>
+            <li><a href="#história-e-evolução-dos-algoritmos"> História e Evolução dos Algoritmos </a></li>
+                <ul>
+                    <li><a href="#antiguidade"> Antiguidade</a></li>
+                    <li><a href="#idade-de-ouro-islâmica-século-ix"> Idade de Ouro Islâmica (Século IX)</a></li>
+                    <li><a href="#século-xix"> Século XIX</a></li>
+                    <li><a href="#década-de-1930"> Década de 1930</a></li>
+                </ul>
+        </ul>
+    </details>
+    <details>
+        <summary><a href="#introdução-à-estruturas-de-dados"> "Introdução" à Estruturas de Dados </a></summary>
+        <ul>
+            <li><a href="#tipos-abstrados-de-dados-tad"> Tipos Abstratos de Dados (TAD) </a></li>
+            <li><a href="#definição-de-estruturas-de-dados"> Definição de Estruturas de Dados</a></li>
+        </ul>
+    </details>
+    <details>
+        <summary><a href="#por-que-estudar-algoritmos-e-estruturas-de-dados"> Por que Estudar Algoritmos e Estruturas de Dados </a></summary>
+            <ul>
+                <li><a href="#eficiência-e-escalabilidade"> Eficiência e Escalabilidade </a></li>
+                <li><a href="#processos-seletivos-mercado-de-trabalho"> Processos Seletivos (Mercado de Trabalho)</a></li>
+                <li><a href="#exemplo-prático-two-sum"> Exemplo Prático: Two Sum </a></li>
+            </ul>
+    </details>
+  <button class="toggle-button" id="toggle-button">
+      Esconder Sumário
+  </button>
+</div>
+<br>
+
+# Conceitos de Memória, Ordenação e Algoritmos
+
+## Memória
 
 Quando um programa é compilado sabemos que é necessário espaço na memória para que ele possa ser executado, mas afinal, de qual espaço estamos falando? Quando somos introduzidos aos tipos de dados de C/C++ aprendemos que `int` ocupa 4 bytes, `char` ocupa 1 byte e por aí vai. Mas será que esses dados ficam jogados de qualquer forma dentro da memória RAM? A resposta é **não**. A memória usada para rodar um programa pode ser dividida em duas partes.
 
