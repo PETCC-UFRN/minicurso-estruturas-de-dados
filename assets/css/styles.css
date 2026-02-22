@@ -384,7 +384,7 @@ td {
 #sumario {
     position: fixed;
     text-align: left;
-    top: 20px;
+    top: 30px;
     left: 0;
     width: 300px; /* Ajuste conforme necessário */
     padding: 10px; /* Espaçamento interno opcional */
@@ -484,11 +484,11 @@ td {
 }
 
 details {
-	padding-bottom: 5px;
+	margin-bottom: 10px;
 }
 
 li {
-	padding-bottom: 5px;
+	margin-bottom: 10px;
 }
 /* TODO: Mudar a estilização das tabelas geradas pelo markdown */
 /* TODO: Centralizar as tabelas geradas pelo markdown */
