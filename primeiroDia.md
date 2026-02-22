@@ -457,6 +457,35 @@ int main() {
 }
 
 ```
+
+Lembrando que, pela condição ser um **booleano**, podemos também utilizar operadores lógicos como **&& (ou and)** e **|| (ou or)** dentro de nossas estruturas.
+
+```cpp
+
+int main(){
+
+    int num = 5;
+    int num2;
+    
+    bool booleano = true;
+
+    if(num == 3 || num == 1){
+        num2 = 10;              //caso num = 3 ou num = 1
+    }
+    else if(num == 5 && booleano){
+        num2 = 2;               // caso num = 5 e booleano = true
+    }
+    else{                       // caso default
+        num2 = 0;
+    }
+
+    //como booleano = true e num == 5, num2 = 2.
+
+    return 0;
+}
+
+```
+
 Existe também outra estrutura em C++ que é o switch case. Ele irá funcionar de forma similar ao `if`, porém ao invés de escolher um caso com base em uma proposição, ela irá escolher com base no valor de alguma variável.
 
 O comando `switch` segue o padrão:
@@ -527,11 +556,7 @@ Elas seguem, respectivamente, os seguintes padrões de escrita:
 
     for(variavel de controle; condição ; contador)
 
-
-
     while(condição)
-
-
 
     do{
         //(...)
@@ -539,6 +564,33 @@ Elas seguem, respectivamente, os seguintes padrões de escrita:
 
 
 ```
+
+O `for` também possui o padrão chamado de **for each**, utilizado para percorrer contêineres, mantendo as informações de cada variável que foi iterada:
+
+```cpp
+
+for(variável : contêiner)
+
+
+// exemplo:
+
+int main(){
+    
+    int arr[5] = {1, 2, 3, 4, 5};
+    int soma = 0;
+
+    for(int var : arr){
+        soma += var; // cada elemento de arr será somado em soma
+    }
+
+    // soma = 1 + 2 + 3 + 4 + 5 = 15
+
+    return 0;
+}
+
+```
+
+
 Caso você nunca tenha visto C ou C++, talvez esteja se perguntando: `qual a diferença entre eles?`, o que é bem normal.
 
 Em geral, cada um deles possuem pequenas coisas que os tornam diferentes e "melhores" em determinados casos:
@@ -546,6 +598,8 @@ Em geral, cada um deles possuem pequenas coisas que os tornam diferentes e "melh
 ```c++
 
 for() := Quando você precisa saber qual passo do loop você está
+
+for() each := Quando você precisa analizar todos os elementos de um contêiner igualmente.
 
 while() := Quando você não precisa saber o passo que você está.
 
