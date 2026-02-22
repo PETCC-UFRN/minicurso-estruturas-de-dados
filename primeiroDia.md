@@ -3003,7 +3003,6 @@ $T(n) = n$.
   
 
 ##### Caso Médio
-
   
 
 O **caso médio** representa o tempo de execução esperado do algoritmo considerando **todas as possíveis posições** do elemento procurado no vetor. Isso, com base nas probabilidades da entrada. Assumindo que cada posição tem **a mesma probabilidade** de conter a chave buscada.
@@ -3040,87 +3039,96 @@ $T(n) = \frac{\frac{n(n + 1)}{2}}{n}$
 
 $T(n) = \frac{n + 1}{2}$
 
+##### O que entender com os três casos
+
+Para analisar com precisão a complexidade de um algoritmo, é preciso entender que cada um desses três casos (melhor caso, pior caso e caso médio) geram uma função de complexidade temporal. No caso da busca pelo menor elemento, as funções são iguais, mas elas podem ser diferentes como no caso da busca sequêncial
+
+### Análise assintótica
+
+#### Como as funções de complexidade temporal são classificadas
+
+Acabamos de mostrar como a função de complexidade de tempo é calculada para um determinado algoritmo. Mas a questão que fica é como comparar funções com complexidades temporais diferentes. 
+
+#### Notações Assintóticas
+
+Para resolver esse problema utilizamos a notação assintótica para descrever a complexidade temporal de um algoritmo. Ela classifica as funções de complexidade temporal com base no crescimento do custo de execução do algoritmo de acordo com a entrada.
   
+Existem 3 classificações assintóticas tipicamente usadas e todas elas seguem a mesma ideia, ou seja, conseguindo entender uma delas, se entende as 3
 
-##### Importância da Análise Assintótica
 
-  
+#### Notação Θ
 
-Para valores pequenos de `n`, qualquer algoritmo, mesmo que ineficiente, tende a apresentar um tempo de execução baixo. No entanto, à medida que o tamanho da entrada aumenta, a complexidade do algoritmo torna-se um fator crítico.
+Essa notação define que dadas duas funções de complexidade f(n) e g(n), f(n) é Θ(g(n)) se, e somente se, f(n) e g(n) tem o mesmo crescimento assintótico
 
-  
+Definição formal:
 
-Ao escolher um algoritmo, deve-se analisar aquele que possui **maior escalabilidade**, de acordo com o seu **comportamento assintótico**.
+"Uma função $f(n)$ é dita $O(g(n))$ se existem constantes positivas c1, c2 e n₀ tais que:
+$ c1 \cdot g(n) ≤ f(n) ≤ c2 \cdot g(n), \forall n ≥ n₀.$"
 
-  
+Outra definição que pode ser usada para a notação O é uma que utiliza limites:
 
-## Notações Assintóticas
+"Uma função $f(n)$ é dita $O(g(n))$ se, e somente se $\lim_{n\rightarrow\infty} f( n )/g( n ) = k$, tal que $k$ seja um número real maior que 0"
 
-  
+##### Exemplo visual
 
-As notações assintóticas são utilizadas para representar o **comportamento assintótico** das funções de complexidade de tempo, descrevendo como o custo de execução de um algoritmo cresce à medida que o tamanho da entrada aumenta.
+<img  src="assets/images/exemplo_theta.png"  alt="grafico log"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
+<p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> Exemplo extraído do geeks4geeks</p>
+</div>
 
-  
+##### Exemplos
 
-### Notação O
+1. Seja f(n) = n+30 e g(n) = 30n 
+f(n) é Θ(g(n))?
 
-  
+2. f(n) = n² + 1 e g(n) = 20n + 10
 
-Uma função `f(n)` é dita **O(g(n))** se existem constantes positivas `c` e `n₀` tais que:
 
-  
+#### Notação O
 
-f(n) ≤ c · g(n), para todo n ≥ n₀.
+Essa notação define que dadas duas funções de complexidade temporal f(n) e g(n), f(n) será O(g(n)) se, e somente se, o crescimento da função f for o mesmo, ou for menor que o crescimento da função g
 
-  
+Definição formal:
 
-Essa notação fornece um **limite superior assintótico** para a função de complexidade, ou seja, descreve o pior crescimento possível do tempo de execução de um algoritmo a partir de um determinado tamanho de entrada, ignorando constantes e termos de menor ordem.
+"Uma função $f(n)$ é dita $O(g(n))$ se existem constantes positivas $c$ e $n₀$ tais que: $f(n) ≤ c \cdot g(n), \forall n ≥ n₀.$"
 
-  
+Outra definição que pode ser usada para a notação O é uma que utiliza limites:
 
-#### Exemplos
+"Uma função $f(n)$ é dita $O(g(n))$ se, e somente se $\lim_{n\rightarrow\infty} f( n )/g( n ) = k$, tal que $k$ seja um número real maior ou igual a 0"
 
-  
 
-1. Seja f(n) = (n + 1)².
+##### Exemplos
 
-Para n ≥ 2, temos:
+Nos seguintes exemplos responda se f(n) é O(g(n))
 
-  
+a) f(n) = 2n+1 e g(n) = 2n+3
 
-(n + 1)² = n² + 2n + 1 ≤ 3n²
+b) f(n) = n² e g(n) = n
 
-  
+c) f(n) = 3n³ e g(n) = n!
 
-Logo, f(n) é **O(n²)**, considerando c = 3 e n₀ = 2.
+#### Notação Ω
 
-  
+Essa notação define que dadas duas funções de complexidade temporal f(n) e g(n), f(n) será Ω(g(n)) se, e somente se, o crescimento da função f for o mesmo, ou for maior que o crescimento da função g
 
-2. Seja f(n) = 2n³ + 3n² + n.
+Definição formal:
 
-Para n ≥ 8, temos:
+"Uma função $f(n)$ é dita $Ω(g(n))$ se existem constantes positivas $c$ e $n₀$ tais que: $f(n) ≥ c \cdot g(n), \forall n ≥ n₀.$"
 
-  
+Outra definição que pode ser usada para a notação Ω é uma que utiliza limites:
 
-2n³ + 3n² + n ≤ 4n³
+"Uma função $f(n)$ é dita $Ω(g(n))$ se, e somente se $\lim_{n\rightarrow\infty} f( n )/g( n ) = k$, tal que $k$ seja um número real maior que 0 ou k seja infinito"
 
-  
+##### Exemplos
 
-Assim, f(n) é **O(n³)**, considerando c = 4 e n₀ = 8.
+Nos seguintes exemplos responda se f(n) é Ω(g(n))
 
-Quando dizemos que um algoritmo é **O(n²)**, por exemplo, queremos dizer que o seu tempo de execução cresce, no pior caso, de forma proporcional a `n²` à medida que o tamanho da entrada aumenta.
+a) f(n) = 2n+1 e g(n) = 10
 
-  
+b) f(n) = n³ e g(n) = n²
 
-### Notação Θ
+### Classes de complexidade 
 
-  
 
-### Notação 𝝮
-
-  
-
-## Análise Assintótica
 
 ### Introdução
 
