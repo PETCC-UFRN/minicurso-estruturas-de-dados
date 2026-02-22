@@ -113,6 +113,62 @@ body {
     color: #ffffff;
 }
 
+ul.intro {
+    list-style-type: none;
+}
+
+ul.intro li.inactive {
+    list-style-image: url(../images/7gray.png);
+    padding-bottom: 15px;
+    padding-top: 5px;
+}
+/*li::before {
+content: "";
+display: inline-block;
+background-image: url("../images/71gray.png");
+background-size: 30px 30px;
+width: 30px;
+height: 30px;
+padding-right: 30px;
+}*/
+
+ul.intro li.red, ul.listaNavegacao li.red {
+    list-style-image: url(../images/1red.png);
+    padding-bottom: 15px;
+    padding-top: 5px;
+}
+
+ul.intro li.orange, ul.listaNavegacao li.orange {
+    list-style-image: url(../images/2orange.png);
+    padding-bottom: 15px;
+    padding-top: 5px;
+}
+
+ul.intro li.yellow , ul.listaNavegacao li.yellow{
+    list-style-image: url(../images/3yellow.png);
+    padding-bottom: 15px;
+    padding-top: 5px;
+}
+
+ul.intro li.green, ul.listaNavegacao li.green {
+    list-style-image: url(../images/4green.png);
+    padding-bottom: 15px;
+    padding-top: 5px;
+}
+
+ul.intro li.blue, ul.listaNavegacao li.blue {
+    list-style-image: url(../images/5blue.png);
+    padding-bottom: 15px;
+    padding-top: 5px;
+}
+
+
+ul.intro li.purple, ul.listaNavegacao li.purple {
+    list-style-image: url(../images/6purple.png);
+    padding-bottom: 15px;
+    padding-top: 5px;
+}
+
 .oldschool main{
     width: 50%;
     padding-top: 4vh;
