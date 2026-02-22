@@ -5,16 +5,11 @@ title: Minicurso de Algoritmos e Estruturas de Dados
 <div id="sumario" class="sumario-git">
     <h1>Dia 2</h1>
     <details>
-        <summary><a href="#introdução-à-algoritmos">Introdução à Algoritmos</a></summary>
+        <summary><a href="#memória">Memória</a></summary>
         <ul>
-            <li><a href="#definição-de-algoritmos">Definição de Algoritmos</a></li>
-            <li><a href="#história-e-evolução-dos-algoritmos"> História e Evolução dos Algoritmos </a></li>
-                <ul>
-                    <li><a href="#antiguidade"> Antiguidade</a></li>
-                    <li><a href="#idade-de-ouro-islâmica-século-ix"> Idade de Ouro Islâmica (Século IX)</a></li>
-                    <li><a href="#século-xix"> Século XIX</a></li>
-                    <li><a href="#década-de-1930"> Década de 1930</a></li>
-                </ul>
+            <li><a href="#stack"> Stack</a></li>
+            <li><a href="#heap"> Heap</a></li>
+            <li><a href="#variáveis-estáticas"> Variáveis Estáticas</a></li>
         </ul>
     </details>
     <details>
@@ -44,17 +39,18 @@ title: Minicurso de Algoritmos e Estruturas de Dados
 
 Quando um programa é compilado sabemos que é necessário espaço na memória para que ele possa ser executado, mas afinal, de qual espaço estamos falando? Quando somos introduzidos aos tipos de dados de C/C++ aprendemos que `int` ocupa 4 bytes, `char` ocupa 1 byte e por aí vai. Mas será que esses dados ficam jogados de qualquer forma dentro da memória RAM? A resposta é **não**. A memória usada para rodar um programa pode ser dividida em duas partes.
 
-## Stack
+### Stack
 
 Essa parte da memória leva este nome por seguir o padrão [LIFO](https://pt.wikipedia.org/wiki/LIFO), que empilha memória conforme lê as linhas do programa. Ela é responsável por armazenar tudo cujo **tamanho** é sabido em **tempo de compilação** e cujo **tempo de vida** é ditado conforme o escopo.
 
-<div style="text-align: center;"><img src="assets/images/dia2/stack.png" alt="" style="width:300px;height:300px;"> </div>
+<div style="text-align: center;"><img src="assets/images/dia2/stack.png" alt="" style="width:600px;height:600px;"> </div>
 
 Dentro da Stack cada função tem seu **StackFrame**, que é o espaço dedicado para as **variáveis locais** de cada função, cujo acesso é permitido apenas dentro daquele escopo.
 
 ### Exercício
 
 > Ilustre a Stack do seguinte programa
+
 ```cpp
 float hello() {
     std::cout << "hello world" << std::endl;
@@ -89,7 +85,7 @@ Que tal resolvermos esse [exercício](https://judge.beecrowd.com/en/problems/vie
 <!-- stack overflow -->
 <!-- cuidado com a profundidade da recursão em linguagens strict -->
 
-## Heap
+### Heap
 
 A região de memória em questão trabalha de forma complementar à **Stack**, armazenando todos os dados que tornariam o acesso menos performático nesta. Isso é, tudo que precisa ter um espaço reservado mas cujo tamanho só é conhecido em **tempo de execução**. Além disso, aqui temos mais liberdade de gerenciar a memória do programa, entretanto, a natureza dinâmica dessa abordagem faz com que ela seja naturalmente **menos performática**.
 
@@ -149,6 +145,8 @@ int main() {
     return 0;
 }
 ```
+
+
 <!-- stack - n, arr, arr2(conteúdo na heap)
     daí outro stackframe é criado acima de main
     stack - a, p(p* na heap), "s" ...
@@ -165,6 +163,8 @@ Podemos formalizar dizendo que `static` é um [Especificador de Classe de Armaze
 <div style="text-align: center;"><img src="assets/images/dia2/static-stack-heap.png" alt="" style="width:300px;height:300px;"> </div>
 
 No mais, apesar dessa representação não ser completamente fiel a como as coisas acontecem dentro da memória, se trata de uma abstração que favorece o entendimento de um programador sobre como o código dele funciona.
+
+---
 
 # Ordenação
 
@@ -190,7 +190,7 @@ Retomando o conceito de análise assintótica, notamos que a verificação acaba
 No pior dos casos será necessário percorrer a lista toda para descobrir se ela é ordenada ou não. Sendo assim, sua complexidade é <b>O(n)</b>. Mas para os algoritmos a seguir vamos desconsiderar a verificação da ordenação, considerando no seu custo apenas a ordenação em si.
 </details>
 
-## Uma abordagem comum
+## Uma Abordagem Comum
 
 Caso você precisasse ordenar um grupo de pessoas por altura, como faria? A única restrição é que só se pode mover uma pessoa por vez, e não pode exagerar nas trocas. Uma das abordagens mais comuns seria percorrer o grupo inteiro e verificar quem é a menor pessoa encontrada naquela iteração. Considere o exemplo a seguir:
 
@@ -482,6 +482,7 @@ void mergeSort(vector<string>& arr, int left, int right) {
 
 
 
+---
 
 # Sorting em algoritmos
 

@@ -22,7 +22,7 @@ Logo, seguem aqui uma breve descrição dos conteúdos que serão vistos durante
 
 O primeiro dia tem como foco introduzir o conceitos de Complexidade Assintótica e Algoritmos de Busca, junto de uma breve introdução à linguagem que iremos utilizar nesse curso, o C++.
 
-### DIA 2 - Análise e Uso de Algoritmos Famosos
+### DIA 2 - Conceitos de Memória, Ordenação e Algoritmos
 
 O segundo dia foca em aplicar os conceitos vistos no dia anterior para descobrir quais algoritmos de busca são realmente os "melhores". Além disso, iremos aplicar o conceito de Complexidade Assintótica para "descobrir" alguns fatos interessantes sobre esses algoritmos.
 
