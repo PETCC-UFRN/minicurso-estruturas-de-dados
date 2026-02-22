@@ -458,7 +458,8 @@ int main() {
 
 ```
 
-Lembrando que, pela condição ser um **booleano**, podemos também utilizar operadores lógicos como **&& (ou and)** e **|| (ou or)** dentro de nossas estruturas.
+Lembrando que, pela condição ser um **booleano**, podemos também utilizar operadores lógicos como **&& (ou and)** e &#124; &#124; **(ou or)** dentro de nossas estruturas.
+
 
 ```cpp
 
@@ -902,7 +903,7 @@ else return fibo(5 - 1) + fibo(5 - 2) // retorno de fibo(5)
 
 Logo, temos que `fibo(5) = fibo(4) + fibo(3)`. Veremos a seguir o valor de `fibo(4)`.
 
-```cpp
+``` cpp
 
 fibo(4);
 
