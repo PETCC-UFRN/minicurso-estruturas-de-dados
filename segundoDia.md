@@ -551,7 +551,7 @@ Digamos que você esteja jogando o seu jogo de RPG MMO favorito. Ao avançar de 
 A ideia mais intuitiva - e correta - é ordenar pela força do dragão: Caso você seja mais forte do que ele, você ganha pontos a mais de força para tentar derrotar o próximo - e mais forte - dragão. Caso você não consiga derrotar o dragão de agora, é impossível você derrotar qualquer outro que ainda está vivo (eles são todos mais fortes!!).
 <p/>
 
-Assim, se você chegar ao fim da sua lista de dragões, você consegue derrotar todos e seguir para o seu próximo desafio! Caso contrário, você não consegue sair da sala e será derrotado :broken_heart:
+Assim, se você chegar ao fim da sua lista de dragões, você consegue derrotar todos e seguir para o seu próximo desafio! Caso contrário, você não consegue sair da sala e será derrotado 💔
 <p/>
 
 Fácil, não foi? Não se preocupe, nem todos são assim! hehe
@@ -590,7 +590,98 @@ A saída dessa questão é ordenar pelo fim do filme! Note que, para escolher o 
 o código fica mais ou menos assim:
 <p/>
 
-// adicionar aqui o codigo
+```cpp
+bool comparar (pair<int, int> a, pair<int, int> b) {
+    if (a.second == b.second) {
+        return a.first < b.first;
+    }
+
+    return a.second < b.second;
+}
+
+int main () {
+
+    int n;
+
+    cin >> n
+
+    pair<int, int> pares[n]; // criando um array de pares
+
+    for (int i = 0; i < n; i++) {
+        cin >> pares[i].first >> pares[i].second; // recebendo cada valor
+    }
+
+    sort(pares, pares + n, comparar); // ordena com base nos horários finais dos filmes
+
+    int total = 0; // variável que conta quantos filmes vou assistir
+
+    int atual = pares[i].second; // primeiro horário de término de um filme
+
+    int i = 1;
+
+    for (int i = 1; i < n; i++) {
+        
+        if (pares[i].first >= pares[atual]) { // se eu ainda posso ver esse filme
+            total++; // vejo o filme
+            atual = i; // todos os próximos filmes deverão ser após esse
+        }
+
+    }
+
+    cout << total << "\n"; // printo o total de filmes que consegui assistir!
+
+    return 0;
+    
+}
+
+
+
+```
+
+uma maneira inteligente de não precisar passar a função _custom_ é receber o segundo número antes, já que a função de comparação de um pair compara primeiro o primeiro objeto
+
+
+```cpp
+
+int main () {
+
+    int n;
+
+    cin >> n
+
+    pair<int, int> pares[n]; // criando um array de pares
+
+    for (int i = 0; i < n; i++) {
+        cin >> pares[i].second >> pares[i].first; // recebendo cada valor
+    }
+
+    sort(pares, pares + n); // ordena com base nos horários finais dos filmes
+
+    int total = 0; // variável que conta quantos filmes vou assistir
+
+    int atual = pares[i].second; // primeiro horário de término de um filme
+
+    int i = 1;
+
+    for (int i = 1; i < n; i++) {
+        
+        if (pares[i].first >= pares[atual]) { // se eu ainda posso ver esse filme
+            total++; // vejo o filme
+            atual = i; // todos os próximos filmes deverão ser após esse
+        }
+
+    }
+
+    cout << total << "\n"; // printo o total de filmes que consegui assistir!
+
+    return 0;
+    
+}
+
+
+```
+
+
 
 </details>
 
@@ -601,7 +692,15 @@ o código fica mais ou menos assim:
 
 Agora que nós já entendemos como funcionam as soluções greedy mais intuitivas, que tal tentar um exercício sozinho?
 
-// watermelons da mfp
+
+Digamos que magali tem um conjunto de melancias que ela quer muito comer - Mas, por incrível que pareça, sua fome não é insaciável! Ela só consegue comer N quilos de melancia. Por alguma razão, Magali também sabe quantas sementes tem em cada melancia que ela tem em casa.
+
+Por outro lado, Quinzinho, que quer começar uma plantação de melancias, pediu que ela entregasse todas as sementes para ele no fim de seu lanche da tarde. Magali, então, pediu a sua ajuda para calcular a maior quantidade de sementes que ela pode dar a Quinzinho, assumindo que as sementes de cada melancia específica estão uniformemente distribuídas. Como você pode fazer isso?
+
+Como eu sinto que fiz um trabalho não tão bom explicando, espero que essa imagem ajude:
+
+
+
 <!-- watermelons(mfp) - pesquisar site -->
 
 <details>
