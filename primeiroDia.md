@@ -1408,4 +1408,4 @@ Quando dizemos que um algoritmo é **O(n²)**, por exemplo, queremos dizer que o
 
 ## Exercícios
 
-E para fechar, vamos botar tudo que aprendemos em prática e nos familiarizarmos com a sintaxe do C++ fazendo [essa lista](https://judge.beecrowd.com/en/problems/index/1).
+E para fechar, vamos botar tudo que aprendemos em prática e nos familiarizarmos com a **sintaxe do C++** fazendo [**essa lista**](https://judge.beecrowd.com/en/problems/index/1).
