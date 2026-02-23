@@ -1345,8 +1345,8 @@ O problema é que nos piores casos nós precisariamos de até 100 chutes para ac
 O valor esperado crescerá proporcionalmente à quantidade de números possíveis. Então para 1.000 será 500,5, para 1.000.000 será 500.000,5, com a proporção se mantendo
 
 ##### 	Visualizando o crescimento da quantidade de casos em média
-<div  class="figure"  style="flex: 1; text-align: center;">
 
+<div  class="figure"  style="flex: 1; text-align: center;">
 <img  src="assets/images/grafico_linear.png"  alt="grafico linear"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
 <p  style="margin: 0.5rem auto 0; text-align: center;"><em>A quantidade média cresce como uma função de primeiro grau<br  /></em></p>
 </div>
@@ -1397,6 +1397,8 @@ Anteriormente, chegamos no resultado de que a quantidade de etapas para 100 elem
 
 #### Comparando o crescimento dos dois algoritmos
 No seguinte gráfico estamos comparando o crescimento dos piores casos dos dois algoritmos
+
+<div  class="figure"  style="flex: 1; text-align: center;">
 <img  src="assets/images/grafico_log.png"  alt="grafico log"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
 <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em></p>
 </div>
@@ -1582,6 +1584,7 @@ Outra definição que pode ser usada para a notação O é uma que utiliza limit
 
 ##### Exemplo visual
 
+<div  class="figure"  style="flex: 1; text-align: center;">
 <img  src="assets/images/exemplo_theta.png"  alt="grafico log"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
 <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> Exemplo extraído do geeks4geeks</p>
 </div>
@@ -1643,7 +1646,7 @@ b) f(n) = n³ e g(n) = n²
 
 ### Classes de complexidade 
 
-<div>
+<div  class="figure"  style="flex: 1; text-align: center;">
 <img  src="assets/images/bigO_graph.jpg"  alt="grafico log"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
 <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> Tabela de comparação de complexidades</p>
 </div>
