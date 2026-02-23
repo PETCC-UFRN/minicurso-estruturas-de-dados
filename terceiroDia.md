@@ -79,18 +79,116 @@ title: Minicurso de Matemática aplicada à Computação
   </div>
 
 
-## O que são Tipos Abstratos de Dados (TADs)?
+## TAD x ED
 
-// guilherme
+Na aula de hoje, vamos nos aprofundar em um dos conflitos conceituais mais importantes da Computação: Tipos Abstratos de Dados (TAD) x Estruturas de Dados (ED). Compreender corretamente esses 
+conceitos é fundamental para expandirmos nossa noção sobre algoritmos e entendermos como o mundo das estruturas de dados funciona.
+
+## O que são Tipos Abstratos de Dados?
+
+TAD, ou Tipo Abstrato de Dado, é formalmente definido como um conjunto de objetos aliado à um conjunto de operações. Na prática, é uma _interface conceitual_ que define o comportamento para um conjunto de dados. A especificação de um TAD determina, principalmente, duas informações principais: como o conjunto de dados se comporta e o conjunto de regras (ou operações) que podem ser realizadas sobre ele. Algumas das operações mais comuns de serem citadas são:
+
+- Criação da estrutura
+
+- Inclusão de um elemento
+
+- Exclusão de um elemento
+
+- Acesso a um elemento
+
+- Verificar vazio
+
+Dessa maneira, o TAD priva o acesso aos dados e restringe a manipulação deles apenas através das operações. Perceba que o TAD, contudo, não é responsável por especificar como essas operações vão ser implementadas ou como os dados vão ser armazenados na memória. O foco aqui está na abstração, ou seja, em definir um guia comportamental e não uma especificação prática para o conjunto de dados.
+
+### Exemplo prático: TAD Ponto
+
+Para entender melhor o conceito de TAD, vamos trabalhar com a definição de um novo TAD arbitrário chamado `Ponto`, que define uma estrutura responsável por representar pontos e armazena duas coordenadas X e Y. Para ele, vamos, tal qual solicitado na definição do conceito, definir algumas operações básicas, como:
+
+- `create(x, y)` - Cria um novo ponto com as coordenadas x e y;
+
+- `delete(p)` - Deleta o ponto;
+
+- `set_coord(p, x, y)` - Seta as coordenadas x e y para um ponto p;
+
+- `distance(p1, p2)` - Calcula a distância entre dois pontos;
+
+Inicialmente, vamos utilizar para a implementação desse TAD uma estrutura já bem conhecida por vocês:
+
+```cpp
+//.cpp
+
+struct Ponto {
+    float x;
+    float y;
+}
+
+Ponto* create(float x, float y) {
+    Ponto* p = new Ponto;
+    p->x = x;
+    p->y = y;
+    return p;
+}
+
+void delete_ponto(Ponto* p) {
+    delete p;
+}
+
+[...]
+```
+
+Perceba, porém, que a definição do `TAD Ponto` não especifica uma implementação fixa, ou seja, nós podemos explorar outras alternativas na representação prática do TAD:
+
+```cpp
+
+int ponto[2]; //Utilizando, por exemplo, o array clássico, ponto[0] = x , ponto[1] = y.
+
+--------------------------
+
+std::vector<float> coord_x; //Ou utilizando dois vetores separados
+std::vector<float> coord_y;
+
+--------------------------
+
+```
+
+Ou, da maneira mais convencional, através do uso de classes:
+
+```cpp
+
+class Ponto { // Utilizando classes
+    private:
+    int x;
+    int y;
+
+    public:
+    Ponto(int x, int y);
+
+    void set_coord(int nx, int ny);
+
+    float distance(const Ponto& outro) const;
+
+    int get_x() const;
+    int get_y() const;
+}
+
+```
+
+Perceba que a liberdade que a abstração nos dá vem com um preço: garantir que o funcionamento da estrutura e o comportamento das operações se mantenha intacto. Porém, mantendo essas condições, podemos explorar a nossa criatividade para a implementação dos mais diversos TAD's.
 
 ## O que são Estruturas de Dados?
 
-//guilherme
+Dentro desse contexto, as Estruturas de Dados são estruturas concretas que organizam, armazenam e manipulam dados na _memória_ do computador, permitindo a realização de operações sobre dados de maneira adequada e correta. A Estrutura de Dado, diferente do TAD, se preocupa principalmente com a maneira como os dados são representados e organizados _internamente_, estabelecendo uma relação lógica e visando a eficiência dos dados, se atentando para aspectos como:
 
+1. Uso eficiente de memória;
+2. Tempo de execução;
+
+As estruturas de dados são as responsáveis por *materializar* as implementações dos Tipos Abstratos de Dados, ou seja, transformam uma abstração conceitual em uma implementação prática.
 
 ## Ponteiros
 
 Calma, não se assuste.
+
+Antes de nos aprofundarmos em algumas estruturas de dados conhecidas, vamos rever alguns pontos importantes sobre ponteiros.
 
 Sabemos que esse tópico é meio chatinho para algumas pessoas, porém é de extrema importância. Não iremos abordar tanta coisa sobre ponteiros, apenas entender por cima como eles funcionam e aplicar na criação de estruturas de dados mais complexas.
 
@@ -536,26 +634,24 @@ Como vocês provavelmente imaginam, a complexidade dessa operação também é O
 
 Note também que sempre que vemos essas implementações, parece que estamos _"babyproofing"_ uma casa: fazendo condicionais para pegar cada caso de borda, cada exceção. Mas é exatamente assim que as estruturas na STL são pensadas: elas precisam ser robustas de forma que o usuário desinformado (nós!) não consiga quebrá-las. E é por isso que é algo tão bom quando estamos programando! É algo previsível, meticulosamente testado, que garatidamente vai retornar erros ao invés de nos deixar acabar com a estrutura que estamos tentando acessar.
 
-
+### Lista Encadeada
 
 Mas bom, essas são as estruturas de dados que vamos ver por enquanto! Vamos partir para os diferentes TADs?
-
-
-
-### Lista Encadeada
 
 <!-- implementationrrr-->
 
 
-## Tipos abstratos de dados e suas implementações
+# Tipos abstratos de dados e suas implementações
 
-## Fila (Queue)
+## TAD Lista (List)
+
+## TAD Fila (Queue)
 
 ### Descrição
 
 O Tipo Abstrato de Dados (TAD) Fila, conhecido na literatura como Queue, é uma das estruturas conceituais mais importantes da Ciência da Computação. Seu princípio fundamental é a política de acesso FIFO (First-In, First-Out), segundo a qual o primeiro elemento inserido é também o primeiro a ser removido. Esse comportamento reflete diversos processos naturais e computacionais, tornando a fila um modelo essencial para a organização temporal de dados.
 
-Enquanto TAD, a fila descreve o comportamento lógico da estrutura, independentemente de como ela é implementada em memória. Como já vimos antes no estudo da diferença entre TAD e ED.
+Enquanto TAD, a fila descreve o comportamento lógico da estrutura, independentemente de como ela é implementada em memória, como já vimos antes no estudo da diferença entre TAD e ED.
 
 Em uma fila, os elementos são inseridos em uma extremidade, usualmente chamada de final, e removidos da outra extremidade, chamada de início. Não há acesso direto ou aleatório aos elementos intermediários, o que reforça a ideia de processamento sequencial e ordenado (temporal).
 
@@ -710,7 +806,7 @@ Nesse contexto, a fila assegura previsibilidade e organização, sendo fundament
 
 
 
-## Pilha (Stack)
+## TAD Pilha (Stack)
 
 Assim como a fila, a pilha é de extrema importância na Ciência da Computação como um TAD crucial à modelagem de situações específicas. Seu maior princípio é a ideia do "LIFO" (Last In, First Out) - os primeiros elementos a sair da nossa estrutura de dados são sempre aqueles que chegaram por último. Podemos imaginar esse TAD como vários objetos e ideias do dia a dia: um dispenser de gurdanapos de uma lanchonete - A única maneira de adicionar guardanapos é empurrando pela única entrada, que também serve de saída - ou até uma rua sem saída bem estreita - onde um carro, caso não tenha sido o último a entrar, não consegue sair imediatamente! Em geral, é como uma pilha de objetos de fato, na qual você só pode retirar o objeto no topo (se não a pilha cai!)
 
