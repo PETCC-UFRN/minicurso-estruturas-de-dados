@@ -150,7 +150,7 @@ Acho que essa parte pode ser no final
 Para compreender o conceito de Estruturas de Dados, é fundamental conhecer primeiro os Tipos Abstratos de Dados (TADs). Esses dois conceitos estão diretamente relacionados, mas não são a mesma coisa.
 
 
-### Tipos Abstrados de Dados (TAD)
+### Tipos Abstratos de Dados (TAD)
 Um TAD é formado por:
 - um **conjunto de dados**
 - um **conjunto de operações** para manipular esses dados
