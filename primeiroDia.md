@@ -71,25 +71,53 @@ title: Minicurso de Matemática aplicada à Computação
         </ul>
     </details>
     <details>
-        <summary><a href="#análise-de-algoritmos"> Análise de Algoritmos</a></summary>
+        <summary><a href="#análise-de-complexidade-de-algoritmos"> Análise de Complexidade de Algoritmos</a></summary>
         <ul>
-            <li><a href="#modelo-ram"> Modelo Ram</a></li>
-            <li><a href="#função-de-complexidade-de-tempo"> Função de Complexidade de Tempo</a></li>
+            <li><a href="#propondo-dois-algoritmos-para-resolver-um-pequeno-jogo"> Propondo dois algoritmos para resolver um pequeno jogo</a></li>
             <ul>
-                <li><a href="#melhor-caso"> Melhor Caso </a></li>
-                <li><a href="#pior-caso"> Pior Caso</a></li>
-                <li><a href="#caso-médio"> Caso Médio </a></li>
-                <li><a href="#importância-da-análise-assintótica"> Importância da Análise Assintótica</a></li>
+                <li><a href="#o-jogo"> O jogo </a></li>
+                <li><a href="#algoritmo-1"> Algoritmo 1 </a></li>
+                <li><a href="#algoritmo-2"> Algoritmo 2 </a></li>
+                <li><a href="#comparando-o-crescimento-dos-dois-algoritmos"> Comparando o crescimento dos dois algoritmos</a></li>
             </ul>
-            <li><a href="#notações-assintóticas"> Notações Assintóticas </a></li>
+            <li><a href="#o-que-aprender-com-esses-dois-algoritmos"> O que aprender com esses dois algoritmos</a></li>
+            <li><a href="#o-que-é-a-complexidade-do-algoritmo"> O que é a complexidade do algoritmo</a></li>
+        </ul>
+        <ul>
+            <li><a href="#como-é-estimada-a-complexidade-temporal"> Como é estimada a complexidade temporal</a></li>
             <ul>
-                <li><a href="#notação-o"> Notação O</a></li>
+                <li><a href="#modelo-ram"> Modelo Ram</a></li>
+                <li><a href="#função-de-complexidade-de-tempo"> Função de Complexidade de Tempo</a></li>
+                <ul>
+                    <li><a href="#melhor-caso"> Melhor Caso </a></li>
+                    <li><a href="#pior-caso"> Pior Caso</a></li>
+                    <li><a href="#caso-médio"> Caso Médio </a></li>
+                </ul>
+                <li><a href="#o-que-entender-com-os-três-casos"> O que entender com os três casos</a></li>
+            </ul>
+            <li><a href="#análise-assintótica"> Análise Assintótica </a></li>
+            <ul>
+                <li><a href="#como-as-funções-de-complexidade-temporal-são-classificadas"> Como essas funções são classificadas</a></li>
+                <li><a href="#notações-assintóticas"> Notações Assintóticas </a></li>
+                <ul>
+                    <li><a href="#notação-θ"> Notação θ </a></li>
+                    <li><a href="#notação-o"> Notação O </a></li>
+                    <li><a href="#notação-ω"> Notação Ω </a></li>
+                </ul>
+            </ul>
+            <li><a href="#classes-de-complexidade"> Classes de complexidade </a></li>
+            <ul>
+                <li><a href="#complexidade-o1"> Complexidade O(1) </a></li>
+                <li><a href="#complexidade-ologn"> Complexidade O(log n)</a></li>   
+                <li><a href="#complexidade-on"> Complexidade O(n) </a></li>
+                <li><a href="#complexidade-on-1"> Complexidade O(n²) </a></li>
+                <li><a href="#complexidade-onlogn"> Complexidade O(n*log n) </a></li>
+                <li><a href="#complexidade-o2n"> Complexidade O(2^n) </a></li>
             </ul>
         </ul>
     </details>
-    <details>
-        <summary><a href="#exercícios">Exercícios</a></summary>
-    </details>
+    <summary><a href="#exercícios">Exercícios</a></summary>
+    
 
   <button class="toggle-button" id="toggle-button">
       Esconder Sumário
@@ -1289,7 +1317,8 @@ Para exemplificar a importância de saber analisar algoritmos será proposto um 
 
 ### Propondo dois algoritmos para resolver um pequeno jogo
 #### O jogo
-	Takahashi estava explorando as ruínas da antiga civilização Logônia, até 
+```
+    Takahashi estava explorando as ruínas da antiga civilização Logônia, até 
 	que se deparou com uma porta trancada e uma máscara falante que o desafiou 
 	para um jogo 
 	
@@ -1298,9 +1327,11 @@ Para exemplificar a importância de saber analisar algoritmos será proposto um 
 	que o número correto. Para venceres uma rodada, terás de acertar o número.
 	Somente abrirei a porta se acertares o número em 5 rodadas consecutivas"
 	
-	Nossa tarefa é ajudar Takahashi a vencer no jogo da máscara
+	Nossa tarefa é ajudar Takahashi a vencer no jogo da máscara 
+```
 #### Algoritmo 1.
- ##### O algoritmo:
+
+##### O algoritmo:
  Nós vamos chutar números em sequência. Começamos chutando 1. Se 1 não for o número certo, chutamos 2 e assim vai. Vamos sempre chutando os números sequencialmente.
 ##### Analisando o algoritmo
 O algoritmo tem uma ideia simples. É possível verificar que ele vai encontrar o número em algum momento, pois testará todas as opções exaustivamente. Infelizmente, o preço que se paga por essa simplicidade é a quantidade exagerada de chutes, em média, necessários para descobrir o número secreto.
@@ -1364,7 +1395,7 @@ No algoritmo anterior foi notado que a quantidade de etapas do algoritmo crescia
 O diferencial do algoritmo 2 é que o crescimento dele é muito lento quando comparado à quantidade de elementos no intervalo.
 Anteriormente, chegamos no resultado de que a quantidade de etapas para 100 elementos no intervalo era aproximadamente o $\log_2(100)$. Se o intervalo tivesse 1000 elementos, a quantidade de passos seria $\log_2(1000)\approx10$ passos. Para 1 bilhão de elementos seriam apenas 30 passos. Esse é o verdadeiro poder da divisão sucessiva e do lento crescimento logaritmo.
 
-##### Comparando o crescimento dos dois algoritmos
+#### Comparando o crescimento dos dois algoritmos
 No seguinte gráfico estamos comparando o crescimento dos piores casos dos dois algoritmos
 <img  src="assets/images/grafico_log.png"  alt="grafico log"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
 <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em></p>
@@ -1612,6 +1643,7 @@ b) f(n) = n³ e g(n) = n²
 
 ### Classes de complexidade 
 
+<div>
 <img  src="assets/images/bigO_graph.jpg"  alt="grafico log"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
 <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> Tabela de comparação de complexidades</p>
 </div>
