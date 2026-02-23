@@ -141,8 +141,6 @@ Assim, o algoritmo retorna `<2, 4, 6, 7, 8>` como saída.
 - **Alan Turing**: Formalizou o conceito de computação com a **Máquina de Turing**, estabelecendo a base teórica da ciência da computação moderna.
 - Introduziu a noção de “computável”.
 
----
-
 <!-- 
 Acho que essa parte pode ser no final
 -->
@@ -845,7 +843,7 @@ if(1 <= 1) return 1; // como 1 = 1, fatorial(1) = 1
 <div class="figure" style="flex: 1; text-align: center;">
     <img src="assets/images/Recursão-1-exemplo.png" alt="representação-visual-recursão" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
     <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
-  </div>
+</div>
 
 
 Então, fatorial(3) = 6.
@@ -1457,6 +1455,6 @@ Essa notação fornece um **limite superior assintótico** para a função de co
    
 Quando dizemos que um algoritmo é **O(n²)**, por exemplo, queremos dizer que o seu tempo de execução cresce, no pior caso, de forma proporcional a `n²` à medida que o tamanho da entrada aumenta. 
 
+## Exercícios
 
-
-
+E para fechar, vamos botar tudo que aprendemos em prática e nos familiarizarmos com a sintaxe do C++ fazendo [essa lista](https://judge.beecrowd.com/en/problems/index/1).
