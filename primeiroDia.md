@@ -18,7 +18,7 @@ title: Minicurso de Matemática aplicada à Computação
         </ul>        
     </details>  
     <details>
-        <summary><a href="#introdução-à-estruturas-de-dados"> "Introdução" à Estruturas de Dados </a></summary>
+        <summary><a href="#breve-visão-de-estruturas-de-dados">Breve visão de Estruturas de Dados</a></summary>
         <ul>
             <li><a href="#tipos-abstrados-de-dados-tad"> Tipos Abstratos de Dados (TAD) </a></li>
             <li><a href="#definição-de-estruturas-de-dados"> Definição de Estruturas de Dados</a></li>
@@ -87,6 +87,10 @@ title: Minicurso de Matemática aplicada à Computação
             </ul>
         </ul>
     </details>
+    <details>
+        <summary><a href="#exercícios">Exercícios</a></summary>
+    </details>
+
   <button class="toggle-button" id="toggle-button">
       Esconder Sumário
   </button>
@@ -145,7 +149,7 @@ Assim, o algoritmo retorna `<2, 4, 6, 7, 8>` como saída.
 Acho que essa parte pode ser no final
 -->
 
-## Introdução à Estruturas de Dados
+## Breve visão de Estruturas de Dados
 
 Para compreender o conceito de Estruturas de Dados, é fundamental conhecer primeiro os Tipos Abstratos de Dados (TADs). Esses dois conceitos estão diretamente relacionados, mas não são a mesma coisa.
 
