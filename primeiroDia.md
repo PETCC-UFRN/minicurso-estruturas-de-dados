@@ -1313,21 +1313,22 @@ Além disso, o `std::array` também providencia comandos similares aos vistos em
 
 Na computação, a principal forma de resolver problemas reais é com o desenvolvimento de algoritmos. Nesse sentido, surge a necessidade de classificar algoritmos pelas suas características objetivas, como tempo de execução, uso de memória, uso de recursos computacionais, entre outros. Dessa forma, a **análise de complexidade de algoritmos** se mostra como uma habilidade essencial para programadores que almejam desenvolver softwares rápidos e funcionais.
 
-Para exemplificar a importância de saber analisar algoritmos será proposto um jogo e 2 formas diferentes de resolver o problema apresentado pelo jogo
+Para exemplificar a importância de saber analisar algoritmos será proposto um jogo e 2 formas diferentes de resolver o problema apresentado pelo jogo.
 
 ### Propondo dois algoritmos para resolver um pequeno jogo
 #### O jogo
+
 ```
-    Takahashi estava explorando as ruínas da antiga civilização Logônia, até 
-	que se deparou com uma porta trancada e uma máscara falante que o desafiou 
-	para um jogo 
-	
-	A máscara disse: "Pensarei em um número de 1 a 100 e terás de adivinhá-lo
-	em até 7 chutes. A cada chute errado direi se o teu número é maior ou menor
-	que o número correto. Para venceres uma rodada, terás de acertar o número.
-	Somente abrirei a porta se acertares o número em 5 rodadas consecutivas"
-	
-	Nossa tarefa é ajudar Takahashi a vencer no jogo da máscara 
+Takahashi estava explorando as ruínas da antiga civilização Logônia, até 
+que se deparou com uma porta trancada e uma máscara falante que o desafiou 
+para um jogo 
+
+A máscara disse: "Pensarei em um número de 1 a 100 e terás de adivinhá-lo
+em até 7 chutes. A cada chute errado direi se o teu número é maior ou menor
+que o número correto. Para venceres uma rodada, terás de acertar o número.
+Somente abrirei a porta se acertares o número em 5 rodadas consecutivas"
+
+Nossa tarefa é ajudar Takahashi a vencer no jogo da máscara 
 ```
 #### Algoritmo 1.
 
@@ -1663,10 +1664,7 @@ Operações aritméticas, ou acessos de memória em posições determinadas são
 //Essa função vai somar o elemento do array que está em indice com o valor de val
 void somar_ao_array(int array[], int tam_array, int indice, int val){
 	if(indice < tam_array){
-		array[indice] = array[indice]+val
-	}
-	else{
-		return;
+		array[indice] = array[indice]+val;
 	}
 }
 
@@ -1730,7 +1728,7 @@ Classes dos algoritmos cuja complexidade cresce de acordo com o quadrado do tama
 
 Algoritmos O(n²) geralmente funcionam com dois laços for aninhados. Para testar todos os pares de elementos possíveis em um vetor se utiliza um algoritmo O(n²)
 
-```cpp
+```c++
 //Esse algoritmo encontra a maior soma de dois elementos de um array com tamanho maior que 1
 //para simplificar a contagem, ele também considera pares de elementos repetidos como (1, 1) ou (2, 2)
 int maior_soma_array(int *array, int n){
@@ -1745,6 +1743,7 @@ int maior_soma_array(int *array, int n){
 			}
 		}
 	}
+    return max_sum;
 }
 ```
 #### Complexidade O(n*logn)
