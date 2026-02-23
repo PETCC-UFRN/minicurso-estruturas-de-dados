@@ -145,29 +145,17 @@ Assim, o algoritmo retorna `<2, 4, 6, 7, 8>` como saída.
 Acho que essa parte pode ser no final
 -->
 
-## "Introdução" à Estruturas de Dados
+## Introdução à Estruturas de Dados
 
 Para compreender o conceito de Estruturas de Dados, é fundamental conhecer primeiro os Tipos Abstratos de Dados (TADs). Esses dois conceitos estão diretamente relacionados, mas não são a mesma coisa.
+
 
 ### Tipos Abstrados de Dados (TAD)
 Um TAD é formado por:
 - um **conjunto de dados**
 - um **conjunto de operações** para manipular esses dados
 
-Vamos exemplificar a seguir.
-
-Podemos definir o TAD Pilha da seguinte forma:
-- `Pilha{topo, tamanho}`
-
-Para manipular esse conjunto podemos usar as operações:
-- `criarPilha()` - cria uma pilha com tamanho n
-- `push(x)` - empilha um elemento x
-- `pop()` - remove o elemento do topo
-- `top()` - consulta o topo
-- `isEmpty()` - verifica se está vazia
-- `destruirPilha()` - apaga uma pilha
-
-Note que foi definido apenas quais dados existem e quais operações podem ser feitas, sem dizar como isso é implementado.
+Um mesmo TAD pode ter várias implementações.
 
 ### Definição de Estruturas de Dados
 Uma Estrutura de Dados é a implementação concreta de um TAD em uma linguagem de programação, usando algoritmos.
@@ -175,47 +163,6 @@ Uma Estrutura de Dados é a implementação concreta de um TAD em uma linguagem 
 As estruturas estabelecem:
 - a forma que os dados são dispostos na memória
 - como as operações são realizadas
-
-Vamos implementar a Pilha, usando um array:
-
-```cpp
-struct Pilha {
-    int* dados;        // array que armazena os elementos
-    int topo;          // índice do topo da pilha
-    int capacidade;    // tamanho máximo da pilha
-};
-
-Pilha* criarPilha(int capacidade) {
-    Pilha* p = new Pilha;
-    p->dados = new int[capacidade];
-    p->capacidade = capacidade;
-    p->topo = -1;
-    return p;
-}
-
-void push(Pilha* p, int x) {
-    if (p->topo == p->capacidade - 1)
-        throw std::overflow_error("Pilha cheia");
-
-    p->dados[++p->topo] = x;
-}
-
-int pop(Pilha* p) {
-    if (isEmpty(p))
-        throw std::underflow_error("Pilha vazia");
-
-    return p->dados[p->topo--];
-}
-
-bool isEmpty(Pilha* p) {
-    return p->topo == -1;
-}
-
-void destruirPilha(Pilha* p) {
-    delete[] p->dados;
-    delete p;
-}
-```
 
 ## Por que estudar Algoritmos e Estruturas de Dados?
 
