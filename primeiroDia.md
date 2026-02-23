@@ -3077,11 +3077,13 @@ Outra definição que pode ser usada para a notação O é uma que utiliza limit
 
 ##### Exemplos
 
-1. Seja f(n) = n+30 e g(n) = 30n 
-f(n) é Θ(g(n))?
+Nos seguintes exemplos responda se f(n) é Θ(g(n)) 
 
-2. f(n) = n² + 1 e g(n) = 20n + 10
+a) f(n) = n+30 e g(n) = 30n 
 
+b) f(n) = n² + 1 e g(n) = 20n + 10
+
+c) f(n) = $log_3(n)$ e g(n) = $log_2(n)$
 
 #### Notação O
 
@@ -3102,9 +3104,11 @@ Nos seguintes exemplos responda se f(n) é O(g(n))
 
 a) f(n) = 2n+1 e g(n) = 2n+3
 
-b) f(n) = n² e g(n) = n
+b) f(n) = $log_2(n)$ e g(n) = n
 
 c) f(n) = 3n³ e g(n) = n!
+
+
 
 #### Notação Ω
 
@@ -3128,55 +3132,138 @@ b) f(n) = n³ e g(n) = n²
 
 ### Classes de complexidade 
 
+<img  src="assets/images/bigO_graph.jpg"  alt="grafico log"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
+<p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> Tabela de comparação de complexidades</p>
+</div>
 
+#### Complexidade O(1)
 
-### Introdução
+Algoritmos dessa classe tem uma complexidade que não cresce com o tamanho n da entrada. Eles são chamados de constantes
 
-<!--
+##### Exemplo
 
-  
-  
+Operações aritméticas, ou acessos de memória em posições determinadas são feitas em tempo constante
 
-Definição e uso
+```cpp
+//Essa função vai somar o elemento do array que está em indice com o valor de val
+void somar_ao_array(int array[], int tam_array, int indice, int val){
+	if(indice < tam_array){
+		array[indice] = array[indice]+val
+	}
+	else{
+		return;
+	}
+}
 
-  
+```
 
-Olhando um gráfico, e vendo a similaridade com funções matemáticas
+#### Complexidade O(logn)
 
-Definição formal
+Classe dos algoritmos cuja complexidade cresce proporcionalmente ao logaritmo do tamanho da entrada. É importante ressaltar que essa complexidade vale para qualquer tipo de logaritmo indepentemente da base.
 
-Gatilho puxando para análise de pior/melor/medio caso.
+##### Exemplo
 
-  
+Esses algoritmos tipicamente fazem divisões sucessivas para ter essa complexidade. Por causa disso, é mais difícil de identificar se um algoritmo pertence à essa classe
+O algoritmo 2 do jogo da máscara é um algoritmo O(logn). Ele é uma variação do famoso algoritmo de busca binária
 
--->
+```cpp
+//Essa função vai retornar o indice do valor procurado se ele estiver no vetor
+//para ela funcionar o vetor tem que estar ordenado previamente
+int busca_binaria(array<int> &arr, int x) {
+    int low = 0;
+    int high = arr.size();
+    while (low < high) {
+        int mid = low + (high - low) / 2;
+        if (arr[mid] == x){
+            return mid;
+		}
+        else if (arr[mid] < x){
+            low = mid + 1;
+		}
+        else{
+            high = mid - 1;
+		}
+    }
+    return -1
+}
+```
+#### Complexidade O(n)
 
-  
+Classe dos algoritmos cuja complexidade cresce linearmente com o tamanho da entrada
 
-#### Pior Caso
+##### Exemplo
 
-#### Melhor Caso
+Tipicamente são algoritmos que percorrem um vetor inteiro para fazer um operação. O algoritmo 1 do jogo da máscara era O(n).
 
-#### Caso Médio
+```cpp
+//Essa função vai retornar o indice do valor procurado se ele estiver no vetor
+int busca_sequencial(array<int> &arr, int x){
+	for(int i=0;i<arr.size();i++){
+		if(arr[i] == x){
+			return i;
+		}
+	}
+	return -1;
+}
+```
 
-### Exemplo <!-- Pegar um código como exemplo e ver seu pior/melhor/médio caso -->
+#### Complexidade O(n²)
 
-### Notações O, Θ e 𝝮
+Classes dos algoritmos cuja complexidade cresce de acordo com o quadrado do tamanho da entrada
 
-### Exercícios
+##### Exemplo 
 
-  
+Algoritmos O(n²) geralmente funcionam com dois laços for aninhados. Para testar todos os pares de elementos possíveis em um vetor se utiliza um algoritmo O(n²)
 
-## Cálculo Assintótico
+```cpp
+//Esse algoritmo encontra a maior soma de dois elementos de um array com tamanho maior que 1
+//para simplificar a contagem, ele também considera pares de elementos repetidos como (1, 1) ou (2, 2)
+int maior_soma_array(int *array, int n){
+	if(n < 2){
+		return 0;
+	}
+	int max_sum = array[0]+array[1];
+	for(int i=0;i<n;i++){
+		for(int j=i;j<n;j++){
+			if(array[i]+array[j] > max_sum){
+				max_sum = array[i]+array[j];
+			}
+		}
+	}
+}
+```
+#### Complexidade O(n*logn)
 
-### Tabela de Complexidade
+Algoritmos dessa complexidade tem crescimento um pouco maior que o de um algoritmo linear, mas ainda é muito mais eficiente que um algoritmo O(n²)
 
-<!-- Mostrar que 1 << logn << n <<... -->
+##### Exemplo
 
-### O que é Eficiência?
+Algoritmos ficam com essa complexidade quando uma das etapas de um algoritmo linear executa um algoritmo logn. Para um exemplo didático, esse algoritmo executa uma busca binária para todos elementos do próprio array
 
-### Eficiência de Tempo X Espaço
+```cpp
+void didatico(int arr, int n){
+	for(int i=0;i<n;i++){
+		busca_binaria(arr, n, arr[i]);
+	}
+}
+```
+O loop de for com uma operação básica como somar elementos, ou acessar elementos de um array, fariam o algoritmo ser O(n), pois as essas operações são O(1), mas como a operação que está sendo executada é um algoritmo O(logn), a complexidade do algoritmo inteiro vira O(n*logn). É importante entender que é feito o produto das complexidades.
 
-#### Aplicação com STL
+#### Complexidade O(2^n)
 
-### Exercícios
+São algoritmos com crescimento exponencial. Eles são alguns dos mais lentos possíveis.
+
+##### Exemplo
+
+Essa complexidade é tipicamente encontrada em algoritmos recursivos com relações de recorrência. Um exemplo clássico é uma implementação recursiva simples do número de fibonacci.
+
+```cpp
+//retorna o n-ésimo número de fiboacci
+long long fibonacci(int n){
+	if(n == 0 || n == 1){
+		return 0;
+	}
+	return fibonacci(n-1) + fibonacci(n-2);
+}
+
+```
