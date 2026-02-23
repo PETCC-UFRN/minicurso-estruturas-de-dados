@@ -1281,130 +1281,472 @@ Além disso, o `std::array` também providencia comandos similares aos vistos em
 * **back()** : retorna o último elemento do array.
 
 
-## Análise de Algoritmos
+## Análise de Complexidade de Algoritmos
 
-Um mesmo problema pode ser resolvido por diferentes algoritmos. Nesse contexto, a **análise de algoritmos** permite quantificar o custo computacional de cada solução, possibilitando a comparação entre elas e a escolha do algoritmo mais eficiente.
+Na computação, a principal forma de resolver problemas reais é com o desenvolvimento de algoritmos. Nesse sentido, surge a necessidade de classificar algoritmos pelas suas características objetivas, como tempo de execução, uso de memória, uso de recursos computacionais, entre outros. Dessa forma, a **análise de complexidade de algoritmos** se mostra como uma habilidade essencial para programadores que almejam desenvolver softwares rápidos e funcionais.
 
-### Modelo RAM
+Para exemplificar a importância de saber analisar algoritmos será proposto um jogo e 2 formas diferentes de resolver o problema apresentado pelo jogo
 
-Uma forma simples de medir a eficiência de um algoritmo é por meio da medição do tempo de execução. No entanto, essa abordagem é fortemente influenciada por fatores externos, como o hardware utilizado, a quantidade de memória disponível e o compilador, o que dificulta comparações justas entre algoritmos.
+### Propondo dois algoritmos para resolver um pequeno jogo
+#### O jogo
+	Takahashi estava explorando as ruínas da antiga civilização Logônia, até 
+	que se deparou com uma porta trancada e uma máscara falante que o desafiou 
+	para um jogo 
+	
+	A máscara disse: "Pensarei em um número de 1 a 100 e terás de adivinhá-lo
+	em até 7 chutes. A cada chute errado direi se o teu número é maior ou menor
+	que o número correto. Para venceres uma rodada, terás de acertar o número.
+	Somente abrirei a porta se acertares o número em 5 rodadas consecutivas"
+	
+	Nossa tarefa é ajudar Takahashi a vencer no jogo da máscara
+#### Algoritmo 1.
+ ##### O algoritmo:
+ Nós vamos chutar números em sequência. Começamos chutando 1. Se 1 não for o número certo, chutamos 2 e assim vai. Vamos sempre chutando os números sequencialmente.
+##### Analisando o algoritmo
+O algoritmo tem uma ideia simples. É possível verificar que ele vai encontrar o número em algum momento, pois testará todas as opções exaustivamente. Infelizmente, o preço que se paga por essa simplicidade é a quantidade exagerada de chutes, em média, necessários para descobrir o número secreto.
+
+Em casos ideais o número secreto estará entre os 7 primeiros números da sequência. Assim, com sorte o suficiente, conseguiriamos vencer o jogo.
+O problema é que nos piores casos nós precisariamos de até 100 chutes para acertar o número. Considerando que todos valores de 1 a 100 tem a mesma chance de serem escolhidos, temos uma chance de 7% de o número estar entre 1 a 7.
+##### Quantos chutes, em média, precisamos para acertar dessa forma?
+ Utilizando o conceito de valor esperado, conceito da probabilidade e estatística, é possível calcular que Takahashi precisaria de, em média, 50,5 chutes para acertar o número
+ 
+##### E se fossem números de 1 a 1.000, ou 1 a 1.000.000, ou 1 a 1.000.000.000, etc?
+O valor esperado crescerá proporcionalmente à quantidade de números possíveis. Então para 1.000 será 500,5, para 1.000.000 será 500.000,5, com a proporção se mantendo
+
+##### 	Visualizando o crescimento da quantidade de casos em média
+<div  class="figure"  style="flex: 1; text-align: center;">
+
+<img  src="assets/images/grafico_linear.png"  alt="grafico linear"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
+<p  style="margin: 0.5rem auto 0; text-align: center;"><em>A quantidade média cresce como uma função de primeiro grau<br  /></em></p>
+</div>
+
+#### Algoritmo 2.
+##### Utilizando as informações que temos ao nosso favor
+A cada tentativa, a máscara vai nos informar se o número secreto é maior ou menor que o nosso chute. Podemos usar isso ao nosso favor.
+Chutando que o número é 20. Se a máscara disser que 20 é menor que o número secreto, nós sabemos que o número não será 19, nem 18 e nem qualquer número menor ou igual a 20. Então podemos chutar um número maior que 20 e, de preferência, um número que vá eliminar a maior quantidade de candidatos possíveis.
+##### O algoritmo
+Nós vamos sempre chutar um número que está no meio e vamos fazer o seguinte dependendo da resposta:
+Se ele falar que o número secreto é maior que nosso número, vamos procurar o número do meio para os números maiores que nosso chute
+Se ele falar que o número secreto é menor que nosso número, vamos procurar o número do meio para os números menores que nosso chute
+Se não for maior nem menor, nós encontramos o número correto!
+##### Como encontrar o número do meio?
+Como estamos procurando um número no intervalo de 1 a 100, vamos escolher o número fazendo a média dos dois. Então o número escolhido será 50, considerando que números não inteiros serão arredondados para baixo. Se o número secreto for maior que 50, nós podemos excluir 50, e todos os números menores que ele do nosso intervalo. Com isso, na segunda etapa ficamos com o intervalo [51, 100] e o próximo número a ser testado será 75. Alternativamente, se o número secreto for menor que 50, nosso intervalo seria reduzido para [1, 49] e o próximo número a ser testado seria 25.
+##### Analisando o algoritmo
+O funcionamento desse algoritmo é mais complexo que o do anterior. O ganho de eficiência dele vem porque ele está continuamente removendo metade dos valores possíveis até encontrar o resultado. Na primeira etapa do algoritmo existem 100 valores possíveis, após isso metade dos valores serão descartados por serem maiores ou menores que o número secreto.
+
+##### Quantas etapas são necessárias para encontrar o número?
+Pensando no pior caso, quando é preciso dividir o intervalo o máximo de vezes, nós precisamos de apenas 7 etapas. Esse número é surpreendente quando se pensa no algoritmo anterior, que precisa de mais de 50 chutes em média ou até 100 chutes no pior caso, para encontrar o número secreto.
+##### Como chegar nesse resultado
+Temos 100 números inicialmente e vamos dividir essa quantidade de números por 2 uma quantidade x de vezes até que sobre apenas 1 elemento.
+Esse problema pode ser representado pela equação 1:
+
+1:  $100 \cdot \frac{1}{2^x} = 1$
+
+Multiplicando $2^x$ nos dois lados ficamos com a equação 2:
+
+2: $100 = 2^x$ 
+
+Para descobrir o valor de x precisamos resolver essa equação exponencial. Isso é feito tirando o logaritmo dos dois lados na equação 3:
+
+3: $\log_2(100) = \log_2(2^x)$
+
+Que pelas propriedades do logaritmo vira
+
+4: $\log_2(100) = x\cdot\log_2(2)$
+
+O log de 2 na base 2 é igual a 1, então
+
+5: $\log_2(100) = x$
+
+O log de 100 na base 2 é aproximadamente 6,64, ou seja, em 6,64 passos teremos apenas um número sobrando. Mas como estamos trabalhando com números inteiros, por se tratar da quantidade de passos em um algoritmo, a conclusão que nós temos é que em 6 ainda há valores possíveis e em 7 o valor foi encontrado 
+##### E se fossem números de 1 a 1.000, ou 1 a 1.000.000, ou 1 a 1.000.000.000, etc?
+No algoritmo anterior foi notado que a quantidade de etapas do algoritmo crescia na mesma proporção que a quantidade de elementos no intervalo.
+O diferencial do algoritmo 2 é que o crescimento dele é muito lento quando comparado à quantidade de elementos no intervalo.
+Anteriormente, chegamos no resultado de que a quantidade de etapas para 100 elementos no intervalo era aproximadamente o $\log_2(100)$. Se o intervalo tivesse 1000 elementos, a quantidade de passos seria $\log_2(1000)\approx10$ passos. Para 1 bilhão de elementos seriam apenas 30 passos. Esse é o verdadeiro poder da divisão sucessiva e do lento crescimento logaritmo.
+
+##### Comparando o crescimento dos dois algoritmos
+No seguinte gráfico estamos comparando o crescimento dos piores casos dos dois algoritmos
+<img  src="assets/images/grafico_log.png"  alt="grafico log"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
+<p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em></p>
+</div>
+
+A diferença de crescimento é tão grande que fica até dificil de visualizar a curva em roxo que representa a função log
+
+### O que aprender com esses dois algoritmos
+Esses dois algoritmos apresentados são duas formas diferentes de resolver o mesmo problema. A maior diferença entre os dois está na classe de complexidade de cada um enquanto o primeiro tem uma complexidade que cresce como uma função de primeiro grau, complexidade linear, o segundo algoritmo cresce como a função logaritmo, complexidade logarítmica. O crescimento de complexidade mais lento do algoritmo 2 é o que possibilita que ele resolva o problema da máscara sem precisar de casos ideais.
+
+
+### O que é a complexidade do algoritmo?
+
+Nas soluções apresentadas para o jogo da máscara, a complexidade de cada algoritmo foi medida com base na quantidade de chutes necessários para conseguir acertar o número secreto. De forma similar, a complexidade temporal dos algoritmos é medida com uma estimativa da quantidade de passos que algoritmo leva para concluir. Além disso, existe a complexidade espacial, que estima quanto de memória determinado algoritmo vai utilizar em sua execução.
+
+### Como é estimada a complexidade temporal
+
+#### Modelo RAM
+
+
+Uma forma simples de medir a eficiência de um algoritmo é por meio da medição do tempo de execução. No entanto, essa abordagem é fortemente influenciada por fatores externos, como o hardware utilizado, a quantidade de memória disponível, o compilador e o sistema operacional, o que dificulta comparações justas entre algoritmos.
+
+  
 
 Para contornar esse problema, utiliza-se uma **abstração do modelo de computação**, chamada **RAM (_Random Access Machine_)**. Nesse modelo, assume-se que o algoritmo é executado em uma máquina ideal que possui instruções aritméticas, de movimentação de dados e de controle, e que cada instrução leva um tempo constante para ser executada.
 
-### Função de Complexidade de Tempo
+  
 
-A função de complexidade de tempo, denotada por `T(n)`, representa o tempo necessário para a execução de um algoritmo em função do tamanho da entrada `n`, considerando o modelo RAM. Essa função permite analisar como o custo do algoritmo cresce à medida que o tamanho da entrada aumenta.
+#### Função de Complexidade de Tempo
+  
+
+A função de complexidade de tempo, denotada por $T(n)$, representa o tempo necessário para a execução de um algoritmo em função do tamanho da entrada `n`, considerando o modelo RAM. Essa função permite analisar como o custo do algoritmo cresce à medida que o tamanho da entrada aumenta. No caso do jogo da máscara, esse `n` pode ser entendido como a quantidade de números no intervalo
+
+  
 
 **Exemplo:**
 
+Observe esse algoritmo para encontrar o menor elemento dentro de um vetor.
+
+```cpp
+int menorElemento(int v[], int n){
+
+	int i;
+
+	int menor = v[0];
+
+	for(i = 1; i < n; i++){
+		if(v[i] < menor){
+		
+		menor = v[i];
+		
+		}
+	}
+	return menor;
+}
 ```
-  int menorElemento(int v[], int n){
-      int i;
-      int menor = v[0];
 
-      for(i = 1; i < n; i++){
-          if(v[i] < menor){
-              menor = v[i];
-          }
-      }
-
-      return menor;
-  }
-
-```
 A função de complexidade de tempo desse algoritmo é dada pelo número de comparações entre os elementos do vetor `v[]`. Como o laço realiza uma comparação para cada elemento, exceto o primeiro, temos:
 
-`T(n) = n - 1`. 
+
+
+$T(n) = n - 1$.
+
+  
 
 Nesse caso, o tempo de execução é **uniforme** para qualquer entrada de tamanho `n`, ou seja, independe da ordem ou dos valores dos elementos.
 
-Porém, existem algoritmos que gastam menos tempo dependendo da organização da entrada. Um exemplo clássico é a **busca sequencial**, cujo tempo de execução varia conforme a posição do elemento procurado.
+  
+Como foi visto nos algoritmos anteriores, nem sempre o tempo de execução dos algoritmos vai depender exclusivamente do tamanho da entrada. Muitas vezes ele depende de como a entrada está organizada. Para exemplificar isso, vamos mostrar a **busca sequencial**, o algoritmo 1 para o jogo da máscara. 
+
+  
 
 **Exemplo:**
 
-```
-	int buscaSequencial(int v[], int n, int chave){
-    	int i;
-        
-        for (i = 0; i < n; i++){
-        	if(v[i] == chave){
-            	return i;
-            }
-        }
-        
-        return -1;
-    }
+  
 
+```cpp
+int buscaSequencial(int v[], int n, int chave){
+	for (int i = 0; i < n; i++){
+
+		if(v[i] == chave){
+
+		return i;
+		
+		}
+	}
+	return -1;
+}
 ```
+
 Nesse algoritmo, identificam-se **três casos de análise**: o melhor caso, o pior caso e o caso médio.
 
-#### Melhor Caso
+  
+
+##### Melhor Caso
+
+  
 
 O melhor caso ocorre quando o valor que estamos procurando (`chave`) se encontra no primeiro elemento do vetor. Nesse cenário, apenas uma comparação é realizada. Logo:
 
-`T(n) = 1`
+  
+$T(n) = 1$
 
-#### Pior Caso
+  
+
+##### Pior Caso
+
+  
 
 O pior caso ocorre quando o valor `chave` se encontra no último elemento do vetor ou não está presente. Nesse caso, é necessário percorrer todo o vetor`v[]`, realizando n comparações. Assim:
 
-`T(n) = n`.
+  
 
-#### Caso Médio
+$T(n) = n$.
 
-O **caso médio** representa o tempo de execução esperado do algoritmo considerando **todas as possíveis posições** do elemento procurado no vetor, assumindo que cada posição tem **a mesma probabilidade** de conter a chave buscada.
+  
+
+##### Caso Médio
+  
+
+O **caso médio** representa o tempo de execução esperado do algoritmo considerando **todas as possíveis posições** do elemento procurado no vetor. Isso, com base nas probabilidades da entrada. Assumindo que cada posição tem **a mesma probabilidade** de conter a chave buscada.
+
+  
 
 Na busca sequencial, se o elemento `chave` estiver presente no vetor `v[]`, ele pode estar em qualquer uma das `n` posições com probabilidade igual a `1/n`. Nesse caso, o número de comparações realizadas será igual à posição do elemento no vetor (considerando indexação iniciando em 1).
 
+  
+
 Assim, o tempo médio é dado pela **média aritmética** do número de comparações necessárias em cada posição:
 
-`T(n) = (1 + 2 + 3 + ... + n) / n`
+  
+
+$T(n) = \frac{1 + 2 + 3 + \dots + n}{n}$
+
+  
 
 Sabemos que a soma dos primeiros `n` números naturais é:
 
-`1 + 2 + ... + n = n(n + 1) / 2`
+  
+
+$1 + 2 + \dots + n = \frac{n(n + 1)}{2}$
+
+  
 
 Substituindo na expressão do tempo médio, temos:
 
-`T(n) = [n(n + 1) / 2] / n`
+  
 
-`T(n) = (n + 1) / 2`
+$T(n) = \frac{\frac{n(n + 1)}{2}}{n}$
 
-#### Importância da Análise Assintótica
+  
 
-Para valores pequenos de `n`, qualquer algoritmo, mesmo que ineficiente, tende a apresentar um tempo de execução baixo. No entanto, à medida que o tamanho da entrada aumenta, a complexidade do algoritmo torna-se um fator crítico.
+$T(n) = \frac{n + 1}{2}$
 
-Ao escolher um algoritmo, deve-se analisar aquele que possui **maior escalabilidade**, de acordo com o seu **comportamento assintótico**.
+##### O que entender com os três casos
 
-## Notações Assintóticas
+Para analisar com precisão a complexidade de um algoritmo, é preciso entender que cada um desses três casos (melhor caso, pior caso e caso médio) geram uma função de complexidade temporal. No caso da busca pelo menor elemento, as funções são iguais, mas elas podem ser diferentes como no caso da busca sequêncial
 
-As notações assintóticas são utilizadas para representar o **comportamento assintótico** das funções de complexidade de tempo, descrevendo como o custo de execução de um algoritmo cresce à medida que o tamanho da entrada aumenta.
+### Análise assintótica
 
-### Notação O
+#### Como as funções de complexidade temporal são classificadas
 
-Uma função `f(n)` é dita **O(g(n))** se existem constantes positivas `c` e `n₀` tais que:
+Acabamos de mostrar como a função de complexidade de tempo é calculada para um determinado algoritmo. Mas a questão que fica é como comparar funções com complexidades temporais diferentes. 
 
-f(n) ≤ c · g(n), para todo n ≥ n₀.
+#### Notações Assintóticas
 
-Essa notação fornece um **limite superior assintótico** para a função de complexidade, ou seja, descreve o pior crescimento possível do tempo de execução de um algoritmo a partir de um determinado tamanho de entrada, ignorando constantes e termos de menor ordem.
+Para resolver esse problema utilizamos a notação assintótica para descrever a complexidade temporal de um algoritmo. Ela classifica as funções de complexidade temporal com base no crescimento do custo de execução do algoritmo de acordo com a entrada.
+  
+Existem 3 classificações assintóticas tipicamente usadas e todas elas seguem a mesma ideia, ou seja, conseguindo entender uma delas, se entende as 3
 
-#### Exemplos
 
-1. Seja f(n) = (n + 1)².  
-   Para n ≥ 2, temos:
+#### Notação Θ
 
-   (n + 1)² = n² + 2n + 1 ≤ 3n²
+Essa notação define que dadas duas funções de complexidade f(n) e g(n), f(n) é Θ(g(n)) se, e somente se, f(n) e g(n) tem o mesmo crescimento assintótico
 
-   Logo, f(n) é **O(n²)**, considerando c = 3 e n₀ = 2.
+Definição formal:
 
-2. Seja f(n) = 2n³ + 3n² + n.  
-   Para n ≥ 8, temos:
+"Uma função $f(n)$ é dita $O(g(n))$ se existem constantes positivas c1, c2 e n₀ tais que:
+$ c1 \cdot g(n) ≤ f(n) ≤ c2 \cdot g(n), \forall n ≥ n₀.$"
 
-   2n³ + 3n² + n ≤ 4n³
+Outra definição que pode ser usada para a notação O é uma que utiliza limites:
 
-   Assim, f(n) é **O(n³)**, considerando c = 4 e n₀ = 8.
-   
-Quando dizemos que um algoritmo é **O(n²)**, por exemplo, queremos dizer que o seu tempo de execução cresce, no pior caso, de forma proporcional a `n²` à medida que o tamanho da entrada aumenta. 
+"Uma função $f(n)$ é dita $O(g(n))$ se, e somente se $\lim_{n\rightarrow\infty} f( n )/g( n ) = k$, tal que $k$ seja um número real maior que 0"
+
+##### Exemplo visual
+
+<img  src="assets/images/exemplo_theta.png"  alt="grafico log"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
+<p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> Exemplo extraído do geeks4geeks</p>
+</div>
+
+##### Exemplos
+
+Nos seguintes exemplos responda se f(n) é Θ(g(n)) 
+
+a) f(n) = n+30 e g(n) = 30n 
+
+b) f(n) = n² + 1 e g(n) = 20n + 10
+
+c) f(n) = $log_3(n)$ e g(n) = $log_2(n)$
+
+#### Notação O
+
+Essa notação define que dadas duas funções de complexidade temporal f(n) e g(n), f(n) será O(g(n)) se, e somente se, o crescimento da função f for o mesmo, ou for menor que o crescimento da função g
+
+Definição formal:
+
+"Uma função $f(n)$ é dita $O(g(n))$ se existem constantes positivas $c$ e $n₀$ tais que: $f(n) ≤ c \cdot g(n), \forall n ≥ n₀.$"
+
+Outra definição que pode ser usada para a notação O é uma que utiliza limites:
+
+"Uma função $f(n)$ é dita $O(g(n))$ se, e somente se $\lim_{n\rightarrow\infty} f( n )/g( n ) = k$, tal que $k$ seja um número real maior ou igual a 0"
+
+
+##### Exemplos
+
+Nos seguintes exemplos responda se f(n) é O(g(n))
+
+a) f(n) = 2n+1 e g(n) = 2n+3
+
+b) f(n) = $log_2(n)$ e g(n) = n
+
+c) f(n) = 3n³ e g(n) = n!
+
+
+
+#### Notação Ω
+
+Essa notação define que dadas duas funções de complexidade temporal f(n) e g(n), f(n) será Ω(g(n)) se, e somente se, o crescimento da função f for o mesmo, ou for maior que o crescimento da função g
+
+Definição formal:
+
+"Uma função $f(n)$ é dita $Ω(g(n))$ se existem constantes positivas $c$ e $n₀$ tais que: $f(n) ≥ c \cdot g(n), \forall n ≥ n₀.$"
+
+Outra definição que pode ser usada para a notação Ω é uma que utiliza limites:
+
+"Uma função $f(n)$ é dita $Ω(g(n))$ se, e somente se $\lim_{n\rightarrow\infty} f( n )/g( n ) = k$, tal que $k$ seja um número real maior que 0 ou k seja infinito"
+
+##### Exemplos
+
+Nos seguintes exemplos responda se f(n) é Ω(g(n))
+
+a) f(n) = 2n+1 e g(n) = 10
+
+b) f(n) = n³ e g(n) = n²
+
+### Classes de complexidade 
+
+<img  src="assets/images/bigO_graph.jpg"  alt="grafico log"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
+<p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> Tabela de comparação de complexidades</p>
+</div>
+
+#### Complexidade O(1)
+
+Algoritmos dessa classe tem uma complexidade que não cresce com o tamanho n da entrada. Eles são chamados de constantes
+
+##### Exemplo
+
+Operações aritméticas, ou acessos de memória em posições determinadas são feitas em tempo constante
+
+```cpp
+//Essa função vai somar o elemento do array que está em indice com o valor de val
+void somar_ao_array(int array[], int tam_array, int indice, int val){
+	if(indice < tam_array){
+		array[indice] = array[indice]+val
+	}
+	else{
+		return;
+	}
+}
+
+```
+
+#### Complexidade O(logn)
+
+Classe dos algoritmos cuja complexidade cresce proporcionalmente ao logaritmo do tamanho da entrada. É importante ressaltar que essa complexidade vale para qualquer tipo de logaritmo indepentemente da base.
+
+##### Exemplo
+
+Esses algoritmos tipicamente fazem divisões sucessivas para ter essa complexidade. Por causa disso, é mais difícil de identificar se um algoritmo pertence à essa classe
+O algoritmo 2 do jogo da máscara é um algoritmo O(logn). Ele é uma variação do famoso algoritmo de busca binária
+
+```cpp
+//Essa função vai retornar o indice do valor procurado se ele estiver no vetor
+//para ela funcionar o vetor tem que estar ordenado previamente
+int busca_binaria(array<int> &arr, int x) {
+    int low = 0;
+    int high = arr.size();
+    while (low < high) {
+        int mid = low + (high - low) / 2;
+        if (arr[mid] == x){
+            return mid;
+		}
+        else if (arr[mid] < x){
+            low = mid + 1;
+		}
+        else{
+            high = mid - 1;
+		}
+    }
+    return -1
+}
+```
+#### Complexidade O(n)
+
+Classe dos algoritmos cuja complexidade cresce linearmente com o tamanho da entrada
+
+##### Exemplo
+
+Tipicamente são algoritmos que percorrem um vetor inteiro para fazer um operação. O algoritmo 1 do jogo da máscara era O(n).
+
+```cpp
+//Essa função vai retornar o indice do valor procurado se ele estiver no vetor
+int busca_sequencial(array<int> &arr, int x){
+	for(int i=0;i<arr.size();i++){
+		if(arr[i] == x){
+			return i;
+		}
+	}
+	return -1;
+}
+```
+
+#### Complexidade O(n²)
+
+Classes dos algoritmos cuja complexidade cresce de acordo com o quadrado do tamanho da entrada
+
+##### Exemplo 
+
+Algoritmos O(n²) geralmente funcionam com dois laços for aninhados. Para testar todos os pares de elementos possíveis em um vetor se utiliza um algoritmo O(n²)
+
+```cpp
+//Esse algoritmo encontra a maior soma de dois elementos de um array com tamanho maior que 1
+//para simplificar a contagem, ele também considera pares de elementos repetidos como (1, 1) ou (2, 2)
+int maior_soma_array(int *array, int n){
+	if(n < 2){
+		return 0;
+	}
+	int max_sum = array[0]+array[1];
+	for(int i=0;i<n;i++){
+		for(int j=i;j<n;j++){
+			if(array[i]+array[j] > max_sum){
+				max_sum = array[i]+array[j];
+			}
+		}
+	}
+}
+```
+#### Complexidade O(n*logn)
+
+Algoritmos dessa complexidade tem crescimento um pouco maior que o de um algoritmo linear, mas ainda é muito mais eficiente que um algoritmo O(n²)
+
+##### Exemplo
+
+Algoritmos ficam com essa complexidade quando uma das etapas de um algoritmo linear executa um algoritmo logn. Para um exemplo didático, esse algoritmo executa uma busca binária para todos elementos do próprio array
+
+```cpp
+void didatico(int arr, int n){
+	for(int i=0;i<n;i++){
+		busca_binaria(arr, n, arr[i]);
+	}
+}
+```
+O loop de for com uma operação básica como somar elementos, ou acessar elementos de um array, fariam o algoritmo ser O(n), pois as essas operações são O(1), mas como a operação que está sendo executada é um algoritmo O(logn), a complexidade do algoritmo inteiro vira O(n*logn). É importante entender que é feito o produto das complexidades.
+
+#### Complexidade O(2^n)
+
+São algoritmos com crescimento exponencial. Eles são alguns dos mais lentos possíveis.
+
+##### Exemplo
+
+Essa complexidade é tipicamente encontrada em algoritmos recursivos com relações de recorrência. Um exemplo clássico é uma implementação recursiva simples do número de fibonacci.
+
+```cpp
+//retorna o n-ésimo número de fiboacci
+long long fibonacci(int n){
+	if(n == 0 || n == 1){
+		return 0;
+	}
+	return fibonacci(n-1) + fibonacci(n-2);
+}
+
+```
 
 ## Exercícios
 
