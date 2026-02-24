@@ -1,25 +1,24 @@
 <!DOCTYPE html>
-
 <html>
     <head>
-        <title></title>
+        <title>Minicurso de Algoritmos e Estruturas de Dados</title>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="./assets/css/styles.css">
         <link rel="stylesheet" href="/matcomp/assets/css/syntax.css">
-        <link rel="stylesheet" href="assets/css/styles.css">
         <link rel="icon" href="https://i.ibb.co/RD7XwYH/pet-logo.png" type="image/png">
     </head>
-    <body>
+    <body class="layoutGit">
         <header>
-    <nav class="menuPrincipal">
+    <nav class="navgit">
         <ul class="listaNavegacao">
             <li>
-                <a href="index">/home</a>
+                <a href="index" style="text-decoration:none;">/home</a>
             </li>
             <li>
-                <a href="aulas">/aulas</a>
+                <a href="aulas" style="text-decoration:none;">/aulas</a>
             </li> 
             <li>
-                <a href="sobre">/sobre</a>
+                <a href="sobre" style="text-decoration:none;">/sobre</a>
             </li>
         </ul>
     </nav>
@@ -27,48 +26,78 @@
 
         <div>
             <main>
-                
-<p>layout: layoutGit
-title: Minicurso de Estruturas de Dados e Algoritmos
-—</p>
-<h1 id="como-um-programa-interage-com-o-computador">Como um programa interage com o computador</h1>
+                <div id="sumario" class="sumario-git">
+    <h1>Dia 2</h1>
+    <details>
+        <summary><a href="#memória">Memória</a></summary>
+        <ul>
+            <li><a href="#stack"> Stack</a></li>
+            <li><a href="#heap"> Heap</a></li>
+            <li><a href="#variáveis-estáticas"> Variáveis Estáticas</a></li>
+        </ul>
+    </details>
+    <details>
+        <summary><a href="#ordenação"> Ordenação </a></summary>
+        <ul>
+            <li><a href="#uma-abordagem-comum"> Selection Sort </a></li>
+            <li><a href="#atenção-no-quadro"> Merge Sort </a></li>
+        </ul>
+    </details>
+    <details>
+        <summary><a href="#sorting-em-algoritmos"> Sorting em Algoritmos </a></summary>
+        <ul>
+            <li><a href="#ideias-greedy-intuitivas"> Ideias Greedy Intuitivas </a></li>
+            <li><a href="#outras-ideias-greedy"> Outras Ideias Greedy</a></li>
+            <li><a href="#two-pointers"> Two Pointers</a></li>
+        </ul>
+    </details>
+  <button class="toggle-button" id="toggle-button">
+      Esconder Sumário
+  </button>
+</div>
+<p><br /></p>
+
+<h1 id="conceitos-de-memória-ordenação-e-algoritmos">Conceitos de Memória, Ordenação e Algoritmos</h1>
+
+<h2 id="memória">Memória</h2>
 
 <p>Quando um programa é compilado sabemos que é necessário espaço na memória para que ele possa ser executado, mas afinal, de qual espaço estamos falando? Quando somos introduzidos aos tipos de dados de C/C++ aprendemos que <code class="language-plaintext highlighter-rouge">int</code> ocupa 4 bytes, <code class="language-plaintext highlighter-rouge">char</code> ocupa 1 byte e por aí vai. Mas será que esses dados ficam jogados de qualquer forma dentro da memória RAM? A resposta é <strong>não</strong>. A memória usada para rodar um programa pode ser dividida em duas partes.</p>
 
-<h2 id="stack">Stack</h2>
+<h3 id="stack">Stack</h3>
 
 <p>Essa parte da memória leva este nome por seguir o padrão <a href="https://pt.wikipedia.org/wiki/LIFO">LIFO</a>, que empilha memória conforme lê as linhas do programa. Ela é responsável por armazenar tudo cujo <strong>tamanho</strong> é sabido em <strong>tempo de compilação</strong> e cujo <strong>tempo de vida</strong> é ditado conforme o escopo.</p>
 
-<div style="text-align: center;"><img src="assets/images/dia2/stack.png" alt="" style="width:300px;height:300px;" /> </div>
+<div style="text-align: center;"><img src="assets/images/dia2/stack.png" alt="" style="width:600px;height:600px;" /> </div>
 
 <p>Dentro da Stack cada função tem seu <strong>StackFrame</strong>, que é o espaço dedicado para as <strong>variáveis locais</strong> de cada função, cujo acesso é permitido apenas dentro daquele escopo.</p>
 
 <h3 id="exercício">Exercício</h3>
 
 <blockquote>
-  <p>Ilustre a Stack do seguinte programa
-```cpp
-float hello() {
-    std::cout « “hello world” « std::endl;</p>
+  <p>Ilustre a Stack do seguinte programa</p>
 </blockquote>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>return 12.5; }
-</code></pre></div></div>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">float</span> <span class="nf">hello</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"hello world"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 
-<p>bool inverse(bool b) {
-    return !b;
-}</p>
+    <span class="k">return</span> <span class="mf">12.5</span><span class="p">;</span>
+<span class="p">}</span>
 
-<p>int main() {
-    int a;</p>
+<span class="kt">bool</span> <span class="n">inverse</span><span class="p">(</span><span class="kt">bool</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">!</span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>std::cin &gt;&gt; a;
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
 
-if (inverse(true)) {
-    int b = 1000;
-}
+    <span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span><span class="p">;</span>
 
-return 0; } ```
+    <span class="k">if</span> <span class="p">(</span><span class="n">inverse</span><span class="p">(</span><span class="nb">true</span><span class="p">))</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <!-- cada thread possue uma stack, mas como estamos trabalhando com programas de single thread... -->
@@ -81,7 +110,7 @@ return 0; } ```
 <!-- stack overflow -->
 <!-- cuidado com a profundidade da recursão em linguagens strict --></p>
 
-<h2 id="heap">Heap</h2>
+<h3 id="heap">Heap</h3>
 
 <p>A região de memória em questão trabalha de forma complementar à <strong>Stack</strong>, armazenando todos os dados que tornariam o acesso menos performático nesta. Isso é, tudo que precisa ter um espaço reservado mas cujo tamanho só é conhecido em <strong>tempo de execução</strong>. Além disso, aqui temos mais liberdade de gerenciar a memória do programa, entretanto, a natureza dinâmica dessa abordagem faz com que ela seja naturalmente <strong>menos performática</strong>.</p>
 
@@ -139,12 +168,15 @@ func(n);
 
 delete[] arr2;
 
-return 0; } ``` &lt;!-- stack - n, arr, arr2(conteúdo na heap)
-daí outro stackframe é criado acima de main
-stack - a, p(p* na heap), "s" ...
-    como "s" é um literal pequeno fica na stack, mas se tiver 20/30 chars ficaria na heap(small string optimization - sso)
-... v(conteúdo na heap)    counter fica... --&gt;
+return 0; } ```
 </code></pre></div></div>
+
+<!-- stack - n, arr, arr2(conteúdo na heap)
+    daí outro stackframe é criado acima de main
+    stack - a, p(p* na heap), "s" ...
+        como "s" é um literal pequeno fica na stack, mas se tiver 20/30 chars ficaria na heap(small string optimization - sso)
+    ... v(conteúdo na heap)
+   counter fica... -->
 
 <h2 id="variáveis-estáticas">Variáveis Estáticas</h2>
 
@@ -155,6 +187,8 @@ stack - a, p(p* na heap), "s" ...
 <div style="text-align: center;"><img src="assets/images/dia2/static-stack-heap.png" alt="" style="width:300px;height:300px;" /> </div>
 
 <p>No mais, apesar dessa representação não ser completamente fiel a como as coisas acontecem dentro da memória, se trata de uma abstração que favorece o entendimento de um programador sobre como o código dele funciona.</p>
+
+<hr />
 
 <h1 id="ordenação">Ordenação</h1>
 
@@ -182,7 +216,7 @@ stack - a, p(p* na heap), "s" ...
 No pior dos casos será necessário percorrer a lista toda para descobrir se ela é ordenada ou não. Sendo assim, sua complexidade é <b>O(n)</b>. Mas para os algoritmos a seguir vamos desconsiderar a verificação da ordenação, considerando no seu custo apenas a ordenação em si.
 </details>
 
-<h2 id="uma-abordagem-comum">Uma abordagem comum</h2>
+<h2 id="uma-abordagem-comum">Uma Abordagem Comum</h2>
 
 <p>Caso você precisasse ordenar um grupo de pessoas por altura, como faria? A única restrição é que só se pode mover uma pessoa por vez, e não pode exagerar nas trocas. Uma das abordagens mais comuns seria percorrer o grupo inteiro e verificar quem é a menor pessoa encontrada naquela iteração. Considere o exemplo a seguir:</p>
 
@@ -475,6 +509,8 @@ void mergeSort(vector<string>& arr, int left, int right) {
     merge(arr, left, mid, right);
 } -->
 
+<hr />
+
 <h1 id="sorting-em-algoritmos">Sorting em algoritmos</h1>
 
 <p>Já dá pra imaginar diversos usos pra esses algoritmos de ordenação, né? Mas com certeza tem muitos mais usos do que você imagina. Os algoritmos que nós vamos focar em atualmente são de uma linha chamada <em>greedy</em> (gulosos). Neles, a partir de algum tipo de ordenação ou organização das nossas informações, tentamos sempre alcançar a melhor solução global através da tomada de decisões menores consideradas “ótimas” - ou seja, pra alcançar uma solução ótima, tomamos sempre a decisão ótima naquele momento. Talvez isso ainda soe confuso, mas vamos aprender mais sobre isso com exemplos e situações problema.</p>
@@ -532,7 +568,7 @@ void mergeSort(vector<string>& arr, int left, int right) {
 A ideia mais intuitiva - e correta - é ordenar pela força do dragão: Caso você seja mais forte do que ele, você ganha pontos a mais de força para tentar derrotar o próximo - e mais forte - dragão. Caso você não consiga derrotar o dragão de agora, é impossível você derrotar qualquer outro que ainda está vivo (eles são todos mais fortes!!).
 <p />
 
-Assim, se você chegar ao fim da sua lista de dragões, você consegue derrotar todos e seguir para o seu próximo desafio! Caso contrário, você não consegue sair da sala e será derrotado :broken_heart:
+Assim, se você chegar ao fim da sua lista de dragões, você consegue derrotar todos e seguir para o seu próximo desafio! Caso contrário, você não consegue sair da sala e será derrotado 💔
 <p />
 
 Fácil, não foi? Não se preocupe, nem todos são assim! hehe
@@ -548,7 +584,7 @@ Assim como qualquer "família" de algoritmos, questões que pedem algoritmos gul
 
 <p>Antes de qualquer coisa, é sempre interessante tentar visualizar o que o problema quer. Desenhando uma reta, podemos representar o início e o final de cada filme como pontos ligados entre si - Assim, podemos tentar fazer sentido das entradas e saídas de teste. Você tem já tem alguma ideia do que precisamos fazer?</p>
 
-<p>// inserir aqui imagem que ainda vou fazer</p>
+<div style="text-align: center;"><img src="assets/images/dia2/movie1.png" alt="" style="width:600px;height:200px;" /> </div>
 
 <p>Bom, como já demos a dica de que estamos lidando com algoritmos de ordenação, o nosso instinto é ordenar a nossa série de números de alguma forma. Mas de qual forma?</p>
 
@@ -557,6 +593,8 @@ Assim como qualquer "família" de algoritmos, questões que pedem algoritmos gul
 <p>… mas isso não leva em consideração a duração de um filme :(</p>
 
 <p>Um filme pode começar mais cedo, mas durar quase o dia todo. Assim, tem chance de você só conseguir ver um único filme enquanto outros filmes mais curtos passam.</p>
+
+<div style="text-align: center;"><img src="assets/images/dia2/movie2.png" alt="" style="width:600px;height:200px;" /> </div>
 
 <p>Uma outra opção seria ordenar por duração! Essa ideia até poderia nos levar a uma saída interessante, mas aí teríamos que manter registros das horas em que estamos livres ou ocupados sempre - o que pioraria muito a nossa complexidade assintótica. Já pensou verificar sempre se é possível ver um filme ou não antes de vê-lo? essa verificação poderia levar O(n) por si só!</p>
 
@@ -569,7 +607,98 @@ A saída dessa questão é ordenar pelo fim do filme! Note que, para escolher o 
 o código fica mais ou menos assim:
 <p />
 
-// adicionar aqui o codigo
+```cpp
+bool comparar (pair&lt;int, int&gt; a, pair&lt;int, int&gt; b) {
+    if (a.second == b.second) {
+        return a.first &lt; b.first;
+    }
+
+    return a.second &lt; b.second;
+}
+
+int main () {
+
+    int n;
+
+    cin &gt;&gt; n
+
+    pair&lt;int, int&gt; pares[n]; // criando um array de pares
+
+    for (int i = 0; i &lt; n; i++) {
+        cin &gt;&gt; pares[i].first &gt;&gt; pares[i].second; // recebendo cada valor
+    }
+
+    sort(pares, pares + n, comparar); // ordena com base nos horários finais dos filmes
+
+    int total = 0; // variável que conta quantos filmes vou assistir
+
+    int atual = pares[i].second; // primeiro horário de término de um filme
+
+    int i = 1;
+
+    for (int i = 1; i &lt; n; i++) {
+        
+        if (pares[i].first &gt;= pares[atual]) { // se eu ainda posso ver esse filme
+            total++; // vejo o filme
+            atual = i; // todos os próximos filmes deverão ser após esse
+        }
+
+    }
+
+    cout &lt;&lt; total &lt;&lt; "\n"; // printo o total de filmes que consegui assistir!
+
+    return 0;
+    
+}
+
+
+
+```
+
+uma maneira inteligente de não precisar passar a função _custom_ é receber o segundo número antes, já que a função de comparação de um pair compara primeiro o primeiro objeto
+
+
+```cpp
+
+int main () {
+
+    int n;
+
+    cin &gt;&gt; n
+
+    pair&lt;int, int&gt; pares[n]; // criando um array de pares
+
+    for (int i = 0; i &lt; n; i++) {
+        cin &gt;&gt; pares[i].second &gt;&gt; pares[i].first; // recebendo cada valor
+    }
+
+    sort(pares, pares + n); // ordena com base nos horários finais dos filmes
+
+    int total = 0; // variável que conta quantos filmes vou assistir
+
+    int atual = pares[i].second; // primeiro horário de término de um filme
+
+    int i = 1;
+
+    for (int i = 1; i &lt; n; i++) {
+        
+        if (pares[i].first &gt;= pares[atual]) { // se eu ainda posso ver esse filme
+            total++; // vejo o filme
+            atual = i; // todos os próximos filmes deverão ser após esse
+        }
+
+    }
+
+    cout &lt;&lt; total &lt;&lt; "\n"; // printo o total de filmes que consegui assistir!
+
+    return 0;
+    
+}
+
+
+```
+
+
 
 </details>
 
@@ -579,12 +708,17 @@ o código fica mais ou menos assim:
 
 <p>Agora que nós já entendemos como funcionam as soluções greedy mais intuitivas, que tal tentar um exercício sozinho?</p>
 
-<p>// watermelons da mfp
-<!-- watermelons(mfp) - pesquisar site --></p>
+<p>Digamos que magali tem um conjunto de melancias que ela quer muito comer - Mas, por incrível que pareça, sua fome não é insaciável! Ela só consegue comer N quilos de melancia. Por alguma razão, Magali também sabe quantas sementes tem em cada melancia que ela tem em casa.</p>
+
+<p>Por outro lado, Quinzinho, que quer começar uma plantação de melancias, pediu que ela entregasse todas as sementes para ele no fim de seu lanche da tarde. Magali, então, pediu a sua ajuda para calcular a maior quantidade de sementes que ela pode dar a Quinzinho, assumindo que as sementes de cada melancia específica estão uniformemente distribuídas. Como você pode fazer isso?</p>
+
+<p>Como eu sinto que fiz um trabalho não tão bom explicando, espero que essa imagem ajude:</p>
+
+<div style="text-align: center;"><img src="assets/images/dia2/watrmelons.png" alt="" style="width:600px;height:427px;" /> </div>
 
 <details>
 <summary><b>Curiosidade!</b></summary>
-(Note que, se não pudermos cortar as melancias, esse problema vira o famoso _"problema da mochila"_, um problema que não é greedy, bem mais avançado e muuuuuito além do escopo desse curso, mas interessante se você quiser conhecer essa situação problema)
+(Note que, se não pudermos cortar as melancias, esse problema vira o famoso "problema da mochila", um problema que não é greedy, bem mais avançado e muuuuuito além do escopo desse curso, mas interessante se você quiser conhecer essa situação problema)
 </details>
 
 <p>Agora que você já exercitou os seus conhecimentos de ideias gulosas simples, vamos tentar ver e desenvolver alguns algoritmos mais diferentes que também cumprem esse dever!</p>
@@ -997,11 +1131,26 @@ Então, nesse caso, poderíamos tentar voltar a segunda seta para trás, para ir
 
 -->
 
-<p>https://www.geeksforgeeks.org/dsa/merge-sort/
-https://www.geeksforgeeks.org/dsa/maximum-perimeter-triangle-from-array/
-https://github.com/Chanda-Abdul/Several-Coding-Patterns-for-Solving-Data-Structures-and-Algorithms-Problems-during-Interviews/blob/main/%E2%9C%85%20%20Pattern%2002%3A%20Two%20Pointers.md</p>
+<p>https://www.geeksforgeeks.org/dsa/merge-sort/</p>
+
+<p>https://www.geeksforgeeks.org/dsa/maximum-perimeter-triangle-from-array/</p>
+
+<p>https://github.com/Chanda-Abdul/Several-Coding-Patterns-for-Solving-Data-Structures-and-Algorithms-Problems-during-Interviews/blob/main/%E2%9C%85%20%20Pattern%2002%3A%20Two%20Pointers.md</p>
 
             </main>
+            <script src="./assets/js/sumario_script.js"></script>
         </div>
     </body>
 </html>
+
+<script type="text/javascript">
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  options: {
+    ignoreHtmlClass: 'highlight|code'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

@@ -13,19 +13,19 @@ title: Minicurso de Algoritmos e Estruturas de Dados
         </ul>
     </details>
     <details>
-        <summary><a href="#introdução-à-estruturas-de-dados"> "Introdução" à Estruturas de Dados </a></summary>
+        <summary><a href="#ordenação"> Ordenação </a></summary>
         <ul>
-            <li><a href="#tipos-abstrados-de-dados-tad"> Tipos Abstratos de Dados (TAD) </a></li>
-            <li><a href="#definição-de-estruturas-de-dados"> Definição de Estruturas de Dados</a></li>
+            <li><a href="#uma-abordagem-comum"> Selection Sort </a></li>
+            <li><a href="#atenção-no-quadro"> Merge Sort </a></li>
         </ul>
     </details>
     <details>
-        <summary><a href="#por-que-estudar-algoritmos-e-estruturas-de-dados"> Por que Estudar Algoritmos e Estruturas de Dados </a></summary>
-            <ul>
-                <li><a href="#eficiência-e-escalabilidade"> Eficiência e Escalabilidade </a></li>
-                <li><a href="#processos-seletivos-mercado-de-trabalho"> Processos Seletivos (Mercado de Trabalho)</a></li>
-                <li><a href="#exemplo-prático-two-sum"> Exemplo Prático: Two Sum </a></li>
-            </ul>
+        <summary><a href="#sorting-em-algoritmos"> Sorting em Algoritmos </a></summary>
+        <ul>
+            <li><a href="#ideias-greedy-intuitivas"> Ideias Greedy Intuitivas </a></li>
+            <li><a href="#outras-ideias-greedy"> Outras Ideias Greedy</a></li>
+            <li><a href="#two-pointers"> Two Pointers</a></li>
+        </ul>
     </details>
   <button class="toggle-button" id="toggle-button">
       Esconder Sumário
@@ -568,7 +568,7 @@ Agora, vamos imaginar que você vai para um festival de filmes do seu estudio fa
 
 Antes de qualquer coisa, é sempre interessante tentar visualizar o que o problema quer. Desenhando uma reta, podemos representar o início e o final de cada filme como pontos ligados entre si - Assim, podemos tentar fazer sentido das entradas e saídas de teste. Você tem já tem alguma ideia do que precisamos fazer?
 
-// inserir aqui imagem que ainda vou fazer
+<div style="text-align: center;"><img src="assets/images/dia2/movie1.png" alt="" style="width:600px;height:200px;"> </div>
 
 Bom, como já demos a dica de que estamos lidando com algoritmos de ordenação, o nosso instinto é ordenar a nossa série de números de alguma forma. Mas de qual forma?
 
@@ -577,6 +577,8 @@ Uma ideia que pode vir à nossa cabeça é de ordenar pela hora que o filme come
 ... mas isso não leva em consideração a duração de um filme :(
 
 Um filme pode começar mais cedo, mas durar quase o dia todo. Assim, tem chance de você só conseguir ver um único filme enquanto outros filmes mais curtos passam.
+
+<div style="text-align: center;"><img src="assets/images/dia2/movie2.png" alt="" style="width:600px;height:200px;"> </div>
 
 Uma outra opção seria ordenar por duração! Essa ideia até poderia nos levar a uma saída interessante, mas aí teríamos que manter registros das horas em que estamos livres ou ocupados sempre - o que pioraria muito a nossa complexidade assintótica. Já pensou verificar sempre se é possível ver um filme ou não antes de vê-lo? essa verificação poderia levar O(n) por si só!
 
@@ -700,12 +702,11 @@ Por outro lado, Quinzinho, que quer começar uma plantação de melancias, pediu
 Como eu sinto que fiz um trabalho não tão bom explicando, espero que essa imagem ajude:
 
 
-
-<!-- watermelons(mfp) - pesquisar site -->
+<div style="text-align: center;"><img src="assets/images/dia2/watrmelons.png" alt="" style="width:600px;height:427px;"> </div>
 
 <details>
 <summary><b>Curiosidade!</b></summary>
-(Note que, se não pudermos cortar as melancias, esse problema vira o famoso _"problema da mochila"_, um problema que não é greedy, bem mais avançado e muuuuuito além do escopo desse curso, mas interessante se você quiser conhecer essa situação problema)
+(Note que, se não pudermos cortar as melancias, esse problema vira o famoso "problema da mochila", um problema que não é greedy, bem mais avançado e muuuuuito além do escopo desse curso, mas interessante se você quiser conhecer essa situação problema)
 </details>
 
 
@@ -1172,5 +1173,7 @@ Vamos tentar aplicá-lo de diferentes formas? Sigam para o vjudge do minicurso p
 
 
 https://www.geeksforgeeks.org/dsa/merge-sort/
+
 https://www.geeksforgeeks.org/dsa/maximum-perimeter-triangle-from-array/
+
 https://github.com/Chanda-Abdul/Several-Coding-Patterns-for-Solving-Data-Structures-and-Algorithms-Problems-during-Interviews/blob/main/%E2%9C%85%20%20Pattern%2002%3A%20Two%20Pointers.md

@@ -3,7 +3,7 @@ layout: layoutGit
 title: Minicurso de Matemática aplicada à Computação
 ---
 
-# Projeto final
+# Contest final
 
 <div id="sumario" class="sumario-git">
     <h1>Dia 5</h1>
@@ -25,89 +25,20 @@ title: Minicurso de Matemática aplicada à Computação
   </button>
   </div>
 
-## Orientações gerais:
 
-1) A partir do apresentado, elabore um plano de como a sua equipe solucionaria a atual demanda, indicando cada passo a ser seguido e quais os sub-problemas identificados;
+Chegamos ao último dia do minicurso! Agora colocaremos os nossos conhecimentos em prática :)
 
-2) Programe superficialmente um protótipo do sistema requisitado, em pseudocódigo ou em alguma linguagem de programação de sua escolha, que seja capaz de atender de forma eficiente a situação em análise;
+Lembram do grupo que criamos no Vjudge? Ele agora tem o nosso mais novo desafio: o contest final! Um contest não é nada além de um conjunto de questões que você tem um tempo fixo para resolver (no nosso caso, até as 17h!). As questões escolhidas por nós para formarem esse contest se aproximam daquelas que trouxemos em sala, sobre assuntos vistos por aqui (como arrays, vetores, pilhas, filas, sets, dentre outros);
 
-3) Faça uma apresentação a todo o corpo de colaboradores presentes, esmiuçando os pontos-chaves essenciais à continuidade de ações que garantam um produto final.
+Lembrem-se de criar, como sugerimos anteriormente na semana, contas no AtCoder e no Codeforces para que elas possam ser linkadas no Vjudge! se tiverem problemas para linkarem os cookies durante submissões, não hesitem em nos perguntar :)
 
-## Pontos que devem estar presentes na apresentação da solução alcançada
+Sugerimos também que vocês se juntarem em trios (assim como nas maratonas oficiais de programação!) para tentar enfrentar esse desafio em conjunto, mas a participação também pode ser em dupla ou individual. Caso vocês façam em conjunto, lembrem-se de mandar todas as questões por uma mesma conta - se não as questões não serão contabilizadas corretamente pelo Vjudge!
 
-1) Aspectos observados ao decorrer da solução que se aproximam de conceitos matemáticos vistos nesse curso;
+Desejamos o melhor da sorte para todos vocês e nos vemos na linha de chegada!
 
-2) Explicação detalhada da lógica por trás do pseudocódigo ou código utilizado;
 
-3) Checagem de possíveis problemas que podem ocorrer na implementação;
+[Que comece o contest!](https://vjudge.net/contest/791056)
 
-4) Aplicação em um caso teste hipotético;
-
-## Critérios de Avaliação
-
-1) Entendimento satisfatório da situação problema;
-
-2) Domínio do código usado como solução;
-
-3) Boa escolha de caso teste;
-
-4) Didaticidade e clareza na hora de apresentar a solução encontrada;
-
-5) Corretude matemática dos algoritmos implementados;
-
-6) Boas práticas e documentação;
-
-## Problema 1 Números bloqueados
-
-Determinado usuário da empresa para a qual você presta serviços tem recebido uma quantidade excessiva de ligações spam. Ao perceber que muitas dessas ligações eram de números repetidos, o usuário solicitou uma aplicação que fosse capaz de bloquear essas chamadas.
-
-Sendo parte da equipe que ficou com essa demanda, você precisa criar um sistema que armazene os números de telefones bloqueados e, baseando-se nessa coleção de dados, seja capaz de bloquear as chamadas provenientes dos números listados.
-
-A sua equipe deve entregar as seguintes funções implementadas:
-
-- O construtor da estrutura de dados que armazena os números
-- Uma função que verifica a presença ou ausência do número na lista
-- Uma função que adiciona novos números
-- Uma função que remove um número
-- Uma função auxiliar que bloqueia chamadas de números presentes na estrutura de dados
-
-## Problema 2 Conversão de minutos para horas
-
-Você está trabalhando numa pesquisa sobre o tempo de uso de smartphones pela população do Brasil. No entanto, os dados de tempo de uso são coletados em minutos, e sua equipe precisa dos dados em horas. Os dados são muitos para ficar convertendo tudo à mão, então você decide utilizar seus conhecimentos de matemática e programação para fazer um algoritmo que recebe o tempo em minutos e retorna o tempo em horas.
-
-- Qual estrutura matemática estudada durante o curso melhor resolve esse problema e porquê?
-- Implemente um algorítmo em pseudocódigo ou na linguagem de sua preferência que faça a conversão desejada.
-- **DESAFIO:** Como podemos modificar esse código para converter minutos para qualquer outro formato temporal (dias, semanas, etc)?
-
-## Problema 3 Histórico de comandos de um terminal
-
-Você participa de uma equipe de programadores que faz parte do desenvolvimento do sistema operacional PET OS, o novo sistema operacional do PET-CC. Ao longo do desenvolvimento seu grupo nota que seria uma boa ideia implementar um sistema que armazene os comandos recentes utilizados no terminal. Ao ouvir isso, Umberto, o líder do projeto, decidiu que essa _feature_ deve ser implementada como uma lista.
-
-A sua equipe deve entregar as seguintes utilidades implementadas:
-
-- O histórico de comandos
-- A busca de um comando no histórico (ex: verificar se git push foi usado)
-- Limpeza de comandos repetidos
-- A visualização do histórico na ordem inversa
-- A limpeza de todo o histórico
-
-## Problema 4 Criptografia fraca
-
-Você trabalha em uma empresa que guarda as senhas dos colaboradores de forma criptografada em seu banco de dados, entretanto, eles não fazem isso de uma forma muito segura. O diretor de tecnologia acredita tanto na confiabilidade da criptografia utilizada na empresa que deixa o banco de dados localmente público, ou seja, qualquer usuário da empresa pode acessar a versão criptografada da senha dos seus colegas. Suponha que você quer convencer o diretor de que a criptografia usada não é segura e, para isso, você pretende fazer o seguinte:
-
-**Primeiro momento:**
-- Sua senha é “banana123” e sua versão criptografada é armazenada como “edqdqd456”. Sabendo que todas as senhas são criptografadas sob o mesmo padrão e usando o mesmo número de encriptação, faça um script que aplique o processo reverso a todas as senhas (faça isso usando os “ASCII printable characters” como referência de alfabeto)
-
-**Segundo momento:**
-- Depois que você fez isso, o diretor da equipe reconheceu que a forma de criptografia atual não era segura e optou por implementar a atualização da criptografia de outra maneira: agora, cada senha é criptografada usando um número diferente, entretanto, ele também concatenou “colaborador@” com todas as senhas. Adapte o código anterior para apresentar na reunião e, possivelmente, ser promovido por evitar um possível vazamento de dados.
-
-## Problema 5 Testando segurança da criptografia
-
-Você é parte de um grupo de programadores contratado por uma grande empresa para realizar testes e verificar se o sistema de segurança implementado está seguro o suficiente. Você sabe que o método utilizado na criptografia local é a criptografia RSA, com números relativamente pequenos (podem ser computados em python, c++ e outras linguagens!) para as mensagens passadas entre os seus chefes. Dado uma chave pública (N), responda:
-
-- Porque esse sistema de segurança é falho e simples de violar?
-- Escreva um pseudocódigo que descubra quais primos P e Q foram utilizados para a geração da chave pública N.
-- **Desafio:** Implemente esse código em python, c++ ou na linguagem de sua preferência
 
 <script>
 const dataDia5 = new Date('2025-03-13');
