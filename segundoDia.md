@@ -1207,7 +1207,7 @@ while (final != n) {
 ```
 
 
-O [Vjudge do minicurso](https://vjudge.net/contest/791056) já tem todas essas questões! Sigam para lá se quiserem fazê-las :)
+O [Vjudge do minicurso](https://vjudge.net/group/meda?r=ifo2QZRofQuVN2TjpPDM) já tem todas essas questões! Sigam para lá se quiserem fazê-las :)
 
 
 <!-- questoes: sum of two values (codeforces), books (codeforces), 
