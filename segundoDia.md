@@ -602,10 +602,11 @@ Uma outra opção seria ordenar por duração! Essa ideia até poderia nos levar
 <summary><b>Spoiler!</b></summary>
 A saída dessa questão é ordenar pelo fim do filme! Note que, para escolher o nosso próximo filme gulosamente, - contanto que ainda possamos ir para o filme - a hora de início não importa! Mesmo que um filme comece mais cedo, queremos sempre ir para uma sessão que termine o mais cedo possível, aumentando a nossa possibilidade de ver mais filmes na nossa tarde!
 
-<p/>
+
+
+</details>
 
 o código fica mais ou menos assim:
-<p/>
 
 ```cpp
 bool comparar (pair<int, int> a, pair<int, int> b) {
@@ -700,8 +701,6 @@ int main () {
 
 
 
-</details>
-
 <!-- movie festival(codeforces)-->
 
 
@@ -726,6 +725,34 @@ Como eu sinto que fiz um trabalho não tão bom explicando, espero que essa imag
 <summary><b>Curiosidade!</b></summary>
 (Note que, se não pudermos cortar as melancias, esse problema vira o famoso "problema da mochila", um problema que não é greedy, bem mais avançado e muuuuuito além do escopo desse curso, mas interessante se você quiser conhecer essa situação problema)
 </details>
+
+Um detalhe interessante para apontarmos é o fato de que a saída dessa questão inclui ordenação com base em frações (para pegarmos o máximo de sementes por quilo). No entanto, números com casas decimais (doubles!) não são o melhor para computadores - eles levam a erros de precisão! Por isso, a forma mais segura de resolver problemas é sempre usando valores inteiros. Mas... se queremos ordenar justamente com base em frações de semente/quilo, como faremos isso?
+
+É aí que a matemática do ensino básico vem nos dar um alô! Vocês se lembram dos "meios por extremos"? Também conhecida como multiplicação cruzada, é uma propriedade (a que usamos nas regras de 3) que nos garante que
+
+```latex
+
+a/b = c/d \iff a * d = b * c
+
+```
+
+Então, ao invés de divisões inexatas, podemos usar essa propriedade na nossa função de comparação! Ela poderia ficar algo mais ou menos assim
+
+```cpp
+
+struct melancia {
+    int sementes;
+    int kg;
+}
+
+bool comparar (melancia a, melancia b) {
+    return a.sementes * b.kg < b.sementes*a.kg;
+}
+
+
+```
+
+E então conseguiríamos sempre escolher os pedaços com mais sementes ;)
 
 
 Agora que você já exercitou os seus conhecimentos de ideias gulosas simples, vamos tentar ver e desenvolver alguns algoritmos mais diferentes que também cumprem esse dever!
@@ -850,7 +877,7 @@ Digamos que estamos com as nossas setas apontando para os números a e b.
 [... a ... b ...]
 ```
 
-Agora vamos provar que, caso a + b > m e o nosso algoritmo tenha sido seguido fielmente, não devemos mover a segunda seta para a esquerda, mas sim a primeira.
+Agora vamos provar que, caso a + b < m e o nosso algoritmo tenha sido seguido fielmente, não devemos mover a primeira seta para a esquerda, mas sim a segunda.
 
 Para isso, vamos analisar cada um dos casos para concluir com certeza de que o nosso algoritmo funciona! (essa etapa é importante para conseguirmos nos convencer da corretude do que fizemos.)
 
@@ -867,7 +894,7 @@ Caso não, esitem números à esquerda de b. vamos denotar o número imediatamen
 dá pra perceber que, para chegar nesse estado (já que seguimos as nossas regras até aqui), temos 2 opções:
 
 
-ou viemos de uma configuração como essa (1)
+ou existe um b' > b e viemos de uma configuração como essa (1)
 
 ```cpp
      |        |
@@ -881,16 +908,20 @@ ou existe um a' < a e viemos de uma configuração como essa (2)
 ```cpp
      |        |
      v        v
-[... a' a ... b  b' ...]
+[... a' a ... b b'...]
 ```
 
 
 caso viemos da configuração 1, já comparamos a + b' e deu errado! (a + b' > m) logo, não faz sentido comparar os mesmos dois números de novo.
 
-caso viemos da configuração 2
-já que a nossa segunda seta aponta pra b, em algum momento viemos do b'.
-para algum a" < a', ocorreu que a" + b' > m
+caso viemos da configuração 2:
+
+como há um b' > b, temos que viemos do b' em algum momento, já que a nossa segunda seta aponta pra b.
+
+para algum a" <= a', ocorreu que a" + b' > m
+
 assim, como a' > a", a' + b' > a" + b' > m
+
 logo, não faz sentido avançar a seta para a direita de novo, visto que a soma será maior que a desejada de qualquer forma
 
 ```cpp
@@ -901,7 +932,7 @@ logo, não faz sentido avançar a seta para a direita de novo, visto que a soma 
 
 
 
-a prova para a primeira seta não voltar para a esquerda é análoga!
+a prova para a primeira seta não voltar para a esquerda é análoga! (a + b > m)
 
 ```cpp
      |     |
@@ -924,14 +955,14 @@ da mesma forma, podemos ter vindo de duas configurações diferentes para a atua
 
 ou de uma configuração como essa (1)
 
-```
+```cpp
      |         |
      v         v
-[... a'  a ... b  b' ...]
+[... a'  a ... b...]
 ```
 
 
-ou de uma configuração como essa (2)
+ou existe b' > b e viemos de uma configuração como essa (2)
 
 ```cpp
          |        |
@@ -941,9 +972,12 @@ ou de uma configuração como essa (2)
 
 no caso (1), nós já comparamos a' com b, (e temos que a' + b < m) então não adianta testar a mesma coisa mais uma vez.
 
-no caso (2), já que a nossa primeira seta aponta para a, em algum momento viemos do a'.
+no caso (2), já que a nossa primeira seta aponta para a, em algum momento viemos do a' (já que a' existe).
+
 A partir disso, temos que, para algum b" > b', chegamos à conclusão que a' + b" < m, e movemos a primeira seta para a direita.
+
 Logo, como b < b", é lógico que a' + b < a' + b" < m.
+
 Dessa forma, a comparação entre esses dois números não é necessária e as condições que estabelecemos sempre vão nos guiar para a resposta certa!
 
 ```cpp
