@@ -877,13 +877,13 @@ Digamos que estamos com as nossas setas apontando para os números a e b.
 [... a ... b ...]
 ```
 
-Agora vamos provar que, caso a + b < m e o nosso algoritmo tenha sido seguido fielmente, não devemos mover a primeira seta para a esquerda, mas sim a segunda.
+Agora vamos provar que, caso a + b < m e o nosso algoritmo tenha sido seguido fielmente, não devemos mover a segunda seta para a direita, mas sim a primeira.
 
-Para isso, vamos analisar cada um dos casos para concluir com certeza de que o nosso algoritmo funciona! (essa etapa é importante para conseguirmos nos convencer da corretude do que fizemos.)
+Para isso, vamos analisar cada um dos casos para concluir com certeza de que o nosso algoritmo funciona! (essa etapa é importante para conseguirmos nos convencer da corretude do que fizemos)
 
 Caso b seja o maior número da nossa lista, ele será o último. logo, é impossível mover a nossa seta para a direita.
 
-Caso não, esitem números à esquerda de b. vamos denotar o número imediatamente à direita de b de b'. Então nosso vetor tem uma cara parecida com essa:
+Caso não, existem números à direita de b. vamos denotar o número imediatamente à direita de b de b'. Então nosso vetor tem uma cara parecida com essa:
 
 ```cpp
      |     |
@@ -894,7 +894,7 @@ Caso não, esitem números à esquerda de b. vamos denotar o número imediatamen
 dá pra perceber que, para chegar nesse estado (já que seguimos as nossas regras até aqui), temos 2 opções:
 
 
-ou existe um b' > b e viemos de uma configuração como essa (1)
+viemos de uma configuração como essa (1)
 
 ```cpp
      |        |
@@ -918,7 +918,7 @@ caso viemos da configuração 2:
 
 como há um b' > b, temos que viemos do b' em algum momento, já que a nossa segunda seta aponta pra b.
 
-para algum a" <= a', ocorreu que a" + b' > m
+para algum a" <= a', ocorreu que a" + b' > m, e movemos a nossa segunda seta para a direita
 
 assim, como a' > a", a' + b' > a" + b' > m
 
