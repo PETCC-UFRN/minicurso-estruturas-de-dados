@@ -578,7 +578,7 @@ Agora, vamos imaginar que você vai para um festival de filmes do seu estudio fa
 Antes de qualquer coisa, é sempre interessante tentar visualizar o que o problema quer. Desenhando uma reta, podemos representar o início e o final de cada filme como pontos ligados entre si - Assim, podemos tentar fazer sentido das entradas e saídas de teste. Você tem já tem alguma ideia do que precisamos fazer?
 
 <div  class="figure"  style="flex: 1; text-align: center;">
-    <img  src="assets/images/dia2/movie1.png"  alt="stack example"  style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"  />
+    <img  src="assets/images/dia2/movie1.png"  alt="exemplo de sessões"  style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"  />
     <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> Autoria própria</p>
 </div>
 
@@ -591,7 +591,7 @@ Uma ideia que pode vir à nossa cabeça é de ordenar pela hora que o filme come
 Um filme pode começar mais cedo, mas durar quase o dia todo. Assim, tem chance de você só conseguir ver um único filme enquanto outros filmes mais curtos passam.
 
 <div  class="figure"  style="flex: 1; text-align: center;">
-    <img  src="assets/images/dia2/movie2.png"  alt="stack example"  style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"  />
+    <img  src="assets/images/dia2/movie2.png"  alt="exemplo de sessões"  style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"  />
     <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> Autoria própria</p>
 </div>
 
@@ -718,7 +718,7 @@ Como eu sinto que fiz um trabalho não tão bom explicando, espero que essa imag
 
 
 <div  class="figure"  style="flex: 1; text-align: center;">
-    <img  src="assets/images/dia2/watermelons.png"  alt="stack example"  style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"  />
+    <img  src="assets/images/dia2/watrmelons.png"  alt="magali e melancias"  style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"  />
     <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> Autoria própria</p>
 </div>
 
