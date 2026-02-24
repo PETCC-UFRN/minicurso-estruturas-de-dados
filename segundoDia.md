@@ -43,11 +43,14 @@ Quando um programa é compilado sabemos que é necessário espaço na memória p
 
 Essa parte da memória leva este nome por seguir o padrão [LIFO](https://pt.wikipedia.org/wiki/LIFO), que empilha memória conforme lê as linhas do programa. Ela é responsável por armazenar tudo cujo **tamanho** é sabido em **tempo de compilação** e cujo **tempo de vida** é ditado conforme o escopo.
 
-<div style="text-align: center;"><img src="assets/images/dia2/stack.png" alt="" style="width:600px;height:600px;"> </div>
+<div  class="figure"  style="flex: 1; text-align: center;">
+    <img  src="assets/images/dia2/stack.png"  alt="stack example"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
+    <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> Imagem gerada por IA</p>
+</div>
 
 Dentro da Stack cada função tem seu **StackFrame**, que é o espaço dedicado para as **variáveis locais** de cada função, cujo acesso é permitido apenas dentro daquele escopo.
 
-### Exercício
+#### Exercício
 
 > Ilustre a Stack do seguinte programa
 
@@ -77,7 +80,7 @@ int main() {
 
 <!-- cada thread possue uma stack, mas como estamos trabalhando com programas de single thread... -->
 
-### Atenção na tela
+#### Atenção na tela
 
 Que tal resolvermos esse [exercício](https://judge.beecrowd.com/en/problems/view/1176) juntos?
 <!-- fazer a solução recursiva e... ué, pq dá erro? -->
@@ -108,11 +111,15 @@ int main() {
 
 <!-- diferente da stack, a heap é compartilhada entre as threads -->
 
-<!-- TODO: queria uma imagem boa para botar aqui -->
+<div  class="figure"  style="flex: 1; text-align: center;">
+    <img  src="assets/images/dia2/heap.png"  alt="stack example"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
+    <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> <a href="https://youtu.be/2r_3f6L2EHw?si=qYhQWRItzEqZr63t">Exemplo de Stack e Heap de Programa</a></p>
+</div>
 
-### Exercício
+#### Exercício
 
 > Ilustre a Stack e Heap do seguinte programa
+
 ```cpp
 #include <iostream>
 #include <vector>
@@ -121,11 +128,8 @@ int main() {
 void func(int x) {
     int a = 10;
     int* p = new int(20);
-
     std::string s = "abc";
-
     std::vector<int> v(3, 5);
-
     static int counter = 0;
 
     delete p;
@@ -133,15 +137,12 @@ void func(int x) {
 
 int main() {
     int n = 5;
-
     int arr[5] = {1,2,3,4,5};
-
     int* arr2 = new int[n];
 
     func(n);
 
     delete[] arr2;
-
     return 0;
 }
 ```
@@ -154,7 +155,7 @@ int main() {
     ... v(conteúdo na heap)
    counter fica... -->
 
-## Variáveis Estáticas
+### Variáveis Estáticas
 
 Além das duas regiões de memória citadas anteriormente, determinados elementos de um programa possuem uma característica particular, particular o suficiente a ponto de justificar um espaço na memória dedicado exclusivamente para eles. Essa característica é o `static`, e ela é responsável desvincular o tempo de vida de um elemento ao escopo de onde ele é declarado, tornando-o válido durante toda a execução do programa. Usemos um exemplo para elucidar melhor como isso funciona.
 
@@ -162,11 +163,16 @@ Podemos formalizar dizendo que `static` é um [Especificador de Classe de Armaze
 
 <div style="text-align: center;"><img src="assets/images/dia2/static-stack-heap.png" alt="" style="width:300px;height:300px;"> </div>
 
+<div  class="figure"  style="flex: 1; text-align: center;">
+    <img  src="assets/images/dia2/static-stack-heap.png"  alt="static memory example"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
+    <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> <a href="https://stackoverflow.com/questions/32418750/stack-and-heap-locations-in-ram/32418775">Exemplo de camadas do programa</a></p>
+</div>
+
 No mais, apesar dessa representação não ser completamente fiel a como as coisas acontecem dentro da memória, se trata de uma abstração que favorece o entendimento de um programador sobre como o código dele funciona.
 
 ---
 
-# Ordenação
+## Ordenação
 
 Ordenação se trata de um dos problemas mais abordados na área da computação. Comummente é um exemplo bastante associado para introduzir a análise assintótica, mas além disso, também é um tópico que estimula de maneira criativa a busca por soluções para um problema. 
 
@@ -181,7 +187,7 @@ Retomando o conceito de análise assintótica, notamos que a verificação acaba
 - Quando encontramos o primeiro elemento que não satisfaz a desigualdade, nesse caso retornamos `false`, pois `A` não está ordenada
 - Quando chegamos ao fim da lista sem encontrar um elemento assim, nesse caso retornamos `true`, pois `A` está ordenada
 
-### Exercício
+#### Exercício
 
 >Implemente uma função que verifica se uma lista está ordenada ou não.
 
@@ -190,7 +196,7 @@ Retomando o conceito de análise assintótica, notamos que a verificação acaba
 No pior dos casos será necessário percorrer a lista toda para descobrir se ela é ordenada ou não. Sendo assim, sua complexidade é <b>O(n)</b>. Mas para os algoritmos a seguir vamos desconsiderar a verificação da ordenação, considerando no seu custo apenas a ordenação em si.
 </details>
 
-## Uma Abordagem Comum
+### Uma Abordagem Comum
 
 Caso você precisasse ordenar um grupo de pessoas por altura, como faria? A única restrição é que só se pode mover uma pessoa por vez, e não pode exagerar nas trocas. Uma das abordagens mais comuns seria percorrer o grupo inteiro e verificar quem é a menor pessoa encontrada naquela iteração. Considere o exemplo a seguir:
 
@@ -214,11 +220,11 @@ void ordenar(vector<int> &lista) {
 
 Vamos analisar em tempo real o que acontece quando executamos esse código.
 
-## Atenção na tela!
+#### Atenção na tela!
 <!-- Rodar o script de visualização -->
 
 Agora vamos analisar a complexidade desse algoritmo, partindo de um exemplo do pior cenário. Considere a lista `[7,6,5,4,3,2,1]`.
-## Atenção no quadro!
+#### Atenção no quadro!
 <!-- T(7) = 7 + 6 + 5... -->
 <!-- T(4) = 4 + 3 + 2... -->
 <!-- T(n) = \sum_{i=1}^{n} i-->
@@ -257,9 +263,10 @@ void sort(vector<int>& lista) {
 ```
 
 Perceba que o `Selection Sort` ordenava diretamente, ou seja, se preocupando que o menor elemento estivesse no começo da lista. O que as duas abordagens vistas até o momento têm em comum?
+
 <!-- Ambas acumulam a lista parcialmente ordenada em uma das pontas -->
 
-## Atenção na tela
+#### Atenção na tela
 <!-- Rodar o script de visualização -->
 
 <details>
@@ -267,7 +274,7 @@ Perceba que o `Selection Sort` ordenava diretamente, ou seja, se preocupando que
 O método que acabou de ser mostrado consiste no <b>Bubble Sort</b>
 </details>
 
-### Exercício
+#### Exercício
 Implemente a `swap` para poder rodar esses algoritmos.
 <!-- Questionar:
         - assinatura(para inteiros),
@@ -310,14 +317,16 @@ int main() {
 	return 0;
 }-->
 
+## Mudando um pouco a abordagem
+
 Perceba que os algoritmos que vimos até o momento são todos **O(n²)**, mas será que ordenar sempre se trata de algo custoso assim? Com essa abordagem, sim. Mas e se a gente pensasse um pouco mais como [Júlio César](https://pt.wikipedia.org/wiki/J%C3%BAlio_C%C3%A9sar) ou [Napoleão Bonaparte](https://pt.wikipedia.org/wiki/Napole%C3%A3o_Bonaparte)?
 
 <div style="text-align: center;"><img src="assets/images/dia2/divideandconquer.jpg" alt="" style="width:300px;height:300px;"> </div>
 
-## Atenção no quadro
+#### Atenção no quadro
 Vamos ordenar `[8,6,4,2,5,1,2,7]` com uma abordagem diferente.
 
-### Exercício
+#### Exercício
 
 >Qual a complexidade do algoritmo?
 
@@ -388,7 +397,7 @@ void mergeSort(vector<int>& arr, int left, int right){
 ```
 <!-- chamar como mergeSort(arr, 0, arr.size() - 1); -->
 
-### Exercício
+#### Exercício
 
 > Dada uma lista de inteiros positivos descubra qual o perímetro do maior triângulo que pode ser formado por esses valores. Caso não seja possível formar um triângulo, retorne `-1`.
 
@@ -484,7 +493,7 @@ void mergeSort(vector<string>& arr, int left, int right) {
 
 ---
 
-# Sorting em algoritmos
+## Sorting em algoritmos
 
 Já dá pra imaginar diversos usos pra esses algoritmos de ordenação, né? Mas com certeza tem muitos mais usos do que você imagina. Os algoritmos que nós vamos focar em atualmente são de uma linha chamada _greedy_ (gulosos). Neles, a partir de algum tipo de ordenação ou organização das nossas informações, tentamos sempre alcançar a melhor solução global através da tomada de decisões menores consideradas "ótimas" - ou seja, pra alcançar uma solução ótima, tomamos sempre a decisão ótima naquele momento. Talvez isso ainda soe confuso, mas vamos aprender mais sobre isso com exemplos e situações problema.
 
@@ -782,13 +791,14 @@ m = 8
 
 Uma maneira simples de consertar isso é mudando de onde o nosso inteiro j começa! Podemos fazer pensando no seguinte: ao passar pelo nosso vetor pela primeira vez, já teremos feito todas as n-1 combinações com o primeiro número. Qualquer outra combinação que fizermos com ele, então, já terá sido feita! Só estamos permutando a ordem de soma. Assim, conseguimos cortar o número de comparações pela metade!
 
+```cpp
 for (int i = 0; i < n; i++) {
 	for (int j = i+1; j < n; j++) {
 		if (i == j) continue;
 		arr[i] + arr[j] == m ? cout << i << " " << j << "\n" : continue;
 	}
-
 }
+```
 
 ...mas em termos assintóticos, isso ainda não significa muita coisa, lembram? ainda que de maneira mais "otimizada", ainda estamos fazendo todas as comparações possíveis - "brutando" a nossa solução
 
@@ -811,7 +821,7 @@ e caso a soma esteja muito baixa? eu movo algum dos meus números para a direita
 
 
 
-# Two Pointers
+## Two Pointers
 
 Essa ideia que a gente tentou alcançar de maneira intuitiva é chamada de "two pointers"! Um ponteiro é um conceito que vamos ver mais pra frente no curso, mas podemos imaginá-lo, nesse caso, como uma seta ou um índice para o número que estamos considerando (além de que, na maioria das vezes, nem usamos ponteiros na implementação desse algoritmo!)
 
@@ -965,7 +975,7 @@ O _two pointers_ é um algoritmo muito comum na área de programação competiti
 
 vamos ver mais um exemplo de uso de two pointers!
 
-# Para treinarmos juntos
+### Para treinarmos juntos
 
 Aqui, você tem t minutos e quer ir à biblioteca para ler o máximo possível de livros! Existem livros mais grossos e mais finos, então cada livro leva um tempo a_i para ser lido. Mas eles já estão organizados em uma ordem que faz sentido para o leitor, então você não quer embaralhar essa ordem e se confundir mair. Então, a única coisa que você pode fazer é escolher em qual livro você começa. Qual a maior quantidade de livros que você pode ler em t minutos?
 
@@ -975,11 +985,6 @@ Aqui, você tem t minutos e quer ir à biblioteca para ler o máximo possível d
 Primeiro, vamos tentar entender de fato a questão: Ela quer que você escolha um subarray contíguo da sua lista de livros para ler todos eles - mas a soma não pode passar de t! E já que não podemos mudar a ordem dos livros, aquela ideia de ordenar os livros por tempo gasto e pegar sempre os menores vai pro beleléu :(
 
 De novo, poderíamos testar todas os intervalos possíveis e "brutar" a questão, mas queremos uma saída eficiente! Então como já demos spoiler e você sabe que estamos falando de two pointers, alguma ideia lhe vem à mente?
-
-<p/>
-<p/>
-<p/>
-<p/>
 
 Primeiramente, podemos perceber que estamos tentando montar o intervalo mais extenso possível dentro desse nosso vetor de valores com soma igual a ou menor o nosso t. Então, podemos tentar passar uma única vez iterando pela nossa lista de valores, verificando o maior intervalo possível que pode ser construído começando em cada valor!
 
