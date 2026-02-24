@@ -1022,9 +1022,6 @@ vamos ver mais um exemplo de uso de two pointers!
 
 Aqui, você tem t minutos e quer ir à biblioteca para ler o máximo possível de livros! Existem livros mais grossos e mais finos, então cada livro leva um tempo a_i para ser lido. Mas eles já estão organizados em uma ordem que faz sentido para o leitor, então você não quer embaralhar essa ordem e se confundir mair. Então, a única coisa que você pode fazer é escolher em qual livro você começa. Qual a maior quantidade de livros que você pode ler em t minutos?
 
- aplicá-lo de diferentes formas? Sigam para o vjudge do minicurso para tentar fazer alguns exercícios de two pointers!
-
-
 Primeiro, vamos tentar entender de fato a questão: Ela quer que você escolha um subarray contíguo da sua lista de livros para ler todos eles - mas a soma não pode passar de t! E já que não podemos mudar a ordem dos livros, aquela ideia de ordenar os livros por tempo gasto e pegar sempre os menores vai pro beleléu :(
 
 De novo, poderíamos testar todas os intervalos possíveis e "brutar" a questão, mas queremos uma saída eficiente! Então como já demos spoiler e você sabe que estamos falando de two pointers, alguma ideia lhe vem à mente?
@@ -1210,7 +1207,7 @@ while (final != n) {
 ```
 
 
-Vamos tentar aplicá-lo de diferentes formas? Sigam para o vjudge do minicurso para tentar fazer alguns exercícios de two pointers!
+O [Vjudge do minicurso](https://vjudge.net/contest/791056) já tem todas essas questões! Sigam para lá se quiserem fazê-las :)
 
 
 <!-- questoes: sum of two values (codeforces), books (codeforces), 
