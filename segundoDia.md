@@ -16,7 +16,7 @@ title: Minicurso de Algoritmos e Estruturas de Dados
         <summary><a href="#ordenação"> Ordenação </a></summary>
         <ul>
             <li><a href="#uma-abordagem-comum"> Selection Sort </a></li>
-            <li><a href="#atenção-no-quadro"> Merge Sort </a></li>
+            <li><a href="#mudando-um-pouco-a-abordagem"> Mudando um pouco a abordagem </a></li>
         </ul>
     </details>
     <details>
@@ -44,7 +44,7 @@ Quando um programa é compilado sabemos que é necessário espaço na memória p
 Essa parte da memória leva este nome por seguir o padrão [LIFO](https://pt.wikipedia.org/wiki/LIFO), que empilha memória conforme lê as linhas do programa. Ela é responsável por armazenar tudo cujo **tamanho** é sabido em **tempo de compilação** e cujo **tempo de vida** é ditado conforme o escopo.
 
 <div  class="figure"  style="flex: 1; text-align: center;">
-    <img  src="assets/images/dia2/stack.png"  alt="stack example"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
+    <img  src="assets/images/dia2/stack.png"  alt="stack example"  style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"  />
     <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> Imagem gerada por IA</p>
 </div>
 
@@ -112,7 +112,7 @@ int main() {
 <!-- diferente da stack, a heap é compartilhada entre as threads -->
 
 <div  class="figure"  style="flex: 1; text-align: center;">
-    <img  src="assets/images/dia2/heap.png"  alt="stack example"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
+    <img  src="assets/images/dia2/heap.png"  alt="stack example"  style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"  />
     <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> <a href="https://youtu.be/2r_3f6L2EHw?si=qYhQWRItzEqZr63t">Exemplo de Stack e Heap de Programa</a></p>
 </div>
 
@@ -161,10 +161,8 @@ Além das duas regiões de memória citadas anteriormente, determinados elemento
 
 Podemos formalizar dizendo que `static` é um [Especificador de Classe de Armazenamento](https://en.cppreference.com/w/cpp/language/storage_duration.html), e existem outros além dele: `auto`, `extern`, `mutable`, etc.
 
-<div style="text-align: center;"><img src="assets/images/dia2/static-stack-heap.png" alt="" style="width:300px;height:300px;"> </div>
-
 <div  class="figure"  style="flex: 1; text-align: center;">
-    <img  src="assets/images/dia2/static-stack-heap.png"  alt="static memory example"  style="display: block; max-width: 40%; margin: 0 auto; border-radius: 8px;"  />
+    <img  src="assets/images/dia2/static-stack-heap.png"  alt="static memory example"  style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"  />
     <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> <a href="https://stackoverflow.com/questions/32418750/stack-and-heap-locations-in-ram/32418775">Exemplo de camadas do programa</a></p>
 </div>
 
@@ -321,7 +319,11 @@ int main() {
 
 Perceba que os algoritmos que vimos até o momento são todos **O(n²)**, mas será que ordenar sempre se trata de algo custoso assim? Com essa abordagem, sim. Mas e se a gente pensasse um pouco mais como [Júlio César](https://pt.wikipedia.org/wiki/J%C3%BAlio_C%C3%A9sar) ou [Napoleão Bonaparte](https://pt.wikipedia.org/wiki/Napole%C3%A3o_Bonaparte)?
 
-<div style="text-align: center;"><img src="assets/images/dia2/divideandconquer.jpg" alt="" style="width:300px;height:300px;"> </div>
+<div  class="figure"  style="flex: 1; text-align: center;">
+    <img  src="assets/images/dia2/divideandconquer.png"  alt="stack example"  style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"  />
+    <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> <a href="https://www.youtube.com/watch?v=f4v_JMKihOs">Fonte</a></p>
+
+</div>
 
 #### Atenção no quadro
 Vamos ordenar `[8,6,4,2,5,1,2,7]` com uma abordagem diferente.
@@ -491,8 +493,6 @@ void mergeSort(vector<string>& arr, int left, int right) {
 
 
 
----
-
 ## Sorting em algoritmos
 
 Já dá pra imaginar diversos usos pra esses algoritmos de ordenação, né? Mas com certeza tem muitos mais usos do que você imagina. Os algoritmos que nós vamos focar em atualmente são de uma linha chamada _greedy_ (gulosos). Neles, a partir de algum tipo de ordenação ou organização das nossas informações, tentamos sempre alcançar a melhor solução global através da tomada de decisões menores consideradas "ótimas" - ou seja, pra alcançar uma solução ótima, tomamos sempre a decisão ótima naquele momento. Talvez isso ainda soe confuso, mas vamos aprender mais sobre isso com exemplos e situações problema.
@@ -577,7 +577,10 @@ Agora, vamos imaginar que você vai para um festival de filmes do seu estudio fa
 
 Antes de qualquer coisa, é sempre interessante tentar visualizar o que o problema quer. Desenhando uma reta, podemos representar o início e o final de cada filme como pontos ligados entre si - Assim, podemos tentar fazer sentido das entradas e saídas de teste. Você tem já tem alguma ideia do que precisamos fazer?
 
-<div style="text-align: center;"><img src="assets/images/dia2/movie1.png" alt="" style="width:600px;height:200px;"> </div>
+<div  class="figure"  style="flex: 1; text-align: center;">
+    <img  src="assets/images/dia2/movie1.png"  alt="stack example"  style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"  />
+    <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> Autoria própria</p>
+</div>
 
 Bom, como já demos a dica de que estamos lidando com algoritmos de ordenação, o nosso instinto é ordenar a nossa série de números de alguma forma. Mas de qual forma?
 
@@ -587,7 +590,10 @@ Uma ideia que pode vir à nossa cabeça é de ordenar pela hora que o filme come
 
 Um filme pode começar mais cedo, mas durar quase o dia todo. Assim, tem chance de você só conseguir ver um único filme enquanto outros filmes mais curtos passam.
 
-<div style="text-align: center;"><img src="assets/images/dia2/movie2.png" alt="" style="width:600px;height:200px;"> </div>
+<div  class="figure"  style="flex: 1; text-align: center;">
+    <img  src="assets/images/dia2/movie2.png"  alt="stack example"  style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"  />
+    <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> Autoria própria</p>
+</div>
 
 Uma outra opção seria ordenar por duração! Essa ideia até poderia nos levar a uma saída interessante, mas aí teríamos que manter registros das horas em que estamos livres ou ocupados sempre - o que pioraria muito a nossa complexidade assintótica. Já pensou verificar sempre se é possível ver um filme ou não antes de vê-lo? essa verificação poderia levar O(n) por si só!
 
@@ -711,7 +717,10 @@ Por outro lado, Quinzinho, que quer começar uma plantação de melancias, pediu
 Como eu sinto que fiz um trabalho não tão bom explicando, espero que essa imagem ajude:
 
 
-<div style="text-align: center;"><img src="assets/images/dia2/watrmelons.png" alt="" style="width:600px;height:427px;"> </div>
+<div  class="figure"  style="flex: 1; text-align: center;">
+    <img  src="assets/images/dia2/watermelons.png"  alt="stack example"  style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"  />
+    <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> Autoria própria</p>
+</div>
 
 <details>
 <summary><b>Curiosidade!</b></summary>
@@ -1175,10 +1184,9 @@ Vamos tentar aplicá-lo de diferentes formas? Sigam para o vjudge do minicurso p
 
 -->
 
+---
 
-
-https://www.geeksforgeeks.org/dsa/merge-sort/
-
-https://www.geeksforgeeks.org/dsa/maximum-perimeter-triangle-from-array/
-
-https://github.com/Chanda-Abdul/Several-Coding-Patterns-for-Solving-Data-Structures-and-Algorithms-Problems-during-Interviews/blob/main/%E2%9C%85%20%20Pattern%2002%3A%20Two%20Pointers.md
+### Fontes
+* [Merge Sort](https://www.geeksforgeeks.org/dsa/merge-sort/)
+* [Questão do Triângulo](https://www.geeksforgeeks.org/dsa/maximum-perimeter-triangle-from-array/)
+* [Conteúdo Complementar](https://github.com/Chanda-Abdul/Several-Coding-Patterns-for-Solving-Data-Structures-and-Algorithms-Problems-during-Interviews)
