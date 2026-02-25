@@ -435,7 +435,9 @@ Mas como isso acontece?
 
 int n = 10;
 
-int arr[n];
+int arr[n]; // declaração com a sintaxe do C
+
+array<int, n> arr2;
 
 ```
 
@@ -457,7 +459,28 @@ Isso acontece porque, tendo o ponto inicial da nossa estrutura, podemos só adic
 
 Note também que não é possível fazer uma remoção ou uma anexação ao pé da letra do nosso array, porque o tamanho é fixo! Então mesmo se eu quiser muito adicionar mais um número ao meu array de tamanho 10, eu não vou conseguir :( . Isso é uma das maiores diferenças dessa estrutura para várias outras que usamos e vemos por aí. Por isso, ao criar um array, você precisa ter *certeza* do número máximo de coisas que você vai guardar.
 
-Diferentemente do que vamos ver um pouco mais adiante, o array é nativo ao c++ (e ao c também!), então ele está fora da nossa biblioteca *STL*. Mas o que isso significa, na prática? Nós não temos funções específicas para a nossa estrutura como veremos para as outras. Mas isso veremos daqui a pouco!
+Como vimos anteriormente, temos a versão do C do array e a do C++. A versão do C, diferentemente do que vamos ver um pouco mais adiante, está fora da nossa biblioteca *STL*. Mas o que isso significa, na prática? Nós não temos funções específicas para a nossa estrutura como veremos para as outras. Já na versão da *STL*, teremos funções como `front()`, `back()`, `size()` e `swap()`.
+
+```cpp
+
+array<int, 5> arr = {1, 2, 3, 4, 5};
+
+cout << arr.front() << "\n";
+
+cout << arr.back() << "\n";
+
+cout << arr.size() << "\n";
+
+
+```
+
+Saída:
+
+```
+1
+5
+5
+```
 
 De forma geral, é uma estrutura rápida e que te faz ter muito controle e noção do que você está fazendo o tempo todo. Eu pessoalmente acredito na soberania do array em todas as situações que o vector não é estritamente necessário (como em assuntos como grafos e, às vezes, na chamada de funções - mas não vamos ver nada disso aqui!), mas isso é para *você* decidir ao longo dessas aulas!
 
@@ -1369,21 +1392,29 @@ Pra nos ajudar a entender a situação, vamos ver algumas sequências de parênt
 
 Algo como isso é valido:
 
-`(()())()`
+```
+(()())()
+```
 
 Mas algo assim é inválido:
-`()()(`
+```
+()()(
+```
 
 Daí, podemos tirar uma conclusão: A quantidade de parênteses precisa ser par. Mas não só isso! É claro que olhando uma sequência inválida como essa:
 
-`()))`
+```
+()))
+```
 
 Percebemos que metade dos nossos parênteses devem abrir e metade fechar.
 
 
 Mas é aí que está o pulo do gato: Isso não é o único fato que importa! Podemos ter a quantidade de parênteses certa, mas uma organização errada. Algo assim:
 
-`)()()(`
+```
+)()()(
+```
 
 Então fica claro que só contar os parênteses não nos ajuda em muita coisa. Então vamos tentar entender mais a fundo como a lógica dos parênteses funciona
 
@@ -1399,13 +1430,12 @@ No fim das contas, se terminarmos uma pilha, a nossa quantidade de caracteres ab
 
 Portanto, com essas duas condições satisfeitas, a nossa pilha consegue "simular" perfeitamente um parser de parênteses.
 
-
-Curiosidade:
-Essa solução também pode ser feita com recursão, já que a recursão também é feita em pilha!
-
-
+<details>
+<summary> <b>Curiosidade</b> </summary>
 Nessa questão específica, o uso da pilha não é a única forma de resolver (podemos adicionar e subtrair uma única variável de maneira estratégica!), mas a solução mostrada nos traz um entendimento interessante de como uma pilha funciona.
+</details>
 
+#### Para fazermos juntos (#2)
 
 Agora vamos pensar em uma situação um pouco diferente:
 
