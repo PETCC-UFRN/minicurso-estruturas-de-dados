@@ -8,40 +8,35 @@ title: Minicurso de Matemática aplicada à Computação
     <h1>Sumário</h1>
     <ul>
     <details>
-        <summary><a href="#introdução-aos-inteiros">Introdução aos inteiros</a></summary>
+        <summary><a href="#tad-x-ed">TAD x ED</a></summary>
         <ul class="section-content">
-            <li><a href="#contextualização" >Contextualização</a></li>
-            <li><a href="#ue-questões"> Ue, questões..? </a></li>
-            <li><a href="#definição-dos-números"> Definição dos... Números? </a></li>
-            <summary><a href="#definição-dos-naturais">Definição dos Naturais</a>
-            </summary>
-            <ul class="section-content">
-              <li><a href="#os-axiomas-de-peano"> Os Axiomas de Peano </a></li>
-              <li><a href="#ordinais-de-john-von-neumann"> Ordinais de John von Neumann </a></li>
-            </ul>
-            <li><a href="#definição-dos-inteiros">Definição dos Inteiros</a></li>
+            <li><a href="#tipos-abstratos-de-dados" >Tipos Abstratos de Dados</a></li>
+            <li><a href="#estruturas-de-dados">Estruturas de Dados</a></li>
         </ul>
     </details>
     <details>
-        <summary><a href="#divisibilidade-e-primos">Divisibilidade e Primos</a></summary>
+        <summary><a href="#ponteiros">Ponteiros</a></summary>
         <ul class="section-content">
-            <li><a href="#relação-de-divisibilidade-e-o-teorema-da-divisão">Relação de Divisibilidade e o Teorema da Divisão</a></li>
-            <details>
-            <summary><a href="#teorema-fundamental-da-aritmética">Teorema Fundamental da Aritmética</a></summary>
-            <ul class="section-content">
-              <li><a href="#qualquer-número-é-primo-ou-composto-por-uma-fatoração-de-primos">Qualquer número é primo, ou composto por uma fatoração de primos</a></li>
-              <li><a href="#a-fatoração-acima-é-única">A Fatoração acima é Única</a></li>
-              <li><a href="#juntando-as-peças">Juntando as peças</a></li>
-              </ul>
-            </details>
-            <details>
-            <summary><a href="#múltiplos-e-divisores-comuns">Múltiplos e Divisores comuns</a></summary>
-            <ul class="section-content">
-              <li><a href="#mmc">MMC</a></li>
-              <li><a href="#mdc">MDC</a></li>
-              <li><a href="#algoritmo-de-euclides-e-o-teorema-de-bezout">Algoritmo de Euclides e o Teorema de Bezout</a></li>
-            </ul></details>
+            <li><a href="#endereços-de-memória-e-referências">Memória</a></li>
+            <li><a href="#agora-sim-ponteiros">Ponteiros!</a></li>
         </ul>
+    <details>
+        <summary><a href="#estruturas-de-dados-lineares">Estruturas de Dados Lineares</a></summary>
+        <ul class="section-content">
+            <li><a href="#array" >Array</a></li>
+            <li><a href="#vector">Vector</a></li>
+            <li><a href="#lista-encadeada">Lista Encadeada</a></li>
+        </ul>
+    </details>
+    <details>
+        <summary><a href="#tipos-abstratos-de-dados-e-suas-implementações">Tipos Abstratos de Dados</a></summary>
+        <ul class="section-content">
+            <li><a href="#tad-lista-list" >Array</a></li>
+            <li><a href="#tad-fila-queue">Fila (Queue)</a></li>
+            <li><a href="#tad-pilha-stack">Pilha(Stack)</a></li>
+        </ul>
+    </details>
+
     </details>
     <details>
         <summary><a href="#relações-de-congruência">Relações de Congruência</a></summary>
@@ -347,7 +342,7 @@ Lembrando que, mesmo que os ponteiros apontem para o mesmo endereço, não signi
   </div>
 
 
-## Tipos lineares de dados!
+## Estruturas de Dados Lineares!
 
 Ontem, para entendermos sobre ordenação, vimos um pouco sobre heap, stack, alocação estática e alocação dinâmica.
 Hoje nos aprofundaremos um pouco mais nessa parte e veremos estruturas de dados e suas implementações!
@@ -674,7 +669,7 @@ No entanto, em uma lista duplamente encadeada, temos algumas informações extra
 Nesse caso, como estamos implementando uma lista duplamente encadeada, teremos um nó de início e um nó de fim (então não precisaremos necessariamente estar comparando com nullptr, mas veremos como isso funciona daqui a pouco!) chamados `head` e `tail` . Eles vão permitir o acesso rápido às extremidades da nossa lista, facilitando a implementação de vários valores
 
 
-# Contruindo uma lista duplamente encadeada
+#### Contruindo uma lista duplamente encadeada
 
 Primeiramente, precisamos do nosso nó
 
@@ -739,7 +734,7 @@ Não se preocupem tanto com entender as minúcias dos códigos dessa parte aqui.
 
 Então agora que já conseguimos construir a nossa lista, vamos ver como funcionam as suas operações!
 
-# Acesso
+#### Acesso
 
 Diferentemente das 2 outras estruturas, não temos acesso a onde está o nosso valor imediatamente - só ao primeiro valor! Por isso, para conseguir acessar o enésimo valor da nossa lista, temos que passar por todos os anteriores - o que faz essa operação ser O(n).
 
@@ -765,11 +760,12 @@ Diferentemente das 2 outras estruturas, não temos acesso a onde está o nosso v
  
  ```
 
-# Inserção
+#### Inserção
 
 Por outro lado, a inserção em uma lista encadeada é muito eficiente (contanto que seja nas pontas!). Em um array, nunca conseguíamos aumentar o tamanho da nossa lista. Em um vetor, aumentar o seu tamanho era sempre O(n). Aqui, podemos simplesmente inicializar um novo nó e ligá-lo ao fim ou ao início (lembrando de atualizar os valores de head e tail!)
 
-Inserção no início
+Inserção no início:
+
 ```cpp
 
   void push_front(int novo_valor) {
@@ -803,7 +799,8 @@ Se mudássemos direto o head, note que perderíamos a informação do antigo pri
 
 De forma análoga, conseguimos fazer inserções no fim da fila (dessa vez, a partir do tail)
 
-Inserção no fim
+Inserção no fim:
+
 ```cpp
 
   void push_back(int novo_valor) {
@@ -837,7 +834,7 @@ Note, então, que a complexidade assintótica da inserção de um novo valor no 
 No entanto, note que uma remoção no meio da lista seria O(n), já que precisaríamos achar um index ( O(n) ) para depois inserir o valor ( O(1) ).
 
 
-# Deleção
+#### Deleção
 
 Da mesma forma que a inserção, a deleção nas pontas passa a ser O(1), já que temos acesso ao head e tail! Dessa forma, reorganizamos os nossos ponteiros e depois deletamos o espaço alocado dinamicamente pelo nosso nó. Os códigos vão parecer algo assim:
 
@@ -1181,8 +1178,16 @@ Nesse contexto, a fila assegura previsibilidade e organização, sendo fundament
 
 Assim como a fila, a pilha é de extrema importância na Ciência da Computação como um TAD crucial à modelagem de situações específicas. Seu maior princípio é a ideia do "LIFO" (Last In, First Out) - os primeiros elementos a sair da nossa estrutura de dados são sempre aqueles que chegaram por último. Podemos imaginar esse TAD como vários objetos e ideias do dia a dia: um dispenser de gurdanapos de uma lanchonete - A única maneira de adicionar guardanapos é empurrando pela única entrada, que também serve de saída - ou até uma rua sem saída bem estreita - onde um carro, caso não tenha sido o último a entrar, não consegue sair imediatamente! Em geral, é como uma pilha de objetos de fato, na qual você só pode retirar o objeto no topo (se não a pilha cai!)
 
-// imagem de um dispenser de guardanapos
-// imagem de um carro uma rua sem saída bem estreita
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/dia3/guardanapos.png" alt="guardanapos" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Guardanapos<br /></em></p>
+</div>
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/dia3/ruasemsaida.png" alt="crua-sem-saida" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Rua sem saída<br /></em></p>
+</div>
 
 De maneira geral, existem muitas aplicações para essa modelagem (bem mais do que imaginamos), e vamos ver isso logo após a implementação.
 
@@ -1368,21 +1373,21 @@ Note, então, que só embaraçamos os fios ao alternar (+ e -) qual passa por ci
 Seguindo nesse último caso, nós também temos 2 opções:
 
 <div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/dia4/cables4.png" alt="cabos-4" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <img src="assets/images/dia3/cables4.png" alt="cabos-4" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
     <p style="margin: 0.5rem auto 0; text-align: center;"><em>Exemplificação 4<br /></em></p>
 </div>
 
 Ou o cabo vermelho passa por cima e desembaralha o último nó (e retornamos à situação anterior!!!)
 
 <div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/dia4/cables5.png" alt="cabos-5" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <img src="assets/images/dia3/cables5.png" alt="cabos-5" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
     <p style="margin: 0.5rem auto 0; text-align: center;"><em>Exemplificação 5<br /></em></p>
 </div>
 
 Ou o cabo vermelho passa por baixo e piora mais ainda a nossa situação.
 
 <div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/dia4/cables6.png" alt="cabos-6" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <img src="assets/images/dia3/cables6.png" alt="cabos-6" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
     <p style="margin: 0.5rem auto 0; text-align: center;"><em>Exemplificação 6<br /></em></p>
 </div>
 
@@ -1468,13 +1473,13 @@ Você está ajudando na organização do desfile de carnaval desse ano e precisa
 
 
 <details>e a 
-<summary>Spoiler!<summary/>
+<summary> <b>Spoiler!</b> </summary>
 A saída dessa questão é pela simulação da rua como uma fila e da ruela sem saída como uma pilha!
 
 <p/>
 A todo o momento, você sabe exatamente qual carro deve seguir para a entrada. Então concorda que se em algum momento ele não estiver na frente da pilha, ele precisa estar em alguma posição futura da fila? Então você itera pela fila, movendo os carros para a rua sem saída. Se você não tiver mais carros na fila, o que você procura deve ser o primeiro da pilha. Se não, a solução é impossível!
 
-<details/>
+</details>
 
 
 
