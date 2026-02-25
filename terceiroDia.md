@@ -79,14 +79,117 @@ title: Minicurso de Matemática aplicada à Computação
   </div>
 
 
-## O que são Tipos Abstratos de Dados (TADs)?
+## TAD x ED
 
-// guilherme
+Na aula de hoje, vamos nos aprofundar em um dos conflitos conceituais mais importantes da Computação: Tipos Abstratos de Dados (TAD) x Estruturas de Dados (ED). Compreender corretamente esses 
+conceitos é fundamental para expandirmos nossa noção sobre algoritmos e entendermos como o mundo das estruturas de dados funciona.
+
+## O que são Tipos Abstratos de Dados?
+
+TAD, ou Tipo Abstrato de Dado, é formalmente definido como um conjunto de objetos aliado à um conjunto de operações. Na prática, é uma _interface conceitual_ que define o comportamento para um conjunto de dados. A especificação de um TAD determina, principalmente, duas informações principais: como o conjunto de dados se comporta e o conjunto de regras (ou operações) que podem ser realizadas sobre ele. Algumas das operações mais comuns de serem citadas são:
+
+- Criação da estrutura
+
+- Inclusão de um elemento
+
+- Exclusão de um elemento
+
+- Acesso a um elemento
+
+- Verificar vazio
+
+Dessa maneira, o TAD priva o acesso aos dados e restringe a manipulação deles apenas através das operações. Perceba que o TAD, contudo, não é responsável por especificar como essas operações vão ser implementadas ou como os dados vão ser armazenados na memória. O foco aqui está na abstração, ou seja, em definir um guia comportamental e não uma especificação prática para o conjunto de dados.
+
+### Exemplo prático: TAD Ponto
+
+Para entender melhor o conceito de TAD, vamos trabalhar com a definição de um novo TAD arbitrário chamado `Ponto`, que define uma estrutura responsável por representar pontos e armazena duas coordenadas X e Y. Para ele, vamos, tal qual solicitado na definição do conceito, definir algumas operações básicas, como:
+
+- `create(x, y)` - Cria um novo ponto com as coordenadas x e y;
+
+- `delete(p)` - Deleta o ponto;
+
+- `set_coord(p, x, y)` - Seta as coordenadas x e y para um ponto p;
+
+- `distance(p1, p2)` - Calcula a distância entre dois pontos;
+
+Inicialmente, vamos utilizar para a implementação desse TAD uma estrutura já bem conhecida por vocês:
+
+```cpp
+//.cpp
+
+struct Ponto {
+    float x;
+    float y;
+}
+
+Ponto* create(float x, float y) {
+    Ponto* p = new Ponto;
+    p->x = x;
+    p->y = y;
+    return p;
+}
+
+void delete_ponto(Ponto* p) {
+    delete p;
+}
+
+[...]
+```
+
+Porém, a definição do `TAD Ponto` não especifica uma implementação fixa, ou seja, nós podemos explorar outras alternativas na representação prática do TAD:
+
+```cpp
+
+int ponto[2]; //Utilizando, por exemplo, o array clássico, ponto[0] = x , ponto[1] = y.
+
+--------------------------
+
+std::vector<float> coord_x; //Ou utilizando dois vetores separados
+std::vector<float> coord_y;
+
+--------------------------
+
+```
+
+Ou, da maneira mais convencional, através do uso de classes:
+
+```cpp
+
+class Ponto { // Utilizando classes
+    private:
+    int x;
+    int y;
+
+    public:
+    Ponto(int x, int y);
+
+    void set_coord(int nx, int ny);
+
+    float distance(const Ponto& outro) const;
+
+    int get_x() const;
+    int get_y() const;
+}
+
+```
+
+Perceba, porém, que a liberdade que a abstração nos dá vem com um preço: garantir que o funcionamento da estrutura e o comportamento das operações se mantenha intacto. Porém, mantendo essas condições, podemos explorar a nossa criatividade para a implementação dos mais diversos TAD's.
 
 ## O que são Estruturas de Dados?
 
-//guilherme
+Dentro desse contexto, as Estruturas de Dados são estruturas concretas que organizam, armazenam e manipulam dados na _memória_ do computador, permitindo a realização de operações sobre dados de maneira adequada e correta. A Estrutura de Dado, diferente do TAD, se preocupa principalmente com a maneira como os dados são representados e organizados _internamente_, estabelecendo uma relação lógica e visando a eficiência dos dados, se atentando para aspectos como:
 
+1. Uso eficiente de memória;
+2. Tempo de execução;
+
+As estruturas de dados são as responsáveis por *materializar* as implementações dos Tipos Abstratos de Dados, ou seja, transformam uma abstração conceitual em uma implementação prática. Elas podem ser divididas em algumas categorias:
+
+- Estruturas de dados lineares
+- Estruturas de dados associativas
+- Estruturas de dados hierárquicas
+- Entre outras
+
+Agora, antes de nos aprofundarmos em algumas estruturas de dados conhecidas, vamos rever alguns pontos importantes sobre ponteiros.
 
 ## Ponteiros
 
@@ -246,18 +349,10 @@ Lembrando que, mesmo que os ponteiros apontem para o mesmo endereço, não signi
 
 ## Tipos lineares de dados!
 
-
-### Array
-
 Ontem, para entendermos sobre ordenação, vimos um pouco sobre heap, stack, alocação estática e alocação dinâmica.
 Hoje nos aprofundaremos um pouco mais nessa parte e veremos estruturas de dados e suas implementações!
 
-// insira aqui diferenca ED x TADs
-
-// agora comecaremos as TADs
-
-
-Array
+### Array
 
 Vocês provavelmente já estão acostumados a usar essa estrutura de dados, né?
 É uma das primeiras estruturas que aprendemos a usar, já que ela é muito simples: ela consegue guardar _N_ instâncias de um tipo primitivo (inteiro, booleano, double, etc.)
@@ -537,19 +632,145 @@ Como vocês provavelmente imaginam, a complexidade dessa operação também é O
 Note também que sempre que vemos essas implementações, parece que estamos _"babyproofing"_ uma casa: fazendo condicionais para pegar cada caso de borda, cada exceção. Mas é exatamente assim que as estruturas na STL são pensadas: elas precisam ser robustas de forma que o usuário desinformado (nós!) não consiga quebrá-las. E é por isso que é algo tão bom quando estamos programando! É algo previsível, meticulosamente testado, que garatidamente vai retornar erros ao invés de nos deixar acabar com a estrutura que estamos tentando acessar.
 
 
+### Lista Encadeada
+
+//
 
 Mas bom, essas são as estruturas de dados que vamos ver por enquanto! Vamos partir para os diferentes TADs?
 
+# Tipos abstratos de dados e suas implementações
+
+## TAD Lista (List)
+
+### Descrição
+
+O TAD Lista é uma das estruturas conceituais fundamentais na Ciência da Computação para a representação de coleções ordenadas de elementos. Diferentemente da Fila e da Pilha, a Lista não impõe políticas de acesso (como FIFO e LIFO), provendo principalmente flexibilidade de acesso e fácil manipulação de seus elementos.
+
+Na prática, uma Lista é definida como uma sequência linear de elementos organizados de acordo com uma determinada ordem. Cada elemento, por sua vez, possui uma posição bem definida dentro da sequência, podendo ser identificado por um índice ( utilizando colchetes `[i]` ) ou por sua relação com outros elementos (como predecessor e sucessor), conforme a especificação adotada para a estrutura. 
+
+<details>
+<summary> <b>Spoiler</b> </summary>
+Convencionalmente, uma especificação do TAD Lista que opta por acesso a elementos por meio de índices tende a se alinhar com o uso de vetores. Da mesma maneira, uma especificação que opte por acesso através de relações de vizinhança - predecessor e sucessor - tende a se alinhar com o uso de listas encadeadas.
+</details>
+
+Novamente, a descrição da Lista descreve apenas um comportamento lógico - um guia comportamental - para a coleção de dados, não dependendo da forma como os dados são organizados na memória, ou seja, é uma definição que independe de estruturas de dados específicas.
+
+### Modelagem e Operações Básicas
+
+//revisar códigos
+
+Como dito acima, a escolha da estrutura de dados para a modelagem da Lista é livre. Portanto, de primeiro momento, vamos optar pela implementação estática utilizando  _array_, por ser uma das formas mais simples de visualizar o funcionamento interno da estrutura. 
+
+Na prática, porém, veremos que a STL oferece implementações prontas e modernas do TAD Lista, como o `std::vector`, que se baseia em um array dinâmico redimensionável (como visto anteriormente) ou como a `std::list`, implementada por meio de uma lista duplamente encadeada, favorecendo operações de inserção e remoção (como veremos adiante).
+
+Com essa implementação, alguns conceitos importantes merecem destaque: semelhantemente a o que vimos anteriormente com vector, teremos _capacity_, um valor fixo que vai definir o espaço reservado em memória, ou seja, a quantidade máxima de elementos que podemos armazenar, enquanto _size_ controlará o tamanho lógico que a estrutura tem em determinado momento, ou seja, a quantidade de elementos que realmente estão na lista.
+
+```cpp
+
+const int CAPACITY = 100;
+
+struct Lista {
+    int data[CAPACITY]; // armazenamento físico
+    int size;           // tamanho lógico
+};
+
+```
+
+Para esse exemplo de modelagem, teremos um construtor parecido com isso:
+
+```cpp
+
+void inicializar(Lista& l) {
+    l.size = 0;
+}
+
+```
+
+### Acesso
+
+Aqui, a vantagem do acesso à elementos é a simplicidade: Por se tratar de um array estático e contíguo, o acesso a elementos pode ser realizado de maneira extremamente simples e direta, utilizando índices ( `[i]` ). Logo, podemos imaginar que a eficiência dessa operação implica em complexidade O(1).
+
+```cpp
+
+int get(const Lista& l, int pos) {
+
+    if (pos < 0 || pos >= l.tamanho) {              
+        throw std::out_of_range("Posição inválida");
+    }                                               // caso posição fora do intervalo
+
+    return l.dados[pos];
+}
+
+```
+
+### Inserção
+
+Como visto antes, a Lista é extremamente flexível na hora da manipulação de seus elementos, o que nos permite realizar a inserção em qualquer posição válida da sequência (desde que estejamos respeitando a capacidade máxima da estrutura). Porém, essa liberdade vem com um custo: realizar a inserção de um elemento em um local diferente do fim da lista implica na necessidade de deslocamento de todos os elementos subsequentes, a fim de preservar a ordem da lista. Isso resulta em uma operação custosa e ineficiente, com complexidade linear O(n).
+
+Todavia, para inserções no fim da lista, a necessidade de deslocamento some, e a operação pode ser realizada em O(1).
+
+```cpp
+
+bool insert(Lista& l, int pos, int valor) {
+    
+    if (l.tamanho >= CAPACIDADE)
+        return false;                       // caso lista cheia
+
+    if (pos < 0 || pos > l.tamanho)
+        return false;                       // caso posição inválida
 
 
-### Lista Encadeada
+    // deslocamento à direita
+    for (int i = l.tamanho; i > pos; i--) {
+        l.dados[i] = l.dados[i - 1];
+    }
 
-<!-- implementationrrr-->
+    l.dados[pos] = valor;
+    l.tamanho++;
+
+    return true;
+}
+
+```
+
+Detalhe: Qual seria o pior caso na inserção?
+
+### Remoção
+
+A remoção segue uma lógica semelhante à inserção: realizar essa operação em qualquer posição diferente do final também implicará no deslocamento dos elementos, o que, novamente, vai tornar a operação custosa, resultando em complexidade O(n).
+
+Perceba que, assim como na inserção, a complexidade dessa operação também depende da posição escolhida, crescendo conforme a proximidade com o início da lista, ou seja, nem todas as inserções vão executar _n_ passos. Novamente, para remoções no fim da lista, nos basta reduzir o tamanho lógico da estrutura, resultando em complexidade O(1).
+
+```cpp
+
+bool remove(Lista& l, int pos) {
+    if (pos < 0 || pos >= l.tamanho)
+        return false;                       // caso posição inválida
+
+    // deslocamento à esquerda
+    for (int i = pos; i < l.tamanho - 1; i++) {
+        l.dados[i] = l.dados[i + 1];
+    }
+
+    l.tamanho--;
+
+    return true;
+}
+
+```
+
+### Exemplos práticos
+
+Justamente por causa da sua flexibilidade, a Lista é amplamente empregada em aplicações que precisam representar coleções ordenadas de dados, onde consultas e modificações podem ocorrer a qualquer momento e em qualquer posição da sequência. Editores de Texto, que modelam um determinado conteúdo por meio de uma lista de linhas ou caracteres (e que podem realizar inserções e remoções em qualquer local) ou Sistemas de Gerenciamento, que necessitam realizar constamente o acesso por índice no conjunto, são exemplos bem comuns de cenários que pedem por uma estrutura que preserve a ordem lógica dos elementos e que permita a fácil manipulação dos dados, tal qual a Lista.
 
 
-## Tipos abstratos de dados e suas implementações
+#### Mas e a Lista Encadeada?
 
-## Fila (Queue)
+Aqui, é importante percebermos como ganhamos eficiência nas operações de inserção e remoção ( viram O(1) ), mas perdemos eficiência na operação de acesso ( viram O(n) ). Evitamos o deslocamento de elementos, mas envolvemos o uso de ponteiros na manipulação da lista.
+
+Logo, percebam que o intuito é exatamente o de identificar que a escolha da estrutura de dados durante a implementação deve se adequar aos nossos objetivos enquanto usuários da TAD. Cada implementação tem as suas vantagens e desvantagens, e cabe a nós julgar corretamente qual estrutura usar.
+
+## TAD Fila (Queue)
 
 ### Descrição
 
@@ -710,7 +931,7 @@ Nesse contexto, a fila assegura previsibilidade e organização, sendo fundament
 
 
 
-## Pilha (Stack)
+## TAD Pilha (Stack)
 
 Assim como a fila, a pilha é de extrema importância na Ciência da Computação como um TAD crucial à modelagem de situações específicas. Seu maior princípio é a ideia do "LIFO" (Last In, First Out) - os primeiros elementos a sair da nossa estrutura de dados são sempre aqueles que chegaram por último. Podemos imaginar esse TAD como vários objetos e ideias do dia a dia: um dispenser de gurdanapos de uma lanchonete - A única maneira de adicionar guardanapos é empurrando pela única entrada, que também serve de saída - ou até uma rua sem saída bem estreita - onde um carro, caso não tenha sido o último a entrar, não consegue sair imediatamente! Em geral, é como uma pilha de objetos de fato, na qual você só pode retirar o objeto no topo (se não a pilha cai!)
 
@@ -839,3 +1060,6 @@ if (agora < dataDia3) {
 }
 </script>
 {% include petcccopyright.html %}
+
+
+AttMAIN
