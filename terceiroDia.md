@@ -458,6 +458,12 @@ Saída:
 
 De forma geral, é uma estrutura rápida e que te faz ter muito controle e noção do que você está fazendo o tempo todo. Eu pessoalmente acredito na soberania do array em todas as situações que o vector não é estritamente necessário (como em assuntos como grafos e, às vezes, na chamada de funções - mas não vamos ver nada disso aqui!), mas isso é para *você* decidir ao longo dessas aulas!
 
+
+|                 | Acesso | Inserção no fim | Deleção no fim | Inserção no meio | Deleção no meio  |
+|-----------------|--------|-----------------|----------------|------------------|------------------|
+| Array           | O(1)   |O(n) se realocar |O(1)            | O(1)             | O(1)             |
+
+
 Então, vamos seguir adiante para o vector!
 
 
@@ -709,6 +715,11 @@ Como vocês provavelmente imaginam, a complexidade dessa operação também é O
 Note também que sempre que vemos essas implementações, parece que estamos _"babyproofing"_ uma casa: fazendo condicionais para pegar cada caso de borda, cada exceção. Mas é exatamente assim que as estruturas na STL são pensadas: elas precisam ser robustas de forma que o usuário desinformado (nós!) não consiga quebrá-las. E é por isso que é algo tão bom quando estamos programando! É algo previsível, meticulosamente testado, que garatidamente vai retornar erros ao invés de nos deixar acabar com a estrutura que estamos tentando acessar.
 
 
+|                 | Acesso | Inserção no fim | Deleção no fim | Inserção no meio | Deleção no meio  |
+|-----------------|--------|-----------------|----------------|------------------|------------------|
+| Vetor           | O(1)   |O(n) se realocar |O(1)            | O(n)             | O(n)             |
+
+
 ### Lista Encadeada
 
 Agora vamos ver uma maneira um pouco mais diferente de guardar informações na nossa memória. Todas as estruturas que vimos até aqui funcionam pelo fato de toda a memória estar junta - Por isso que temos sempre acesso imediato ao que queremos, é só somar a quantidade de endereços de memória. E nesse sentido, essas estruturas são muito boas, mas elas sempre precisam de um bloco de memória ininterrupto para que coloquemos todas as nossas informações. E é aí que a lista encadeada entra como algo diferente! ela salva vários pequenos blocos de memória que apontam sempre para o próximo bloco - como se fosse aquelas estruturas de arvorismo! (reconheço que essa metáfora não é das melhores, mas não consegui imaginar nada mais preciso 😭😭😭😭)
@@ -953,6 +964,11 @@ Da mesma forma que a inserção, a deleção nas pontas passa a ser O(1), já qu
 De maneira geral, dá pra ver que esse tipo de lista é muito eficiente para a implementação de TADs que só inserem / deletam nas extremidades (como uma lista ou uma fila!), mas não é muito legal para guardar vários valores que você precisa visitar de maneira recorrente. Listas encadeadas não aparecem muito por si só em questões ou modelagens no dia a dia, mas vários desses conceitos aqui apresentados são usados em estruturas bem mais populares (como árvores!). Aqui está a tabela de complexidade.
 
 
+|                 | Acesso | Inserção no fim | Deleção no fim | Inserção no meio | Deleção no meio  |
+|-----------------|--------|-----------------|----------------|------------------|------------------|
+| Lista Encadeada | O(n)   |O(n)             |O(n)            | O(n)             | O(n)             |
+
+
 Mas bom, essas são as estruturas de dados que vamos ver por enquanto! Vamos partir para os diferentes TADs?
 
 # Tipos abstratos de dados e suas implementações
@@ -973,8 +989,6 @@ Convencionalmente, uma especificação do TAD Lista que opta por acesso a elemen
 Novamente, a descrição da Lista descreve apenas um comportamento lógico - um guia comportamental - para a coleção de dados, não dependendo da forma como os dados são organizados na memória, ou seja, é uma definição que independe de estruturas de dados específicas.
 
 ### Modelagem e Operações Básicas
-
-//revisar códigos
 
 Como dito acima, a escolha da estrutura de dados para a modelagem da Lista é livre. Portanto, de primeiro momento, vamos optar pela implementação estática utilizando  _array_, por ser uma das formas mais simples de visualizar o funcionamento interno da estrutura. 
 
@@ -1075,6 +1089,7 @@ bool remove(Lista& l, int pos) {
 }
 
 ```
+
 
 ### Exemplos práticos
 
