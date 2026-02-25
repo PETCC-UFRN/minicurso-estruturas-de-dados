@@ -383,7 +383,7 @@ cout << arr[5]
 
 Isso acontece porque, tendo o ponto inicial da nossa estrutura, podemos só adicionar a quantidade de "casinhas" (equivalente à quantidade de bits que o tipo guardado no array ocupa) que vamos pular e chegar ao endereço que queremos acessar. Por isso, qualquer operação de acesso ou atualização é constante, o que se torna muito bom para nós!
 
-Note também que não é possível fazer uma remoção ou uma anexação ao pé da letra do nosso array, porque o tamanho é fixo! Então mesmo se eu quiser muito adicionar mais um número ao meu array de tamanho 10, eu não vou conseugir :( . Isso é uma das maiores diferenças dessa estrutura para várias outras que usamos e vemos por aí. Por isso, ao criar um array, você precisa ter *certeza* do número máximo de coisas que você vai guardar.
+Note também que não é possível fazer uma remoção ou uma anexação ao pé da letra do nosso array, porque o tamanho é fixo! Então mesmo se eu quiser muito adicionar mais um número ao meu array de tamanho 10, eu não vou conseguir :( . Isso é uma das maiores diferenças dessa estrutura para várias outras que usamos e vemos por aí. Por isso, ao criar um array, você precisa ter *certeza* do número máximo de coisas que você vai guardar.
 
 Diferentemente do que vamos ver um pouco mais adiante, o array é nativo ao c++ (e ao c também!), então ele está fora da nossa biblioteca *STL*. Mas o que isso significa, na prática? Nós não temos funções específicas para a nossa estrutura como veremos para as outras. Mas isso veremos daqui a pouco!
 
@@ -400,7 +400,10 @@ Então, vamos seguir adiante para o vector!
 
 Agora já entramos no mundo da STL! o vector, ou vetor, é outra das estruturas mais populares e comumente utilzadas por toda a base usuária do C++ - mas ele não é nada mais que um array "embalado" (ou "encapsulado", para os mais chiques).
 
-// colocar o ah ehhhhh
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/dia3/ahehhhhhhhhhhhhh.gif" alt="vector-meu-malvado-favorito" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Vector<br /></em></p>
+</div>
 
 ```cpp
 
@@ -414,7 +417,10 @@ Ele funciona da mesma forma que um array funcionaria, mas com alguns grandes dif
 
 Vamos pensar no vector como um struct do C: É uma caixa que guarda alguns atributos e indica onde estão guardados os nossos valores. Então poderíamos imaginar essa implementação como algo assim:
 
-// desenho com atributos vem aqui
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/dia3/vector.png" alt="vector-meu-malvado-favorito" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Vector<br /></em></p>
+</div>
 
 
 Esses atributos podem parecer meio desnecessários, mas são *extremamente* úteis para quase todas as funcionalidades do vector - eles que dão as informações necessárias para a realocação de espaço de memória.
@@ -548,7 +554,7 @@ void push_back(valor) {
 ...Mas isso pode resultar em um erro se a capacidade do nosso vetor já for igual à quantidade de valores guardados: Estaremos acessando um espaço fora do permitido - o que vai gerar uma falha de segmentação. Para evitar isso, podemos usar a função `resize()` que vimos antes.
 
 ```cpp
-
+ 
   void push_back(const_reference value) {
 
     if (size() >= capacity()) {
@@ -562,7 +568,9 @@ void push_back(valor) {
 
 Assim, já que a função de `resize()` é O(n), `push_back` no pior caso também é O(n).
 
-Como você pode observar na implementação acima, sempre que "estouramos" o tamanho, reservamos duas vezes a capacidade atual. Assim, se fizermos push_back muitas vezes, sempre que chegarmos a uma potência de 2, teremos que copiar todos os valores um a um. Logo, a complexidade de algo como o código abaixo, ainda que pareça linear, é O(n * log2n)!
+Como você pode observar na implementação acima, sempre que "estouramos" o tamanho, reservamos duas vezes a capacidade atual. Assim, se fizermos push_back muitas vezes, sempre que chegarmos a uma potência de 2, teremos que copiar todos os valores um a um.
+
+Logo, a complexidade de algo como o código abaixo, ainda que pareça , não é necessariamente linear!
 
 ```cpp
 cin >> n;
@@ -575,7 +583,7 @@ for (int i = 0; i < n; i++){
 }
 
 ```
-Ainda que nlogn, em geral, não seja significativamente maior do que tempo linear, ainda temos uma maneira inteligente de contornar isso! Nesse caso, como já sabemos a quantidade de números que vamos inserir, podemos reservar todo esse espaço ao invés de deixar o push back ir aumentando logaritmicamente:
+No entanto, como já sabemos a quantidade de números que vamos inserir nesse caso, podemos reservar todo esse espaço ao invés de deixar o push back ir aumentando a cada potência de 2:
 
 ```cpp
 
@@ -591,7 +599,7 @@ for (int i = 0; i < n; i++){
 
 ```
 
-Nesse código, a complexidade será linear!
+Nesse código, a complexidade da inserção será linear!
 
 É interessante também mencionar que existem várias outras maneiras de declarar vectors (que "chamam" outros construtores) que podem reservar a quantidade certa de memória durante a sua criação!
 
@@ -634,7 +642,245 @@ Note também que sempre que vemos essas implementações, parece que estamos _"b
 
 ### Lista Encadeada
 
-//
+Agora vamos ver uma maneira um pouco mais diferente de guardar informações na nossa memória. Todas as estruturas que vimos até aqui funcionam pelo fato de toda a memória estar junta - Por isso que temos sempre acesso imediato ao que queremos, é só somar a quantidade de endereços de memória. E nesse sentido, essas estruturas são muito boas, mas elas sempre precisam de um bloco de memória ininterrupto para que coloquemos todas as nossas informações. E é aí que a lista encadeada entra como algo diferente! ela salva vários pequenos blocos de memória que apontam sempre para o próximo bloco - como se fosse aquelas estruturas de arvorismo! (reconheço que essa metáfora não é das melhores, mas não consegui imaginar nada mais preciso 😭😭😭😭)
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/dia3/arvorismo.jpg" alt="estruturas-de-arvorismo" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Estruturas de Arvorismo<br /></em></p>
+  </div>
+
+Então esse comportamento nos deixa alocar memórias fisicamente distantes, aumentando muito a nossa gama de possibilidades de estruturas de dados (como em árvores! mas isso é conteúdo do dia de amanhã)
+
+Mas como isso funciona?
+
+Ao invés de um só bloco de memória, teremos vários pacotinhos independentes que apontam um para o outro - usando, como vocês podem já ter imaginado, ponteiros! Cada pacotinho desse, chamado de Nó ou Node, guarda, então, um espaço para informação (pode ser um inteiro, um booleano, um caractere), um ponteiro apontando para o próximo nó da lista  e um ponteiro apontando para o nó anterior. Seu código se assemelha a isso:
+
+```cpp
+struct Node {
+
+	int valor;
+	int * next;
+	int * prev;
+
+}
+
+```
+Mas isso nos gera outra pergunta: Se sempre temos um ponteiro apontando para o próximo número, como encontramos o fim?
+
+Simples! quando declaramos essa nossa lista encadeada, apontamos o ponteiro do último número para _nullptr_ . Isso, de maneira bem superficial, faz o ponteiro ser nulo ou não apontar para nada (por razões históricas e práticas, ele geralmente aponta para o endereço 0x0, mas ele nunca será modificável nem nada). Logo, sempre que tiver algum ponteiro em direção a esse endereço, sabemos que não há informações guardadas nesse lugar e que chegamos ao fim da nossa lista encadeada.
+
+No entanto, em uma lista duplamente encadeada, temos algumas informações extras guardadas
+
+Nesse caso, como estamos implementando uma lista duplamente encadeada, teremos um nó de início e um nó de fim (então não precisaremos necessariamente estar comparando com nullptr, mas veremos como isso funciona daqui a pouco!) chamados `head` e `tail` . Eles vão permitir o acesso rápido às extremidades da nossa lista, facilitando a implementação de vários valores
+
+
+# Contruindo uma lista duplamente encadeada
+
+Primeiramente, precisamos do nosso nó
+
+```cpp
+
+Node() { // construtor!
+        this->next = nullptr;
+        this->prev = nullptr;
+    }
+
+Node(int new_data) { // construtor que inicializa o valor!
+        this->data = new_data; //define 
+        this->next = nullptr;
+        this->prev = nullptr;
+    }
+    
+```
+
+Observação: this->data é equivalente a *(this).data
+
+E também precisamos declarar as variáveis que vamos usar para identificar o head e o tail;
+
+```cpp
+
+class linkedlist() {
+
+	int length;
+	Node * head;
+	Node * tail;
+	
+}
+
+```
+
+Além disso, precisamos fazer uma função que vai construir a nossa lista encadeada. A primeira coisa que precisamos fazer é criar os nossos dois nós base - o head e o tail! É importante, então, fazer com que eles apontem um para o outro e para nullptr!
+
+```cpp
+
+linkedlist() { // construtor -->
+
+	int length;
+	Node * new_head; // aponta para o primeiro elemento da nossa lista
+	Node * new_tail; // aponta para o último elemento da nossa lista
+
+	new_head = new Node(); // aloco os nós dinamicamente
+    	new_tail = new Node();
+    	
+    	head->prev = nullptr;  	// aponto o prev do head para o nada
+    	head->next = m_tail;	// aponto o next do head para o tail
+
+    	tail->prev = head;	// aponto o prev de tail para head
+    	tail->next = nullptr;	// aponto o next de tail para o nada
+    	m_len = 0;
+
+}
+
+
+```
+
+
+Não se preocupem tanto com entender as minúcias dos códigos dessa parte aqui. O importante é vocês entenderem os passos que estão sendo feitos e porque o algoritmo funciona!
+
+Então agora que já conseguimos construir a nossa lista, vamos ver como funcionam as suas operações!
+
+# Acesso
+
+Diferentemente das 2 outras estruturas, não temos acesso a onde está o nosso valor imediatamente - só ao primeiro valor! Por isso, para conseguir acessar o enésimo valor da nossa lista, temos que passar por todos os anteriores - o que faz essa operação ser O(n).
+
+ ```cpp
+  
+  int find_at_index(int index) const {
+  
+    if (index > m_size) {
+    	throw std::out_ofter_range("Index out of range!"); // o index é maior do que a quantidade de elementos na nossa lista!!
+    
+    }
+    
+    Node * temp = head;
+    int dummie = 0;
+
+    while(dummie != index) {
+      temp = temp->next;
+    }
+    
+    return temp->valor;
+  }
+ 
+ 
+ ```
+
+# Inserção
+
+Por outro lado, a inserção em uma lista encadeada é muito eficiente (contanto que seja nas pontas!). Em um array, nunca conseguíamos aumentar o tamanho da nossa lista. Em um vetor, aumentar o seu tamanho era sempre O(n). Aqui, podemos simplesmente inicializar um novo nó e ligá-lo ao fim ou ao início (lembrando de atualizar os valores de head e tail!)
+
+Inserção no início
+```cpp
+
+  void push_front(int novo_valor) {
+  
+    Node * novo = new Node(novo_valor);
+    
+    novo->data = novo_valor;
+    
+    // primeiro conectamos o novo no à lista
+    
+    novo->prev = head;
+    novo->next = head->next;
+
+
+    // depois podemos conectar a lista ao nó
+
+    head->next->prev = novo; // antigo primeiro (agora segundo) nó aponta para o novo
+    head->next = novo; // o novo passa a ser considerado o primeiro da lista
+
+    m_len++; // aumentando o comprimento
+
+    // agora o node passou a ser o primeiro da lista !
+
+  }
+
+```
+
+Note que é muito importante "conectar o nó" (sem que o resto da lista saiba) para depois atualizar o prev do antigo primeiro nó e o next do head.
+
+Se mudássemos direto o head, note que perderíamos a informação do antigo primeiro nó da lista e todos os nós seguintes (porque estamos sobrescrevendo! tipo o exemplo de Gabriel com as garrafas ontem)
+
+De forma análoga, conseguimos fazer inserções no fim da fila (dessa vez, a partir do tail)
+
+Inserção no fim
+```cpp
+
+  void push_back(int novo_valor) {
+  
+    Node * novo = new Node(novo_valor);
+    
+    novo->data = novo_valor;
+    
+    // primeiro conectamos o novo no à lista
+    
+    novo->next = tail;
+    novo->prev = tail->prev;
+
+
+    // depois podemos conectar a lista ao nó
+
+    tail->prev->next = novo; // antigo último (agora penúltimo) nó aponta para o novo
+    tail->prev = novo; // o novo passa a ser considerado último
+
+    m_len++; // aumentando o comprimento
+
+    // agora o node passou a ser o último !
+
+  }
+
+
+```
+
+Note, então, que a complexidade assintótica da inserção de um novo valor no início ou no fim da lista é O(1)!
+
+No entanto, note que uma remoção no meio da lista seria O(n), já que precisaríamos achar um index ( O(n) ) para depois inserir o valor ( O(1) ).
+
+
+# Deleção
+
+Da mesma forma que a inserção, a deleção nas pontas passa a ser O(1), já que temos acesso ao head e tail! Dessa forma, reorganizamos os nossos ponteiros e depois deletamos o espaço alocado dinamicamente pelo nosso nó. Os códigos vão parecer algo assim:
+
+```cpp
+
+  void pop_front() {
+
+    if (m_len == 0) return;
+
+    Node * hmm = head->next; 		// guarda o endereço do nó que queremos apagar
+
+    head->next = head->next->next; 	// redirecionamos o início da lista
+    head->next->prev = head; 		// fazemos o novo primeiro apontar para o head
+
+    delete hmm;				// apagamos o espaço alocado dinamicamente
+
+    m_len--;				// diminui o tamanho da lista
+	
+  }
+
+```
+
+```cpp
+
+  void pop_back() {
+
+    if (m_len == 0) return;
+
+    Node * hmm = m_tail->prev; 		// guarda o endereço do nó que queremos apagar
+
+    tail->prev = tail->prev->prev; 	// redireciona o fim da lista (pula o apagado)
+    m_tail->prev->next = m_tail;	// fazemos o novo último apontar para o tail
+
+    delete hmm;				// apagamos o espaço alocado dinamicamente
+
+    m_len--;				// diminui o tamanho da lista
+  }
+
+```
+
+
+De maneira geral, dá pra ver que esse tipo de lista é muito eficiente para a implementação de TADs que só inserem / deletam nas extremidades (como uma lista ou uma fila!), mas não é muito legal para guardar vários valores que você precisa visitar de maneira recorrente. Listas encadeadas não aparecem muito por si só em questões ou modelagens no dia a dia, mas vários desses conceitos aqui apresentados são usados em estruturas bem mais populares (como árvores!). Aqui está a tabela de complexidade.
+
 
 Mas bom, essas são as estruturas de dados que vamos ver por enquanto! Vamos partir para os diferentes TADs?
 
@@ -828,7 +1074,7 @@ public:
     bool isFull() const {
         return fim == capacidade;
     }
-
+ 
     void enqueue(int valor) {
         if (isFull()) {
             cout << "Fila cheia" << endl;
@@ -1002,13 +1248,12 @@ if (end == size-1) {
 
 storage[end] = novo; // insere como o mais novo número na lista
 end++;
+
 }
 
 ```
 
 E sua complexidade também é O(1)
-
-// inserir imagem
 
 
 #### Remoção
@@ -1024,19 +1269,220 @@ void pop() {
 ```
 Imagino que você veja isso e fique um pouco confuso, já que não fizemos nada com o nosso array _storage_! Mas no fim das contas, o que vale para nós é o que. Não temos nenhuma maneira de "apagar" uma das "casas" do nosso array sem mudar a alocação de memória - então podemos só esquecer o valor ali, já que qualquer inserção que for usar esse endereço substituirá o valor! É como se ele fosse um lixo de memória.
 
-// inserir imagem
 
 ### Aplicações
 
-De maneira geral, os códigos para a implementação da pilha são bem simples e fáceis de entender, né? Então já que entendemos tudo que precisamos saber sobre pilhas, vamos fazer algumas questões em conjunto e depois seguir para o vjudge para testarmos nossos conhecimentos individualmente!
+Como eu falei mais cedo, a implementação de uma pilha pode variar muito (na STL, ela e implementada com um deque, estrutura que não veremos aqui!), mas elas seguem os mesmos princípios gerais. Mas agora que já entendemos essa parte, vamos tentar fazer algumas questões!
+
+No início, pode parecer um pouco contra intuitivo usar pilhas pra problemas no dia a dia. É como se ela "dificultasse a nossa vida", não nos deixando ter acesso a informações que tínhamos antes. Mas é exatamente isso que a pilha simula muito bem: uma situação em que precisamos resolver um problema mais novo antes de passar para um mais antigo.
+
+Uma questão emblemática de pilha pode nos ajudar:
+
 
 #### Para fazermos juntos
 
-// colocar questao aqui
+Imagine que você está construindo um parser pra sequências de parênteses. Então você quer, de alguma forma, descrobrir se sequências específicas são válidas ou não. Imaginam alguma maneira de fazer isso?
+
+Pra nos ajudar a entender a situação, vamos ver algumas sequências de parênteses que são válidas e inválidas.
+
+Algo como isso é valido:
+
+`(()())()`
+
+Mas algo assim é inválido:
+`()()(`
+
+Daí, podemos tirar uma conclusão: A quantidade de parênteses precisa ser par. Mas não só isso! É claro que olhando uma sequência inválida como essa:
+
+`()))`
+
+Percebemos que metade dos nossos parênteses devem abrir e metade fechar.
+
+
+Mas é aí que está o pulo do gato: Isso não é o único fato que importa! Podemos ter a quantidade de parênteses certa, mas uma organização errada. Algo assim:
+
+`)()()(`
+
+Então fica claro que só contar os parênteses não nos ajuda em muita coisa. Então vamos tentar entender mais a fundo como a lógica dos parênteses funciona
+
+Você concorda que, a cada parêntese que abrimos, "entramos" em mais um problema? Pra fechar qualquer parêntese mais externo, precisamos fechar todos os parênteses internos antes (se não, nem conseguimos chegar nele!). E é exatamente isso que uma pilha modela! A ideia de sempre precisar se preocupar com o problema mais novo ao invés do mais antigo.
+
+Então sempre que encontrarmos um parêntese, nós podemos colocar na nossa pilha (como se estivéssemos entrando em uma recursão) pra resolver sempre o problema mais interno - ou seja, fechar o par de parêntese mais de dentro.
+
+Assim, quando encontrarmos um parêntese fechando, significa que conseguimos fechar um par. Logo, podemos tirar o topo da nossa pilha, já que nós já validamos esse par (ele passa a não ser mais um problema!)
+
+No caso de não ter nada na nossa pilha, chegamos justamente em um dos casos em que a sequência é inválida: Nós estamos tentando fechar um parêntese que não abre, então é impossível a sequência ser correta.
+
+No fim das contas, se terminarmos uma pilha, a nossa quantidade de caracteres abrindo é exatamente igual à de caracteres fechando - porque todos que foram inseridos foram retirados mais à frente.
+
+Portanto, com essas duas condições satisfeitas, a nossa pilha consegue "simular" perfeitamente um parser de parênteses.
+
+
+Curiosidade:
+Essa solução também pode ser feita com recursão, já que a recursão também é feita em pilha!
+
+
+Nessa questão específica, o uso da pilha não é a única forma de resolver (podemos adicionar e subtrair uma única variável de maneira estratégica!), mas a solução mostrada nos traz um entendimento interessante de como uma pilha funciona.
+
+
+Agora vamos pensar em uma situação um pouco diferente:
+
+Você está ajudando um super cientista a montar uma maquina inovadora de viagem temporal! ...mas ele é muito desorganizado 💔
+Por isso, os cabos + e - da máquina, ligados a pontos diferentes, passam por cima um do outro diversas vezes, e podem estar embaraçados! Você, como um bom ajudante, quer ajudá-lo a ser mais organizado, desembaraçando os cabos. Mas, como a máquina já está ligada, você não queria ter que desconectar nenhuma das pontas para alcançar essa façanha. Como conseguimos descobrir se o desembaraçamento é alcançável?
+
+As imagens originais da questão são um pouco enganadoras, então aqui estão as produzidas pelo próprio PET (por mim, especificamente)
+
+
+
+Note que *a todo momento* os dois cabos trocam de lugar, então os '+' e '-' na entrada indicam apenas qual cabo está passando por cima!
+
+E aí, alguma ideia?
+
+Vamos tentar analizar o comportamento dos cabos. Vamos supor (sem perda de generalidade) que o cabo azul (-) passou por cima no primeiro cruzamento deles.
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/dia3/cables1.png" alt="cabos-1" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Exemplificação 1<br /></em></p>
+</div>
+
+E aí, os cabos estão embaraçados ou desembaraçados?
+
+Nenhum dos dois! eles só cruzarm, ainda não sabemos se eles estão embaraçados ou não - isso vai depender da próxima troca:
+
+Caso o azul passe por cima novamente, note que nada se embaraçou, os cabos só trocaram de lugar sem se enrolar.
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/dia3/cables2.png" alt="cabos-2" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Exemplificação 2<br /></em></p>
+</div>
+
+No entanto, se o vermelho passasse por cima, teríamos cabos embaraçados.
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/dia3/cables3.png" alt="cabos-3" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Exemplificação 3<br /></em></p>
+</div>
+
+Note, então, que só embaraçamos os fios ao alternar (+ e -) qual passa por cima.
+
+Seguindo nesse último caso, nós também temos 2 opções:
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/dia4/cables4.png" alt="cabos-4" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Exemplificação 4<br /></em></p>
+</div>
+
+Ou o cabo vermelho passa por cima e desembaralha o último nó (e retornamos à situação anterior!!!)
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/dia4/cables5.png" alt="cabos-5" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Exemplificação 5<br /></em></p>
+</div>
+
+Ou o cabo vermelho passa por baixo e piora mais ainda a nossa situação.
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/dia4/cables6.png" alt="cabos-6" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Exemplificação 6<br /></em></p>
+</div>
+
+Note que, da mesma forma que ocorreu na questão passada, não conseguimos desembaraçar os primeiros nós sem primeiro desembaraçar o último. Então também podemos usar uma pilha para representá-la! A grande diferença está nas nossas condicionais de empilhar. Nesse caso, nós só conseguimos desembaraçar um nó (e desemplilhar a nossa pilha) se o símbolo do próximo cruzamento for igual ao do topo da pilha (+ e + ou - e -).
+
+Então o código poderia ficar algo mais ou menos assim:
+
+```cpp
+
+string s;
+
+cin >> string;
+
+stack<char> pilha;
+
+for (int i = 0; i < s.size(); i++) {
+
+    if (pilha.size()) { // se o tamanho da pilha eh diferente de 0 --> se tem algúem na pilha
+
+        if (pilha.top() == string[i]) { // se conseguimos desembaralhar
+
+            pilha.pop(); // não nos preocupamos mais!
+        }
+
+        else {
+            pilha.push(string[i]); // caso contrário, é o novo problema que precisamos resolver
+        }
+
+    }
+
+    else {
+        pilha.push(string[i]); // em caso de a string estar vazia, apenas adicionamos um novo problema
+    }
+
+}
+
+if (pilha.size()) { // ainda tem algum nó embaraçado
+    cout << "No\n";
+    return 0;
+}
+
+cout << "Yes\n"; // tudo está livre!
+
+```
+
 
 #### Para fazer sozinho
 
-Agora que você já entendeu como essas TADs funcionam, siga para o vjudge para fazer as questões!
+Agora que você já entendeu como essas TADs funcionam, vamos tentar fazer uma questão sozinho?
+
+Você está ajudando na organização do desfile de carnaval desse ano e precisa organizar a entrada no sambódromo. Mas a ordem de chegada das escolas de samba foi diferente da que está planejada, então você tem a tarefa de tentar reorganizar as alegorias. Só tem um problema: a rua é estreita demais para permitir qualquer ultrapassagem. A sua única ferramenta é uma ruela sem saída, na qual os carros que você indicar podem entrar e depois sair de ré, seguindo direto para a entrada do local. Sabendo que nenhum dos carros, após sair da ruela, pode voltar para antes dela, como conseguimos verificar se é possível chegar à organização desejada?
+
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/dia3/stpar1.png" alt="Representação-visual-stpar-1" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual 1<br /></em></p>
+</div>
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/dia3/stpar2.png" alt="Representação-visual-stpar-2" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual 2<br /></em></p>
+</div>
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/dia3/stpar3.png" alt="Representação-visual-stpar-3" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual 3<br /></em></p>
+</div>
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/dia3/stpar4.png" alt="Representação-visual-stpar-4" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual 4<br /></em></p>
+</div>
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/dia3/stpar5.png" alt="Representação-visual-stpar-5" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual 5<br /></em></p>
+</div>
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/dia3/stpar6.png" alt="Representação-visual-stpar-6" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
+    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual 6<br /></em></p>
+</div>
+
+
+<details>e a 
+<summary>Spoiler!<summary/>
+A saída dessa questão é pela simulação da rua como uma fila e da ruela sem saída como uma pilha!
+
+<p/>
+A todo o momento, você sabe exatamente qual carro deve seguir para a entrada. Então concorda que se em algum momento ele não estiver na frente da pilha, ele precisa estar em alguma posição futura da fila? Então você itera pela fila, movendo os carros para a rua sem saída. Se você não tiver mais carros na fila, o que você procura deve ser o primeiro da pilha. Se não, a solução é impossível!
+
+<details/>
+
+
+
+
+
+
+Vamos seguir para o [Vjudge](https://vjudge.net/group/meda?r=ifo2QZRofQuVN2TjpPDM) para fazer algumas questões?
+
 
 <!-- vjudge!! -->
 
