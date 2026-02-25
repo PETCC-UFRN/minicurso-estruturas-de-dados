@@ -15,10 +15,10 @@ title: Minicurso de Matemática aplicada à Computação
         </ul>
     </details>
     <details>
-        <summary><a href="#ponteiros">Ponteiros</a></summary>
+        <summary><a href="#ponteiros-e-iteradores">Ponteiros e Iteradores</a></summary>
         <ul class="section-content">
-            <li><a href="#endereços-de-memória-e-referências">Memória</a></li>
-            <li><a href="#agora-sim-ponteiros">Ponteiros!</a></li>
+            <li><a href="#ponteiros">Ponteiros</a></li>
+            <li><a href="#iteradores">Iteradores</a></li>
         </ul>
     <details>
         <summary><a href="#estruturas-de-dados-lineares">Estruturas de Dados Lineares</a></summary>
@@ -74,7 +74,7 @@ title: Minicurso de Matemática aplicada à Computação
   </div>
 
 
-## TAD x ED
+# TAD x ED
 
 Na aula de hoje, vamos nos aprofundar em um dos conflitos conceituais mais importantes da Computação: Tipos Abstratos de Dados (TAD) x Estruturas de Dados (ED). Compreender corretamente esses 
 conceitos é fundamental para expandirmos nossa noção sobre algoritmos e entendermos como o mundo das estruturas de dados funciona.
@@ -185,6 +185,11 @@ As estruturas de dados são as responsáveis por *materializar* as implementaç�
 - Entre outras
 
 Agora, antes de nos aprofundarmos em algumas estruturas de dados conhecidas, vamos rever alguns pontos importantes sobre ponteiros.
+
+
+# Ponteiros e Iteradores
+
+Agora que já entendemos a diferença entre uma TAD e uma Estrutura de Dados, vamos dar uma revisada em ponteiros e aprender um pouco sobre interadores para que possamos entender melhor as implementações que vamos mostrar!
 
 ## Ponteiros
 
@@ -341,6 +346,78 @@ Lembrando que, mesmo que os ponteiros apontem para o mesmo endereço, não signi
     <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual<br /></em></p>
   </div>
 
+
+## Iteradores
+
+### O que são iteradores?
+
+Um iterador é um objeto que representa uma posição dentro de um contêiner (como vector, list ou map). Ele funciona de forma parecida com um ponteiro, permitindo percorrer os elementos sem precisar conhecer como os dados estão armazenados internamente.
+
+Ele funciona como uma abstração que permite percorrer estruturas de dados complexas de forma sequencial sem expor os detalhes internos de como esses dados estão organizados
+
+As principais características de um iterador incluem a capacidade de ser:
+- **Incrementado (++)**: Para avançar para o próximo elemento.
+- **Desreferenciado (*)**: Para acessar ou modificar o valor do elemento apontado.
+- **Comparado (!= ou ==)**: Geralmente usado para verificar se o iterador atingiu o final do contêiner.
+
+### Para que são utilizados?
+
+Os iteradores são fundamentais na Biblioteca Padrão do C++ (STL) para:
+- **Navegação e Acesso:** Permitir que algoritmos acessem elementos de contêineres de maneira padrão, independentemente do tipo de contêiner (seja um vetor, uma lista ligada ou uma árvore).
+- **Compatibilidade com Algoritmos:** Eles servem como a "ponte" entre contêineres e algoritmos genéricos (como std::sort, std::find ou std::copy). Isso torna o código mais genérico, pois o mesmo algoritmo pode funcionar em qualquer contêiner que forneça os iteradores necessários.
+- **Abstração de Operações:** Permitem realizar operações de leitura, escrita ou ambas, além de movimentos bidirecionais ou de acesso aleatório, dependendo da categoria do iterador.
+
+### Por que usar iteradores no lugar de ponteiros brutos?
+
+Embora ponteiros brutos possam atuar como iteradores de acesso aleatório em arrays, os iteradores oferecem vantagens críticas:
+
+- **Flexibilidade e Generalidade:** Ponteiros brutos funcionam apenas com memória contígua e arrays. Iteradores podem percorrer estruturas não contíguas, como listas ligadas (std::list) ou mapas, onde o "próximo" elemento não está necessariamente no próximo endereço de memória.
+
+- **Segurança:** Iteradores são considerados mais seguros, pois contêineres modernos podem implementar verificações de limites (bounds checking) para evitar falhas de segmentação causadas por acessos fora do intervalo permitido.
+
+- **Interface Padronizada**: Ao usar iteradores (begin() e end()), você escreve código que funciona de forma idêntica para diferentes tipos de dados, facilitando a manutenção e a reutilização.
+
+### Exemplo Comparativo: Ponteiro Bruto vs. Iterador
+Abaixo, veja como percorrer uma sequência de dados usando ambas as abordagens:
+
+#### Versão com Ponteiro Bruto (Limitada a Arrays)
+
+Nesta versão, o programador precisa lidar diretamente com o endereço de memória e o tamanho fixo do array.
+
+```cpp
+int main() {
+    int arr[] = {10, 20, 30};
+    int* ptr_inicio = arr;
+    int* ptr_fim = arr + 3; // Aponta para um elemento após o último
+
+    for (int* p = ptr_inicio; p != ptr_fim; ++p) {
+        // O ponteiro precisa de aritmética de memória direta
+        int valor = *p; 
+    }
+    return 0;
+}
+```
+
+### Versão com Iterador (Funciona com qualquer Contêiner STL)
+
+Nesta versão, o código é independente da estrutura interna. Se você trocar array por list (ou qualquer outro container stl-like), o loop permanecerá exatamente o mesmo.
+
+```cpp
+int main() {
+    std::array<int> v = {10, 20, 30};
+
+    // O uso de begin() e end() abstrai onde os dados começam e terminam
+    for (auto it = v.begin(); it != v.end(); ++it) {
+        // O iterador 'it' se comporta como um ponteiro, mas é um objeto gerenciado
+        int valor = *it; 
+    }
+
+    return 0;
+}
+```
+Se você trocar std::array por std::list, o código continuará o mesmo, algo impossível com ponteiros brutos.
+
+Em resumo, iteradores permitem escrever código genérico, seguro e reutilizável, sendo a base dos algoritmos da STL.
 
 ## Estruturas de Dados Lineares!
 
