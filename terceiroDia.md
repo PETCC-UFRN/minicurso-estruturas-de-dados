@@ -20,7 +20,7 @@ title: Minicurso de Matemática aplicada à Computação
             <li><a href="#ponteiros">Ponteiros</a></li>
             <li><a href="#iteradores">Iteradores</a></li>
         </ul>
-    <details>
+    </details>
         <summary><a href="#estruturas-de-dados-lineares">Estruturas de Dados Lineares</a></summary>
         <ul class="section-content">
             <li><a href="#array" >Array</a></li>
@@ -36,33 +36,6 @@ title: Minicurso de Matemática aplicada à Computação
             <li><a href="#tad-pilha-stack">Pilha(Stack)</a></li>
         </ul>
     </details>
-
-    </details>
-    <details>
-        <summary><a href="#relações-de-congruência">Relações de Congruência</a></summary>
-        <ul class="section-content">
-            <li><a href="#conceitualização">Conceitualização</a></li>
-            <li><a href="#relações-de-congruência-na-programação">Relações de congruência na programação</a></li>
-            <li><a href="#aplicações-e-definição-formal">Aplicações e definição formal</a></li>
-            <summary><a href="#propriedades">Propriedades</a></summary>
-            <ul class="section-content">
-              <li><a href="#propriedades-relacionais">Propriedades Relacionais</a></li>
-              <li><a href="#propriedades-operacionais">Propriedades Operacionais</a></li>
-            </ul>
-            <summary><a href="#congruência-linear-e-inversos-modulares">Congruência Linear e Inversos Modulares </a></summary>
-            <ul class="section-content">
-            <li><a href="#como-encontrar-um-inverso-modular"> Como encontrar um Inverso Modular</a></li>
-            </ul>
-        </ul>
-    </details>
-    <details>
-  <summary><a href="#criptografia">Criptografia</a></summary>
-    <ul class="section-content">
-        <li><a href="#contextualização-histórica">Contextualização histórica</a></li>
-        <li><a href="#criptografia-assimétrica">Criptografia Assimétrica</a></li>
-        <li><a href="#criptografia-rsa">Criptografia RSA </a></li>
-    </ul>
-  </details>
 </ul>
 
   <button class="toggle-button" id="toggle-button">
