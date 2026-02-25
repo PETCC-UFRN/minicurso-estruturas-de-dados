@@ -1,6 +1,6 @@
 ---
 layout: layoutGit
-title: Minicurso de Matemática aplicada à Computação
+title: Minicurso de Estruturas de Dados e Algoritmos
 ---
 
 
@@ -21,6 +21,7 @@ title: Minicurso de Matemática aplicada à Computação
             <li><a href="#iteradores">Iteradores</a></li>
         </ul>
     </details>
+    <details>
         <summary><a href="#estruturas-de-dados-lineares">Estruturas de Dados Lineares</a></summary>
         <ul class="section-content">
             <li><a href="#array" >Array</a></li>
