@@ -29,6 +29,7 @@ Desejamos o melhor da sorte para todos vocês e nos vemos na linha de chegada!
 
 [Que comece o contest!](https://vjudge.net/contest/791056)
 
+E ao fim, não se esqueça de [avaliar o curso!](https://forms.gle/6cjktMtkAkwV6sG3A)
 
 <script>
 const dataDia5 = new Date('2025-03-13');
