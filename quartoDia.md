@@ -29,14 +29,6 @@ title: Minicurso de Matemática aplicada à Computação
                     <li><a href="#árvore-cheiaperfeita">Árvore Cheia / Perfeita</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="#percursos">Percursos</a>
-                <ul>
-                    <li><a href="#pré-ordem">Pré-Ordem</a></li>
-                    <li><a href="#em-ordem-simétrica">Em Ordem (Simétrica)</a></li>
-                    <li><a href="#pós-ordem">Pós-Ordem</a></li>
-                </ul>
-            </li>
             <li><a href="#operações">Operações</a></li>
         </ul>
     </details>

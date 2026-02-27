@@ -8,16 +8,6 @@ title: Minicurso de Matemática aplicada à Computação
 <div id="sumario" class="sumario-git">
     <h1>Dia 5</h1>
     <summary><a href="#Projeto final">Projeto final</a></summary>
-    <ul>
-      <li><a href="#orientações-gerais">Orientações Gerais</a></li>
-      <li><a href="#pontos-que-devem-estar-presentes-na-apresentação-da-solução-alcançada">Pontos essenciais</a></li>
-      <li><a href="#critérios-de-avaliação">Critérios de avaliação</a></li>
-      <li><a href="#problema-1-números-bloqueados">Problema 1</a></li>
-      <li><a href="#problema-2-conversão-de-minutos-para-horas">Problema 2</a></li>
-      <li><a href="#problema-3-histórico-de-comandos-de-um-terminal">Problema 3</a></li>
-      <li><a href="#problema-4-criptografia-fraca">Problema 4</a></li>
-      <li><a href="#problema-5-testando-segurança-da-criptografia">Problema 5</a></li>
-    </ul>
   <button class="toggle-button" id="toggle-button">
   
       Esconder Sumário
